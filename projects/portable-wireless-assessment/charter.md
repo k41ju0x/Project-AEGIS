@@ -3,6 +3,7 @@
 **Status:** Concept / architecture selection
 **Build strategy:** Entirely new hardware build (greenfield); do not assume reuse of old LattePanda or peripherals.
 **Selected architecture:** Headless LattePanda x86 computer, remotely administered from a laptop/phone. Exact model pending selection.
+**Design priority:** Maximum sustained compute performance over portability, battery runtime, weight, and cost.
 
 ## Mission
 Design and validate a modular, portable Kali Linux wireless security assessment workstation for authorized wireless discovery, GPS-correlated surveys, controlled WPA2/WPA3 lab security evaluation, and secure remote management.
@@ -27,6 +28,14 @@ Owner's four-page *Remote Access Device Build* PDF documents an older LattePanda
 - Headless operation selected: no integrated display or keyboard required. Management via secure local link and/or Tailscale.
 - Separate management network/interface from assessment Wi-Fi interface.
 - Budget, size, runtime, and cellular requirements remain open decisions.
+
+## Performance-first design criteria
+- Prefer highest practical LattePanda CPU class and 32GB+ RAM when offered; validate actual model specifications before purchase.
+- Fast NVMe storage sized for PCAP/Kismet data; separate archival and retention policies.
+- Sustained-load thermal management with active cooling and measured throttling.
+- Dedicated monitor-mode wireless adapter; separate reliable management interface.
+- Robust DC power supply, with portable battery architecture designed after load measurements.
+- Benchmark CPU, memory, storage throughput, multi-adapter capture stability and power consumption before enclosure finalization.
 
 ## Initial next milestone
 Architecture trade study and requirements discovery; then draft BOM and build plan.
