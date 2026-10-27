@@ -6,6 +6,7 @@
 **Design priority:** Maximum sustained compute performance over portability, battery runtime, weight, and cost.
 **Enclosure direction:** Rugged Pelican-style protective case; user accepts active fans and larger form factor. Exact model and ingress-protection strategy TBD.
 **Power requirement:** Both wall-powered and standalone battery-powered operation. Full sustained performance on AC; target full performance on battery subject to measured load and safe battery design.
+**OS deployment decision:** Native Kali Linux installed directly on the LattePanda internal NVMe SSD, booting via UEFI, with headless SSH/Tailscale management. No planned Windows dual boot or Ubuntu host. Ubuntu 24.04 with a Kali VM is a contingency only if selected Sigma hardware fails compatibility validation. User previously installed and booted Kali directly on a LattePanda 3 Delta; this is precedent, not Sigma 2 certification.
 **Battery endurance target:** 8 hours at a documented active assessment workload; support an externally attachable backup battery/power bank for additional runtime, subject to verified voltage, current, continuous wattage and power-path compatibility.
 
 ## Mission
