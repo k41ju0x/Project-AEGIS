@@ -1,39 +1,33 @@
-# AEG-002 — Battery Runtime Model v1
+# AEG-002 — Runtime Model v2 (6600mAh)
+**Design decision:** Prefer 48 hours; **minimum acceptable fallback 24 hours** based on user direction. Both require measured validation.
 
-**Target:** At least 48 hours of operation with Meshtastic, GPS and local display enabled in a documented representative duty cycle.
+## Candidate pack
+Adafruit 353 protected **3.7 V, 6600mAh**, 69 × 54 × 18 mm / 155g, JST-PH-2 connector. **The connector shape does NOT guarantee polarity compatibility** with RAK19007; verify using a multimeter against vendor pinout **before connection**.
 
-## Capacity model
-Proposed nominal battery capacity: **5000 mAh**, *not yet sourced, tested or validated*. Applying a provisional 80% usable fraction for losses/operating reserve gives:
-- usable charge allowance: 5000 × 0.8 = **4000 mAh**
-- maximum allowable average device current over 48 hours: **4000 / 48 ≈ 83.3 mA**
+https://www.adafruit.com/product/353
 
-This is a **planning ceiling**, not measured draw. The usable fraction is an assumption and will depend on discharge limits, age, temperature, regulator efficiency, cell quality and usage.
+## Preliminary math (not measured)
+Assume usable battery charge = 80% of 6600mAh = **5280mAh** (arbitrary engineering reserve, not vendor derating).
+- 48h target: max average draw **110 mA**.
+- 24h fallback: max average draw **220 mA**.
 
-## Sensitivity to measured average device current
-| Measured average draw | Hypothetical runtime at 4000 mAh usable |
-|---|---|
-| 20 mA | 200 h |
-| 35 mA | 114 h |
-| 50 mA | 80 h |
-| 70 mA | 57 h |
-| 83 mA | 48 h |
-| 100 mA | 40 h |
-| 125 mA | 32 h |
+| Average current | Hypothetical duration at 5280mAh usable |
+|---:|---:|
+| 35mA | 151h |
+| 50mA | 106h |
+| 80mA | 66h |
+| 100mA | 53h |
+| 110mA | 48h |
+| 150mA | 35h |
+| 220mA | 24h |
 
-## Loads to quantify
-- nRF52840/SX1262 idle/receive/transmit state and actual packet traffic
-- GNSS acquisition vs periodic tracking modes
-- RAK1921 OLED active brightness and sleep/timeout
-- BLE active vs disconnected
-- Power regulators and charging circuitry, battery temperature
+Measured averages depend on GNSS acquisition, OLED usage, BLE, LoRa airtime, regulator losses, temperature and battery age. No vendor claim of 48h endurance.
 
-## Acceptance test
-1. Use safe vendor-compatible battery and instrumentation, record pack capacity and charging history.
-2. Fix firmware, radio settings, GPS tracking interval, screen brightness/timeout, BLE state and traffic profile.
-3. Fully charge according to pack/baseboard instructions, then run untethered for >=48h.
-4. Record message success and GPS/display function through the test; report cutoff behavior and measured usable capacity.
-5. Retest if firmware, GNSS interval, enclosure or battery changes meaningfully.
+## Charging consideration
+RAK19007 charge-current limit is reported approximately **350mA**. A nominal 6600/350 = **18.9 hours minimum ideal constant-current**; real charging generally takes longer as current tapers and system loads draw power. Verify charger revision/spec and pack manufacturer's charging limits; avoid charging an unattended prototype or in excessive temperature.
 
-**If under target:** Measure which subsystem dominates draw and revise display/GNSS duty cycle, battery capacity, or enclosure constraints—do not simply declare the goal met.
-
-Reference: https://meshtastic.org/docs/hardware/devices/rak-wireless/wisblock/base-board/
+## Acceptance
+Test for 48h with representative GNSS + OLED settings. If it fails, quantify runtime under identical conditions; 24h can be accepted as **approved fallback**, with evidence and a recorded deviation. Do not change the requirements silently. Measure battery voltage and observe device performance at intervals.
+References:
+- https://www.adafruit.com/product/353
+- https://store.rakwireless.com/products/rak19007-wisblock-base-board-2nd-gen
