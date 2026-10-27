@@ -44,4 +44,4 @@ Read [SECURITY.md](SECURITY.md) before contributing information.
 
 ---
 
-<sub>Project Aegis · Research. Engineer. Secure.</sub>
+<sub>Project AEGIS · Research. Engineer. Secure.</sub>
