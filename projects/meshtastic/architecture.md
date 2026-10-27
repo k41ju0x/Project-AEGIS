@@ -1,39 +1,35 @@
-# AEG-002 — Rugged RAK4631 Architecture v1.0
-**Decision:** RAK4631 on RAK19007, US915 radio variant, with GNSS + OLED. **State:** Proposed integration pending fit/electrical tests.
+# AEG-002 — Rugged Architecture v2
 
-```text
-                    ┌──────────────── Rugged gasketed case ────────────────┐
-Antenna US915 ─SMA──┤ sealed bulkhead ─ RF pigtail ─ SX1262 / RAK4631      │
-                    │                                  │                    │
-Phone ─── BLE ──────┤                             nRF52840                 │
-                    │                                  │                    │
-                    │                      RAK19007 baseboard              │
-                    │                         │           │                │
-                    │                  RAK12501 GNSS   RAK1921 OLED        │
-                    │                         │           │                │
-                    │               GPS antenna      gasketed window      │
-                    │                         │                            │
-                    │  protected 1S LiPo ─ charge circuitry ─ USB-C       │
-                    └──────────────────────────────────────────────────────┘
+## Selected
+RAK4631 nRF52840 / SX1262 on RAK19007 baseboard, US915 hardware, RAK12501 GNSS, RAK1921 OLED, BLE to phone, and appropriately matched 915MHz antenna.
+
+## Enclosure and battery candidates
+- **Hammond 1554F2GYCL** clear lid polycarbonate gasketed enclosure, **120 × 90 × 60mm external**, $13.83 listed.
+- **Adafruit #353** protected **3.7V 6600mAh** parallel-cell pack, **69 × 54 × 18mm**, 155g, $24.50 listed.
+- **RAK19007** board nominal **30 × 60mm**. Confirm *usable interior* case dimensions, standoff locations, GPS antenna orientation, and cable paths. Stack on electrically insulated mounts if necessary.
+- OLED visible through factory clear lid eliminates an additional cutout. No exposed USB hole in version 1. Open gasketed lid indoors to charge; reseal before outdoor use.
+- Only intentional case penetration: properly gasketed external 915MHz antenna feedthrough matched to the kit's supplied RF lead (confirm interface, don't assume SMA vs RP-SMA).
+- GNSS antenna and BLE must operate through nonmetallic housing; verify actual reception and no excessive RF attenuation.
+
+## Cross-sectional concept (not to scale)
+```
+  CLEAR LID / FACTORY GASKET  <-- no OLED window cut
+  -------------------------------------------
+  OLED + RAK4631/RAK19007 on insulated mount
+  -------------------- clearance / standoffs
+  Protected 6600 mAh pack restrained in cradle
+  -------------------------------------------
+  Hammond 1554F polycarbonate base
+  (sealed antenna bulkhead on side)
 ```
 
-## Connections and role
-- **RAK4631:** nRF52840 + SX1262; 915 MHz hardware variant; *Arduino bootloader*, not the stock RAK4631-R RUI3.
-- **RAK19007:** 30×60 mm baseboard with slots for sensor expansion, LiPo connector/charging and USB-C.
-- **GNSS:** RAK12501 in vendor-supported sensor slot, with GPS antenna carefully located under a suitable nonmetallic cover.
-- **Display:** RAK1921 0.96-inch 128×64 I2C OLED; vendor documents soldering and pin-order precautions. Use status screen; phone is text-entry interface.
-- **RF:** Included matching US-band antenna and MHF/U.FL-to-SMA lead only if bundled with chosen variant. Additional waterproof gland/bulkhead may be required.
-- **Power:** One protected compatible 1S LiPo (working design assumption 5,000 mAh), polarity checked before connection; evaluate onboard charge rate and thermal requirements.
-- **Enclosure:** Commercial gasketed weather-resistant plastic case with mounts, separate screened window, strain-relieved RF bulkhead, and deliberate sealed charging-access strategy. Any modification invalidates automatic claims based on an empty enclosure's IP rating.
+## Engineering hold points
+1. Confirm battery connector **polarity** by measurement; matching JST shape is insufficient.
+2. Verify pack protection, nominal voltage and permitted charge current; RAK19007 charging is approximately 350mA and may take 20+ hours.
+3. Download enclosure CAD drawing: exterior dimensions alone cannot prove fit.
+4. Verify battery secure mounting (avoid crushing/puncture); check USB access after dry fitting.
+5. Test GNSS, OLED, BLE and LoRa functionality with enclosure assembled.
+6. Original enclosure rating is not automatically preserved after drilling; validate weather resistance of complete build.
 
-## Integration review checklist
-- [ ] Record full vendor kit name, chosen radio band, baseboard and bundled modules
-- [ ] Verify LiPo voltage, connector polarity, protection, dimensions and charging limits
-- [ ] Confirm GPS module and display fit without slot/pin interference
-- [ ] Confirm screen-viewing cutout sealing design
-- [ ] Confirm antenna gland/bulkhead seals and orientation
-- [ ] Confirm access for USB flashing / charging without exposed ports
-- [ ] Confirm GNSS antenna visibility, LoRa antenna clearance and BLE coverage
-- [ ] Bench-build and validate *before* installing into closed enclosure
-
-Sources: https://meshtastic.org/docs/hardware/devices/rak-wireless/wisblock/core-module/?rakcore=RAK4631 ; https://meshtastic.org/docs/hardware/devices/rak-wireless/wisblock/screens/?rakscreens=OLED ; https://store.rakwireless.com/products/wisblock-meshtastic-starter-kit
+## Runtime criterion
+48h preferred; 24h accepted fallback only with documented representative workload and measurements. See [power budget](power-budget.md) and [procurement](procurement.md).
