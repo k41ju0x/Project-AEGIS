@@ -1,0 +1,10 @@
+item_id,description,qty,unit_usd,extended_usd,price_basis,status,notes
+BOM-001,"RAK4631 + RAK19007 Client-Tracker US915 bundle with RAK12501 GPS and RAK1921 OLED",1,60.99,60.99,"Published vendor kit upper variant price; exact configuration checkout not verified",Validate,"Select appropriate bundle; avoid double counting included antennas and modules"
+BOM-002,"Protected 1S LiPo ~5000mAh compatible pack",1,39.00,39.00,"Engineering allowance, not retailer quote",Estimate,"Verify polarity, protection, certification, dimensions and charge compatibility"
+BOM-003,"Gasketed impact-resistant enclosure, appropriately sized",1,39.00,39.00,"Engineering allowance",Estimate,"Raw enclosure IP rating not finished assembly rating"
+BOM-004,"Sealed display window and bonding/gasket materials",1,23.00,23.00,"Engineering allowance",Estimate,"Optical visibility and seal testing required"
+BOM-005,"Sealed RF bulkhead / antenna feedthrough accessories",1,24.00,24.00,"Engineering allowance",Estimate,"Use only if kit supplied RF lead/bulkhead is unsuitable; verify genders"
+BOM-006,"Sealed USB/charging service access materials",1,22.00,22.00,"Engineering allowance",Estimate,"Charging safety and serviceability"
+BOM-007,"Standoffs, strain relief, fasteners, protective cushioning",1,18.00,18.00,"Engineering allowance",Estimate,"Nonconductive and RF appropriate"
+BOM-008,"Consumables / prototype reserve",1,25.00,25.00,"Engineering allowance",Estimate,"Wire, seals, adhesive and rework"
+BOM-009,"Shipping/tax/price variance reserve",1,35.00,35.00,"Planning reserve; not checkout total",Estimate,"Recalculate at purchase"
