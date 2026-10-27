@@ -1,40 +1,20 @@
-# AEG-002 — Meshtastic
-**Project:** Portable LoRa mesh communications prototype  
-**Status:** Planning (engineering docs baseline; hardware not selected)  
-**Tracking issue:** [AEG-002](https://github.com/k41ju0x/Project-AEGIS/issues/2)  
-**Visibility:** Public sanitized summary / private sensitive RF and location configuration
+# AEG-002 — Meshtastic Rugged Field Node
+**Status:** Planning — RAK4631 selected, procurement pending  
+**Requirements:** Rugged portable; budget **$250+** (no upper ceiling agreed); GPS, screen, weather-resistant enclosure; target **48 h measured** runtime.  
+**Tracking:** [AEG-002](https://github.com/k41ju0x/Project-AEGIS/issues/2)  
+**Visibility:** Public sanitized overview, private sensitive configurations.
 
-## Mission
-Design, build and field-test a reliable battery-powered Meshtastic node, learning RF selection, hardware assembly, configuration, power engineering, and repeatable validation.
+## Selected architecture
+**RAK4631** (nRF52840 + SX1262) with **RAK19007** baseboard; a US915 kit variant; **RAK12501 GNSS** and **RAK1921 OLED**; protected 1S LiPo battery; properly matched external antenna; customized gasketed enclosure. BLE phone provides text input. Follow the [architecture](architecture.md) and [ADR-0001](decisions/ADR-0001-rak4631.md).
 
-## Current state
-- Completed: first-pass charter, requirements matrix, hardware research shortlist, risk register, draft validation plan, and dated documentation log.
-- Pending: hardware and antenna selection, budget, battery/runtime target, feature selection, procurement, assembly, firmware flashing, tests.
-- No performance or range measurements have been claimed.
+## Engineering package
+- [Charter](charter.md) · [Requirements](requirements.md) · [Research](research.md)
+- [Architecture](architecture.md) · [Hardware decision](decisions/ADR-0001-rak4631.md)
+- [Estimated bill of materials](bom.csv) · [Cost and procurement notes](procurement.md)
+- [48-hour power model](power-budget.md) · [Risks](risk-register.md)
+- [Test plan](test-plan.md) · [Build log](build-log.md) · [Resume notes](resume-here.md)
 
-## Documentation
-| Document | Purpose |
-|---|---|
-| [Charter](charter.md) | Purpose, scope and success gates |
-| [Requirements](requirements.md) | Functional and technical acceptance matrix |
-| [Research journal](research.md) | Platform candidates and sources |
-| [Risk register](risk-register.md) | RF, power, privacy and integration risks |
-| [Test plan](test-plan.md) | TST-001 onwards; not yet executed |
-| [Build log](build-log.md) | Dated decisions and results |
-| [Resume here](resume-here.md) | Last state and immediate next action |
+## Outstanding before purchasing
+Confirm precise **Client-Tracker/RAK19007/US915** bundle contents and pricing; choose compatible battery with verified polarity and charger limits; select physical enclosure, screen mounting, sealed cable entries and antenna connector. A second compatible test node or authorized peer is required to test message exchange.
 
-## Current technical direction
-Evaluate low-power officially supported hardware (including modular RAK4631 WisBlock) before purchasing. Confirm exact RF SKU, antenna matching and Meshtastic firmware support. Plan a controlled second node or authorized existing peer for two-way tests.
-
-## Decisions still needed
-1. Form factor: compact or rugged portable?
-2. Budget ceiling?
-3. Mandatory GPS, display, on-device controls, weather resistance?
-4. Runtime goal and conditions?
-5. Second test node procurement?
-
-## Next action
-Confirm requirements and create an architecture decision record (ADR-0001) and vendor-checked bill of materials. Do not purchase prematurely.
-
-## Safety
-Use compatible charging circuitry and antenna; adhere to applicable RF rules. Keep private channel credentials and exact personal location details out of this public repository.
+**Current evidence:** Architecture selected, no hardware assembled, RF/ingress protection or battery life verified. Avoid publishing exact coordinates or channel secrets.
