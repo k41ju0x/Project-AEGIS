@@ -1,0 +1,2 @@
+item_id,component,manufacturer_or_part_number,quantity,unit_cost_usd,estimated_total_usd,supplier_url,status,compatibility_notes,receipt_private_reference
+BOM-001,Example component,,1,,,,Researching,Check pinout and RF band; do not publish purchase identifiers,
