@@ -1,33 +1,41 @@
-# AEG-002 — Procurement Notes and Budget v1
+# AEG-002 — Procurement Plan v2
+**Status:** Candidate parts selected, **NOT PURCHASED**.
 
-**Status:** Price planning, not a purchase order. **Date:** 2026-10-26.
+## Preferred battery and housing
+- **Battery:** [Adafruit #353 3.7V protected 6600mAh Li-ion pack](https://www.adafruit.com/product/353): **$24.50** listed; 69 × 54 × 18mm; JST-PH-2; rated charge current up to 1.65A by pack maker, **but RAK19007 charges far slower**.
+- **Enclosure:** [Hammond 1554F2GYCL](https://hammond-store.com/electronics/small-case/plastic/1554): **$13.83** listed; clear-lid gasketed polycarbonate, **120 × 90 × 60mm external**. This is an evaluation selection, not a verified internal fit.
+- **Core:** [RAKwireless Meshtastic Starter Kit](https://store.rakwireless.com/products/wisblock-meshtastic-starter-kit): **$24.99–$60.99 variants**, use $60.99 as conservative placeholder; choose RAK19007, US915 and Client-Tracker, confirm RAK12501 GNSS + RAK1921 OLED included.
 
-## Cost model for one rugged node
-| Group | Allowance (USD) | Source quality |
+## Budget, one node
+| Component | USD | Basis |
 |---|---:|---|
-| RAK4631/RAK19007 Client-Tracker configured kit | $60.99 | Published RAKwireless **range upper variant price** ($24.99–$60.99), **not verified exact options checkout** |
-| Compatible protected ~5000mAh 1S LiPo | $39 | Estimate |
-| Gasketed enclosure | $39 | Estimate |
-| Screen window/sealing | $23 | Estimate |
-| RF feedthrough accessories | $24 | Estimate |
-| USB/charging access seals | $22 | Estimate |
-| Mounting and strain relief | $18 | Estimate |
-| Consumables | $25 | Estimate |
-| Shipping/tax/variation reserve | $35 | Estimate |
-| **Planned total** | **$285.99** | **Mixed sourced price + engineering allowances** |
+| RAK configured kit placeholder | $60.99 | Vendor published variant ceiling, precise checkout unverified |
+| Adafruit 6600mAh battery | $24.50 | Listed price |
+| Hammond clear-lid enclosure | $13.83 | Listed price |
+| Waterproof RF bulkhead/interface | $25.00 | Estimate |
+| Nonconductive mounts and pack restraints | $20.00 | Estimate |
+| Insulation/padding and strain relief | $10.00 | Estimate |
+| Charging access contingency | $20.00 | Estimate; may not be spent |
+| Shipping/tax/rework reserve | $35.00 | Estimate |
+| **Total budget allowance** | **$209.32** | **Not a final checkout quote** |
 
-An **optional second test node** could add roughly **$60–$100+** depending on configuration; not included in the total. A second peer or approved existing reachable node is necessary for repeatable two-way message tests.
+Does not include a second owned Meshtastic node or specialist test instruments. Budget remains under the user's open-ended $250+ preferred funding band, leaving reserve for a test peer, environmental testing, or alternate components.
 
-### Vendor source
-RAKwireless [RAK4631 Meshtastic Starter Kit](https://store.rakwireless.com/products/wisblock-meshtastic-starter-kit): variant pricing listed $24.99–$60.99. Its **Client-Tracker** option bundles a RAK12501 GNSS, RAK1904 acceleration sensor and RAK1921 OLED. Select **RAK19007 base**, **US915 radio**, and confirm display assembly, exact kit contents and final checkout price. The published kit includes antenna and RF lead, so don't pay twice for them unless sealing/connector requirements necessitate changes.
+## Mechanical & electrical considerations
+1. Use the **clear lid** as the OLED viewing window; no separate window cutout required. Readability, GNSS reception through plastic and board/display orientation require bench tests.
+2. Fit 69×54×18mm battery plus RAK19007 30×60mm baseboard and cable loops with supports; **external dimensions are not usable internal dimensions**. A stacked mount may be needed; preserve clearance from screws.
+3. Avoid exposed USB penetration in v1. Open lid in a dry indoor environment for charging, then reseat gasket and screws before field use. This is less convenient but removes a common leak path.
+4. Any antenna hole requires an accurately matched watertight bulkhead/feedthrough. Verify antenna connector type and rubber seal.
+5. Check pack voltage, JST connector pin order and polarity using official schematics and multimeter. A physically fitting JST can have reversed polarity.
+6. RAK19007 low charge-current limit makes full recharge potentially **20+ hours**; verify actual charge behavior and ventilation.
+7. Modified enclosure's published IP68 rating is **not a certified finished-device rating**. Test assembled enclosure for realistic splashes/rain before use; no intentional submersion claim.
 
-### Procurement gates
-- [ ] Screenshot/record exact vendor option values and completed checkout *before payment*
-- [ ] Confirm 915 MHz correct region, Arduino-bootloader variant
-- [ ] Confirm charger and LiPo connector polarity, dimensions, temperature and protection
-- [ ] Dry-fit enclosure against vendor CAD / actual parts
-- [ ] Confirm weather-sealed screen, antenna and charging access design
-- [ ] Select controlled second test peer
-- [ ] Reconcile expected cost vs actual paid total; retain receipts privately
+## Do not purchase until
+- [ ] Verify exact variant cart and delivered module assembly/pinout
+- [ ] Download/check Hammond interior dimensions and mounting drawing
+- [ ] Confirm battery-to-base polarity without relying on matching connector
+- [ ] Confirm SMA/pigtail/feedthrough mating interfaces and mechanical layout
+- [ ] Verify safe indoor charging access and external antenna waterproofing
+- [ ] Decide whether a second peer is needed for testing
 
-Do not copy purchase addresses, order numbers or serial numbers to this public repository.
+Sources: https://www.adafruit.com/product/353 ; https://hammond-store.com/electronics/small-case/plastic/1554 ; https://store.rakwireless.com/products/wisblock-meshtastic-starter-kit
