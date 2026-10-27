@@ -1,29 +1,42 @@
-# AEG-XXX — Project Name
+# AEG-XXX — Project Overview
 
-**Status:** Idea
+**Project ID:** AEG-XXX
 **Domain:**
-**Visibility:** Public summary / private engineering / both
-**Repository:**
-**Last reviewed:**
+**Status:** Ideas
+**Visibility:** Public summary / Private implementation / Both
+**Related issue:**
+**Dedicated repository (when applicable):**
+**Last reviewed:** YYYY-MM-DD
 
-## Purpose and success criteria
+## Purpose
+One-paragraph problem statement and motivation.
 
-## Scope and authorization
+## Goals and success criteria
+- [ ] A measurable acceptance outcome
 
-## Requirements
+## Current state
+State **what is verified**, what is planned and what remains unknown. Do not equate an idea with a working build.
 
-## Architecture and design decisions
+## Architecture overview
+Public, sanitized system diagram or component summary; link the private implementation without disclosing secrets when applicable.
 
-## Bill of materials / dependencies
+## Documentation index
+- [Charter](../../templates/CHARTER-TEMPLATE.md)
+- [Requirements](../../templates/REQUIREMENTS-TEMPLATE.md)
+- [Research](../../templates/RESEARCH-TEMPLATE.md)
+- [Decision record](../../templates/DECISION-RECORD-TEMPLATE.md)
+- [BOM](../../templates/BOM-TEMPLATE.csv)
+- [Build log](../../templates/BUILD-LOG-TEMPLATE.md)
+- [Test plan](../../templates/TEST-PLAN-TEMPLATE.md)
+- [Lessons learned](../../templates/LESSONS-LEARNED-TEMPLATE.md)
+- [Resume here](../../templates/SESSION-HANDOFF-TEMPLATE.md)
 
-## Build log
-| Date | Change | Rationale | Result / evidence |
-|---|---|---|---|
+**Note:** These are starter templates. Copy relevant files into this project's own folder and change links to those copies when work begins.
 
-## Test plan and evidence
+## Risks and authorization boundaries
 
-## Risks and security considerations
+## Next action
+One immediately actionable step, with prerequisites.
 
-## Lessons learned
-
-## Next concrete action
+## Most recent milestone
+Date, evidence, and related issue or commit.
