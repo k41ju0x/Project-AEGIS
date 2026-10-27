@@ -1,0 +1,53 @@
+name: Project intake
+description: Propose and scope a new Aegis research or engineering initiative
+title: "AEG-XXX — "
+labels: []
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective and value
+      description: What will be built or learned, and why?
+      placeholder: Describe the idea and the problem it solves
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Home Lab
+        - RF / Wireless
+        - Cybersecurity
+        - Hardware
+        - Automation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Success criteria
+      placeholder: What observable result means the project is successful?
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and risks
+      placeholder: Budget, approvals, environment, safety, skills, dependencies
+  - type: dropdown
+    id: visibility
+    attributes:
+      label: Visibility plan
+      options:
+        - Public summary, private implementation
+        - Public only (sanitized)
+        - Private implementation only
+    validations:
+      required: true
+  - type: textarea
+    id: next
+    attributes:
+      label: Next concrete action
+      placeholder: One thing to do next
+    validations:
+      required: true
