@@ -1,0 +1,32 @@
+name: Engineering task
+description: A discrete research, build, testing, or documentation task
+title: "[Task] "
+body:
+  - type: input
+    id: project
+    attributes:
+      label: Project ID
+      placeholder: AEG-002
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Define what done looks like.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Tasks and dependencies
+      value: "- [ ] "
+  - type: textarea
+    id: validation
+    attributes:
+      label: Acceptance test / evidence
+      description: How will the result be verified?
+  - type: textarea
+    id: next
+    attributes:
+      label: Next action
