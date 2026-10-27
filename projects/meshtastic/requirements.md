@@ -1,25 +1,21 @@
-# AEG-002 — Initial Requirements & Acceptance Plan
-**State:** Proposed baseline — thresholds and options to be confirmed before acquisition.
+# AEG-002 — Requirements Baseline v1.0
+**Date:** 2026-10-26 · **State:** User-confirmed objectives; acceptance tests pending.
 
-| ID | Level | Requirement | Proposed validation |
+| ID | Priority | Requirement | Acceptance evidence |
 |---|---|---|---|
-| REQ-001 | Must | Device runs an officially supported Meshtastic firmware target | Record platform, firmware release, successful boot |
-| REQ-002 | Must | RF variant and antenna are appropriate for applicable US regional rules | Photograph/record labels, antenna rating and configured region; verify local obligations |
-| REQ-003 | Must | Node can communicate with a second compatible, authorized node | Exchange bidirectional test messages and record received packets, timestamps and conditions |
-| REQ-004 | Must | Node operates from a safely integrated rechargeable battery | Inspect electrical compatibility, charge safely, measure actual endurance |
-| REQ-005 | Must | Local configuration and messaging available via supported client/interface | Document successful pairing/connectivity and configuration readback |
-| REQ-006 | Must | Build can be replicated from sanitized records | Versioned BOM, wiring/configuration notes, build journal, test results |
-| REQ-007 | Should | Portable protective enclosure | Assess fit, connector strain, accessibility and thermal considerations |
-| REQ-008 | Could | GPS position capability | Verify opt-in location acquisition and privacy behavior if installed |
-| REQ-009 | Could | Display and user controls | Verify usability in anticipated environment if installed |
-| REQ-010 | Could | Future fixed/solar relay compatibility | Evaluate after v1 field results |
+| REQ-001 | Must | Selected Meshtastic platform is RAK4631, compatible Arduino-bootloader version | Identify SKU, firmware and two successful boots |
+| REQ-002 | Must | US-compatible radio and matched attached antenna | Verify US915 SKU, local regulatory suitability and firmware region before transmission |
+| REQ-003 | Must | Bidirectional text messaging to compatible authorized peer | Time-stamped send/receive logs from two nodes |
+| REQ-004 | Must | Rechargeable battery with **48-hour operating target** | Run a continuous 48h test with GPS/display and ordinary messaging workload documented |
+| REQ-005 | Must | Built-in working GPS/GNSS | GNSS lock and opt-in location readback demonstrated |
+| REQ-006 | Must | Built-in functional display | Readable status / message-related display test |
+| REQ-007 | Must | Rugged portable enclosure with weather-resistant construction | Inspect sealing, strain relief and environmental exposure method; do not claim certified IP rating without testing |
+| REQ-008 | Must | Phone connection for Meshtastic configuration and message composition | Pair and exchange messages from supported client |
+| REQ-009 | Must | Reproducible, sanitized build | BOM, wiring, assembly, firmware version, test evidence documented |
+| REQ-010 | Should | Device cost within user-approved scope | Per-node itemized checkout total reviewed before procurement; $250+ is a budget band, not a fixed ceiling |
 
-## Parameters requiring user choices
-- Target runtime: TBD hours (measure; don't promise prematurely)
-- Budget: TBD USD
-- Range target: TBD and conditioned on geography, antenna height, and obstacles
-- Weather resistance: TBD, do not claim IP certification without testing
-- Enclosure dimensions / weight: TBD
-
-## Acceptance notes
-One Meshtastic node cannot demonstrate end-to-end messaging alone. Plan for two compatible nodes or an authorized reachable peer. Record software versions, environment, antenna and physical placement for every RF test.
+## Open test parameters
+- GPS acquisition frequency (continuous vs interval), OLED brightness/timeout, transmit/receive load, Bluetooth use and temperature must be recorded.
+- Runtime target is **not** a claimed battery specification. Battery capacity and firmware behavior will be verified.
+- Enclosure ingress protection rating of raw box does not transfer automatically to drilled/modified finished assembly.
+- Range is not guaranteed and will be evaluated separately based on terrain/antenna height.
