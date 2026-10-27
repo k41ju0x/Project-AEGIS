@@ -6,6 +6,7 @@
 **Design priority:** Maximum sustained compute performance over portability, battery runtime, weight, and cost.
 **Enclosure direction:** Rugged Pelican-style protective case; user accepts active fans and larger form factor. Exact model and ingress-protection strategy TBD.
 **Power requirement:** Both wall-powered and standalone battery-powered operation. Full sustained performance on AC; target full performance on battery subject to measured load and safe battery design.
+**Battery endurance target:** 8 hours at a documented active assessment workload; support an externally attachable backup battery/power bank for additional runtime, subject to verified voltage, current, continuous wattage and power-path compatibility.
 
 ## Mission
 Design and validate a modular, portable Kali Linux wireless security assessment workstation for authorized wireless discovery, GPS-correlated surveys, controlled WPA2/WPA3 lab security evaluation, and secure remote management.
@@ -38,7 +39,9 @@ Owner's four-page *Remote Access Device Build* PDF documents an older LattePanda
 - Investigate ducted intake/exhaust with filtered vents versus a sealed conduction-cooled enclosure. Include temperature sensors, dust/water protection, and service access.
 - Dedicated monitor-mode wireless adapter; separate reliable management interface.
 - Dual-input AC adapter and field battery architecture, with properly rated regulation, BMS, fuses and thermal protection. Investigate uninterrupted switchover only after selecting board input specifications; do not assume simple parallel wiring is safe.
-- Determine battery runtime and Wh capacity from measured complete-system power draw, including radios, storage and fans. Avoid committing to chemistry, charger or enclosure placement before thermal and electrical design.
+- Size onboard battery for an **8-hour mission target** using measured complete-system average power, including radios, storage and fans. Illustrative nominal Wh = average W × 8 / 0.85; 60 W average implies ~565 Wh nominal under this assumption, not a validated BOM.
+- Provide a protected, accessible external backup-power input. Validate power bank or station output ratings, cable/connectors, electrical isolation and safe transfer before purchase; a generic USB power bank may not support the selected LattePanda.
+- Avoid committing to chemistry, charger or enclosure placement before thermal and electrical design.
 - Benchmark CPU, memory, storage throughput, multi-adapter capture stability and power consumption before enclosure finalization.
 
 ## Initial next milestone
