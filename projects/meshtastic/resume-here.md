@@ -1,21 +1,19 @@
 # AEG-002 — Resume Here
 **Date:** 2026-10-26  
-**Stage:** Planning / architecture selected (not procured)
+**Stage:** Parts shortlisted; nothing ordered.
 
-## Locked requirements
-- **Platform:** RAK4631 WisBlock + RAK19007
-- **Form factor:** Rugged portable
-- **Features:** GNSS, OLED display, weather-resistant enclosure
-- **Runtime acceptance target:** 48 hours under documented usage
-- **Budget band:** USD $250+, exact spending ceiling not specified
+## Selected / proposed
+- RAK4631 + RAK19007 US915 Client-Tracker, GNSS, OLED
+- **Candidate battery:** Adafruit 353 protected 3.7V 6600mAh, 69×54×18mm
+- **Candidate enclosure:** Hammond 1554F2GYCL clear-lid polycarbonate, 120×90×60mm external
+- **Runtime:** 48-hour preferred; 24-hour accepted fallback **only if verified through testing**.
+- **Mechanical:** No window cutout; antenna needs sealed bulkhead; charge with lid open in dry indoor setting.
+- **Budget allowance:** $209.32 (mix of observed catalog prices and estimates, excluding test node).
 
-## Done
-Published project charter, requirements, research, ADR-0001, architecture, estimated BOM, power model and draft tests.
-
-## Not yet done
-No orders, assembly, electrical tests, battery or ingress validation, two-node message tests.
+## Unverified / before purchase
+Physical dry-fit and internal enclosure clearances; module assembly options; exact starter bundle cost; battery JST polarity and charge compatibility; antenna mating interfaces. No hardware procured, built or tested.
 
 ## Next action
-Select the exact vendor **US915, RAK19007, Client-Tracker** SKU and screenshot its contents/checkout; avoid double buying included GPS/OLED/antenna. Validate protected battery polarity, housing dimensions, antenna bulkhead and gasketed screen design before payment.
+Verify vendor cart for Client-Tracker RAK19007 US915, Hammond internal mechanical drawing and battery pinout; then approve order and log receipts privately.
 
-[Project overview](README.md) · [ADR](decisions/ADR-0001-rak4631.md) · [BOM](bom.csv) · [Power](power-budget.md)
+[Overview](README.md) · [BOM](bom.csv) · [Procurement](procurement.md) · [Runtime model](power-budget.md)
