@@ -28,6 +28,21 @@ Research, design, build, test, and document cybersecurity technologies and exper
 
 See [PROJECTS.md](PROJECTS.md) for provisional statuses and the complete registry. Additional projects can start as ideas here, then graduate to dedicated repositories.
 
+## Documentation Framework
+
+**[Start Here — Engineering Handbook](docs/README.md)** provides the full project lifecycle and documentation rules.
+
+| Resource | Purpose |
+|---|---|
+| [Workflow](docs/WORKFLOW.md) | Project intake, research, implementation, validation, and handoff |
+| [Board Configuration](docs/BOARD-CONFIGURATION.md) | GitHub Projects fields, views, and triage |
+| [Visibility Policy](docs/VISIBILITY-POLICY.md) | Public versus private engineering material |
+| [Reusable Templates](templates/PROJECT-TEMPLATE.md) | Charters, requirements, research, ADRs, BOM, build logs, tests, lessons and handoff |
+| [Project Intake Form](.github/ISSUE_TEMPLATE/project-intake.yml) | Register a new project as a GitHub issue |
+| [Engineering Task Form](.github/ISSUE_TEMPLATE/task.yml) | Track specific implementation or investigation work |
+
+**When returning to a project:** read its README, latest build log, and session handoff; update the next action after each work session.
+
 ## Workflow
 **Ideas → Research → Planning → In Progress → Testing → Completed**, with **On Hold** for paused work.
 
