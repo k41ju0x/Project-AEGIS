@@ -1,14 +1,17 @@
 # AEG-002 — Build Log
 
-## 2026-10-26 — Planning baseline
-**Goal:** Establish charter, initial requirements, research shortlist, risk register and draft test plan.
+## 2026-10-26 — Requirements locked and hardware platform selected
+**Goal:** Translate rugged, $250+, GNSS, display, weather protection and 48-hour operating objective into procurement-ready engineering plan.
 
-**Action:** Reviewed official Meshtastic hardware and getting-started documentation, shortlisted modular nRF52 and other supported hardware platforms, defined validation gates.
+**Action:** Selected RAK4631 with RAK19007 as the platform, confirmed Meshtastic documented GNSS/OLED expansion, drafted architecture, ADR, BOM, power and validation plan.
 
-**Why:** Avoid purchases before agreeing on device form factor, RF frequency/regional suitability, power targets, and reproducible tests.
+**Rationale:** nRF52840 platform's lower-power profile and WisBlock modularity suit documented rugged custom construction.
 
-**Observed:** Documentation prepared; no hardware assembled, firmware flashed, or field testing performed.
+**Observed:** Research and planning documents committed. No physical build or runtime measurement occurred. Published product price is a variant range, not a quoted exact configured checkout amount.
 
-**Open:** Form factor, budget, mandatory GPS/display, runtime target, controlled test peer.
+**Open:** Confirm exact bundle, battery SKU/polarity, enclosure parts/ingress, antenna hardware and validation peer.
 
-**Next action:** Gather constraints and select platform through a documented decision record.
+**Next:** Verify selected SKU configuration and checkout, then finalize procurement.
+
+## 2026-10-26 — Initial planning baseline
+Charter, risk review and first-pass requirements/research/test documentation established.
