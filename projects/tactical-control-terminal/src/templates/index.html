@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+<title>AEGIS Mesh Control</title>
+<style>
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #081522;
+  color: #e9f4f1;
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 22px; }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+h1 { color: #a8f46c; font-size: 28px; margin: 0; }
+h2 { font-size: 20px; margin-top: 0; }
+small, .muted { color: #9bb0bf; }
+main { max-width: 1200px; margin: auto; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.card {
+  background: #172a3c;
+  border: 1px solid #30465a;
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 16px;
+}
+.value {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+.ok { color: #a8f46c; }
+.warn { color: #ffcc70; }
+nav { display: flex; flex-wrap: wrap; gap: 12px; }
+button {
+  min-height: 52px;
+  padding: 12px 22px;
+  border: 1px solid #496075;
+  border-radius: 12px;
+  background: #20374c;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+button.active {
+  background: #a8f46c;
+  color: #081522;
+  border-color: #a8f46c;
+}
+button:focus-visible { outline: 3px solid #fff; }
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+[hidden] { display: none !important; }
+@media (max-width: 650px) {
+  body { padding: 12px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div>
+    <h1>🛡️ AEGIS // MESH CONTROL</h1>
+    <small>AEG-006 | Tactical Control Terminal</small>
+  </div>
+  <span id="connection" class="warn">Starting...</span>
+</header>
+
+<nav aria-label="Application sections">
+  <button class="active" data-page="overview">Overview</button>
+  <button data-page="nodes">Mesh Nodes</button>
+  <button data-page="diagnostics">Diagnostics</button>
+</nav>
+
+<section id="overview" style="margin-top:22px">
+  <div class="grid">
+    <div class="card">
+      <small>CPU TEMPERATURE</small>
+      <div class="value" id="temperature">--</div>
+      <small>Live Raspberry Pi sensor</small>
+    </div>
+    <div class="card">
+      <small>MESHTASTIC RADIO</small>
+      <div class="value warn" id="radio">NOT CONNECTED</div>
+      <small>Awaiting AEG-002 USB integration</small>
+    </div>
+  </div>
+  <div class="card">
+    <h2>System Information</h2>
+    <p>Hostname: <strong id="hostname">--</strong></p>
+    <p>Last update: <span id="updated">--</span></p>
+    <p>Application: <span class="ok">Operational</span></p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <small>MEMORY USAGE</small>
+      <div class="value" id="memory">--</div>
+      <small id="memory-details">Awaiting data</small>
+    </div>
+    <div class="card">
+      <small>STORAGE USAGE</small>
+      <div class="value" id="storage">--</div>
+      <small id="storage-details">Awaiting data</small>
+    </div>
+    <div class="card">
+      <small>SYSTEM UPTIME</small>
+      <div class="value" id="uptime">--</div>
+      <small>Time since last boot</small>
+    </div>
+    <div class="card">
+      <small>ACTIVE COOLER</small>
+      <div class="value" id="fan">--</div>
+      <small>Fan rotation in RPM</small>
+    </div>
+  </div>
+</section>
+
+<section id="nodes" hidden style="margin-top:22px">
+  <div class="card">
+    <h2>Mesh Node Monitor</h2>
+    <p id="node-message">
+      No live radio connection established.
+    </p>
+    <p class="muted">
+      Node information will appear after the
+      RAK4631 is connected and verified.
+    </p>
+  </div>
+</section>
+
+<section id="diagnostics" hidden style="margin-top:22px">
+  <div class="card">
+    <h2>Diagnostics</h2>
+    <p>USB serial candidates are not necessarily Meshtastic devices.</p>
+    <pre id="diagnostic-output">Loading...</pre>
+  </div>
+</section>
+
+<small>PROJECT AEGIS • VERSION 0.2 • LOCAL PROTOTYPE</small>
+</main>
+
+<script>
+const buttons = document.querySelectorAll("[data-page]");
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    const page = button.dataset.page;
+    buttons.forEach(b => {
+      b.classList.toggle("active", b === button);
+    });
+    ["overview", "nodes", "diagnostics"].forEach(id => {
+      document.getElementById(id).hidden = id !== page;
+    });
+  });
+});
+
+async function refreshStatus() {
+  try {
+    const response = await fetch("/api/status", {
+      cache: "no-store"
+    });
+    if (!response.ok) throw new Error("API unavailable");
+    const data = await response.json();
+
+    document.getElementById("connection").textContent =
+      "● APP ONLINE";
+    document.getElementById("connection").className = "ok";
+
+    document.getElementById("temperature").textContent =
+      data.cpu_temp_c === null
+        ? "Unavailable"
+        : data.cpu_temp_c.toFixed(1) + " °C";
+
+
+    const memory = data.memory;
+    document.getElementById("memory").textContent =
+      memory ? memory.percent.toFixed(1) + "%" : "Unavailable";
+    document.getElementById("memory-details").textContent =
+      memory ? `${memory.used_mb} / ${memory.total_mb} MB` : "";
+
+    const storage = data.storage;
+    document.getElementById("storage").textContent =
+      storage ? storage.percent.toFixed(1) + "%" : "Unavailable";
+    document.getElementById("storage-details").textContent =
+      storage ? `${storage.used_gb} / ${storage.total_gb} GB` : "";
+
+    const seconds = data.uptime_seconds;
+    if (seconds !== null && seconds !== undefined) {
+      const days = Math.floor(seconds / 86400);
+      const hours = Math.floor((seconds % 86400) / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      document.getElementById("uptime").textContent =
+        `${days}d ${hours}h ${minutes}m`;
+    } else {
+      document.getElementById("uptime").textContent = "Unavailable";
+    }
+
+    document.getElementById("fan").textContent =
+      data.fan_rpm === null ? "Unavailable" :
+      data.fan_rpm + " RPM";
+
+    document.getElementById("hostname").textContent =
+      data.hostname;
+
+    document.getElementById("updated").textContent =
+      data.timestamp;
+
+    document.getElementById("radio").textContent =
+      "NOT CONNECTED";
+
+    document.getElementById("node-message").textContent =
+      "No live radio session. 0 verified nodes.";
+
+    document.getElementById("diagnostic-output").textContent =
+      JSON.stringify(data, null, 2);
+  } catch (error) {
+    document.getElementById("connection").textContent =
+      "● APP OFFLINE";
+    document.getElementById("connection").className = "warn";
+  }
+}
+
+refreshStatus();
+setInterval(refreshStatus, 5000);
+</script>
+</body>
+</html>
