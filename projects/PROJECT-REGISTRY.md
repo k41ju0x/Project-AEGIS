@@ -16,9 +16,13 @@ These are proposed research projects, not purchase commitments. Existing AEG-002
 | AEG-013 | Web Application Security Lab | Software Development | 1 | Backlog | [web-app-security](web-app-security/README.md) |
 | AEG-014 | IoT Security Research Platform | Hardware & Embedded | 3 | Backlog | [iot-security-research](iot-security-research/README.md) |
 | AEG-015 | Flipper Zero Development Lab | Hardware & Embedded | 2 | Backlog | [flipper-development](flipper-development/README.md) |
+| AEG-016 | AEGIS Sentinel — Desktop AI Companion | AI & Embedded Systems | 1 | Planning / Procurement | [aegis-sentinel](aegis-sentinel/README.md) |
 
 ## Operating principle
 Pair every authorized offensive security experiment with corresponding detection, mitigation, or defensive validation. Use isolated lab environments and sanitized evidence. Each project follows M0 scope, M1 design, M2 prototype, M3 test, M4 defensive validation and publication, M5 retrospective.
 
 ## Sequencing
 Phase 1: AEG-009, AEG-006, AEG-013. Phase 2: AEG-007, AEG-008, AEG-015. Phase 3: AEG-010, AEG-011, AEG-012, AEG-014. These are suggested sequencing groups, not committed dates.
+
+## ID reconciliation note (2026-11-01)
+The AEG-006 Pico Ducky row above conflicts with the previously established **AEG-006 Tactical Control Terminal** (Raspberry Pi 5). Preserve the Tactical Control Terminal as AEG-006; the Pico Ducky backlog ID is provisional pending registry cleanup. AEG-016 Sentinel is unique and unaffected.
