@@ -73,6 +73,23 @@ pre {
   body { padding: 12px; }
   .grid { grid-template-columns: 1fr; }
 }
+
+select {
+  min-height: 52px;
+  padding: 12px;
+  margin-left: 12px;
+  border-radius: 10px;
+  background: #20374c;
+  color: #ffffff;
+  border: 1px solid #496075;
+  font-size: 17px;
+}
+th, td {
+  text-align: left;
+  padding: 14px 10px;
+  border-bottom: 1px solid #30465a;
+}
+th { color: #a8f46c; }
 </style>
 </head>
 <body>
@@ -188,6 +205,39 @@ pre {
     </p>
   </div>
 
+
+  <div class="card">
+    <h2>Mesh Packet Intelligence</h2>
+    <p class="warn" id="packet-mode">
+      SYNTHETIC TEST DATA — NOT LIVE RF TRAFFIC
+    </p>
+
+    <label for="packet-filter">Packet type</label>
+    <select id="packet-filter">
+      <option value="ALL">All packets</option>
+      <option value="TEXT">Text</option>
+      <option value="POSITION">Position</option>
+      <option value="TELEMETRY">Telemetry</option>
+    </select>
+
+    <div style="overflow-x:auto; margin-top:18px">
+      <table style="width:100%; border-collapse:collapse">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Source</th>
+            <th>Type</th>
+            <th>RSSI</th>
+            <th>SNR</th>
+          </tr>
+        </thead>
+        <tbody id="packet-rows">
+          <tr><td colspan="5">Loading test data...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <div class="card">
     <h2>RF Spectrum</h2>
     <p class="muted">
@@ -206,7 +256,7 @@ pre {
   </div>
 </section>
 
-<small>PROJECT AEGIS • VERSION 0.3 • LOCAL PROTOTYPE</small>
+<small>PROJECT AEGIS • VERSION 0.4 • LOCAL PROTOTYPE</small>
 </main>
 
 <script>
@@ -331,10 +381,78 @@ async function refreshRF() {
   }
 }
 
+
+let packetRecords = [];
+
+function drawPackets() {
+  const filter = document.getElementById("packet-filter").value;
+  const rows = document.getElementById("packet-rows");
+  rows.replaceChildren();
+
+  const selected = packetRecords.filter(p =>
+    filter === "ALL" || p.packet_type === filter
+  );
+
+  if (!selected.length) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 5;
+    td.textContent = "No packets match this filter.";
+    tr.appendChild(td);
+    rows.appendChild(tr);
+    return;
+  }
+
+  selected.forEach(packet => {
+    const tr = document.createElement("tr");
+    const values = [
+      new Date(packet.timestamp).toLocaleTimeString(),
+      packet.source,
+      packet.packet_type,
+      packet.rssi_dbm + " dBm",
+      packet.snr_db + " dB"
+    ];
+
+    values.forEach(value => {
+      const td = document.createElement("td");
+      td.textContent = value;
+      tr.appendChild(td);
+    });
+    rows.appendChild(tr);
+  });
+}
+
+async function refreshPackets() {
+  try {
+    const response = await fetch("/api/packets", {
+      cache: "no-store"
+    });
+    if (!response.ok) throw new Error("Packet API unavailable");
+
+    const data = await response.json();
+
+    document.getElementById("packet-mode").textContent =
+      data.notice || "SYNTHETIC TEST DATA";
+
+    packetRecords = data.packets || [];
+    drawPackets();
+  } catch (error) {
+    document.getElementById("packet-mode").textContent =
+      "PACKET API UNAVAILABLE";
+    packetRecords = [];
+    drawPackets();
+  }
+}
+
+document.getElementById("packet-filter")
+  .addEventListener("change", drawPackets);
+
 refreshStatus();
 refreshRF();
+refreshPackets();
 setInterval(refreshStatus, 5000);
 setInterval(refreshRF, 5000);
+setInterval(refreshPackets, 5000);
 
 </script>
 </body>
