@@ -1,4 +1,4 @@
-# AEG-006 — Pico Ducky / HID Research
+# AEG-017 — Pico Ducky / HID Research
 
 **Status:** Proposed / Backlog (not started; no procurement authorized)
 **Track:** Hardware & Embedded
