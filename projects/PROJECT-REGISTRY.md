@@ -6,7 +6,7 @@ These are proposed research projects, not purchase commitments. Existing AEG-002
 
 | ID | Project | Track | Phase | Status | Folder |
 |---|---|---|---|---|
-| AEG-003 | Pwnagotchi | Wireless Security Research | Active | Hardware Ordered | [pwnagotchi](pwnagotchi/README.md) |
+| AEG-003 | Pwnagotchi | Wireless Security Research | Deferred | Hardware Ordered / Build Paused | [pwnagotchi](pwnagotchi/README.md) |
 | AEG-006 | Tactical Control Terminal | Raspberry Pi / Meshtastic | Active | Built / integration ongoing | Existing project documentation |
 | AEG-007 | RFID/NFC Security Lab | Hardware & Embedded | 2 | Backlog | [rfid-nfc](rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP Lab | Wireless & Network | 2 | Backlog | [openwrt-rogue-ap](openwrt-rogue-ap/README.md) |
@@ -28,3 +28,6 @@ Phase 1: AEG-009, AEG-017, AEG-013. Phase 2: AEG-007, AEG-008, AEG-015. Phase 3:
 
 ## ID reconciliation (2026-11-01)
 AEG-006 remains the existing Tactical Control Terminal. Pico Ducky has been reassigned to AEG-017; AEG-016 remains Sentinel. No other existing project IDs were renumbered.
+
+## Execution focus — 2026-11-01
+Pause new project ideas, discretionary procurement, and backlog expansion. Active priorities: AEG-002 Meshtastic RAK4631 arrival, bring-up and integration with AEG-006 Tactical Control Terminal; AEG-016 Sentinel hardware arrival, build and initial companion software. AEG-003 Pwnagotchi hardware is ordered but **build deferred**: inventory/store on arrival only, no assembly or software work until explicitly resumed. Other backlog projects remain paused.
