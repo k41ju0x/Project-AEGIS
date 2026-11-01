@@ -1,6 +1,7 @@
 # AEG-016 — AEGIS Sentinel
 
 **Status:** Planning / procurement authorized (not yet purchased)
+**Controller decision (confirmed 2026-11-01):** Raspberry Pi Zero 2 W, preferably with pre-soldered 40-pin GPIO header. Remote AI inference on existing Windows desktop; no dedicated Pi 5 purchase for Sentinel.
 **Track:** AI, Embedded Systems, Home Automation, Cybersecurity Research
 **Concept:** Futuristic desktop AI companion and Project AEGIS voice command center.
 
@@ -16,7 +17,7 @@ A compact desktop AI companion with a hybrid personality: warm, expressive, and 
 
 ## Hardware baseline (pending bench validation)
 - PiSugar Whisplay HAT: 1.69-inch 240x280 LCD, dual microphones, mono speaker, RGB LEDs, programmable button, 40-pin GPIO.
-- **Dedicated Raspberry Pi Zero 2 W with populated 40-pin header** as compact display/audio endpoint; remote AI inference on existing Windows desktop or a configured cloud endpoint. Alternative: dedicated Pi 5 if on-device processing becomes a requirement.
+- **Dedicated Raspberry Pi Zero 2 W with populated 40-pin header** as compact display/audio endpoint; remote AI inference on existing Windows desktop or a configured cloud endpoint. Dedicated Pi 5 is not part of the selected baseline; reconsider only if measured requirements justify it.
 - microSD card, suitable 5V supply, USB cable, standoffs/headers as required.
 - Custom enclosure **only after physical measurement**; maintain acoustic openings, ventilation, button access, and physical microphone-disable provision.
 - Existing AEG-006 Pi 5 is a separate project and must not be dismantled or repurposed.
