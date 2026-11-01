@@ -23,7 +23,10 @@ getconf LONG_BIT             # Confirm 64-bit userspace (expected: 64)
 command -v chromium          # Check browser presence (actual path may vary)
 ```
 
-**Evidence and accuracy:** Debian 13 Trixie, working graphical desktop, and Chromium kiosk were verified during the build. This is a reproducible installation checklist; the exact Raspberry Pi Imager selections from the original imaging session were not captured as a screenshot. Add a photograph of the Imager OS-selection screen to future rebuild documentation, taking care not to show credentials.
+**Evidence and accuracy:** Debian 13 Trixie, working graphical desktop, and Chromium kiosk were verified during the build. This is a reproducible installation checklist; the exact Raspberry Pi Imager selections from the original imaging session.
+
+<img width="680" height="482" alt="Pi 5 OS Selection" src="https://github.com/user-attachments/assets/47c84773-65bc-4ee4-a0aa-4dcf1d51d4b1" />
+
 
 ## Phase 1 — Assembly and OS
 Installed Pi 5, DSI touchscreen, and Active Cooler. Initial blank screen resolved after EEPROM update and reboot. Debian 13 Trixie; touchscreen taps and swipes verified.
@@ -36,7 +39,7 @@ sudo apt full-upgrade    # Apply package upgrades
 sudo rpi-eeprom-update   # Inspect bootloader
 ```
 
-<img width="222" height="380" alt="Pi Touch and Pi5 Complete" src="https://github.com/user-attachments/assets/7a2639c9-21d7-410f-ae03-bc21d0f84129" />
+<img width="480" height="482" alt="Pi Touch and Pi5 Complete" src="https://github.com/user-attachments/assets/7a2639c9-21d7-410f-ae03-bc21d0f84129" />
 
 ## Phase 1A — Headless SSH recovery when the touchscreen was blank
 
@@ -89,15 +92,12 @@ sudo reboot                 # Reboot after applying updates when appropriate
 
 **Troubleshooting / safeguards:** If SSH is refused, check that the Pi booted, networking works, and SSH was enabled in Imager; if authentication fails, confirm the configured username and matching password/public key. The device must be on a reachable authorized LAN. Do not disable password authentication until key-based login has been tested successfully. For a power-only screen, check DSI ribbon orientation, GPIO power wiring and supported display configuration before assuming software is the only problem.
 
-**Photo evidence:** Initial blank display and later successful GUI photographs should be added to the photo register when the original images are available.
-
 ## Phase 2 — Cooling and system baseline
 Measured approximately 45 C CPU temperature; manual fan speed measurements approximately 7566 RPM at PWM 255 and 5099 RPM at PWM 125.
 ```bash
 cat /sys/class/thermal/thermal_zone0/temp
 ls /sys/class/hwmon/
 ```
-Evidence: cooler and thermal testing photos pending.
 
 ## Phase 3 — Python/Flask and kiosk
 Python 3.13.5, Meshtastic Python client 2.7.11, Flask 3.1.3. Virtual environment under ~/aegis-tct/.venv. Flask binds 127.0.0.1:5000. systemd unit aegis-mesh.service enabled. Chromium kiosk starts via labwc autostart.
@@ -108,7 +108,8 @@ systemctl status aegis-mesh.service --no-pager
 curl -sS http://127.0.0.1:5000/api/status
 ```
 Why: validate service, boot integration, and telemetry before adding radio features.
-Evidence: kiosk photos pending.
+
+<img width="480" height="482" alt="App Works" src="https://github.com/user-attachments/assets/d8b1ad63-465d-40c2-969d-36bed4c48340" />
 
 ## Phase 4 — v0.2 system monitoring
 Implemented CPU temperature, memory, storage, uptime, and fan RPM. Fixed uptime parsing and hwmon pwmfan detection. Verified cards on touchscreen. Source milestone: 776c9db.
