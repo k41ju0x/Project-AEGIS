@@ -1,5 +1,5 @@
 # AEG-002 — Procurement Plan v2
-**Status:** Candidate parts selected, **NOT PURCHASED**.
+**Status (November 1, 2026):** One RAK4631/R​AK19007 Meshtastic kit has been ordered, reported checkout $56.30 before import fees, with US915 selection and OLED/GNSS/sensor configuration. Kit delivery and component inventory are pending. Battery, enclosure and accessories in this document remain *unbought proposals*.
 
 ## Preferred battery and housing
 - **Battery:** [Adafruit #353 3.7V protected 6600mAh Li-ion pack](https://www.adafruit.com/product/353): **$24.50** listed; 69 × 54 × 18mm; JST-PH-2; rated charge current up to 1.65A by pack maker, **but RAK19007 charges far slower**.
@@ -9,7 +9,7 @@
 ## Budget, one node
 | Component | USD | Basis |
 |---|---:|---|
-| RAK configured kit placeholder | $60.99 | Vendor published variant ceiling, precise checkout unverified |
+| RAK configured kit placeholder | $60.99 | Vendor published variant ceiling, historical planning estimate; actual reported kit checkout $56.30 before import fees |
 | Adafruit 6600mAh battery | $24.50 | Listed price |
 | Hammond clear-lid enclosure | $13.83 | Listed price |
 | Waterproof RF bulkhead/interface | $25.00 | Estimate |
@@ -30,7 +30,7 @@ Does not include a second owned Meshtastic node or specialist test instruments. 
 6. RAK19007 low charge-current limit makes full recharge potentially **20+ hours**; verify actual charge behavior and ventilation.
 7. Modified enclosure's published IP68 rating is **not a certified finished-device rating**. Test assembled enclosure for realistic splashes/rain before use; no intentional submersion claim.
 
-## Do not purchase until
+## Before purchasing additional enclosure/power parts
 - [ ] Verify exact variant cart and delivered module assembly/pinout
 - [ ] Download/check Hammond interior dimensions and mounting drawing
 - [ ] Confirm battery-to-base polarity without relying on matching connector
