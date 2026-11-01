@@ -2,6 +2,29 @@
 
 This journal records the Raspberry Pi 5 / 10-inch touchscreen Tactical Control Terminal. It is reconstructed from verified sessions; it is not a verbatim terminal transcript. Photos mentioned below are pending upload and are not represented as committed artifacts.
 
+## Phase 0 — Install the correct Raspberry Pi OS image (before assembly and SSH recovery)
+
+**Required image for this specific build:** **Raspberry Pi OS (64-bit) with Desktop**, selected in **Raspberry Pi Imager** for Raspberry Pi 5. The verified installation boots a graphical desktop and reports Debian GNU/Linux 13 (Trixie). Do **not** select **Raspberry Pi OS Lite** for this walkthrough: Lite lacks the graphical desktop, Chromium and graphical session required by the documented touchscreen kiosk. A Lite-based build would need additional packages and setup not covered here. The optional image labeled *Desktop and recommended software* is not required.
+
+**Prepare the 128 GB microSD card from a separate management computer:**
+1. Install and open Raspberry Pi Imager; choose **Raspberry Pi 5** as the device.
+2. Under **Operating System**, choose **Raspberry Pi OS (64-bit)** — the **desktop** image, not the Lite variant. Check the image description in Imager because menu labels can change.
+3. Under **Storage**, select the intended microSD card. Writing the image **erases the selected drive**; double-check the target.
+4. Before writing, use the OS customization options to set the device hostname (here `aegis-tct`), create the `aegis` account with a strong password, configure Wi-Fi and its regulatory country if Wi-Fi is used, select time zone `America/Chicago`, and **enable SSH**. Select either password authentication for initial setup or provision a public SSH key already generated on the management computer.
+5. Write and verify the image, safely eject the card, insert it into the Pi, attach the DSI touchscreen and cooler according to their hardware instructions, and apply the official Pi 5 power supply.
+6. If the display is blank, **do not assume the OS failed to install**. Check whether the Pi joined the network and continue with the following headless SSH recovery phase.
+
+**Why Desktop matters:** AEGIS Mesh Control is a Flask server displayed locally in Chromium fullscreen kiosk mode via the Raspberry Pi OS graphical `labwc` session. The browser, display stack and touch navigation depend on the desktop environment being installed. The Flask API itself can operate headlessly; the **documented AEG-006 operator interface** cannot.
+
+**Verify the installed OS after SSH access is available (commands run on Pi):**
+```bash
+cat /etc/os-release          # Confirm Debian release (Trixie for this build)
+getconf LONG_BIT             # Confirm 64-bit userspace (expected: 64)
+command -v chromium          # Check browser presence (actual path may vary)
+```
+
+**Evidence and accuracy:** Debian 13 Trixie, working graphical desktop, and Chromium kiosk were verified during the build. This is a reproducible installation checklist; the exact Raspberry Pi Imager selections from the original imaging session were not captured as a screenshot. Add a photograph of the Imager OS-selection screen to future rebuild documentation, taking care not to show credentials.
+
 ## Phase 1 — Assembly and OS
 Installed Pi 5, DSI touchscreen, and Active Cooler. Initial blank screen resolved after EEPROM update and reboot. Debian 13 Trixie; touchscreen taps and swipes verified.
 
