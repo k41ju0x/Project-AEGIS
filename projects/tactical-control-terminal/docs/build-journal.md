@@ -58,7 +58,7 @@ Confirmed TEXT filter shows one event, one source, -82.0 dBm RSSI and 7.5 dB SNR
 
 ## Phase 8 — v0.6 history controls
 Verified source filter, type filter, Pause/Resume, Clear/Restore View, RSSI bars, and statistics on touchscreen. Backend retained separately; clearing view does not delete server packet history. Version 0.6 published. History 10/50/200 selectors still need validation with more than 10 records.
-Evidence: original photo of v0.6 touchscreen provided in chat; not yet uploaded to GitHub.
+Evidence: original v0.6 touchscreen photograph captured during acceptance testing; not yet uploaded to GitHub.
 
 ## Phase 9 — RAK4631 integration — not started
 Await starter kit. Inventory, configure Meshtastic US915, bench test via phone, connect USB to Pi, ingest live events separately from synthetic data.
