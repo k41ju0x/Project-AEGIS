@@ -9,7 +9,7 @@
 | AEG-003 | Pwnagotchi | Wireless security research | Idea / parked | [#3](../../issues/3) |
 | AEG-004 | Remote Access Device | Authorized remote administration | Idea / parked | [#4](../../issues/4) |
 | AEG-005 | Portable LattePanda Platform | Headless Kali / portable assessment device | Concept parked; no active purchases | Future scoping only |
-| AEG-006 | Tactical Control Terminal | Raspberry Pi 5 + Touch Display 2 / Meshtastic interface | Ordered from Micro Center; estimated Oct 31 delivery | [#6](../../issues/6) |
+| AEG-006 | Tactical Control Terminal | Raspberry Pi 5 + Touch Display 2 / Meshtastic interface | Hardware assembled and validated; Mesh Control v0.1 running on touchscreen; radio integration pending | [#6](../../issues/6) |
 
 ### Numbering decisions
 - **AEG-002** permanently refers to the RAK4631 Meshtastic build, even where separate issues cover planning and execution.
