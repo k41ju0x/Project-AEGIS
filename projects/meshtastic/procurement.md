@@ -19,7 +19,7 @@
 | Shipping/tax/rework reserve | $35.00 | Estimate |
 | **Total budget allowance** | **$209.32** | **Not a final checkout quote** |
 
-Does not include a second owned Meshtastic node or specialist test instruments. Budget remains under the user's open-ended $250+ preferred funding band, leaving reserve for a test peer, environmental testing, or alternate components.
+Does not include a second owned Meshtastic node or specialist test instruments. Budget remains under the initial $250+ planning budget, leaving reserve for a test peer, environmental testing, or alternate components.
 
 ## Mechanical & electrical considerations
 1. Use the **clear lid** as the OLED viewing window; no separate window cutout required. Readability, GNSS reception through plastic and board/display orientation require bench tests.
