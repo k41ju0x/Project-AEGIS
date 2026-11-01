@@ -6,6 +6,8 @@ import glob
 import socket
 import shutil
 
+from packet_store import get_events, load_synthetic_events
+
 app = Flask(__name__)
 
 def read_number(path, divisor=1):
@@ -116,7 +118,21 @@ def rf_status():
     })
 
 
+@app.get("/api/packets")
+def packet_events():
+    events = get_events()
+    return jsonify({
+        "mode": "synthetic_test",
+        "synthetic": True,
+        "radio_connected": False,
+        "count": len(events),
+        "packets": events,
+        "notice": "SYNTHETIC TEST DATA - NOT LIVE RF TRAFFIC"
+    })
+
+
 if __name__ == "__main__":
+    load_synthetic_events()
     app.run(
         host="127.0.0.1",
         port=5000,
