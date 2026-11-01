@@ -1,6 +1,6 @@
 # AEG-002 — Resume Here
-**Date:** 2026-10-26  
-**Stage:** Parts shortlisted; nothing ordered.
+**Updated:** 2026-11-01  
+**Stage:** RAK4631 kit ordered (one node), awaiting delivery and physical inventory. Battery/enclosure still candidate parts, not purchased.
 
 ## Selected / proposed
 - RAK4631 + RAK19007 US915 Client-Tracker, GNSS, OLED
@@ -11,9 +11,9 @@
 - **Budget allowance:** $209.32 (mix of observed catalog prices and estimates, excluding test node).
 
 ## Unverified / before purchase
-Physical dry-fit and internal enclosure clearances; module assembly options; exact starter bundle cost; battery JST polarity and charge compatibility; antenna mating interfaces. No hardware procured, built or tested.
+Physical dry-fit and internal enclosure clearances; module assembly options; exact starter bundle cost; battery JST polarity and charge compatibility; antenna mating interfaces. Radio kit ordered but not yet received, assembled or tested.
 
 ## Next action
-Verify vendor cart for Client-Tracker RAK19007 US915, Hammond internal mechanical drawing and battery pinout; then approve order and log receipts privately.
+Upon arrival, inventory kit and check region, module identifiers and antenna; record photos and firmware. Keep Hammond and battery proposals deferred until physical fit/polarity can be verified.
 
 [Overview](README.md) · [BOM](bom.csv) · [Procurement](procurement.md) · [Runtime model](power-budget.md)
