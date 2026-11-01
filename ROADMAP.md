@@ -3,8 +3,8 @@
 ## Phase 1 — Foundation
 - [x] Create Project Aegis repository
 - [x] Register existing Project NEXUS home lab
-- [x] Create GitHub Projects board and add four project issues (user-confirmed)
-- [x] Configure table fields (user-confirmed)
+- [x] Create GitHub Projects board and add four project issues (validated during project setup)
+- [x] Configure table fields (validated during project setup)
 - [x] Publish handbook, reusable templates and publication safety guidelines
 - [ ] Independently review board option names and assignments in GitHub UI
 
