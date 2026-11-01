@@ -6,11 +6,11 @@
 
 ## Already registered projects (not new backlog ideas)
 - **AEG-001 — Project NEXUS:** separate existing home lab.
-- **AEG-002 — Meshtastic / RAK4631:** hardware ordered; main current build. Planning issue [#2](../../issues/2), hardware execution [#5](../../issues/5).
-- **AEG-003 — Pwnagotchi:** existing idea; issue [#3](../../issues/3).
-- **AEG-004 — Remote Access Device:** existing idea; issue [#4](../../issues/4).
+- **AEG-002 — Meshtastic / RAK4631:** hardware ordered; main current build. Planning issue [#2](https://github.com/k41ju0x/Project-AEGIS/issues/2), hardware execution [#5](https://github.com/k41ju0x/Project-AEGIS/issues/5).
+- **AEG-003 — Pwnagotchi:** existing idea; issue [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3).
+- **AEG-004 — Remote Access Device:** existing idea; issue [#4](https://github.com/k41ju0x/Project-AEGIS/issues/4).
 - **AEG-005 — Portable LattePanda assessment platform:** previously discussed headless Kali hardware concept; parked, no purchases authorized.
-- **AEG-006 — Tactical Control Terminal:** Pi 5 8GB + 10-inch Touch Display 2; received and assembled October 31; AEGIS Mesh Control v0.6 touchscreen-tested and published. Meshtastic-first USB interface, future APEX integration; issue [#6](../../issues/6).
+- **AEG-006 — Tactical Control Terminal:** Pi 5 8GB + 10-inch Touch Display 2; received and assembled October 31; AEGIS Mesh Control v0.6 touchscreen-tested and published. Meshtastic-first USB interface, future APEX integration; issue [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6).
 - **APEX:** independent AI penetration-testing platform; future AEG-006 client integration is deferred. APEX is *not* a replacement name for NEXUS.
 
 ## Future idea inventory — unnumbered and on hold
