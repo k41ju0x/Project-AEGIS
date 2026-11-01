@@ -220,6 +220,35 @@ th { color: #a8f46c; }
       <option value="TELEMETRY">Telemetry</option>
     </select>
 
+
+    <div class="grid" style="margin-top:18px">
+      <div class="card">
+        <small>VISIBLE PACKETS</small>
+        <div class="value" id="stat-count">0</div>
+      </div>
+      <div class="card">
+        <small>AVERAGE RSSI</small>
+        <div class="value" id="stat-rssi">--</div>
+      </div>
+      <div class="card">
+        <small>AVERAGE SNR</small>
+        <div class="value" id="stat-snr">--</div>
+      </div>
+      <div class="card">
+        <small>UNIQUE SOURCES</small>
+        <div class="value" id="stat-sources">0</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Signal Quality</h2>
+      <p class="muted">
+        RSSI measurements from the selected packet records.
+        These are not wideband spectrum readings.
+      </p>
+      <div id="signal-bars"></div>
+    </div>
+
     <div style="overflow-x:auto; margin-top:18px">
       <table style="width:100%; border-collapse:collapse">
         <thead>
@@ -256,7 +285,7 @@ th { color: #a8f46c; }
   </div>
 </section>
 
-<small>PROJECT AEGIS • VERSION 0.4 • LOCAL PROTOTYPE</small>
+<small>PROJECT AEGIS • VERSION 0.5 • LOCAL PROTOTYPE</small>
 </main>
 
 <script>
@@ -384,6 +413,82 @@ async function refreshRF() {
 
 let packetRecords = [];
 
+
+function updatePacketStatistics(records) {
+  const count = records.length;
+
+  const validRSSI = records
+    .map(p => p.rssi_dbm)
+    .filter(Number.isFinite);
+
+  const validSNR = records
+    .map(p => p.snr_db)
+    .filter(Number.isFinite);
+
+  const average = values =>
+    values.length
+      ? values.reduce((a, b) => a + b, 0) / values.length
+      : null;
+
+  const avgRSSI = average(validRSSI);
+  const avgSNR = average(validSNR);
+
+  document.getElementById("stat-count").textContent =
+    String(count);
+
+  document.getElementById("stat-rssi").textContent =
+    avgRSSI === null ? "N/A" : avgRSSI.toFixed(1) + " dBm";
+
+  document.getElementById("stat-snr").textContent =
+    avgSNR === null ? "N/A" : avgSNR.toFixed(1) + " dB";
+
+  document.getElementById("stat-sources").textContent =
+    String(new Set(records.map(p => p.source)).size);
+
+  const container = document.getElementById("signal-bars");
+  container.replaceChildren();
+
+  if (!validRSSI.length) {
+    container.textContent = "No signal measurements available.";
+    return;
+  }
+
+  records.forEach(packet => {
+    if (!Number.isFinite(packet.rssi_dbm)) return;
+
+    const row = document.createElement("div");
+    row.style.marginBottom = "14px";
+
+    const label = document.createElement("div");
+    label.textContent =
+      `${packet.source} | ${packet.rssi_dbm} dBm`;
+
+    const track = document.createElement("div");
+    track.style.height = "14px";
+    track.style.background = "#294353";
+    track.style.borderRadius = "6px";
+    track.style.marginTop = "6px";
+
+    const bar = document.createElement("div");
+
+    // Visual scale: -120 dBm -> 0%, -40 dBm -> 100%.
+    // Not a calibrated signal-quality score.
+    const percentage = Math.max(
+      0, Math.min(100, (packet.rssi_dbm + 120) / 80 * 100)
+    );
+
+    bar.style.width = percentage + "%";
+    bar.style.height = "100%";
+    bar.style.background = "#a8f46c";
+    bar.style.borderRadius = "6px";
+
+    track.appendChild(bar);
+    row.appendChild(label);
+    row.appendChild(track);
+    container.appendChild(row);
+  });
+}
+
 function drawPackets() {
   const filter = document.getElementById("packet-filter").value;
   const rows = document.getElementById("packet-rows");
@@ -392,6 +497,8 @@ function drawPackets() {
   const selected = packetRecords.filter(p =>
     filter === "ALL" || p.packet_type === filter
   );
+
+  updatePacketStatistics(selected);
 
   if (!selected.length) {
     const tr = document.createElement("tr");
