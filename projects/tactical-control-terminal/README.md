@@ -45,6 +45,6 @@ Do not commit the Pi's `.venv/`, logs, keyring, keys, credentials, private chann
 2. **Channel Monitor:** display configured region, modem preset, channel settings and frequency slot from the connected radio; label it as configuration, not a measured spectral survey.
 3. **RF Spectrum Monitor (future hardware phase):** wideband energy plots and waterfall from an SDR or compatible RF receiver. Not possible from the ordinary Meshtastic API alone.
 
-**Safety and privacy:** logging should be disabled by default until the user opts in; avoid publishing message bodies, location data, node IDs or secret channel keys. Restrict the web server to loopback unless remote access is deliberately designed and secured.
+**Safety and privacy:** logging should be disabled by default until logging is explicitly enabled; avoid publishing message bodies, location data, node IDs or secret channel keys. Restrict the web server to loopback unless remote access is deliberately designed and secured.
 
 Tracking: [AEG-006 issue](https://github.com/k41ju0x/Project-AEGIS/issues/6).
