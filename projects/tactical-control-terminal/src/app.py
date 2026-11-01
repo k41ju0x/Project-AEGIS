@@ -97,6 +97,25 @@ def status():
         "node_data_status": "awaiting_radio"
     })
 
+
+@app.get("/api/rf")
+def rf_status():
+    return jsonify({
+        "radio_connected": False,
+        "connection_type": None,
+        "radio_region": None,
+        "modem_preset": None,
+        "center_frequency_mhz": None,
+        "frequency_slot": None,
+        "packets_received": 0,
+        "last_packet": None,
+        "packets": [],
+        "capture_active": False,
+        "spectrum_available": False,
+        "data_source": "no_radio_connected"
+    })
+
+
 if __name__ == "__main__":
     app.run(
         host="127.0.0.1",

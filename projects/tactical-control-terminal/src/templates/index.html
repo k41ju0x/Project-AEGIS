@@ -89,6 +89,7 @@ pre {
   <button class="active" data-page="overview">Overview</button>
   <button data-page="nodes">Mesh Nodes</button>
   <button data-page="diagnostics">Diagnostics</button>
+  <button data-page="rf-monitor">RF Monitor</button>
 </nav>
 
 <section id="overview" style="margin-top:22px">
@@ -148,6 +149,55 @@ pre {
   </div>
 </section>
 
+
+<section id="rf-monitor" hidden style="margin-top:22px">
+  <div class="card">
+    <h2>RF Monitor</h2>
+    <p class="muted">
+      Meshtastic packet intelligence and radio configuration
+    </p>
+    <p id="rf-state" class="warn">Awaiting radio connection</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <small>RADIO LINK</small>
+      <div class="value warn" id="rf-link">OFFLINE</div>
+    </div>
+    <div class="card">
+      <small>PACKETS RECEIVED</small>
+      <div class="value" id="rf-count">0</div>
+    </div>
+    <div class="card">
+      <small>CENTER FREQUENCY</small>
+      <div class="value" id="rf-frequency">UNKNOWN</div>
+      <small>Configured frequency, not spectrum measurement</small>
+    </div>
+    <div class="card">
+      <small>MODEM PRESET</small>
+      <div class="value" id="rf-preset">UNKNOWN</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Packet Activity</h2>
+    <p id="rf-packets">No live packets captured.</p>
+    <p class="muted">
+      Received packet information will appear when a
+      Meshtastic radio is connected and verified.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>RF Spectrum</h2>
+    <p class="muted">
+      Wideband spectrum and waterfall visualization
+      require a separate compatible RF receiver.
+      No spectrum measurements are available.
+    </p>
+  </div>
+</section>
+
 <section id="diagnostics" hidden style="margin-top:22px">
   <div class="card">
     <h2>Diagnostics</h2>
@@ -156,7 +206,7 @@ pre {
   </div>
 </section>
 
-<small>PROJECT AEGIS • VERSION 0.2 • LOCAL PROTOTYPE</small>
+<small>PROJECT AEGIS • VERSION 0.3 • LOCAL PROTOTYPE</small>
 </main>
 
 <script>
@@ -167,7 +217,7 @@ buttons.forEach(button => {
     buttons.forEach(b => {
       b.classList.toggle("active", b === button);
     });
-    ["overview", "nodes", "diagnostics"].forEach(id => {
+    ["overview", "nodes", "diagnostics", "rf-monitor"].forEach(id => {
       document.getElementById(id).hidden = id !== page;
     });
   });
@@ -239,8 +289,53 @@ async function refreshStatus() {
   }
 }
 
+
+async function refreshRF() {
+  try {
+    const response = await fetch("/api/rf", {
+      cache: "no-store"
+    });
+    if (!response.ok) throw new Error("RF API unavailable");
+
+    const data = await response.json();
+
+    document.getElementById("rf-link").textContent =
+      data.radio_connected ? "CONNECTED" : "OFFLINE";
+
+    document.getElementById("rf-state").textContent =
+      data.radio_connected
+        ? "Radio session established"
+        : "Awaiting AEG-002 radio connection";
+
+    document.getElementById("rf-count").textContent =
+      String(data.packets_received);
+
+    document.getElementById("rf-frequency").textContent =
+      data.center_frequency_mhz === null
+        ? "UNKNOWN"
+        : data.center_frequency_mhz + " MHz";
+
+    document.getElementById("rf-preset").textContent =
+      data.modem_preset || "UNKNOWN";
+
+    document.getElementById("rf-packets").textContent =
+      data.packets.length
+        ? `${data.packets.length} packet records available`
+        : "No live packets captured.";
+
+  } catch (error) {
+    document.getElementById("rf-state").textContent =
+      "RF API unavailable";
+    document.getElementById("rf-link").textContent =
+      "UNKNOWN";
+  }
+}
+
 refreshStatus();
+refreshRF();
 setInterval(refreshStatus, 5000);
+setInterval(refreshRF, 5000);
+
 </script>
 </body>
 </html>
