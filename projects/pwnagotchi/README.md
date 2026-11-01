@@ -1,12 +1,12 @@
 # AEG-003 — Pwnagotchi
 
-**Status:** Hardware ordered (2026-11-01); delivery pending
+**Status:** Hardware ordered (2026-11-01); build deferred by user; delivery pending
 
 ## Purpose
 Document an authorized wireless security research hardware project.
 
 ## Next action
-Inventory existing components, applicable permissions, and the intended research environment.
+On delivery, inventory and store the components only. Do not assemble, flash, or develop until user explicitly resumes AEG-003.
 
 ## Hardware and procurement — 2026-11-01
 - Ordered: dedicated Raspberry Pi Zero 2 W with pre-soldered GPIO header; PiSugar 3 1200mAh battery.
