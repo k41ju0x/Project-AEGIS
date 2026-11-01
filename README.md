@@ -25,6 +25,8 @@ Research, design, build, test, and document cybersecurity technologies and exper
 | AEG-002 | **Meshtastic** | LoRa mesh communications | [Planning notes](projects/meshtastic/README.md) |
 | AEG-003 | **Pwnagotchi** | Wireless security | [Planning notes](projects/pwnagotchi/README.md) |
 | AEG-004 | **Remote Access Device** | Authorized remote administration hardware | [Planning notes](projects/remote-access-device/README.md) |
+| AEG-005 | **Portable LattePanda Platform** | Headless Kali / portable security assessment device (parked concept) | [Project registry](PROJECTS.md) |
+| AEG-006 | **Tactical Control Terminal** | Raspberry Pi 5 + Touch Display 2 / Meshtastic base station (in progress) | [Build tracking](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
 
 See [PROJECTS.md](PROJECTS.md) for provisional statuses and the complete registry. Additional projects can start as ideas here, then graduate to dedicated repositories.
 
