@@ -1,8 +1,8 @@
 # AEG-016 — AEGIS Sentinel
 
-**Status:** Ready for Purchase (in cart; checkout not yet confirmed)
-**Battery decision (confirmed 2026-11-01):** Desktop UPS + portable operation required. Select PiSugar 3 1200mAh as preferred battery, pending shared-I2C and Whisplay electrical/mechanical bench validation. Desktop external charging via PiSugar; software battery telemetry and safe shutdown. Do not assume uninterrupted upstream desktop AI/network access during outages. Estimated runtime to be measured with LCD/audio/Wi-Fi workloads. No battery ordered yet.
-**Controller decision (confirmed 2026-11-01):** Raspberry Pi Zero 2 W, preferably with pre-soldered 40-pin GPIO header. Remote AI inference on existing Windows desktop; no dedicated Pi 5 purchase for Sentinel.
+**Status:** Hardware ordered (2026-11-01); delivery pending
+**Battery decision (confirmed 2026-11-01):** Desktop UPS + portable operation required. Select PiSugar 3 1200mAh as preferred battery, pending shared-I2C and Whisplay electrical/mechanical bench validation. Desktop external charging via PiSugar; software battery telemetry and safe shutdown. Do not assume uninterrupted upstream desktop AI/network access during outages. Estimated runtime to be measured with LCD/audio/Wi-Fi workloads. PiSugar 3 battery ordered 2026-11-01.
+**Controller decision (confirmed 2026-11-01):** Raspberry Pi Zero 2 W, with pre-soldered 40-pin GPIO header. Remote AI inference on existing Windows desktop; no dedicated Pi 5 purchase for Sentinel.
 **Track:** AI, Embedded Systems, Home Automation, Cybersecurity Research
 **Concept:** Futuristic desktop AI companion and Project AEGIS voice command center.
 
@@ -46,3 +46,6 @@ M0 concept and scope; M1 hardware procurement and inventory; M2 Whisplay driver 
 - https://docs.pisugar.com/docs/product-wiki/whisplay/overview
 - https://github.com/PiSugar/Whisplay
 - https://www.pisugar.com/products/whisplay-hat-for-pi-zero-2w-audio-display
+
+## Procurement log — 2026-11-01
+Ordered: Raspberry Pi Zero 2 W with soldered GPIO header, PiSugar 3 1200mAh, PiSugar Whisplay HAT. Existing microSD and charger available. Delivery date not yet confirmed. Defer 3D-printed enclosure until hardware assembly and physical measurements.
