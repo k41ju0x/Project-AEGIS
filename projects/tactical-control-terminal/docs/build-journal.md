@@ -12,7 +12,8 @@ uname -a                 # Identify kernel
 sudo apt full-upgrade    # Apply package upgrades
 sudo rpi-eeprom-update   # Inspect bootloader
 ```
-Evidence: physical assembly and working touchscreen photo to add.
+
+<img width="222" height="380" alt="Pi Touch and Pi5 Complete" src="https://github.com/user-attachments/assets/7a2639c9-21d7-410f-ae03-bc21d0f84129" />
 
 ## Phase 1A — Headless SSH recovery when the touchscreen was blank
 
