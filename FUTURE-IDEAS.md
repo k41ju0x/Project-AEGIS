@@ -10,7 +10,7 @@
 - **AEG-003 — Pwnagotchi:** existing idea; issue [#3](../../issues/3).
 - **AEG-004 — Remote Access Device:** existing idea; issue [#4](../../issues/4).
 - **AEG-005 — Portable LattePanda assessment platform:** previously discussed headless Kali hardware concept; parked, no purchases authorized.
-- **AEG-006 — Tactical Control Terminal:** Pi 5 8GB + 10-inch Touch Display 2; ordered from Micro Center, expected Oct 31 (unconfirmed). Meshtastic-first USB interface, future APEX integration; issue [#6](../../issues/6).
+- **AEG-006 — Tactical Control Terminal:** Pi 5 8GB + 10-inch Touch Display 2; received and assembled October 31; AEGIS Mesh Control v0.6 touchscreen-tested and published. Meshtastic-first USB interface, future APEX integration; issue [#6](../../issues/6).
 - **APEX:** independent AI penetration-testing platform; future AEG-006 client integration is deferred. APEX is *not* a replacement name for NEXUS.
 
 ## Future idea inventory — unnumbered and on hold
@@ -44,6 +44,6 @@ Some entries are extensions or variations of other concepts rather than guarante
 6. Upon completion of a session, update that project's existing issue and next action.
 
 ## Resume checkpoint
-- **AEG-006:** Receive/inspect Micro Center shipment (anticipated Saturday, October 31, 2026), bench assemble screen + Pi, install Raspberry Pi OS, and verify display.
+- **AEG-006:** Hardware and kiosk complete through v0.6; resume when RAK4631 arrives to implement authenticated/authorized real radio packet reception.
 - **AEG-002:** Inventory RAK4631 kit when delivered, verify correct LoRa antenna and region, flash firmware, and test USB serial to AEG-006.
 - **APEX:** Future phase only, after radio-facing console works.
