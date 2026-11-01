@@ -221,6 +221,37 @@ th { color: #a8f46c; }
     </select>
 
 
+
+    <div class="card" style="margin-top:18px">
+      <h2>Packet History Controls</h2>
+
+      <label for="source-filter">Source</label>
+      <select id="source-filter">
+        <option value="ALL">All sources</option>
+      </select>
+
+      <label for="history-limit">History limit</label>
+      <select id="history-limit">
+        <option value="10">10 records</option>
+        <option value="50" selected>50 records</option>
+        <option value="200">200 records</option>
+      </select>
+
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:18px">
+        <button id="pause-packets" type="button">Pause</button>
+        <button id="clear-view" type="button">Clear View</button>
+        <button id="restore-view" type="button">Restore View</button>
+      </div>
+
+      <p id="history-state" class="muted">
+        Live view of synthetic test records
+      </p>
+      <small>
+        Clear View only hides records in this browser.
+        It does not delete backend history.
+      </small>
+    </div>
+
     <div class="grid" style="margin-top:18px">
       <div class="card">
         <small>VISIBLE PACKETS</small>
@@ -285,7 +316,7 @@ th { color: #a8f46c; }
   </div>
 </section>
 
-<small>PROJECT AEGIS • VERSION 0.5 • LOCAL PROTOTYPE</small>
+<small>PROJECT AEGIS • VERSION 0.6 • LOCAL PROTOTYPE</small>
 </main>
 
 <script>
@@ -489,14 +520,87 @@ function updatePacketStatistics(records) {
   });
 }
 
+
+let packetPaused = false;
+let hiddenPacketIds = new Set();
+
+function updateSourceOptions() {
+  const select = document.getElementById("source-filter");
+  const previous = select.value;
+
+  const sources = [...new Set(
+    packetRecords.map(p => p.source)
+  )].sort();
+
+  select.replaceChildren();
+
+  for (const value of ["ALL", ...sources]) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent =
+      value === "ALL" ? "All sources" : value;
+    select.appendChild(option);
+  }
+
+  select.value = sources.includes(previous) ? previous : "ALL";
+}
+
+function visiblePacketRecords() {
+  const type = document.getElementById("packet-filter").value;
+  const source = document.getElementById("source-filter").value;
+  const limit = Number(
+    document.getElementById("history-limit").value
+  );
+
+  return packetRecords
+    .filter(p => !hiddenPacketIds.has(p.id))
+    .filter(p => type === "ALL" || p.packet_type === type)
+    .filter(p => source === "ALL" || p.source === source)
+    .slice(0, limit);
+}
+
+function updateHistoryState() {
+  const state = document.getElementById("history-state");
+
+  state.textContent = packetPaused
+    ? "PAUSED — packet display frozen"
+    : "AUTO-REFRESH — synthetic test records";
+
+  document.getElementById("pause-packets").textContent =
+    packetPaused ? "Resume" : "Pause";
+}
+
+document.getElementById("source-filter")
+  .addEventListener("change", drawPackets);
+
+document.getElementById("history-limit")
+  .addEventListener("change", drawPackets);
+
+document.getElementById("pause-packets")
+  .addEventListener("click", () => {
+    packetPaused = !packetPaused;
+    updateHistoryState();
+    if (!packetPaused) refreshPackets();
+  });
+
+document.getElementById("clear-view")
+  .addEventListener("click", () => {
+    packetRecords.forEach(p => hiddenPacketIds.add(p.id));
+    drawPackets();
+  });
+
+document.getElementById("restore-view")
+  .addEventListener("click", () => {
+    hiddenPacketIds.clear();
+    drawPackets();
+  });
+
 function drawPackets() {
   const filter = document.getElementById("packet-filter").value;
   const rows = document.getElementById("packet-rows");
   rows.replaceChildren();
 
-  const selected = packetRecords.filter(p =>
-    filter === "ALL" || p.packet_type === filter
-  );
+  const selected = visiblePacketRecords();
 
   updatePacketStatistics(selected);
 
@@ -530,6 +634,7 @@ function drawPackets() {
 }
 
 async function refreshPackets() {
+  if (packetPaused) return;
   try {
     const response = await fetch("/api/packets", {
       cache: "no-store"
@@ -542,6 +647,8 @@ async function refreshPackets() {
       data.notice || "SYNTHETIC TEST DATA";
 
     packetRecords = data.packets || [];
+    updateSourceOptions();
+    updateHistoryState();
     drawPackets();
   } catch (error) {
     document.getElementById("packet-mode").textContent =
