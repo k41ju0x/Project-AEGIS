@@ -1,6 +1,6 @@
 # AEG-002 — Meshtastic Rugged Field Node
-**Phase:** Detailed hardware planning (no orders placed)  
-**Core:** RAK4631 / RAK19007 US915 Client-Tracker with RAK12501 GNSS and RAK1921 OLED  
+**Phase:** Kit ordered; awaiting delivery, inventory and bench testing (as of November 1, 2026)  
+**Core:** RAK4631 / RAK19007 US915 Client-Tracker with RAK12501 GNSS, RAK19221 OLED and RAK1904 sensor (ordered kit configuration; delivered contents not yet checked)  
 **Runtime requirement:** 48h preferred; **24h verified fallback acceptable**  
 **Visibility:** Public sanitized build notes; keep private coordinates and keys confidential.
 
@@ -16,6 +16,6 @@
 [Charter](charter.md) · [Requirements](requirements.md) · [Architecture](architecture.md) · [Hardware decision](decisions/ADR-0001-rak4631.md) · [BOM](bom.csv) · [Procurement](procurement.md) · [Power budget](power-budget.md) · [Risk register](risk-register.md) · [Test plan](test-plan.md) · [Build log](build-log.md) · [Resume](resume-here.md)
 
 ## Next action
-Validate exact configured kit checkout, **JST polarity**, internal enclosure clearance and matching watertight SMA feedthrough before placing orders. No measured runtime or waterproof rating for assembled device yet.
+Inventory the ordered single-node RAK4631 / RAK19007 US915 kit on arrival, verify modules/antenna, then begin bench testing. Battery, Hammond enclosure and sealed RF feedthrough remain proposed, not purchased; check JST polarity and mechanical fit before any separate purchases. No measured runtime or assembled-device ingress rating yet.
 
 [Tracking issue](https://github.com/k41ju0x/Project-AEGIS/issues/2)
