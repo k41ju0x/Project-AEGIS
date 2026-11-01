@@ -4,12 +4,12 @@
 
 | ID | Project | Domain | Current status | Tracking |
 |---|---|---|---|---|
-| AEG-001 | Project NEXUS | Home lab / infrastructure | Existing, review paused | [NEXUS repository](https://github.com/k41ju0x/Project-NEXUS) · [#1](../../issues/1) |
-| AEG-002 | Meshtastic — RAK4631 | LoRa / mesh communications | Starter kit ordered; delivery and inventory pending | [Planning #2](../../issues/2) · [Build #5](../../issues/5) |
-| AEG-003 | Pwnagotchi | Wireless security research | Idea / parked | [#3](../../issues/3) |
-| AEG-004 | Remote Access Device | Authorized remote administration | Idea / parked | [#4](../../issues/4) |
+| AEG-001 | Project NEXUS | Home lab / infrastructure | Existing, review paused | [NEXUS repository](https://github.com/k41ju0x/Project-NEXUS) · [#1](https://github.com/k41ju0x/Project-AEGIS/issues/1) |
+| AEG-002 | Meshtastic — RAK4631 | LoRa / mesh communications | Starter kit ordered; delivery and inventory pending | [Planning #2](https://github.com/k41ju0x/Project-AEGIS/issues/2) · [Build #5](https://github.com/k41ju0x/Project-AEGIS/issues/5) |
+| AEG-003 | Pwnagotchi | Wireless security research | Idea / parked | [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3) |
+| AEG-004 | Remote Access Device | Authorized remote administration | Idea / parked | [#4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
 | AEG-005 | Portable LattePanda Platform | Headless Kali / portable assessment device | Concept parked; no active purchases | Future scoping only |
-| AEG-006 | Tactical Control Terminal | Raspberry Pi 5 + Touch Display 2 / Meshtastic interface | In Progress — hardware validated; AEGIS Mesh Control v0.6 touchscreen-tested and published; RAK4631 live integration pending | [#6](../../issues/6) |
+| AEG-006 | Tactical Control Terminal | Raspberry Pi 5 + Touch Display 2 / Meshtastic interface | In Progress — hardware validated; AEGIS Mesh Control v0.6 touchscreen-tested and published; RAK4631 live integration pending | [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
 
 ### Numbering decisions
 - **AEG-002** permanently refers to the RAK4631 Meshtastic build, even where separate issues cover planning and execution.
