@@ -1,0 +1,38 @@
+# AEG-006 — Tactical Control Terminal
+
+**Status:** In Progress. **Platform:** Raspberry Pi 5 (8 GB), Raspberry Pi Touch Display 2 (10-inch), Raspberry Pi OS 64-bit (Debian Trixie).
+
+## AEGIS Mesh Control v0.2
+
+Local-only Flask dashboard at `http://127.0.0.1:5000` displaying live CPU temperature, memory, root filesystem storage, uptime, and Active Cooler RPM. The radio and node views correctly indicate no active RAK4631 connection. Touch navigation and status polling have been verified on physical hardware.
+
+**Verified milestones:**
+- Raspberry Pi OS installed; touch display, cooling, SSH and networking operational.
+- Meshtastic Python package and CLI v2.7.11 in `/home/aegis/aegis-tct/.venv` (Python 3.13.5).
+- Flask v3.1.3 running locally via `aegis-mesh.service`; starts on reboot.
+- Chromium fullscreen kiosk via `labwc` graphical autostart, without keyring prompt after using a dedicated basic password-store kiosk configuration.
+- v0.2 API verifies CPU temperature, memory, storage, uptime, and fan RPM. User confirms the new monitor cards render on the touchscreen.
+
+**Pending:** Publish exact working source files from the Raspberry Pi, repeat visual refresh checks, connect RAK4631 when delivered, capture real packets, and evaluate spectrum analyzer integration.
+
+## Repository files (to be uploaded from the Pi)
+
+```text
+src/
+  app.py
+  templates/
+    index.html
+requirements.txt
+```
+
+Do not commit the Pi's `.venv/`, logs, keyring, keys, credentials, private channel configuration, or host-specific network information.
+
+## Planned RF monitoring
+
+1. **Mesh Traffic Monitor:** display received Meshtastic packet metadata (time, sender, destination, type, RSSI/SNR where present), receive counts, and text decoded by the owned radio on authorized channels.
+2. **Channel Monitor:** display configured region, modem preset, channel settings and frequency slot from the connected radio; label it as configuration, not a measured spectral survey.
+3. **RF Spectrum Monitor (future hardware phase):** wideband energy plots and waterfall from an SDR or compatible RF receiver. Not possible from the ordinary Meshtastic API alone.
+
+**Safety and privacy:** logging should be disabled by default until the user opts in; avoid publishing message bodies, location data, node IDs or secret channel keys. Restrict the web server to loopback unless remote access is deliberately designed and secured.
+
+Tracking: [AEG-006 issue](https://github.com/k41ju0x/Project-AEGIS/issues/6).
