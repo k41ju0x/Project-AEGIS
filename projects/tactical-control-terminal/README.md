@@ -2,7 +2,7 @@
 
 **Status:** In Progress. **Platform:** Raspberry Pi 5 (8 GB), Raspberry Pi Touch Display 2 (10-inch), Raspberry Pi OS 64-bit (Debian Trixie).
 
-## AEGIS Mesh Control v0.2
+## AEGIS Mesh Control v0.6
 
 Local-only Flask dashboard at `http://127.0.0.1:5000` displaying live CPU temperature, memory, root filesystem storage, uptime, and Active Cooler RPM. The radio and node views correctly indicate no active RAK4631 connection. Touch navigation and status polling have been verified on physical hardware.
 
@@ -13,16 +13,24 @@ Local-only Flask dashboard at `http://127.0.0.1:5000` displaying live CPU temper
 - Chromium fullscreen kiosk via `labwc` graphical autostart, without keyring prompt after using a dedicated basic password-store kiosk configuration.
 - v0.2 API verifies CPU temperature, memory, storage, uptime, and fan RPM. User confirms the new monitor cards render on the touchscreen.
 
-**Pending:** Publish exact working source files from the Raspberry Pi, repeat visual refresh checks, connect RAK4631 when delivered, capture real packets, and evaluate spectrum analyzer integration.
+**Pending:** Connect RAK4631 when delivered and validate actual RF packet capture; add original photos and complete remaining evidence in the journal. Version 0.6 source is published and touchscreen-tested with explicitly synthetic records.
 
-## Repository files (to be uploaded from the Pi)
+
+## Engineering build journal
+
+**[Step-by-step build journal](docs/build-journal.md)** — chronological hardware, commands, purpose, test evidence, troubleshooting and photo register. Reconstructed from verified sessions; original photos and unrecorded terminal output still need to be added.
+
+## Repository source files
 
 ```text
 src/
   app.py
+  packet_store.py
   templates/
     index.html
 requirements.txt
+docs/
+  build-journal.md
 ```
 
 Do not commit the Pi's `.venv/`, logs, keyring, keys, credentials, private channel configuration, or host-specific network information.
