@@ -6,7 +6,7 @@ These are proposed research projects, not purchase commitments. Existing AEG-002
 
 | ID | Project | Track | Phase | Status | Folder |
 |---|---|---|---|---|
-| AEG-003 | Pwnagotchi | Wireless Security Research | Deferred | Hardware Ordered / Build Paused | [pwnagotchi](pwnagotchi/README.md) |
+| AEG-003 | Pwnagotchi | Wireless Security Research | Deferred | Hardware Received / Build Paused | [pwnagotchi](pwnagotchi/README.md) |
 | AEG-006 | Tactical Control Terminal | Raspberry Pi / Meshtastic | Active | Built / integration ongoing | Existing project documentation |
 | AEG-007 | RFID/NFC Security Lab | Hardware & Embedded | 2 | Backlog | [rfid-nfc](rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP Lab | Wireless & Network | 2 | Backlog | [openwrt-rogue-ap](openwrt-rogue-ap/README.md) |
@@ -17,7 +17,7 @@ These are proposed research projects, not purchase commitments. Existing AEG-002
 | AEG-013 | Web Application Security Lab | Software Development | 1 | Backlog | [web-app-security](web-app-security/README.md) |
 | AEG-014 | IoT Security Research Platform | Hardware & Embedded | 3 | Backlog | [iot-security-research](iot-security-research/README.md) |
 | AEG-015 | Flipper Zero Development Lab | Hardware & Embedded | 2 | Backlog | [flipper-development](flipper-development/README.md) |
-| AEG-016 | AEGIS Sentinel — Desktop AI Companion | AI & Embedded Systems | 1 | Hardware Ordered | [aegis-sentinel](aegis-sentinel/README.md) |
+| AEG-016 | AEGIS Sentinel — Desktop AI Companion | AI & Embedded Systems | 1 | Hardware Received / Inspection Pending | [aegis-sentinel](aegis-sentinel/README.md) |
 | AEG-017 | Pico Ducky / HID Research | Hardware & Embedded | 1 | Backlog | [pico-ducky](pico-ducky/README.md) |
 
 ## Operating principle
