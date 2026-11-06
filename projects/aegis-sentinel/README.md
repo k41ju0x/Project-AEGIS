@@ -1,6 +1,6 @@
 # AEG-016 — AEGIS Sentinel
 
-**Status:** Hardware received (2026-11-06); inventory inspection and assembly pending
+**Status:** Hardware received (2026-11-06); build deferred by user while AEG-003 Pwnagotchi is active
 **Battery decision (confirmed 2026-11-01):** Desktop UPS + portable operation required. Select PiSugar 3 1200mAh as preferred battery, pending shared-I2C and Whisplay electrical/mechanical bench validation. Desktop external charging via PiSugar; software battery telemetry and safe shutdown. Do not assume uninterrupted upstream desktop AI/network access during outages. Estimated runtime to be measured with LCD/audio/Wi-Fi workloads. PiSugar 3 battery ordered 2026-11-01.
 **Controller decision (confirmed 2026-11-01):** Raspberry Pi Zero 2 W, with pre-soldered 40-pin GPIO header. Remote AI inference on existing Windows desktop; no dedicated Pi 5 purchase for Sentinel.
 **Track:** AI, Embedded Systems, Home Automation, Cybersecurity Research
