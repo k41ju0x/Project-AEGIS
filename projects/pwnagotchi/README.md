@@ -47,5 +47,8 @@ User reports arrival of the second Raspberry Pi Zero 2 W and second PiSugar batt
 - Hardware stack: Raspberry Pi Zero 2 W, Waveshare 2.13-inch V4 e-paper HAT, PiSugar 3 1200mAh UPS.
 - PiSugar 3 boot procedure: short press then long press; the Pi booted without USB attached.
 - Pwnagotchi displayed battery state of charge **52%**; confirms initial software battery telemetry and battery-powered boot.
-- Previously validated: functional Pwnagotchi display, updating uptime and application status, USB RNDIS network and SSH (Pi `10.12.194.1`, Windows `10.12.194.2/28`).
+- Previously validated: functional Pwnagotchi display, updating uptime and application status, USB RNDIS network and SSH (working interface addresses verified; site-specific addresses intentionally omitted from public documentation).
 - Remaining: measure endurance, verify graceful shutdown/low-battery behavior, inspect enclosure dimensions and design 3D-printable case.
+
+## Network documentation policy
+USB RNDIS management uses two compatible static IPv4 addresses on a dedicated point-to-point subnet. The exact addressing is environment-specific and should be kept in private operational notes. Example only: Windows `10.0.0.1/24`, Pi `10.0.0.2/24` (not the addresses validated in this build). Do not publish Wi-Fi credentials, SSH private keys, or sensitive capture files.
