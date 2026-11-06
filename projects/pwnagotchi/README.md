@@ -1,6 +1,6 @@
 # AEG-003 — Pwnagotchi
 
-**Status:** Active build (2026-11-06); hardware received; SD image preparation next
+**Status:** Active build; battery-powered boot and telemetry verified (2026-11-06); endurance/enclosure pending
 
 ## Purpose
 Document an authorized wireless security research hardware project.
@@ -42,3 +42,10 @@ User reports arrival of the second Raspberry Pi Zero 2 W and second PiSugar batt
 - On-screen readings: `CH 00`, `APS 0 (00)`, `BAT 0%`, `UP 00:00:00`, `AUTO`; initial startup readings, not yet independently validated.
 - Verified: image boots sufficiently to render display and custom identity. USB Ethernet management and Wi-Fi behavior not verified.
 - PiSugar 3 not installed yet; battery telemetry not tested. Before wireless operation, verify passive settings and authorized-lab scope. Next milestone: USB management access and PiSugar hardware fit/telemetry.
+
+## Battery power and telemetry verified — 2026-11-06
+- Hardware stack: Raspberry Pi Zero 2 W, Waveshare 2.13-inch V4 e-paper HAT, PiSugar 3 1200mAh UPS.
+- PiSugar 3 boot procedure: short press then long press; the Pi booted without USB attached.
+- Pwnagotchi displayed battery state of charge **52%**; confirms initial software battery telemetry and battery-powered boot.
+- Previously validated: functional Pwnagotchi display, updating uptime and application status, USB RNDIS network and SSH (Pi `10.12.194.1`, Windows `10.12.194.2/28`).
+- Remaining: measure endurance, verify graceful shutdown/low-battery behavior, inspect enclosure dimensions and design 3D-printable case.
