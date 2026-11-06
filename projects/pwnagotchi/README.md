@@ -30,3 +30,9 @@ User reports arrival of the second Raspberry Pi Zero 2 W and second PiSugar batt
 - Hardware: Pi Zero 2 W with soldered header, Waveshare 2.13-inch V4, PiSugar 3.
 - Software selection: jayofelony Pwnagotchi 64-bit Raspberry Pi Zero 2 W image; source https://github.com/jayofelony/pwnagotchi/releases. PiSugar reference https://docs.pisugar.com/docs/product-wiki/pwnagotchi/intro.
 - Next: verify microSD and host OS; download and flash verified image; no boot or hardware testing completed yet.
+
+## Build session 1 — firmware selection
+- Firmware asset validated: `pwnagotchi-64bit-2.9.5.8.img.xz` from jayofelony release `v2.9.5.8` (published 2026-08-18).
+- Download: https://github.com/jayofelony/pwnagotchi/releases/download/v2.9.5.8/pwnagotchi-64bit-2.9.5.8.img.xz
+- Host: Windows 11; Raspberry Pi Imager installed.
+- Next: flash 32GB SanDisk microSD with custom image and verify write; flashing not yet reported complete.
