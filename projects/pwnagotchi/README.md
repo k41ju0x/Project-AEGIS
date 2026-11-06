@@ -36,3 +36,9 @@ User reports arrival of the second Raspberry Pi Zero 2 W and second PiSugar batt
 - Download: https://github.com/jayofelony/pwnagotchi/releases/download/v2.9.5.8/pwnagotchi-64bit-2.9.5.8.img.xz
 - Host: Windows 11; Raspberry Pi Imager installed.
 - Next: flash 32GB SanDisk microSD with custom image and verify write; flashing not yet reported complete.
+
+## First successful display boot — 2026-11-06
+- Photo evidence supplied by user: Raspberry Pi Zero 2 W powered via USB, Waveshare 2.13-inch V4 showing Pwnagotchi face and `aegis-pwn` identity.
+- On-screen readings: `CH 00`, `APS 0 (00)`, `BAT 0%`, `UP 00:00:00`, `AUTO`; initial startup readings, not yet independently validated.
+- Verified: image boots sufficiently to render display and custom identity. USB Ethernet management and Wi-Fi behavior not verified.
+- PiSugar 3 not installed yet; battery telemetry not tested. Before wireless operation, verify passive settings and authorized-lab scope. Next milestone: USB management access and PiSugar hardware fit/telemetry.
