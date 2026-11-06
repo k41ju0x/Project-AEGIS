@@ -6,7 +6,7 @@ These are proposed research projects, not purchase commitments. Existing AEG-002
 
 | ID | Project | Track | Phase | Status | Folder |
 |---|---|---|---|---|
-| AEG-003 | Pwnagotchi | Wireless Security Research | Deferred | Hardware Received / Build Paused | [pwnagotchi](pwnagotchi/README.md) |
+| AEG-003 | Pwnagotchi | Wireless Security Research | Active | Build Started / SD Preparation | [pwnagotchi](pwnagotchi/README.md) |
 | AEG-006 | Tactical Control Terminal | Raspberry Pi / Meshtastic | Active | Built / integration ongoing | Existing project documentation |
 | AEG-007 | RFID/NFC Security Lab | Hardware & Embedded | 2 | Backlog | [rfid-nfc](rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP Lab | Wireless & Network | 2 | Backlog | [openwrt-rogue-ap](openwrt-rogue-ap/README.md) |
@@ -17,7 +17,7 @@ These are proposed research projects, not purchase commitments. Existing AEG-002
 | AEG-013 | Web Application Security Lab | Software Development | 1 | Backlog | [web-app-security](web-app-security/README.md) |
 | AEG-014 | IoT Security Research Platform | Hardware & Embedded | 3 | Backlog | [iot-security-research](iot-security-research/README.md) |
 | AEG-015 | Flipper Zero Development Lab | Hardware & Embedded | 2 | Backlog | [flipper-development](flipper-development/README.md) |
-| AEG-016 | AEGIS Sentinel — Desktop AI Companion | AI & Embedded Systems | 1 | Hardware Received / Inspection Pending | [aegis-sentinel](aegis-sentinel/README.md) |
+| AEG-016 | AEGIS Sentinel — Desktop AI Companion | AI & Embedded Systems | Deferred | Hardware Received / Build Paused | [aegis-sentinel](aegis-sentinel/README.md) |
 | AEG-017 | Pico Ducky / HID Research | Hardware & Embedded | 1 | Backlog | [pico-ducky](pico-ducky/README.md) |
 
 ## Operating principle
@@ -31,3 +31,6 @@ AEG-006 remains the existing Tactical Control Terminal. Pico Ducky has been reas
 
 ## Execution focus — 2026-11-01
 Pause new project ideas, discretionary procurement, and backlog expansion. Active priorities: AEG-002 Meshtastic RAK4631 arrival, bring-up and integration with AEG-006 Tactical Control Terminal; AEG-016 Sentinel hardware arrival, build and initial companion software. AEG-003 Pwnagotchi hardware is ordered but **build deferred**: inventory/store on arrival only, no assembly or software work until explicitly resumed. Other backlog projects remain paused.
+
+## Priority change — 2026-11-06
+User explicitly resumed AEG-003 Pwnagotchi as the immediate build. AEG-016 Sentinel is deferred with hardware received; no assembly yet. AEG-002 Meshtastic and AEG-006 TCT remain the planned integration focus upon RAK4631 delivery. No new projects or purchases.
