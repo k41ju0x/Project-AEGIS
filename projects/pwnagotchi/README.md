@@ -1,6 +1,6 @@
 # AEG-003 — Pwnagotchi
 
-**Status:** Hardware ordered (2026-11-01); build deferred by user; delivery pending
+**Status:** Hardware received (2026-11-06); build deferred by user
 
 ## Purpose
 Document an authorized wireless security research hardware project.
@@ -20,3 +20,6 @@ On delivery, inventory and store the components only. Do not assemble, flash, or
 2. Prepare supported community Pwnagotchi OS image on microSD; enable secure management access.
 3. Test e-paper display and battery monitoring before enclosure design.
 4. Measure stacked assembly for 3D-printed case; document build and results.
+
+## Delivery log — 2026-11-06
+User reports arrival of the second Raspberry Pi Zero 2 W and second PiSugar battery. Existing Waveshare 2.13-inch e-Paper HAT V4 is in inventory. Label and store parts; no assembly, flashing, or development until explicitly resumed. Verify exact battery model during inventory.
