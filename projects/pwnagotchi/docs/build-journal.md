@@ -176,3 +176,8 @@ timedatectl status
 - **Direct iPhone Bluetooth SSH acceptance: PASSED.** This establishes management access without relying on the Windows USB connection for the client session.
 - USB gadget SSH remains the recovery path; authenticated dashboard remains bound to Pi localhost `127.0.0.1:8080` and has not yet been tested from iPhone through a tunnel.
 - Next: test whether iOS Termius supports local port forwarding to the authenticated local dashboard; do not rebind web UI to 0.0.0.0. Later test reconnect behavior after phone leaves range and returns.
+
+## iPhone authenticated dashboard via Bluetooth SSH tunnel — 2026-11-06
+- User confirmed Termius on iPhone successfully establishes SSH port forwarding over existing Bluetooth PAN, and the Pwnagotchi authenticated dashboard opens in Safari via local forwarded `127.0.0.1:8080`.
+- **PASS:** direct iPhone SSH, Bluetooth networking, SSH local forwarding, and web dashboard access. The dashboard remains bound to Pwnagotchi localhost; user did not need to expose the HTTP listener to external interfaces.
+- Outstanding reliability acceptance: reconnect after iPhone leaves Bluetooth range, reconnect after Pi reboot, and confirm SSH tunnel availability after iOS background suspension; PiSugar automatic low-battery shutdown remains separately untested.
