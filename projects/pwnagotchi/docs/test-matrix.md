@@ -14,7 +14,7 @@ Updated: 2026-11-06. Status **Testing** as reported by project owner. A **Pass**
 | T08 | Saved .pcap exists in configured directory | Pass (existence only) | `/etc/pwnagotchi/handshakes`; user reported file found |
 | T09 | Capture imported and dissected in Wireshark | Pending | Check format, frame count and `eapol` in an authorized capture |
 | T10 | Handshake integrity/completeness | Pending | Do not equate PWND counter with valid full handshake |
-| T11 | Correct time, timezone and synchronization | Needs attention | Logs displayed Aug 18 on Nov 6; inspect `timedatectl status` |
+| T11 | Correct time, timezone and synchronization | Partial | Manually corrected to 2026-11-06 21:02 CST; `America/Chicago` set; `System clock synchronized: no`, NTP active but not synchronized; verify after reboot and when internet/time source available |
 | T12 | Stable service over reboot and 30+ min | Pending | Earlier exit 1 followed by restart; inspect uptime and journal after reboot |
 | T13 | PiSugar charging, cutoff and graceful shutdown | Pending | No forced discharges; test non-destructively with monitored power |
 | T14 | Battery runtime | Pending | Log start/end percentages and uptime under repeatable loads |
@@ -32,3 +32,6 @@ Updated: 2026-11-06. Status **Testing** as reported by project owner. A **Pass**
 
 ## Acceptance threshold for Completed
 Stable repeatable boot, display updates, safe standalone power and shutdown, correct timestamps, working management access, documented capture-storage behavior, and sanitized evidence in the build log. A recovered password or intrusive wireless interaction is **not** a completion requirement.
+
+## Next phase scope — 2026-11-06
+Owner selected display/personality customization, authenticated USB-only web UI, optional phone Bluetooth tether, PiSugar battery optimization and safe shutdown, and Wi-Fi research analysis. Implement sequentially: validate current web UI binding and authentication without opening public ports; back up and carefully change custom configuration; pair phone only after platform-specific tether documentation is checked; validate battery plugin's existing shutdown settings before any charge/discharge test. Preserve existing working USB address assignment. Firmware v2.9.5.8 defaults include `[ui.web]` enabled/port 8080/auth false and `[main.plugins.pisugarx]` lowpower_shutdown_level=10, but deployed effective settings need verification before asserting behavior.
