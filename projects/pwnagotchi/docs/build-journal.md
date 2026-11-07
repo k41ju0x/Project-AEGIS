@@ -208,3 +208,9 @@ timedatectl status
 - Manual `nmcli connection up` at 23:06:03 succeeded; by 23:06:05 DHCPv4 lease, IPv4/IPv6 routes and DNS and NM active connection all established.
 - Hypothesis: competition/race between bt-tether BlueZ NAP management and NetworkManager autoactivation, or PAN established without NM IP configuration. Not proven; do not disable or add reconnect mechanism without verifying state when plugin reports connected but management fails.
 - Next test while disconnected from iPhone management but USB SSH preserved: inspect `nmcli -f DEVICE,TYPE,STATE,CONNECTION device status`, `nmcli -f NAME,TYPE,DEVICE connection show --active`, `ip -4 -br addr show bnep0` and `ip -4 route show dev bnep0`. Compare Bluetooth NAP plugin state against network layer. Additional observation: plugin upgrade entries around 23:07 are noted but no conclusions drawn.
+
+## Bluetooth PAN reconnection state — post-interruption inspection (2026-11-06)
+- Following unattended Bluetooth reconnection attempt, user observed `nmcli device status`: USB gadget `usb0` connected, loopback connected, `wlan0` unavailable (Pwnagotchi monitor configuration), no Bluetooth interface.
+- `nmcli connection show --active`: only USB gadget and loopback. `ip -4 -br addr show bnep0`: device does not exist; `ip -4 route show dev bnep0`: cannot find device.
+- This proves **PAN network interface absent at inspection time**, not merely DHCP without an address. Previous logs demonstrated bt-tether NAP connection on a prior attempt and NetworkManager auto-activation I/O errors; current Bluetooth link connection state has not yet been inspected.
+- Next safe read-only check: `bluetoothctl devices Connected` / selected iPhone `bluetoothctl info` for Connected/Paired/Trusted and `journalctl -u bluetooth -u NetworkManager --since '5 minutes ago'` for BlueZ/NM failure. Keep USB recovery and avoid changing networking or forcing duplicate reconnect mechanisms until link state known.
