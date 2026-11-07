@@ -41,4 +41,4 @@ Owner selected display/personality customization, authenticated USB-only web UI,
 
 | T21 | iPhone Bluetooth pairing and trusted device | Pass | `bluetoothctl info` showed Paired: yes, Trusted: yes |
 | T22 | iPhone Bluetooth PAN activation | Pass | `nmcli connection up` activated existing iPhone Network profile; user reports interface/route checks good; phone-originated SSH still untested |
-| T23 | SSH and dashboard from iPhone | Pending | Verify reachability to actual `bnep0` IP and tunnel to authenticated localhost-only web dashboard |
+| T23 | SSH and dashboard from iPhone | Partial | iPhone Termius SSH over Bluetooth PAN works with interactive commands; web dashboard via SSH forward not yet verified |
