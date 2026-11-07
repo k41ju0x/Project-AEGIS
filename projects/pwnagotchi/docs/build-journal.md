@@ -631,3 +631,9 @@ The project remains in **Testing**. I will return to these specific acceptance i
 - I remained on PiSugar 3 battery power after unplugging external USB around 09:19 CST. At 09:26:36 I ran `uptime`, `vcgencmd get_throttled`, and `systemctl show pwnagotchi -p ActiveState -p NRestarts`.
 - Results: Linux `up 23 min`, `throttled=0x0`, `NRestarts=1` (still unchanged), `ActiveState=active`.
 - **PASS:** at least seven minutes of continuous battery-only operation following live USB removal, with no observed kernel undervoltage flags or application service restart. **Not yet confirmed at this checkpoint:** the full ten-minute battery-only observation, automatic low-battery shutdown, long-term battery endurance, or definitive root cause of the earlier unexplained reboot.
+
+## Final acceptance — 12+ minute battery-only stability passed (2026-11-07)
+- After I disconnected USB power at approximately 09:19 CST and continued operating on PiSugar 3 alone, I ran `uptime`, `vcgencmd get_throttled`, and `systemctl show pwnagotchi -p ActiveState -p NRestarts` at 09:31:43 CST.
+- Results: `up 28 min`, `throttled=0x0`, `NRestarts=1` (unchanged), and `ActiveState=active`. The Termius SSH session remained available.
+- **PASS:** controlled live USB-to-battery transition and over 12 minutes of observed battery-only operation with no new OS restart, Pwnagotchi service restart, or reported undervoltage flag. This completes my chosen **10-minute short battery stability acceptance test**.
+- Separate acceptance limitations remain: I have not measured long-duration battery endurance or behaviorally verified the inherited PiSugar automatic low-power shutdown/cutoff; the earlier startup failure's root cause and intermittent Bluetooth recovery after deliberately interrupting the connection remain unconfirmed.
