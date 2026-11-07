@@ -6,7 +6,7 @@ These are proposed research projects, not purchase commitments. Existing AEG-002
 
 | ID | Project | Track | Phase | Status | Folder |
 |---|---|---|---|---|
-| AEG-003 | Pwnagotchi | Wireless Security Research | Active | Build Started / SD Preparation | [pwnagotchi](pwnagotchi/README.md) |
+| AEG-003 | Pwnagotchi | Wireless Security Research | Testing | Functional Prototype / Validation Pending | [pwnagotchi](pwnagotchi/README.md) |
 | AEG-006 | Tactical Control Terminal | Raspberry Pi / Meshtastic | Active | Built / integration ongoing | Existing project documentation |
 | AEG-007 | RFID/NFC Security Lab | Hardware & Embedded | 2 | Backlog | [rfid-nfc](rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP Lab | Wireless & Network | 2 | Backlog | [openwrt-rogue-ap](openwrt-rogue-ap/README.md) |
@@ -34,3 +34,6 @@ Pause new project ideas, discretionary procurement, and backlog expansion. Activ
 
 ## Priority change — 2026-11-06
 User explicitly resumed AEG-003 Pwnagotchi as the immediate build. AEG-016 Sentinel is deferred with hardware received; no assembly yet. AEG-002 Meshtastic and AEG-006 TCT remain the planned integration focus upon RAK4631 delivery. No new projects or purchases.
+
+## Testing update — 2026-11-06
+AEG-003 Pwnagotchi entered **Testing** (project owner moved board item). Confirmed functional prototype and first stored capture; validate capture content, system clock, uptime/service stability, charging and shutdown safety, battery endurance, and enclosure fit before completion. See [build journal](pwnagotchi/docs/build-journal.md) and [test matrix](pwnagotchi/docs/test-matrix.md). AEG-016 Sentinel remains deferred; AEG-002 Meshtastic/AEG-006 TCT remain pending hardware integration.
