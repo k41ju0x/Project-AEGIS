@@ -92,6 +92,68 @@ sudo reboot                 # Reboot after applying updates when appropriate
 
 **Troubleshooting / safeguards:** If SSH is refused, check that the Pi booted, networking works, and SSH was enabled in Imager; if authentication fails, confirm the configured username and matching password/public key. The device must be on a reachable authorized LAN. Do not disable password authentication until key-based login has been tested successfully. For a power-only screen, check DSI ribbon orientation, GPIO power wiring and supported display configuration before assuming software is the only problem.
 
+
+## Phase 1B — Mobile SSH administration with Termius (2026-11-07)
+
+**Objective:** Establish a second, independent SSH management path from the Termius mobile client to the Raspberry Pi 5 Tactical Control Terminal, while preserving the working Kali SSH session and the existing key-based-only SSH policy.
+
+**Starting condition:** Kali could connect over SSH using an authorized key. Password-based login from Termius failed. Connection-specific OpenSSH configuration was checked on the Pi:
+
+```bash
+sudo sshd -T -C user=aegis,host=aegis-tct,addr=127.0.0.1 \
+  | grep -E '^(passwordauthentication|pubkeyauthentication|kbdinteractiveauthentication) '
+```
+
+**Observed effective SSH settings:**
+```text
+pubkeyauthentication yes
+passwordauthentication no
+kbdinteractiveauthentication no
+```
+
+**Interpretation:** Key-based access was allowed; password and keyboard-interactive authentication were disabled. Password failure in Termius was therefore expected. A separate ED25519 keypair was generated inside Termius for the mobile device. The public key was authorized on the Pi; the private key was kept in the mobile SSH client. A passphrase is recommended for the mobile private key, with its storage cipher left at the app's secure default.
+
+### Procedure — add the mobile public key safely
+
+1. With the original Kali SSH session **still open**, generate an ED25519 key in Termius; assign the local key a descriptive label such as `AEGIS-TCT-iPhone`.
+2. Copy **the exact public key** using Termius's *Copy Public Key* action. The label/comment at the end of an OpenSSH public-key line is optional. Do not manually retype ambiguous Base64 characters such as `I`, `l` and `1`.
+3. On the **Pi via Kali SSH**, preserve the working authorized-key file and append the new public key as a separate line:
+
+```bash
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+cp ~/.ssh/authorized_keys ~/.ssh/authorized_keys.bak
+nano ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
+
+4. Verify each key independently to identify malformed lines without disclosing key material:
+
+```bash
+while IFS= read -r key; do
+    if [[ "$key" == ssh-* || "$key" == ecdsa-* ]]; then
+        printf '%s\n' "$key" | ssh-keygen -lf -
+    fi
+done < ~/.ssh/authorized_keys
+```
+
+**Observed troubleshooting:** Only the existing Kali key initially produced a valid fingerprint. The newly pasted Termius line caused `(stdin) is not a public key file.` This indicated an invalid/malformed public-key entry, consistent with a transcription or clipboard-formatting issue. The invalid mobile key line was replaced with an exact copy from Termius without altering the Kali key. The subsequent mobile SSH connection succeeded.
+
+**Mobile client configuration:** Host address set to the Pi's LAN IP, TCP port `22`, username `aegis`, authentication set to the newly generated Termius SSH key rather than password. Actual addresses, fingerprints, passwords and private keys are deliberately omitted from this public journal.
+
+**Acceptance result:** **PASS** — Termius authenticated successfully to AEG-006 from the mobile device; the pre-existing Kali key access was preserved. No change to the effective SSH password-authentication policy was necessary. The dashboard application itself remained unchanged.
+
+**Recommended repeatable confirmation (not claimed as recorded terminal output):**
+```bash
+whoami
+hostname
+systemctl is-active aegis-mesh.service
+```
+
+Expected: `aegis`, `aegis-tct`, and `active` if the dashboard service is running.
+
+**Security note:** Do not add private-key files, real `authorized_keys` contents, account passwords, host fingerprints tied to private infrastructure, or LAN addresses to the public repository. Store recovery copies securely outside the Git repository. Keep a known-working SSH session open until each new authentication method has been tested.
+
 ## Phase 2 — Cooling and system baseline
 Measured approximately 45 C CPU temperature; manual fan speed measurements approximately 7566 RPM at PWM 255 and 5099 RPM at PWM 125.
 ```bash
