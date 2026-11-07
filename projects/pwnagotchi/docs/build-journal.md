@@ -145,3 +145,9 @@ timedatectl status
 - `bluetoothctl show`: controller alias/name `aegis-pwn`, `Powered: yes`, `PowerState: on`, `Discoverable: no`, `Pairable: no`, `Discovering: no`, supports central and peripheral roles.
 - Hardware and BlueZ operational; device intentionally not currently pairing or advertising. Bluetooth pairing and PAN/SSH transport **not yet configured or tested**. Temporary pairable/discoverable mode should be enabled only during actual pairing, and disabled afterwards.
 - USB management SSH remains recovery path. Await user phone OS (Android/iPhone) to decide Bluetooth networking and verify PAN/tethering support before changes.
+
+## iPhone Bluetooth pairing completed — 2026-11-06
+- User reports `bluetoothctl` showing **Paired: yes** and **Trusted: yes** for their iPhone. Do not publish device Bluetooth address in the public repo.
+- Controller powered, service healthy, no rfkill blocks previously confirmed. Pairing milestone passed; Bluetooth PAN, IP, and SSH from the phone remain untested.
+- Recommended temporary discoverability/pairability OFF after pairing; preserve USB-gadget SSH for recovery.
+- Next diagnostic: inspect shape/enablement of firmware's `[main.plugins.bt-tether]` in default and custom TOML without printing secrets; list NetworkManager connections and `bnep0` if present. Configure only after identifying installed schema and avoid weakening `127.0.0.1:8080` authenticated dashboard binding.
