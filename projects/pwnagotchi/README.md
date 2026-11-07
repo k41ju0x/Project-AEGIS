@@ -58,3 +58,6 @@ The project owner moved AEG-003 to **Testing** on the GitHub Project board. Firm
 
 ## Clock correction and next features — 2026-11-06
 System clock initially reported August 18 in Europe/London and unsynchronized. Corrected manually via the Windows SSH host to **2026-11-06 21:02 CST**, timezone `America/Chicago`. NTP shows active but `System clock synchronized: no`; automatic sync, reboot persistence and upstream time-source access remain to test. Next planned features: secure local USB web UI, optional Bluetooth phone tethering, custom AEGIS personality/display, battery safety/runtime testing, and optional session analytics. [Journal](docs/build-journal.md) · [Test matrix](docs/test-matrix.md).
+
+## Secured web dashboard — 2026-11-06
+Pwnagotchi service remained active following restart. Web interface now listens on `127.0.0.1:8080` with authentication enabled; user verified successful credentials over SSH tunnel from Windows. No password or private interface address committed. Test T15 is **Passed**. Next: AEGIS personality and face customization with reversible configuration changes.
