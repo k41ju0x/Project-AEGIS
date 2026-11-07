@@ -93,3 +93,9 @@ timedatectl status
 - `sudo apt update` and `sudo apt install -y i2c-tools` failed with `Temporary failure resolving deb.debian.org` and `archive.raspberrypi.com`. USB SSH connectivity does not establish internet access; apt's 'All packages are up to date' message is based on stale/previous indexes, not a successful fetch.
 - No i2c-tools installed; avoid changing known-working USB IP settings solely for this diagnostic.
 - Next: inspect whether existing Pwnagotchi Python venv has `smbus2` or `smbus`; if available, perform targeted read-only test of expected PiSugar controller addresses. Battery device remains powered on per user correction.
+
+## Session 10 — PiSugar I²C address detection (2026-11-06)
+- Existing Python virtual environment contains both `smbus2` and `smbus` despite `i2c-tools` being unavailable offline.
+- A targeted SMBus read of I²C bus 1 returned `[DETECTED] 0x57 - PiSugar battery controller` and `[DETECTED] 0x68 - PiSugar RTC`.
+- This confirms both expected I²C addresses responded to read probes, reducing likelihood of a fully disconnected battery controller or missing I²C bus. It does **not** confirm reliable PiSugarX plugin connectivity or the low-power shutdown behavior.
+- Next: inspect latest PiSugar plugin log entries and whether a PiSugar management systemd service exists, before performing service restarts or hardware changes.
