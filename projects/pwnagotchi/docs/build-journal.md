@@ -585,3 +585,10 @@ The project remains in **Testing**. I will return to these specific acceptance i
 - After restarting with the existing PiSugar procedure, I reconnected over Termius and ran `systemctl is-active pwnagotchi` and `uptime`.
 - Results: `active`; `08:54:37 up 1 min, 1 user, load average: 0.61, 0.28, 0.10`. A fresh uptime and working Termius session confirm successful startup and working remote administration.
 - **PASS:** manual orderly shutdown, reboot, Pwnagotchi service startup, and remote SSH access. The e-Paper update after this restart was not separately reported at this checkpoint. **NOT TESTED:** automatic low-battery shutdown at the PiSugar 10% setting or battery-controller delayed power cutoff; these are distinct from Linux `shutdown -h now`.
+
+## Final acceptance — e-Paper restart and live display evidence (2026-11-07)
+- After I performed a controlled Linux shutdown, restarted from PiSugar power and confirmed Termius SSH and the Pwnagotchi service were working, I photographed the Waveshare 2.13-inch V4 display twice.
+- The two photos show my `aegis-pwn` identity, two distinct custom facial expressions and changing screen messages (from a session-log reading state to the normal personality greeting), establishing that the e-Paper interface was operating and updating after restart.
+- Battery percentages visible in the photos are approximately 46% and 51%, demonstrating the percentage is displayed but **not establishing accurate state-of-charge measurement or charging behavior**. Both pictures show on-screen `UP 00:00:00`; I did not separately verify that this UI counter advances. Linux `uptime` had already reported one minute after restart.
+- The display also showed a private Bluetooth PAN address. I **did not include that address** in this public journal or commit the photographs. Before publishing any images I will redact/crop private device/network identifiers, SSIDs and capture information.
+- **PASS:** e-Paper renders and changes faces/messages after controlled shutdown and restart, while SSH and the Pwnagotchi service are functional. **OPEN:** PiSugar automatic low-battery cutoff and on-screen uptime counter observation.
