@@ -16,7 +16,7 @@ Updated: 2026-11-06. Status **Testing** as reported by project owner. A **Pass**
 | T10 | Handshake integrity/completeness | Pending | Do not equate PWND counter with valid full handshake |
 | T11 | Correct time, timezone and synchronization | Partial | Manually corrected to 2026-11-06 21:02 CST; `America/Chicago` set; `System clock synchronized: no`, NTP active but not synchronized; verify after reboot and when internet/time source available |
 | T12 | Stable service over reboot and 30+ min | Pending | Earlier exit 1 followed by restart; inspect uptime and journal after reboot |
-| T13 | PiSugar charging, cutoff and graceful shutdown | Partial | PiSugarX dashboard displays live battery data; prior I²C `0x57`/`0x68` and plugin connected/ready confirmed. Stable long-term telemetry, charging, and actual 10% shutdown/cutoff untested |
+| T13 | PiSugar charging, cutoff and graceful shutdown | Partial / deferred | Standalone battery powered Pi and PiSugarX showed data; inherited low-power settings found, but long-duration runtime and actual shutdown/cutoff at 10% not tested; user deferred additional battery test |
 | T14 | Battery runtime | Pending | Log start/end percentages and uptime under repeatable loads |
 | T15 | Secure browser dashboard access | Pass | Service active; bound to `127.0.0.1:8080`; dashboard required credentials and login succeeded over previously verified SSH tunnel (2026-11-06) |
 | T16 | Bluetooth management (optional) | Not started | Verify supported phone tether implementation, protect remote access |
@@ -43,6 +43,6 @@ Owner selected display/personality customization, authenticated USB-only web UI,
 | T22 | iPhone Bluetooth PAN activation | Pass | `nmcli connection up` activated existing iPhone Network profile; user reports interface/route checks good; phone-originated SSH still untested |
 | T23 | SSH and dashboard from iPhone | Pass | Interactive Termius SSH over Bluetooth PAN and local port forwarding to authenticated localhost-only dashboard work; user confirmed Safari dashboard access |
 
-| T24 | iPhone Bluetooth PAN reconnection after interruption | Fail / link-level diagnostic pending | After unattended retry, NetworkManager shows no active Bluetooth connection, `bnep0` absent and no route; not only a missing IPv4 lease. Need BlueZ link state and service logs before changes |
+| T24 | iPhone Bluetooth PAN reconnection after interruption | Deferred (known intermittent failure) | Previously failed unattended reconnect despite configuration; successful post-reboot recovery. User elected not to repeat interruption test now |
 
 | T25 | Bluetooth controller/PAN recovery after reboot | Pass | After Broadcom HCI reset timeout and controlled reboot, user confirmed iPhone remote connectivity works; transient Bluetooth interruption reliability remains pending |
