@@ -44,3 +44,5 @@ Owner selected display/personality customization, authenticated USB-only web UI,
 | T23 | SSH and dashboard from iPhone | Pass | Interactive Termius SSH over Bluetooth PAN and local port forwarding to authenticated localhost-only dashboard work; user confirmed Safari dashboard access |
 
 | T24 | iPhone Bluetooth PAN reconnection after interruption | Fail / link-level diagnostic pending | After unattended retry, NetworkManager shows no active Bluetooth connection, `bnep0` absent and no route; not only a missing IPv4 lease. Need BlueZ link state and service logs before changes |
+
+| T25 | Bluetooth controller/PAN recovery after reboot | Pass | After Broadcom HCI reset timeout and controlled reboot, user confirmed iPhone remote connectivity works; transient Bluetooth interruption reliability remains pending |
