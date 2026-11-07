@@ -626,3 +626,8 @@ The project remains in **Testing**. I will return to these specific acceptance i
 - I disconnected external USB power with Pwnagotchi already running and the PiSugar 3 attached. The device remained on and my Termius SSH connection remained available.
 - I ran `uptime`, `vcgencmd get_throttled`, and `systemctl show pwnagotchi -p ActiveState -p NRestarts` on battery power. Results at 09:19:06 CST: `up 16 min`, `throttled=0x0`, `NRestarts=1` (unchanged), `ActiveState=active`.
 - **PASS:** live USB-to-battery transition with no observed immediate OS reboot, undervoltage flag or Pwnagotchi service restart. **PENDING:** sustained battery-only operation after further normal use; a single successful transition does not prove endurance or automatic 10%-threshold shutdown. The earlier unexplained restart remains noted separately.
+
+## Final acceptance — continued battery-only stability (2026-11-07)
+- I remained on PiSugar 3 battery power after unplugging external USB around 09:19 CST. At 09:26:36 I ran `uptime`, `vcgencmd get_throttled`, and `systemctl show pwnagotchi -p ActiveState -p NRestarts`.
+- Results: Linux `up 23 min`, `throttled=0x0`, `NRestarts=1` (still unchanged), `ActiveState=active`.
+- **PASS:** at least seven minutes of continuous battery-only operation following live USB removal, with no observed kernel undervoltage flags or application service restart. **Not yet confirmed at this checkpoint:** the full ten-minute battery-only observation, automatic low-battery shutdown, long-term battery endurance, or definitive root cause of the earlier unexplained reboot.
