@@ -164,3 +164,9 @@ timedatectl status
 - User reports follow-up IP/active-connection/routing checks all showed good outputs, but exact `bnep0` IP not supplied. Avoid inventing an address or asserting iPhone-initiated reachability.
 - Status: **Bluetooth PAN activation passed**; direct SSH from iPhone, SSH-tunneled authenticated web dashboard, reconnection after reboot, and coexistence with USB recovery still need testing.
 - Next: read `ip -4 -br addr show bnep0`; attempt SSH from iPhone with actual Bluetooth IP and existing credentials, preserving localhost-only dashboard binding and USB recovery.
+
+## Bluetooth IPv4 address assigned — 2026-11-06
+- User verified `ip -4 -br addr show bnep0` returned `bnep0 UNKNOWN [private Bluetooth PAN IPv4]/28` after activating existing paired iPhone PAN profile.
+- IP assignment **passed**; interface UNKNOWN does not independently signify failure for Bluetooth PAN interfaces. iPhone-initiated SSH to port 22 at Bluetooth PAN IPv4 and dashboard SSH port-forward are **not yet tested**.
+- Next: with iPhone Bluetooth and Personal Hotspot enabled and USB SSH preserved, connect with iOS SSH client using existing account; verify hostname `aegis-pwn`. Afterwards test authenticated dashboard via SSH localhost forward, keeping existing `127.0.0.1:8080` bind.
+- Bluetooth-subnet address is documented here in local/private working notes only if repository visibility permits; avoid publishing device IDs or passwords.
