@@ -1,12 +1,12 @@
 # Project Registry
 
-**Execution focus (updated November 6, 2026):** AEG-003 Pwnagotchi is in Testing, AEG-002 Meshtastic and AEG-006 Tactical Control Terminal integration remains pending RAK4631 arrival, and AEG-016 Sentinel hardware is received but build deferred. No new project ideas or purchases. Future concepts stay archived in **[FUTURE-IDEAS.md](FUTURE-IDEAS.md)**.
+**Execution focus (updated November 6, 2026):** AEG-003 Pwnagotchi is in Testing, AEG-002 Meshtastic and AEG-006 Tactical Control Terminal integration remains pending RAK4631 arrival, and AEG-016 Sentinel hardware is received but build deferred. No new project proposals; the planned Alfa AWUS036ACM is an AEG-003 hardware enhancement. Future concepts stay archived in **[FUTURE-IDEAS.md](FUTURE-IDEAS.md)**.
 
 | ID | Project | Domain | Current status | Tracking |
 |---|---|---|---|---|
 | AEG-001 | Project NEXUS | Home lab / infrastructure | Existing, review paused | [NEXUS repository](https://github.com/k41ju0x/Project-NEXUS) · [#1](https://github.com/k41ju0x/Project-AEGIS/issues/1) |
 | AEG-002 | Meshtastic — RAK4631 | LoRa / mesh communications | Starter kit ordered; delivery and inventory pending | [Planning #2](https://github.com/k41ju0x/Project-AEGIS/issues/2) · [Build #5](https://github.com/k41ju0x/Project-AEGIS/issues/5) |
-| AEG-003 | Pwnagotchi | Wireless security research | Testing — functional battery-powered prototype; validation pending | [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3) |
+| AEG-003 | Pwnagotchi | Wireless security research | Testing — secured dashboard, PiSugar telemetry and iPhone Bluetooth management verified; shutdown and intermittent reconnect validation deferred | [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3) |
 | AEG-004 | Remote Access Device | Authorized remote administration | Idea / parked | [#4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
 | AEG-005 | Portable LattePanda Platform | Headless Kali / portable assessment device | Concept parked; no active purchases | Future scoping only |
 | AEG-006 | Tactical Control Terminal | Raspberry Pi 5 + Touch Display 2 / Meshtastic interface | In Progress — hardware validated; AEGIS Mesh Control v0.6 touchscreen-tested and published; RAK4631 live integration pending | [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
