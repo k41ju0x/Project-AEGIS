@@ -18,7 +18,7 @@ I mark **Pass** only when I observed the behavior; **Partial** when a prerequisi
 | T10 | Handshake completeness | Pending | `PWND 1` does not prove a complete four-way handshake |
 | T11 | Clock and timezone | Partial | I manually corrected to America/Chicago; automatic NTP sync unverified |
 | T12 | Long-duration daemon stability | Partial | Service survived configuration restarts/reboot; a separate 30+ minute acceptance run not recorded |
-| T13 | PiSugar automatic shutdown/cutoff | Deferred | Firmware defaults specify 10% / 45 seconds; I have not tested real cutoff behavior |
+| T13 | PiSugar automatic low-battery shutdown/cutoff | Deferred | Firmware defaults specify 10% / 45 seconds; I have not tested real cutoff behavior |
 | T14 | Battery endurance | Deferred | I chose not to repeat a timed standalone runtime test |
 | T15 | Authenticated localhost-only dashboard | Pass | I confirmed auth and listener `127.0.0.1:8080` with an SSH tunnel |
 | T16 | Bluetooth phone management | Pass | I used iPhone Termius SSH over Bluetooth PAN |
@@ -42,3 +42,5 @@ To call this project **Completed**, I will document repeatable boot/display beha
 I consciously deferred battery endurance and an additional Bluetooth toggle test at the close of this session. **The initial failure remains a known limitation** until I demonstrate unattended recovery under repeatable conditions. I will retain USB SSH as a recovery method during future Alfa and networking modifications.
 
 See the [build journal](build-journal.md) for my exact executed commands, observed results, and sanitized substitutes for private parameters.
+
+| T27 | Manual safe shutdown and return to service | Pass | I ran `sudo shutdown -h now`, restarted the Pi, reconnected through Termius, confirmed `pwnagotchi` active and approximately one-minute uptime; PiSugar automatic low-battery cutoff remains untested |
