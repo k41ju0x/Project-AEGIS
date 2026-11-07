@@ -67,3 +67,9 @@ timedatectl status
 - `sudo systemctl restart pwnagotchi` completed and `systemctl is-active pwnagotchi` returned **active**.
 - User observed **two facial expressions** so far; display-state rendering works but all custom expressions are not individually validated. Face selection is state-driven; no intrusive wireless activity should be induced merely for appearance tests.
 - Next: inspect effective web theme configuration, back up, apply reversible AEGIS green accent theme, check secured localhost-only dashboard remains authenticated.
+
+## Session 8 — AEGIS green dashboard theme verified
+- Backed up config and added `[ui.web.theme]` RGB accent `159, 232, 112` (`#9FE870`).
+- User confirmed the custom theme works and the authenticated dashboard remains accessible after applying changes.
+- Existing binding to `127.0.0.1:8080` had previously been verified; no report of a new listener check during this milestone.
+- Next priority: inspect PiSugar 3 low-battery shutdown configuration before making changes; then validate battery endurance and optional Bluetooth tethering.
