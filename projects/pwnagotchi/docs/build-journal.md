@@ -170,3 +170,9 @@ timedatectl status
 - IP assignment **passed**; interface UNKNOWN does not independently signify failure for Bluetooth PAN interfaces. iPhone-initiated SSH to port 22 at Bluetooth PAN IPv4 and dashboard SSH port-forward are **not yet tested**.
 - Next: with iPhone Bluetooth and Personal Hotspot enabled and USB SSH preserved, connect with iOS SSH client using existing account; verify hostname `aegis-pwn`. Afterwards test authenticated dashboard via SSH localhost forward, keeping existing `127.0.0.1:8080` bind.
 - Bluetooth-subnet address is documented here in local/private working notes only if repository visibility permits; avoid publishing device IDs or passwords.
+
+## iPhone direct SSH over Bluetooth — 2026-11-06
+- User successfully connected from iPhone Termius to `aegis-pwn` via the established Bluetooth PAN and reports interactive control of Pwnagotchi.
+- **Direct iPhone Bluetooth SSH acceptance: PASSED.** This establishes management access without relying on the Windows USB connection for the client session.
+- USB gadget SSH remains the recovery path; authenticated dashboard remains bound to Pi localhost `127.0.0.1:8080` and has not yet been tested from iPhone through a tunnel.
+- Next: test whether iOS Termius supports local port forwarding to the authenticated local dashboard; do not rebind web UI to 0.0.0.0. Later test reconnect behavior after phone leaves range and returns.
