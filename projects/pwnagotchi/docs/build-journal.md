@@ -232,3 +232,8 @@ timedatectl status
 - bluetoothd service active; its journal records bnep0 disconnect 23:09 and later `Failed to set mode: Authentication Failed (0x05)` at 23:19. User says `systemctl is-active hciuart` returns inactive. Because kernel `hci_uart_bcm serial0-0` already detected controller, inactive hciuart alone does not establish a misconfiguration; do not enable legacy hciuart or change UART overlays without further evidence.
 - BlueZ controller earlier `Powered: no` despite no rfkill blocks; `sudo bluetoothctl power on` returned `org.bluez.Error.Failed`.
 - Diagnosis: kernel/controller HCI reset timeout, not just PAN DHCP. Proposed one clean `sudo reboot` while USB recovery and adequate power are maintained, then verify `bluetoothctl show`, fresh kernel HCI errors, and whether iPhone PAN auto-reconnects without manual `nmcli connection up`. Actual outcome **pending**. No hardware resets, pairing deletion or boot firmware changes performed.
+
+## Bluetooth connection recovered after controlled reboot — 2026-11-06
+- Following Broadcom HCI reset timeouts and failed BlueZ controller power-on, user reports **iPhone connected after reboot**.
+- This suggests reboot recovered controller/link connectivity. However, user has not yet provided post-reboot controller power status, `bnep0` IP, NetworkManager active profile, or confirmed direct Termius SSH/Safari tunnel after reboot. Mark full PAN auto-reconnection and management tests **pending verification**, not passed.
+- Next checks: `bluetoothctl show | grep 'Powered:'`, `nmcli -f NAME,TYPE,DEVICE connection show --active`, `ip -4 -br addr show bnep0`; verify Termius and Safari dashboard without manually activating NM.
