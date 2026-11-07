@@ -99,3 +99,9 @@ timedatectl status
 - A targeted SMBus read of I²C bus 1 returned `[DETECTED] 0x57 - PiSugar battery controller` and `[DETECTED] 0x68 - PiSugar RTC`.
 - This confirms both expected I²C addresses responded to read probes, reducing likelihood of a fully disconnected battery controller or missing I²C bus. It does **not** confirm reliable PiSugarX plugin connectivity or the low-power shutdown behavior.
 - Next: inspect latest PiSugar plugin log entries and whether a PiSugar management systemd service exists, before performing service restarts or hardware changes.
+
+## Session 11 — PiSugar 3 plugin recovered (2026-11-06)
+- After repeated logs saying `No PiSugar device was found` and `[PiSugarX] PiSugar is not ready` through 21:31:20 CST, log shows `PiSugar3 is connected` at 21:31:25.664 and `PiSugar3 is ready` at 21:31:26.670 CST.
+- `systemctl list-units --all --type=service | grep -i pisugar` returned no matching standalone service; plugin operation may be embedded in Pwnagotchi process.
+- Combined with prior I²C probe detecting addresses `0x57` and `0x68`, this confirms successful software connection at least once. Sustained connectivity, current battery gauge, charging, graceful shutdown, and controller power cutoff are not yet verified.
+- Next: review subsequent logs for reconnection errors and observe current battery percentage. Do not deep-discharge merely to test low-voltage cutoff.
