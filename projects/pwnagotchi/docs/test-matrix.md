@@ -16,7 +16,7 @@ Updated: 2026-11-06. Status **Testing** as reported by project owner. A **Pass**
 | T10 | Handshake integrity/completeness | Pending | Do not equate PWND counter with valid full handshake |
 | T11 | Correct time, timezone and synchronization | Partial | Manually corrected to 2026-11-06 21:02 CST; `America/Chicago` set; `System clock synchronized: no`, NTP active but not synchronized; verify after reboot and when internet/time source available |
 | T12 | Stable service over reboot and 30+ min | Pending | Earlier exit 1 followed by restart; inspect uptime and journal after reboot |
-| T13 | PiSugar charging, cutoff and graceful shutdown | Partial / investigate | PiSugar I²C addresses `0x57` and `0x68` both responded through Python SMBus; plugin previously reported device not found; shutdown behavior unverified |
+| T13 | PiSugar charging, cutoff and graceful shutdown | Partial | Battery + RTC responded at I²C `0x57`/`0x68`; PiSugar plugin logged `PiSugar3 is connected` and `PiSugar3 is ready` at 21:31:25–26 CST after transient failures. Sustained telemetry and low-battery cutoff unverified |
 | T14 | Battery runtime | Pending | Log start/end percentages and uptime under repeatable loads |
 | T15 | Secure browser dashboard access | Pass | Service active; bound to `127.0.0.1:8080`; dashboard required credentials and login succeeded over previously verified SSH tunnel (2026-11-06) |
 | T16 | Bluetooth management (optional) | Not started | Verify supported phone tether implementation, protect remote access |
