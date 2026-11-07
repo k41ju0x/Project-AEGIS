@@ -237,3 +237,8 @@ timedatectl status
 - Following Broadcom HCI reset timeouts and failed BlueZ controller power-on, user reports **iPhone connected after reboot**.
 - This suggests reboot recovered controller/link connectivity. However, user has not yet provided post-reboot controller power status, `bnep0` IP, NetworkManager active profile, or confirmed direct Termius SSH/Safari tunnel after reboot. Mark full PAN auto-reconnection and management tests **pending verification**, not passed.
 - Next checks: `bluetoothctl show | grep 'Powered:'`, `nmcli -f NAME,TYPE,DEVICE connection show --active`, `ip -4 -br addr show bnep0`; verify Termius and Safari dashboard without manually activating NM.
+
+## Bluetooth post-reboot recovery verified — 2026-11-06
+- After controlled reboot following Broadcom Bluetooth HCI reset timeouts, user confirmed **iPhone connectivity and remote access work again** following requested verification of controller, NetworkManager PAN interface, Termius SSH and web dashboard.
+- Acceptance: recovery after reboot **Passed**. Earlier failure to reconnect unattended after temporarily turning iPhone Bluetooth off/on remains a separate **open reliability issue**. A single post-reboot success does not establish reliable reconnection after transient losses or explain the controller hardware timeouts.
+- Preserve existing paired/trusted phone, `connection.autoconnect=yes`, `bt-tether.auto_reconnect=true`, USB SSH recovery, and localhost-only authenticated web UI.
