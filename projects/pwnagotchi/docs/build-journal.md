@@ -128,3 +128,8 @@ timedatectl status
 - Together with `modinfo mt76x2u` on kernel `6.18.39+rpt-rpi-v8`, this verifies the planned Alfa AWUS036ACM / MT7612U software driver and required firmware are present.
 - **This is a prerequisite check, not hardware/monitor-mode acceptance.** Adapter not yet acquired/connected; device detection, actual monitor mode, Bettercap handoff, USB-OTG connection, PiSugar power capacity and remote management via onboard Wi-Fi still pending.
 - Preferred design: USB Alfa for authorized monitoring, onboard Pi Wi-Fi for home LAN SSH/dashboard, preserve USB-gadget recovery until migration passes.
+
+## Next milestone — Bluetooth remote management (2026-11-06)
+- User intends to order Alfa AWUS036ACM for future dedicated monitor-mode use; **order not yet confirmed placed**. Firmware and driver prerequisites previously verified.
+- Work continues on AEG-003 without waiting for adapter. Next goal: Bluetooth phone management as an alternate transport, preserving proven USB SSH recovery and existing Pwnagotchi settings.
+- Initial non-destructive checks requested: `bluetoothctl list`, `sudo systemctl status bluetooth --no-pager -l`, `sudo rfkill list`. Phone OS not yet determined; pairing/PAN setup to be tailored after basic service inspection.
