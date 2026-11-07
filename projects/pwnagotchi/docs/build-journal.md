@@ -122,3 +122,9 @@ timedatectl status
 - This supplies direct evidence that the plugin can retrieve and present battery-controller telemetry. I²C battery address 0x57 and RTC address 0x68 previously responded.
 - Current status: PiSugarX telemetry **Pass (visible)**; long-term polling stability, charging behavior, safe shutdown at the inherited 10% threshold, and 45-second cutoff remain **unverified**. No forced deep-discharge test performed.
 - Next: preserve working settings; proceed to Bluetooth tethering after confirming phone OS, since pairing/network configuration differs for Android and iOS.
+
+## Alfa AWUS036ACM firmware prerequisite check — 2026-11-06
+- User confirmed firmware searches found `/lib/firmware/mt7662_rom_patch.bin`, `/lib/firmware/mediatek/mt7662_rom_patch.bin`, `/lib/firmware/mt7662.bin`, and `/lib/firmware/mediatek/mt7662.bin`.
+- Together with `modinfo mt76x2u` on kernel `6.18.39+rpt-rpi-v8`, this verifies the planned Alfa AWUS036ACM / MT7612U software driver and required firmware are present.
+- **This is a prerequisite check, not hardware/monitor-mode acceptance.** Adapter not yet acquired/connected; device detection, actual monitor mode, Bettercap handoff, USB-OTG connection, PiSugar power capacity and remote management via onboard Wi-Fi still pending.
+- Preferred design: USB Alfa for authorized monitoring, onboard Pi Wi-Fi for home LAN SSH/dashboard, preserve USB-gadget recovery until migration passes.
