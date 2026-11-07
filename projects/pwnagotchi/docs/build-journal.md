@@ -151,3 +151,10 @@ timedatectl status
 - Controller powered, service healthy, no rfkill blocks previously confirmed. Pairing milestone passed; Bluetooth PAN, IP, and SSH from the phone remain untested.
 - Recommended temporary discoverability/pairability OFF after pairing; preserve USB-gadget SSH for recovery.
 - Next diagnostic: inspect shape/enablement of firmware's `[main.plugins.bt-tether]` in default and custom TOML without printing secrets; list NetworkManager connections and `bnep0` if present. Configure only after identifying installed schema and avoid weakening `127.0.0.1:8080` authenticated dashboard binding.
+
+## iPhone Bluetooth PAN profile discovered — 2026-11-06
+- `bt-tether` settings inspected using Python TOML parser: plugin enabled in custom config and disabled in defaults, default/custom key sets include `auto_reconnect`, `fast_dhcp`, reconnect intervals/status display options. `devices` subtable absent in both; do not assume per-device TOML profile necessary.
+- `nmcli -f NAME,TYPE,DEVICE connection show` showed `USB Gadget (shared)` active on `usb0`, loopback, inactive Bluetooth profile for paired iPhone (`Chris’s iPhone Network`), and inactive `USB Gadget (client)`.
+- `ip -br addr show bnep0`: interface does not exist, confirming PAN not presently active.
+- Relevant upstream issue jayofelony/pwnagotchi #387 notes paired iPhones may not activate PAN automatically and suggests `sudo nmcli connection up "<iPhone Network>"` over existing USB recovery, followed by `ip -br addr show bnep0`, active NetworkManager profile and route check.
+- Next: user to manually activate their existing Bluetooth profile while iPhone Personal Hotspot enabled; inspect result before enabling autoconnect or changing routes. No new connection or credential modifications yet.
