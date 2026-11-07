@@ -86,3 +86,10 @@ timedatectl status
 - PiSugar official documentation warns that USB-connected Pi may illuminate PiSugar LEDs even if battery controller is not turned on. Other possible cause is intermittent pogo contact on underside GPIO solder pads.
 - Next read-only tests: `ls -l /dev/i2c*` and `sudo i2cdetect -y 1`. PiSugar 3 expected I²C addresses `0x57` and `0x68`; do not adjust hardware under power. If not available, check PiSugar power-on sequence (short then long press) and contact only after safe shutdown.
 - Reference: https://docs.pisugar.com/docs/product-wiki/pwnagotchi/intro ; https://docs.pisugar.com/docs/product-wiki/battery/faq
+
+## Offline I²C diagnostic blocker — 2026-11-06
+- `/dev/i2c-1` and `/dev/i2c-2` exist (Linux I²C device nodes available).
+- `sudo i2cdetect -y 1` unavailable: `i2cdetect: command not found`.
+- `sudo apt update` and `sudo apt install -y i2c-tools` failed with `Temporary failure resolving deb.debian.org` and `archive.raspberrypi.com`. USB SSH connectivity does not establish internet access; apt's 'All packages are up to date' message is based on stale/previous indexes, not a successful fetch.
+- No i2c-tools installed; avoid changing known-working USB IP settings solely for this diagnostic.
+- Next: inspect whether existing Pwnagotchi Python venv has `smbus2` or `smbus`; if available, perform targeted read-only test of expected PiSugar controller addresses. Battery device remains powered on per user correction.
