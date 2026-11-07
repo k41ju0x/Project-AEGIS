@@ -53,3 +53,11 @@ timedatectl status
 - From Windows, user successfully opened an SSH tunnel using `ssh -L 8080:127.0.0.1:8080 pi@<private-USB-Pi-IP>` and browsed `http://127.0.0.1:8080`.
 - User confirmed **dashboard appears**. Browser access is verified, but authentication is not yet verified. Listening on wildcard address means potential exposure through any reachable Pi interface; inspect effective web configuration and restrict access/authenticate as appropriate.
 - Next: inspect the `[ui.web]` settings in `/etc/pwnagotchi/config.toml` without publishing any password; verify auth and binding before making a backup and controlled change.
+
+## Session 6 — 2026-11-06: authenticated dashboard validation
+- Added `[ui.web]` override to `/etc/pwnagotchi/config.toml` with `enabled = true`, `address = "127.0.0.1"`, `port = 8080`, `auth = true`, and user-selected private credentials (never committed). Backup taken prior to edit; syntax validation returned `TOML syntax valid`.
+- After `sudo systemctl restart pwnagotchi`, `systemctl status pwnagotchi --no-pager -l` showed `active (running)`, launched at 21:12:54 CST.
+- `sudo ss -ltnp | grep ':8080'` confirmed listener `127.0.0.1:8080`, not a wildcard address.
+- User verified dashboard demanded login and accepted configured credentials through the existing Windows SSH tunnel. **Web dashboard security test passed.**
+- Process appeared with `--manual`; operational mode should be confirmed rather than assuming active wireless operation.
+- Next: back up before display/personality customization; test changes incrementally, preserving accessible recovery via SSH.
