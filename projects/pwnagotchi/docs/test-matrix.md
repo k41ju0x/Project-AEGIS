@@ -17,7 +17,7 @@ I mark **Pass** only when I observed the behavior; **Partial** when a prerequisi
 | T09 | PCAPNG structural and packet record validation | Pass (structural only) | I checked all nine PCAPNG block structures: 9/9 pass, 439 packet-bearing blocks in seven files, two files have zero packets; frame-level Wireshark dissection remains pending |
 | T10 | Handshake completeness | Pending | `PWND 1` does not prove a complete four-way handshake |
 | T11 | Clock and timezone | Partial | I manually corrected to America/Chicago; automatic NTP sync unverified |
-| T12 | Long-duration daemon stability | Partial | Service survived configuration restarts/reboot; a separate 30+ minute acceptance run not recorded |
+| T12 | Service stability and reboot recovery | Partial — 10+ minute USB-powered check passed | I observed 14-minute OS uptime, active Pwnagotchi, and unchanged NRestarts=1 since 09:03:52; extended runtime and battery-only stability not established |
 | T13 | PiSugar automatic low-battery shutdown/cutoff | Deferred | Firmware defaults specify 10% / 45 seconds; I have not tested real cutoff behavior |
 | T14 | Battery endurance | Deferred | I chose not to repeat a timed standalone runtime test |
 | T15 | Authenticated localhost-only dashboard | Pass | I confirmed auth and listener `127.0.0.1:8080` with an SSH tunnel |
