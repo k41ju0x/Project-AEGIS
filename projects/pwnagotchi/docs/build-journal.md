@@ -181,3 +181,10 @@ timedatectl status
 - User confirmed Termius on iPhone successfully establishes SSH port forwarding over existing Bluetooth PAN, and the Pwnagotchi authenticated dashboard opens in Safari via local forwarded `127.0.0.1:8080`.
 - **PASS:** direct iPhone SSH, Bluetooth networking, SSH local forwarding, and web dashboard access. The dashboard remains bound to Pwnagotchi localhost; user did not need to expose the HTTP listener to external interfaces.
 - Outstanding reliability acceptance: reconnect after iPhone leaves Bluetooth range, reconnect after Pi reboot, and confirm SSH tunnel availability after iOS background suspension; PiSugar automatic low-battery shutdown remains separately untested.
+
+## iPhone Bluetooth reconnection failure — 2026-11-06
+- User interrupted iPhone Bluetooth after verifying Termius SSH + SSH-tunneled Safari dashboard and reports **Bluetooth PAN does not automatically reconnect**.
+- Previous direct SSH/dashboard success remains passed. **Reconnection reliability test failed**; not the same as initial pairing/activation.
+- Firmware `bt-tether` enabled; existing NetworkManager Bluetooth profile `Chris’s iPhone Network` previously activated using `nmcli connection up`.
+- Next safe checks with USB SSH retained: re-enable iPhone Bluetooth + Personal Hotspot, manually reactivate existing profile, inspect `nmcli -g connection.autoconnect connection show "Chris’s iPhone Network"` and set `connection.autoconnect yes` if false, inspect effective `[main.plugins.bt-tether]` `auto_reconnect`, retry with phone ready. Do not remove pairings, reset USB gadget, or change Pwnagotchi monitor interface. Note iPhone tether availability/backoff and potential reconnect delay.
+- Reference: jayofelony/pwnagotchi issue #387 documents NetworkManager `connection.autoconnect yes` workaround.
