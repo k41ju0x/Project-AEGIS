@@ -10,13 +10,13 @@ Updated: 2026-11-06. Status **Testing** as reported by project owner. A **Pass**
 | T04 | USB RNDIS detected on Windows | Pass | Ethernet 5 device present |
 | T05 | SSH management connection | Pass | User restored and confirmed shell |
 | T06 | PiSugar 3 standalone startup | Pass | Started without USB; short + long press |
-| T07 | PiSugar charge reporting | Pass (basic) | Screen reported BAT 52%; accuracy not calibrated |
+| T07 | PiSugar charge reporting | Intermittent / investigate | Earlier BAT 52% was observed, but current plugin logs cannot communicate with the battery; test I²C at `0x57`/`0x68` |
 | T08 | Saved .pcap exists in configured directory | Pass (existence only) | `/etc/pwnagotchi/handshakes`; user reported file found |
 | T09 | Capture imported and dissected in Wireshark | Pending | Check format, frame count and `eapol` in an authorized capture |
 | T10 | Handshake integrity/completeness | Pending | Do not equate PWND counter with valid full handshake |
 | T11 | Correct time, timezone and synchronization | Partial | Manually corrected to 2026-11-06 21:02 CST; `America/Chicago` set; `System clock synchronized: no`, NTP active but not synchronized; verify after reboot and when internet/time source available |
 | T12 | Stable service over reboot and 30+ min | Pending | Earlier exit 1 followed by restart; inspect uptime and journal after reboot |
-| T13 | PiSugar charging, cutoff and graceful shutdown | Partial | Enabled PiSugar plugin and inherited defaults (`lowpower_shutdown=true`, threshold 10%, delay 45s) inspected; actual safe-shutdown/cutoff and charging not yet tested |
+| T13 | PiSugar charging, cutoff and graceful shutdown | Blocked / investigate | Plugin enabled and defaults inspected, but repeated live logs show `No PiSugar device was found` / `PiSugar is not ready`; verify I²C detection before relying on shutdown protection |
 | T14 | Battery runtime | Pending | Log start/end percentages and uptime under repeatable loads |
 | T15 | Secure browser dashboard access | Pass | Service active; bound to `127.0.0.1:8080`; dashboard required credentials and login succeeded over previously verified SSH tunnel (2026-11-06) |
 | T16 | Bluetooth management (optional) | Not started | Verify supported phone tether implementation, protect remote access |
