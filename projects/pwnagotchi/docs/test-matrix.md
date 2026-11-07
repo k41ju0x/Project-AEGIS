@@ -18,7 +18,7 @@ Updated: 2026-11-06. Status **Testing** as reported by project owner. A **Pass**
 | T12 | Stable service over reboot and 30+ min | Pending | Earlier exit 1 followed by restart; inspect uptime and journal after reboot |
 | T13 | PiSugar charging, cutoff and graceful shutdown | Pending | No forced discharges; test non-destructively with monitored power |
 | T14 | Battery runtime | Pending | Log start/end percentages and uptime under repeatable loads |
-| T15 | Secure browser dashboard access | Partial | Dashboard reached successfully via SSH local tunnel to port 8080; authentication and listener restriction pending |
+| T15 | Secure browser dashboard access | Pass | Service active; bound to `127.0.0.1:8080`; dashboard required credentials and login succeeded over previously verified SSH tunnel (2026-11-06) |
 | T16 | Bluetooth management (optional) | Not started | Verify supported phone tether implementation, protect remote access |
 | T17 | Enclosure fitting and thermal clearance | Pending | Measure final physical stack before designing/printing |
 | T18 | Sanitized public write-up and private evidence storage | In progress | Do not upload packet captures, home SSIDs, keys, clients/MACs |
