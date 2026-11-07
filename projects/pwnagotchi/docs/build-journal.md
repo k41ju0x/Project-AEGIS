@@ -220,3 +220,9 @@ timedatectl status
 - `rfkill list bluetooth` showed `hci0` with soft block `no` and hard block `no`.
 - BlueZ adapter `Powered: no` is consistent with the observed connection failure; exact cause of controller power state change remains unknown. Contrasting `PowerState: on` should not be treated as overriding `Powered: no`.
 - Next non-destructive test with USB SSH intact: `sudo bluetoothctl power on`, re-check `Powered`, connected-device list and `bnep0`; avoid manual `nmcli connection up` until automatic response assessed. Investigate if controller turns off again; don't mark reconnection passed yet.
+
+## Bluetooth controller refuses power-on — 2026-11-06
+- After `bluetoothctl show` had `Powered: no` and `PowerState: on`, user attempted `sudo bluetoothctl power on`.
+- BlueZ emitted controller `PowerState: off-enabling` then `Failed to set power on: org.bluez.Error.Failed`; subsequent `show` remained `Powered: no`, `PowerState: on`.
+- Earlier `rfkill` check indicated no soft/hard blocks and Bluetooth pairing remained intact. Root cause uncertain: BlueZ vs controller/firmware/transport initialization or competing management.
+- Next non-destructive diagnostics requested: `sudo dmesg -T | grep -iE 'bluetooth|hci0|brcm|firmware|uart|timeout' | tail -n 50`, `sudo journalctl -u bluetooth --no-pager -n 40`, `systemctl is-active bluetooth`, `systemctl is-active hciuart`. Do not re-pair, change Wi-Fi/USB configuration, or create persistent restart services until logs evaluated. Maintain USB SSH recovery.
