@@ -14,7 +14,7 @@ I mark **Pass** only when I observed the behavior; **Partial** when a prerequisi
 | T06 | PiSugar standalone power | Pass | I booted on PiSugar without USB after its short/long button sequence |
 | T07 | PiSugar battery telemetry | Pass (live display) | I observed initial BAT 52% and subsequently saw data in the PiSugarX dashboard; an earlier I/O error was recorded |
 | T08 | Saved capture exists | Pass (existence only) | I found a .pcap in `/etc/pwnagotchi/handshakes/` |
-| T09 | Wireshark capture interpretation | Pending | Wireshark is installed; I have not documented successful import/dissection |
+| T09 | PCAPNG structural and packet record validation | Pass (structural only) | I checked all nine PCAPNG block structures: 9/9 pass, 439 packet-bearing blocks in seven files, two files have zero packets; frame-level Wireshark dissection remains pending |
 | T10 | Handshake completeness | Pending | `PWND 1` does not prove a complete four-way handshake |
 | T11 | Clock and timezone | Partial | I manually corrected to America/Chicago; automatic NTP sync unverified |
 | T12 | Long-duration daemon stability | Partial | Service survived configuration restarts/reboot; a separate 30+ minute acceptance run not recorded |
