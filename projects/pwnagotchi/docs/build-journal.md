@@ -200,3 +200,11 @@ timedatectl status
 - NetworkManager profile `connection.autoconnect=yes` and Pwnagotchi bt-tether `auto_reconnect=true` (60-s interval, 300-s cooldown) had already been confirmed. Therefore configuration switches alone did not resolve issue.
 - Upstream jayofelony/pwnagotchi issue #387 documents PAN activation failures and issue #604 (Aug 2026) documents some iOS Bluetooth reconnection failures; not proof of same root cause.
 - Next diagnostic while PAN disconnected and before another manual activation: inspect recent `bt-tether`/Bluetooth/reconnect logs from `/etc/pwnagotchi/log/pwnagotchi.log` and `journalctl -u NetworkManager --since "10 minutes ago"` to determine which layer is failing. Preserve working USB-gadget SSH and paired iPhone. If no automatic connection attempts, consider scoped periodic reconnection helper with bounded retries, only for inactive PAN and no changes to monitor-mode Wi-Fi.
+
+## Bluetooth PAN log root-cause investigation — 2026-11-06 late session
+- User supplied bt-tether and NetworkManager log excerpts (user-provided diagnostic paste; do not publish Bluetooth MAC or private network IP).
+- `bt-tether` at 23:01:40 detected drop, 23:01:47 NAP ready; 23:01:48 reports DBus NAP connection successful, PAN interface bnep0 active, and Bluetooth link reconnected.
+- Simultaneously NetworkManager at 23:01:39–23:01:43 repeatedly attempted iPhone profile activation, failed `org.bluez.Error.Failed: Input/output error` / `bluetooth-failed`.
+- Manual `nmcli connection up` at 23:06:03 succeeded; by 23:06:05 DHCPv4 lease, IPv4/IPv6 routes and DNS and NM active connection all established.
+- Hypothesis: competition/race between bt-tether BlueZ NAP management and NetworkManager autoactivation, or PAN established without NM IP configuration. Not proven; do not disable or add reconnect mechanism without verifying state when plugin reports connected but management fails.
+- Next test while disconnected from iPhone management but USB SSH preserved: inspect `nmcli -f DEVICE,TYPE,STATE,CONNECTION device status`, `nmcli -f NAME,TYPE,DEVICE connection show --active`, `ip -4 -br addr show bnep0` and `ip -4 route show dev bnep0`. Compare Bluetooth NAP plugin state against network layer. Additional observation: plugin upgrade entries around 23:07 are noted but no conclusions drawn.
