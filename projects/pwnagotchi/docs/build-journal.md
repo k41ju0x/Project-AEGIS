@@ -553,3 +553,9 @@ The project remains in **Testing**. I will return to these specific acceptance i
 - I booted AEG-003 and successfully connected using Termius over the existing iPhone management setup.
 - I inspected the system date from my terminal and confirmed it was correct after startup. This supports boot-time clock/date retention and management connectivity, **but does not yet verify automatic NTP synchronization**.
 - Next I will check `systemctl is-active pwnagotchi`, `systemctl is-active bluetooth`, `systemctl is-active NetworkManager`, and `sudo journalctl -b -p err --no-pager -n 20` to establish service health after boot.
+
+## Final acceptance — services and boot-error review (2026-11-07)
+- From my post-boot Termius SSH session, I ran `systemctl is-active pwnagotchi`, `systemctl is-active bluetooth`, and `systemctl is-active NetworkManager`. All three returned `active`.
+- I reviewed `sudo journalctl -b -p err --no-pager -n 20`. Entries included ALSA udev missing-GOTO-label warnings, VCHI/MMAL multimedia initialization failures (`-22`), Broadcom `brcmfmac` monitor-interface creation messages for `wlan0mon`, and `dhcpcd is not running`.
+- I confirmed the core services start and Bluetooth SSH management works despite these messages. I did not disable drivers, alter audio/multimedia modules, or replace NetworkManager. The log alone does not establish any operational impact from the multimedia or dhcpcd entries.
+- Acceptance outcome: **startup/service availability passed**. Extended-duration reliability remains distinct and untested in this checkpoint.
