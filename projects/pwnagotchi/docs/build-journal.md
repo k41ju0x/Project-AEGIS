@@ -116,3 +116,9 @@ timedatectl status
 - User reports `ps` showing Bettercap PID 607, PwnGrid PID 850, Pwnagotchi launcher PID 9765, Python PID 9768 (`/opt/.pwn/bin/pwnagotchi --manual`), all running.
 - `systemctl status pwnagotchi` confirms `Active: active (running)` since 21:26:01 CST, 18 tasks, Python process present. This establishes process/service liveness, not PiSugar sensor thread health.
 - Battery telemetry remains unverified after last recorded plugin `read error[Errno 5]`. Next: inspect newest log timestamp, filtered PiSugar errors, Python thread count, and current WAVESHARE `BAT` percentage without changing service or USB network.
+
+## Session 14 — Live PiSugarX telemetry visible (2026-11-06)
+- Although application log remained at a one-off `[Errno 5] Input/output error` after `PiSugar3 is ready`, the user opened the PiSugarX dashboard over the existing SSH tunnel and reported **all fields display data**.
+- This supplies direct evidence that the plugin can retrieve and present battery-controller telemetry. I²C battery address 0x57 and RTC address 0x68 previously responded.
+- Current status: PiSugarX telemetry **Pass (visible)**; long-term polling stability, charging behavior, safe shutdown at the inherited 10% threshold, and 45-second cutoff remain **unverified**. No forced deep-discharge test performed.
+- Next: preserve working settings; proceed to Bluetooth tethering after confirming phone OS, since pairing/network configuration differs for Android and iOS.
