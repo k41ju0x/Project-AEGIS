@@ -548,3 +548,8 @@ I verified iPhone management was working again. **I did not repeat the Bluetooth
 I elected to defer a further standalone battery endurance test and repeat Bluetooth-interruption test for this session. These decisions do **not** replace evidence for an automatic low-power shutdown, stable reconnection after an interrupted link, validated capture completeness, or a physical Alfa monitor-mode test.
 
 The project remains in **Testing**. I will return to these specific acceptance items when needed; I will preserve the USB recovery path and keep secret values out of the public repository.
+
+## Final acceptance — post-startup management and clock check (2026-11-07)
+- I booted AEG-003 and successfully connected using Termius over the existing iPhone management setup.
+- I inspected the system date from my terminal and confirmed it was correct after startup. This supports boot-time clock/date retention and management connectivity, **but does not yet verify automatic NTP synchronization**.
+- Next I will check `systemctl is-active pwnagotchi`, `systemctl is-active bluetooth`, `systemctl is-active NetworkManager`, and `sudo journalctl -b -p err --no-pager -n 20` to establish service health after boot.
