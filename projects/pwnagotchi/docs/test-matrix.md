@@ -43,4 +43,4 @@ Owner selected display/personality customization, authenticated USB-only web UI,
 | T22 | iPhone Bluetooth PAN activation | Pass | `nmcli connection up` activated existing iPhone Network profile; user reports interface/route checks good; phone-originated SSH still untested |
 | T23 | SSH and dashboard from iPhone | Pass | Interactive Termius SSH over Bluetooth PAN and local port forwarding to authenticated localhost-only dashboard work; user confirmed Safari dashboard access |
 
-| T24 | iPhone Bluetooth PAN reconnection after interruption | Fail / investigate | Failed again despite `connection.autoconnect=yes` and `bt-tether.auto_reconnect=true`; user still requires manual `nmcli connection up`. Await Bluetooth plugin and NetworkManager logs before implementing recovery |
+| T24 | iPhone Bluetooth PAN reconnection after interruption | Fail / root cause narrowed | At 23:01 plugin reported NAP/bnep0 reconnected but NetworkManager autoactivation failed with BlueZ I/O errors; manual nmcli activation at 23:06 gave DHCP lease and active network. Verify interface IP/routing after plugin-only reconnect; possible manager race |
