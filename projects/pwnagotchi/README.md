@@ -61,3 +61,6 @@ System clock initially reported August 18 in Europe/London and unsynchronized. C
 
 ## Secured web dashboard — 2026-11-06
 Pwnagotchi service remained active following restart. Web interface now listens on `127.0.0.1:8080` with authentication enabled; user verified successful credentials over SSH tunnel from Windows. No password or private interface address committed. Test T15 is **Passed**. Next: AEGIS personality and face customization with reversible configuration changes.
+
+## AEGIS theme milestone — 2026-11-06
+Custom `[ui.web.theme]` accent set to RGB `159, 232, 112` (`#9FE870`). User confirmed web theme working and dashboard accessible. See [build journal](docs/build-journal.md) and [test matrix](docs/test-matrix.md). Battery safety and Bluetooth management remain pending.
