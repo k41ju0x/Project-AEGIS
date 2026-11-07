@@ -566,3 +566,9 @@ The project remains in **Testing**. I will return to these specific acceptance i
 - Several file timestamps still reflect the historical pre-clock-correction date of 2026-08-18; I do not treat these as reliable evidence of actual capture time.
 - **PASS:** stored capture files persist after startup. **PENDING:** validate file structure and packet/handshake content. I omit real capture filenames, SSIDs, and MAC-like identifiers from this public document.
 - Next commands: `sudo find /etc/pwnagotchi/handshakes/ -maxdepth 1 -type f -name '*.pcapng' -printf '%s bytes\n' | sort -n`, `sudo file /etc/pwnagotchi/handshakes/*.pcapng` (output requires sanitization if publishing), and `command -v tshark || echo 'tshark not installed'`.
+
+## Final acceptance — PCAPNG recognition and sizes (2026-11-07)
+- I ran `sudo find /etc/pwnagotchi/handshakes/ -maxdepth 1 -type f -name '*.pcapng' -printf '%s bytes\n' | sort -n` and observed nine nonempty files: 128, 256, 832, 900, 1,940, 1,980, 12,856, 16,256 and 84,880 bytes (120,028 bytes total).
+- I ran `sudo file /etc/pwnagotchi/handshakes/*.pcapng`; all nine were recognized as `pcapng capture file - version 1.0`. I omit SSIDs, address-derived filename suffixes and filenames from this public record.
+- `command -v tshark || echo 'tshark not installed'` returned `tshark not installed`.
+- **PASS:** all nine have recognizable PCAPNG headers/format and are nonzero-sized. **NOT YET PASSED:** complete block integrity, presence of actual packet records and EAPOL/four-way handshake validation; the 128-byte file might contain headers only. Next test uses only installed tools to assess block structure; no package installation necessary.
