@@ -78,3 +78,11 @@ timedatectl status
 - On-device `/etc/pwnagotchi/default.toml` `[main.plugins.pisugarx]` defaults: `enabled=false`, `lowpower_shutdown=true`, `lowpower_shutdown_level=10`, `shutdown_delay=45`, `max_charge_voltage_protection=false`.
 - Read-only inspection of custom `/etc/pwnagotchi/config.toml`: `enabled=True` explicitly; remaining four settings not overridden, thus expected to inherit defaults (pending effective runtime verification).
 - Initial interpretation: plugin enabled and default low-power shutoff configured, but graceful shutdown and 45-second controller cutoff are **not yet behaviorally validated**. Avoid destructive deep-discharge test. Next: examine PiSugar initialization/event logs and later safely confirm shutdown behavior.
+
+## Session 9 — PiSugar 3 detection warning (2026-11-06)
+- PiSugar plugin confirmed enabled in custom configuration; firmware default low-power shutdown threshold 10% and shutdown delay 45 seconds identified.
+- User log excerpt from 21:27–21:29 CST repeatedly reports `No PiSugar device was found. Please check if the PiSugar device is powered on.` and `[PiSugarX] PiSugar is not ready`.
+- Important correction: earlier battery-powered startup and the displayed 52% battery reading establish prior battery use/reporting, **not reliable current I²C communication or a functioning low-battery safety cutoff**.
+- PiSugar official documentation warns that USB-connected Pi may illuminate PiSugar LEDs even if battery controller is not turned on. Other possible cause is intermittent pogo contact on underside GPIO solder pads.
+- Next read-only tests: `ls -l /dev/i2c*` and `sudo i2cdetect -y 1`. PiSugar 3 expected I²C addresses `0x57` and `0x68`; do not adjust hardware under power. If not available, check PiSugar power-on sequence (short then long press) and contact only after safe shutdown.
+- Reference: https://docs.pisugar.com/docs/product-wiki/pwnagotchi/intro ; https://docs.pisugar.com/docs/product-wiki/battery/faq
