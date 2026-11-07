@@ -43,4 +43,4 @@ Owner selected display/personality customization, authenticated USB-only web UI,
 | T22 | iPhone Bluetooth PAN activation | Pass | `nmcli connection up` activated existing iPhone Network profile; user reports interface/route checks good; phone-originated SSH still untested |
 | T23 | SSH and dashboard from iPhone | Pass | Interactive Termius SSH over Bluetooth PAN and local port forwarding to authenticated localhost-only dashboard work; user confirmed Safari dashboard access |
 
-| T24 | iPhone Bluetooth PAN reconnection after interruption | Fail / investigate | Initial Bluetooth PAN, Termius SSH and tunneled dashboard passed, but user reports connection does not automatically recover after turning iPhone Bluetooth off/on; investigate NetworkManager autoconnect + bt-tether settings |
+| T24 | iPhone Bluetooth PAN reconnection after interruption | Retest pending | Manual activation succeeds; fixed NetworkManager profile `connection.autoconnect` from no to yes; Pwnagotchi bt-tether auto_reconnect already true (60s retry, 300s failure cooldown). Must verify unattended recovery |
