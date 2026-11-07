@@ -42,3 +42,8 @@ timedatectl status
 **Pending:** capture validation and permissions, time synchronization, battery endurance and safe shutdown, charging test, authenticated web UI, optional Bluetooth management, mechanical enclosure, and final test evidence.
 
 **Safety:** No deauthentication or active association is needed for initial validation. Keep such behavior disabled unless operating in a specifically authorized, isolated test setting. Do not publish capture files or credentials.
+
+## Session 4 — 2026-11-06: clock correction and next-stage selection
+- Before intervention, `date -Is` reported `2026-08-18T19:12:03+01:00`; timezone `Europe/London`; NTP active but clock not synchronized.
+- Applied `sudo timedatectl set-timezone America/Chicago`, and manually set UTC using the Windows 11 host over established USB SSH. Subsequent `date -Is`: **`2026-11-06T21:02:06-06:00`**, Central Standard Time. `timedatectl status`: timezone America/Chicago, **System clock synchronized: no**, NTP service active, no RTC. Thus date/time corrected manually, **automatic time sync remains unverified**. No service restart or reboot validation yet.
+- Owner selected next feature work: customized display and personality, secure web dashboard, optional Bluetooth phone management, PiSugar low battery shut down and runtime, wireless telemetry/session statistics, plugin and log review. Priority is secure web dashboard inspection followed by controlled configuration updates and battery safeguards. Do not assume changing the software clock retroactively corrects prior PCAP timestamps.
