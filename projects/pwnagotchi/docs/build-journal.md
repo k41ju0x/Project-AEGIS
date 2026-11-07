@@ -105,3 +105,9 @@ timedatectl status
 - `systemctl list-units --all --type=service | grep -i pisugar` returned no matching standalone service; plugin operation may be embedded in Pwnagotchi process.
 - Combined with prior I²C probe detecting addresses `0x57` and `0x68`, this confirms successful software connection at least once. Sustained connectivity, current battery gauge, charging, graceful shutdown, and controller power cutoff are not yet verified.
 - Next: review subsequent logs for reconnection errors and observe current battery percentage. Do not deep-discharge merely to test low-voltage cutoff.
+
+## Session 12 — quiet application log after I²C read error (2026-11-06)
+- User verified `date` at `2026-11-06 21:41:16 CST`; `systemctl is-active pwnagotchi` returned `active`.
+- `journalctl -u pwnagotchi --since "5 minutes ago" --no-pager -n 40` returned `-- No entries --` (not independently evidence of a fault).
+- Application log last modified at `2026-11-06 21:31:46.979999313 -0600`, approximately 9.5 minutes before observation. Its final entry was `[ERROR] ... read error[Errno 5] Input/output error`, following initial PiSugar3 connected/ready messages.
+- Diagnosis remains open: systemd active, but unknown whether Pwnagotchi and PiSugar telemetry are continuing normally, whether application logging is simply quiet, or whether battery polling stalled. Next check process/thread state, available logs, and currently displayed BAT percentage before altering services.
