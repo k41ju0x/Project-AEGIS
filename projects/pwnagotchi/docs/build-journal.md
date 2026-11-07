@@ -242,3 +242,9 @@ timedatectl status
 - After controlled reboot following Broadcom Bluetooth HCI reset timeouts, user confirmed **iPhone connectivity and remote access work again** following requested verification of controller, NetworkManager PAN interface, Termius SSH and web dashboard.
 - Acceptance: recovery after reboot **Passed**. Earlier failure to reconnect unattended after temporarily turning iPhone Bluetooth off/on remains a separate **open reliability issue**. A single post-reboot success does not establish reliable reconnection after transient losses or explain the controller hardware timeouts.
 - Preserve existing paired/trusted phone, `connection.autoconnect=yes`, `bt-tether.auto_reconnect=true`, USB SSH recovery, and localhost-only authenticated web UI.
+
+## Test scope decision — 2026-11-06
+- User considers existing standalone PiSugar 3 battery-powered operation sufficient for current AEG-003 build stage and elects to **defer** another controlled battery endurance test.
+- User also elects to **defer repeat Bluetooth interruption/reconnection tests** following successful post-reboot recovery of iPhone Termius SSH and SSH-tunneled dashboard.
+- Evidence distinction preserved: battery can power device and live PiSugarX telemetry was displayed, but 10% automatic low-battery shutdown/cutoff and sustained runtime are not behaviorally verified; iPhone Bluetooth post-reboot recovery passed, but automatic recovery after ordinary out-of-range/toggle interruption had previously failed and is not claimed fixed.
+- Current build/testing session can proceed without additional stress testing; retain noted limitations for future field checks if symptoms recur. Await Alfa AWUS036ACM hardware for dual-radio integration, with no assumption order completed.
