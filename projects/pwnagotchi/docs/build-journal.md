@@ -61,3 +61,9 @@ timedatectl status
 - User verified dashboard demanded login and accepted configured credentials through the existing Windows SSH tunnel. **Web dashboard security test passed.**
 - Process appeared with `--manual`; operational mode should be confirmed rather than assuming active wireless operation.
 - Next: back up before display/personality customization; test changes incrementally, preserving accessible recovery via SSH.
+
+## Session 7 — AEGIS face customization validation
+- User added custom `[ui.faces]` configuration and verified it parses with `sudo python3`/`tomllib`. Reported **22 facial-state/configuration entries**; this includes possible non-expression keys and should not be interpreted as 22 unique visible expressions.
+- `sudo systemctl restart pwnagotchi` completed and `systemctl is-active pwnagotchi` returned **active**.
+- User observed **two facial expressions** so far; display-state rendering works but all custom expressions are not individually validated. Face selection is state-driven; no intrusive wireless activity should be induced merely for appearance tests.
+- Next: inspect effective web theme configuration, back up, apply reversible AEGIS green accent theme, check secured localhost-only dashboard remains authenticated.
