@@ -188,3 +188,9 @@ timedatectl status
 - Firmware `bt-tether` enabled; existing NetworkManager Bluetooth profile `Chris’s iPhone Network` previously activated using `nmcli connection up`.
 - Next safe checks with USB SSH retained: re-enable iPhone Bluetooth + Personal Hotspot, manually reactivate existing profile, inspect `nmcli -g connection.autoconnect connection show "Chris’s iPhone Network"` and set `connection.autoconnect yes` if false, inspect effective `[main.plugins.bt-tether]` `auto_reconnect`, retry with phone ready. Do not remove pairings, reset USB gadget, or change Pwnagotchi monitor interface. Note iPhone tether availability/backoff and potential reconnect delay.
 - Reference: jayofelony/pwnagotchi issue #387 documents NetworkManager `connection.autoconnect yes` workaround.
+
+## iPhone PAN autoconnect configuration fixed — 2026-11-06
+- User manually reactivated iPhone Bluetooth profile successfully via `sudo nmcli connection up "Chris’s iPhone Network"`.
+- Diagnosed NetworkManager profile `connection.autoconnect=no`; user changed to `yes` via `sudo nmcli connection modify "Chris’s iPhone Network" connection.autoconnect yes` and verified `yes`.
+- Firmware's `bt-tether` config is enabled (`config.toml enabled=True`); auto_reconnect=True in default and custom files; reconnect_interval=60 s, reconnect_failure_cooldown=300 s.
+- Likely mismatch resolved at configuration level; **automatic reconnection has not yet been retested or passed**. Next test: disable/re-enable iPhone Bluetooth with hotspot active, watch `nmcli connection show --active` and `ip -4 -br addr show bnep0` without manual `nmcli connection up`; confirm Termius SSH and forwarded dashboard after restoration.
