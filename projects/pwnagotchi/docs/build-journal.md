@@ -73,3 +73,8 @@ timedatectl status
 - User confirmed the custom theme works and the authenticated dashboard remains accessible after applying changes.
 - Existing binding to `127.0.0.1:8080` had previously been verified; no report of a new listener check during this milestone.
 - Next priority: inspect PiSugar 3 low-battery shutdown configuration before making changes; then validate battery endurance and optional Bluetooth tethering.
+
+## PiSugar 3 shutdown settings inspection — 2026-11-06
+- On-device `/etc/pwnagotchi/default.toml` `[main.plugins.pisugarx]` defaults: `enabled=false`, `lowpower_shutdown=true`, `lowpower_shutdown_level=10`, `shutdown_delay=45`, `max_charge_voltage_protection=false`.
+- Read-only inspection of custom `/etc/pwnagotchi/config.toml`: `enabled=True` explicitly; remaining four settings not overridden, thus expected to inherit defaults (pending effective runtime verification).
+- Initial interpretation: plugin enabled and default low-power shutoff configured, but graceful shutdown and 45-second controller cutoff are **not yet behaviorally validated**. Avoid destructive deep-discharge test. Next: examine PiSugar initialization/event logs and later safely confirm shutdown behavior.
