@@ -214,3 +214,9 @@ timedatectl status
 - `nmcli connection show --active`: only USB gadget and loopback. `ip -4 -br addr show bnep0`: device does not exist; `ip -4 route show dev bnep0`: cannot find device.
 - This proves **PAN network interface absent at inspection time**, not merely DHCP without an address. Previous logs demonstrated bt-tether NAP connection on a prior attempt and NetworkManager auto-activation I/O errors; current Bluetooth link connection state has not yet been inspected.
 - Next safe read-only check: `bluetoothctl devices Connected` / selected iPhone `bluetoothctl info` for Connected/Paired/Trusted and `journalctl -u bluetooth -u NetworkManager --since '5 minutes ago'` for BlueZ/NM failure. Keep USB recovery and avoid changing networking or forcing duplicate reconnect mechanisms until link state known.
+
+## Bluetooth controller powered off during reconnection failures — 2026-11-06
+- After BlueZ NAP errors `org.bluez.Error.NotReady: br-connection-adapter-not-powered` and bt-tether pausing reconnection after five failed attempts, user checked `bluetoothctl show`: `Powered: no`, `PowerState: on`, `Discoverable: no`, `Pairable: yes`.
+- `rfkill list bluetooth` showed `hci0` with soft block `no` and hard block `no`.
+- BlueZ adapter `Powered: no` is consistent with the observed connection failure; exact cause of controller power state change remains unknown. Contrasting `PowerState: on` should not be treated as overriding `Powered: no`.
+- Next non-destructive test with USB SSH intact: `sudo bluetoothctl power on`, re-check `Powered`, connected-device list and `bnep0`; avoid manual `nmcli connection up` until automatic response assessed. Investigate if controller turns off again; don't mark reconnection passed yet.
