@@ -579,3 +579,9 @@ The project remains in **Testing**. I will return to these specific acceptance i
 - Summary: **9/9 files structurally parsed, 7 files with packet-bearing blocks, 2 without, 439 packet-bearing blocks total**. The two zero-packet captures contain valid PCAPNG structure but no packet records; I do not claim they contain usable capture evidence.
 - **PASS:** PCAPNG basic structural checks and the existence of packet-bearing records. **NOT YET VERIFIED:** detailed packet decoding, EAPOL frame presence, four-way handshake completeness, or the validity of historical timestamps.
 - Validation command was a read-only, standard-library Python PCAPNG parser (`struct`, `pathlib`) run with `sudo python3`, operating over `/etc/pwnagotchi/handshakes/*.pcapng`; all nine printed `Capture N: PASS | blocks=X | packets=Y`. See the acceptance matrix for limitations.
+
+## Final acceptance — controlled shutdown and boot (2026-11-07)
+- I executed `sudo shutdown -h now` from my existing Termius SSH management session and observed that the Pi shut down normally.
+- After restarting with the existing PiSugar procedure, I reconnected over Termius and ran `systemctl is-active pwnagotchi` and `uptime`.
+- Results: `active`; `08:54:37 up 1 min, 1 user, load average: 0.61, 0.28, 0.10`. A fresh uptime and working Termius session confirm successful startup and working remote administration.
+- **PASS:** manual orderly shutdown, reboot, Pwnagotchi service startup, and remote SSH access. The e-Paper update after this restart was not separately reported at this checkpoint. **NOT TESTED:** automatic low-battery shutdown at the PiSugar 10% setting or battery-controller delayed power cutoff; these are distinct from Linux `shutdown -h now`.
