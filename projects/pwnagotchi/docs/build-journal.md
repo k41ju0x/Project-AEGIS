@@ -140,3 +140,8 @@ timedatectl status
 - `rfkill list`: `hci0` Bluetooth soft/hard blocks both `no`; `phy0` WLAN soft/hard blocks both `no`.
 - Service log timestamps start 2026-08-18, reflecting previously corrected system clock; configuration directory mode warning did not stop daemon startup.
 - Bluetooth readiness **passed**, but pairing, Bluetooth PAN/network configuration, and phone-side management not yet tested. Next read-only `bluetoothctl show`; ask user for Android vs iPhone to select correct networking approach. Preserve USB SSH recovery.
+
+## Bluetooth pairing readiness — 2026-11-06
+- `bluetoothctl show`: controller alias/name `aegis-pwn`, `Powered: yes`, `PowerState: on`, `Discoverable: no`, `Pairable: no`, `Discovering: no`, supports central and peripheral roles.
+- Hardware and BlueZ operational; device intentionally not currently pairing or advertising. Bluetooth pairing and PAN/SSH transport **not yet configured or tested**. Temporary pairable/discoverable mode should be enabled only during actual pairing, and disabled afterwards.
+- USB management SSH remains recovery path. Await user phone OS (Android/iPhone) to decide Bluetooth networking and verify PAN/tethering support before changes.
