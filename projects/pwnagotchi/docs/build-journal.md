@@ -621,3 +621,8 @@ The project remains in **Testing**. I will return to these specific acceptance i
 - `systemctl show pwnagotchi -p ActiveState -p NRestarts -p ExecMainStartTimestamp` reported `ActiveState=active`, `NRestarts=1`, and `ExecMainStartTimestamp=Sat 2026-11-07 09:03:52 CST`.
 - The restart counter was **unchanged** from the previous checkpoint. The service had stayed up for approximately 13 minutes after its automatic restart, with the OS up 14 minutes. **PASS:** short-term (10+ minute) USB-powered post-recovery application stability. **NOT YET CONFIRMED:** battery-only stability, extended runtime, and root cause of earlier full reboot or startup failure.
 - I preserved the working configuration and USB recovery path rather than changing network management, plugin or PiSugar settings without a proven cause.
+
+## Final acceptance — live USB-to-PiSugar battery transition (2026-11-07)
+- I disconnected external USB power with Pwnagotchi already running and the PiSugar 3 attached. The device remained on and my Termius SSH connection remained available.
+- I ran `uptime`, `vcgencmd get_throttled`, and `systemctl show pwnagotchi -p ActiveState -p NRestarts` on battery power. Results at 09:19:06 CST: `up 16 min`, `throttled=0x0`, `NRestarts=1` (unchanged), `ActiveState=active`.
+- **PASS:** live USB-to-battery transition with no observed immediate OS reboot, undervoltage flag or Pwnagotchi service restart. **PENDING:** sustained battery-only operation after further normal use; a single successful transition does not prove endurance or automatic 10%-threshold shutdown. The earlier unexplained restart remains noted separately.
