@@ -599,3 +599,8 @@ The project remains in **Testing**. I will return to these specific acceptance i
 - I ran `uptime` at 09:11:22 and observed **8 minutes**. This differentiates the Pwnagotchi service restart within the current boot from an entire OS reboot: the Pi remained running after the app crash. My earlier 09:03 uptime reflected a separate new Linux boot, but the prior reboot cause remains unproven due to absent persistent journal history.
 - The bt-tether plugin invoked `dhcpcd` even though NetworkManager is active. Possible interface management conflict remains a hypothesis, **not** confirmed as the application failure cause. No configuration changes or network-service shutdowns performed.
 - Next: inspect application error/exception lines around 09:02–09:03. The initial error is **unresolved**; do not mark overall power/runtime stability passed merely on an eight-minute uptime sample.
+
+## Final acceptance — systemd startup-failure window checked (2026-11-07)
+- I ran `sudo journalctl -u pwnagotchi -b --since "2026-11-07 09:02:45" --until "2026-11-07 09:03:15" --no-pager`.
+- It showed only the service starting at 09:02:51, the main process exiting at 09:03:10 with `status=1/FAILURE`, systemd recording `Failed with result 'exit-code'`, and 9.103s of CPU time; **no application exception or failure cause** appeared in this systemd slice.
+- Next I will inspect `/etc/pwnagotchi/log/pwnagotchi.log` around 09:03 and any traceback/exception details, without altering the working setup or publicly revealing network identifiers.
