@@ -158,3 +158,9 @@ timedatectl status
 - `ip -br addr show bnep0`: interface does not exist, confirming PAN not presently active.
 - Relevant upstream issue jayofelony/pwnagotchi #387 notes paired iPhones may not activate PAN automatically and suggests `sudo nmcli connection up "<iPhone Network>"` over existing USB recovery, followed by `ip -br addr show bnep0`, active NetworkManager profile and route check.
 - Next: user to manually activate their existing Bluetooth profile while iPhone Personal Hotspot enabled; inspect result before enabling autoconnect or changing routes. No new connection or credential modifications yet.
+
+## iPhone Bluetooth PAN activated successfully — 2026-11-06
+- On paired/trusted iPhone with Personal Hotspot available, user ran `sudo nmcli connection up "Chris’s iPhone Network"` and NetworkManager responded: `Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/3)`.
+- User reports follow-up IP/active-connection/routing checks all showed good outputs, but exact `bnep0` IP not supplied. Avoid inventing an address or asserting iPhone-initiated reachability.
+- Status: **Bluetooth PAN activation passed**; direct SSH from iPhone, SSH-tunneled authenticated web dashboard, reconnection after reboot, and coexistence with USB recovery still need testing.
+- Next: read `ip -4 -br addr show bnep0`; attempt SSH from iPhone with actual Bluetooth IP and existing credentials, preserving localhost-only dashboard binding and USB recovery.
