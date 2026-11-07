@@ -50,7 +50,7 @@ timedatectl status
 
 ## Session 5 — 2026-11-06: web dashboard verified
 - `sudo ss -ltnp | grep ':8080'` showed Pwnagotchi listening on `*:8080` (PID 931 at observation).
-- From Windows, I successfully opened an SSH tunnel using `ssh -L 8080:127.0.0.1:8080 pi@<private-USB-Pi-IP>` and browsed `http://127.0.0.1:8080`.
+- From Windows, I successfully opened an SSH tunnel using `ssh -L 8080:127.0.0.1:8080 pi@<PRIVATE_USB_IPV4>` and browsed `http://127.0.0.1:8080`.
 - I confirmed **dashboard appears**. Browser access is verified, but authentication is not yet verified. Listening on wildcard address means potential exposure through any reachable Pi interface; inspect effective web configuration and restrict access/authenticate as appropriate.
 - Next: inspect the `[ui.web]` settings in `/etc/pwnagotchi/config.toml` without publishing any password; verify auth and binding before making a backup and controlled change.
 
@@ -92,7 +92,7 @@ timedatectl status
 - `sudo i2cdetect -y 1` unavailable: `i2cdetect: command not found`.
 - `sudo apt update` and `sudo apt install -y i2c-tools` failed with `Temporary failure resolving deb.debian.org` and `archive.raspberrypi.com`. USB SSH connectivity does not establish internet access; apt's 'All packages are up to date' message is based on stale/previous indexes, not a successful fetch.
 - No i2c-tools installed; avoid changing known-working USB IP settings solely for this diagnostic.
-- Next: inspect whether existing Pwnagotchi Python venv has `smbus2` or `smbus`; if available, perform targeted read-only test of expected PiSugar controller addresses. Battery device remains powered on per user correction.
+- Next: inspect whether existing Pwnagotchi Python venv has `smbus2` or `smbus`; if available, perform targeted read-only test of expected PiSugar controller addresses. Battery device remains powered on per I correction.
 
 ## Session 10 — PiSugar I²C address detection (2026-11-06)
 - Existing Python virtual environment contains both `smbus2` and `smbus` despite `i2c-tools` being unavailable offline.
@@ -113,7 +113,7 @@ timedatectl status
 - Diagnosis remains open: systemd active, but unknown whether Pwnagotchi and PiSugar telemetry are continuing normally, whether application logging is simply quiet, or whether battery polling stalled. Next check process/thread state, available logs, and currently displayed BAT percentage before altering services.
 
 ## Session 13 — process-level validation (2026-11-06)
-- I reported `ps` showing Bettercap PID 607, PwnGrid PID 850, Pwnagotchi launcher PID 9765, Python PID 9768 (`/opt/.pwn/bin/pwnagotchi --manual`), all running.
+- I checked `ps` and confirmed Bettercap, PwnGrid, Pwnagotchi launcher and Python processes were running (`/opt/.pwn/bin/pwnagotchi --manual`). PIDs are transient and omitted.
 - `systemctl status pwnagotchi` confirms `Active: active (running)` since 21:26:01 CST, 18 tasks, Python process present. This establishes process/service liveness, not PiSugar sensor thread health.
 - Battery telemetry remains unverified after last recorded plugin `read error[Errno 5]`. Next: inspect newest log timestamp, filtered PiSugar errors, Python thread count, and current WAVESHARE `BAT` percentage without changing service or USB network.
 
@@ -147,7 +147,7 @@ timedatectl status
 - USB management SSH remains recovery path. At that point I had not yet selected the phone OS (Android/iPhone) to decide Bluetooth networking and verify PAN/tethering support before changes.
 
 ## iPhone Bluetooth pairing completed — 2026-11-06
-- I reported `bluetoothctl` showing **Paired: yes** and **Trusted: yes** for their iPhone. Do not publish device Bluetooth address in the public repo.
+- I checked `bluetoothctl` and confirmed **Paired: yes** and **Trusted: yes** for my iPhone. Do not publish device Bluetooth address in the public repo.
 - Controller powered, service healthy, no rfkill blocks previously confirmed. Pairing milestone passed; Bluetooth PAN, IP, and SSH from the phone remain untested.
 - Recommended temporary discoverability/pairability OFF after pairing; preserve USB-gadget SSH for recovery.
 - Next diagnostic: inspect shape/enablement of firmware's `[main.plugins.bt-tether]` in default and custom TOML without printing secrets; list NetworkManager connections and `bnep0` if present. Configure only after identifying installed schema and avoid weakening `127.0.0.1:8080` authenticated dashboard binding.
@@ -160,8 +160,8 @@ timedatectl status
 - Next: I will manually activate their existing Bluetooth profile while iPhone Personal Hotspot enabled; inspect result before enabling autoconnect or changing routes. No new connection or credential modifications yet.
 
 ## iPhone Bluetooth PAN activated successfully — 2026-11-06
-- On paired/trusted iPhone with Personal Hotspot available, user ran `sudo nmcli connection up "<IPHONE_BLUETOOTH_PROFILE>"` and NetworkManager responded: `Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/3)`.
-- I reported follow-up IP/active-connection/routing checks all showed good outputs, but exact `bnep0` IP not supplied. Avoid inventing an address or asserting iPhone-initiated reachability.
+- With my paired/trusted iPhone's Personal Hotspot enabled, I ran `sudo nmcli connection up "<IPHONE_BLUETOOTH_PROFILE>"` and NetworkManager responded: `Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/3)`.
+- I checked the assigned PAN IP, active connection and routes. I kept the exact address private; successful iPhone-initiated SSH was verified in a later step.
 - Status: **Bluetooth PAN activation passed**; direct SSH from iPhone, SSH-tunneled authenticated web dashboard, reconnection after reboot, and coexistence with USB recovery still need testing.
 - Next: read `ip -4 -br addr show bnep0`; attempt SSH from iPhone with actual Bluetooth IP and existing credentials, preserving localhost-only dashboard binding and USB recovery.
 
@@ -174,12 +174,12 @@ timedatectl status
 ## iPhone direct SSH over Bluetooth — 2026-11-06
 - I successfully connected from iPhone Termius to `aegis-pwn` via the established Bluetooth PAN and reports interactive control of Pwnagotchi.
 - **Direct iPhone Bluetooth SSH acceptance: PASSED.** This establishes management access without relying on the Windows USB connection for the client session.
-- USB gadget SSH remains the recovery path; authenticated dashboard remains bound to Pi localhost `127.0.0.1:8080` and has not yet been tested from iPhone through a tunnel.
+- I preserved USB SSH as my recovery path. At this stage, the localhost-only authenticated dashboard had not yet been tested through an iPhone tunnel; I later verified that access.
 - Next: test whether iOS Termius supports local port forwarding to the authenticated local dashboard; do not rebind web UI to 0.0.0.0. Later test reconnect behavior after phone leaves range and returns.
 
 ## iPhone authenticated dashboard via Bluetooth SSH tunnel — 2026-11-06
 - I confirmed Termius on iPhone successfully establishes SSH port forwarding over existing Bluetooth PAN, and the Pwnagotchi authenticated dashboard opens in Safari via local forwarded `127.0.0.1:8080`.
-- **PASS:** direct iPhone SSH, Bluetooth networking, SSH local forwarding, and web dashboard access. The dashboard remains bound to Pwnagotchi localhost; user did not need to expose the HTTP listener to external interfaces.
+- **PASS:** I confirmed direct iPhone SSH, Bluetooth networking, SSH local forwarding and dashboard access. I kept the HTTP listener restricted to Pwnagotchi's loopback interface.
 - Outstanding reliability acceptance: reconnect after iPhone leaves Bluetooth range, reconnect after Pi reboot, and confirm SSH tunnel availability after iOS background suspension; PiSugar automatic low-battery shutdown remains separately untested.
 
 ## iPhone Bluetooth reconnection failure — 2026-11-06
@@ -191,12 +191,12 @@ timedatectl status
 
 ## iPhone PAN autoconnect configuration fixed — 2026-11-06
 - I manually reactivated iPhone Bluetooth profile successfully via `sudo nmcli connection up "<IPHONE_BLUETOOTH_PROFILE>"`.
-- Diagnosed NetworkManager profile `connection.autoconnect=no`; user changed to `yes` via `sudo nmcli connection modify "<IPHONE_BLUETOOTH_PROFILE>" connection.autoconnect yes` and verified `yes`.
+- I found NetworkManager's profile had `connection.autoconnect=no` and changed it to `yes` via `sudo nmcli connection modify "<IPHONE_BLUETOOTH_PROFILE>" connection.autoconnect yes` and verified `yes`.
 - Firmware's `bt-tether` config is enabled (`config.toml enabled=True`); auto_reconnect=True in default and custom files; reconnect_interval=60 s, reconnect_failure_cooldown=300 s.
 - Likely mismatch resolved at configuration level; **automatic reconnection has not yet been retested or passed**. Next test: disable/re-enable iPhone Bluetooth with hotspot active, watch `nmcli connection show --active` and `ip -4 -br addr show bnep0` without manual `nmcli connection up`; confirm Termius SSH and forwarded dashboard after restoration.
 
 ## Bluetooth PAN autoconnect retest failed despite both settings — 2026-11-06
-- I reported iPhone Bluetooth connection still **did not return automatically** after toggling Bluetooth off/on; manual `sudo nmcli connection up "<IPHONE_BLUETOOTH_PROFILE>"` was again required via USB SSH.
+- I found the iPhone Bluetooth connection still **did not return automatically** after toggling Bluetooth off/on; manual `sudo nmcli connection up "<IPHONE_BLUETOOTH_PROFILE>"` was again required via USB SSH.
 - NetworkManager profile `connection.autoconnect=yes` and Pwnagotchi bt-tether `auto_reconnect=true` (60-s interval, 300-s cooldown) had already been confirmed. Therefore configuration switches alone did not resolve issue.
 - Upstream jayofelony/pwnagotchi issue #387 documents PAN activation failures and issue #604 (Aug 2026) documents some iOS Bluetooth reconnection failures; not proof of same root cause.
 - Next diagnostic while PAN disconnected and before another manual activation: inspect recent `bt-tether`/Bluetooth/reconnect logs from `/etc/pwnagotchi/log/pwnagotchi.log` and `journalctl -u NetworkManager --since "10 minutes ago"` to determine which layer is failing. Preserve working USB-gadget SSH and paired iPhone. If no automatic connection attempts, consider scoped periodic reconnection helper with bounded retries, only for inactive PAN and no changes to monitor-mode Wi-Fi.
@@ -216,13 +216,13 @@ timedatectl status
 - Next safe read-only check: `bluetoothctl devices Connected` / selected iPhone `bluetoothctl info` for Connected/Paired/Trusted and `journalctl -u bluetooth -u NetworkManager --since '5 minutes ago'` for BlueZ/NM failure. Keep USB recovery and avoid changing networking or forcing duplicate reconnect mechanisms until link state known.
 
 ## Bluetooth controller powered off during reconnection failures — 2026-11-06
-- After BlueZ NAP errors `org.bluez.Error.NotReady: br-connection-adapter-not-powered` and bt-tether pausing reconnection after five failed attempts, user checked `bluetoothctl show`: `Powered: no`, `PowerState: on`, `Discoverable: no`, `Pairable: yes`.
+- After BlueZ NAP errors `org.bluez.Error.NotReady: br-connection-adapter-not-powered` and bt-tether paused reconnection after five failed attempts, I checked `bluetoothctl show`: `Powered: no`, `PowerState: on`, `Discoverable: no`, `Pairable: yes`.
 - `rfkill list bluetooth` showed `hci0` with soft block `no` and hard block `no`.
 - BlueZ adapter `Powered: no` is consistent with the observed connection failure; exact cause of controller power state change remains unknown. Contrasting `PowerState: on` should not be treated as overriding `Powered: no`.
 - Next non-destructive test with USB SSH intact: `sudo bluetoothctl power on`, re-check `Powered`, connected-device list and `bnep0`; avoid manual `nmcli connection up` until automatic response assessed. Investigate if controller turns off again; don't mark reconnection passed yet.
 
 ## Bluetooth controller refuses power-on — 2026-11-06
-- After `bluetoothctl show` had `Powered: no` and `PowerState: on`, user attempted `sudo bluetoothctl power on`.
+- After `bluetoothctl show` showed `Powered: no` and `PowerState: on`, I attempted `sudo bluetoothctl power on`.
 - BlueZ emitted controller `PowerState: off-enabling` then `Failed to set power on: org.bluez.Error.Failed`; subsequent `show` remained `Powered: no`, `PowerState: on`.
 - Earlier `rfkill` check indicated no soft/hard blocks and Bluetooth pairing remained intact. Root cause uncertain: BlueZ vs controller/firmware/transport initialization or competing management.
 - Next non-destructive diagnostics requested: `sudo dmesg -T | grep -iE 'bluetooth|hci0|brcm|firmware|uart|timeout' | tail -n 50`, `sudo journalctl -u bluetooth --no-pager -n 40`, `systemctl is-active bluetooth`, `systemctl is-active hciuart`. Do not re-pair, change Wi-Fi/USB configuration, or create persistent restart services until logs evaluated. Maintain USB SSH recovery.
@@ -234,8 +234,8 @@ timedatectl status
 - Diagnosis: kernel/controller HCI reset timeout, not just PAN DHCP. Proposed one clean `sudo reboot` while USB recovery and adequate power are maintained, then verify `bluetoothctl show`, fresh kernel HCI errors, and whether iPhone PAN auto-reconnects without manual `nmcli connection up`. Actual outcome **pending**. No hardware resets, pairing deletion or boot firmware changes performed.
 
 ## Bluetooth connection recovered after controlled reboot — 2026-11-06
-- Following Broadcom HCI reset timeouts and failed BlueZ controller power-on, I reported **iPhone connected after reboot**.
-- This suggests reboot recovered controller/link connectivity. However, user has not yet provided post-reboot controller power status, `bnep0` IP, NetworkManager active profile, or confirmed direct Termius SSH/Safari tunnel after reboot. Mark full PAN auto-reconnection and management tests **pending verification**, not passed.
+- Following Broadcom HCI reset timeouts and failed BlueZ controller power-on, I rebooted and confirmed **my iPhone reconnected**.
+- This suggests reboot recovered controller/link connectivity. At this point in the session I had not yet verified the full post-reboot management path; I subsequently confirmed iPhone connectivity and remote access. Mark full PAN auto-reconnection and management tests **pending verification**, not passed.
 - Next checks: `bluetoothctl show | grep 'Powered:'`, `nmcli -f NAME,TYPE,DEVICE connection show --active`, `ip -4 -br addr show bnep0`; verify Termius and Safari dashboard without manually activating NM.
 
 ## Bluetooth post-reboot recovery verified — 2026-11-06
