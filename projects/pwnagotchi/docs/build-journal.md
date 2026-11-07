@@ -133,3 +133,10 @@ timedatectl status
 - User intends to order Alfa AWUS036ACM for future dedicated monitor-mode use; **order not yet confirmed placed**. Firmware and driver prerequisites previously verified.
 - Work continues on AEG-003 without waiting for adapter. Next goal: Bluetooth phone management as an alternate transport, preserving proven USB SSH recovery and existing Pwnagotchi settings.
 - Initial non-destructive checks requested: `bluetoothctl list`, `sudo systemctl status bluetooth --no-pager -l`, `sudo rfkill list`. Phone OS not yet determined; pairing/PAN setup to be tailored after basic service inspection.
+
+## Bluetooth controller readiness — 2026-11-06
+- `bluetoothctl list` found controller `88:A2:9E:D0:2E:F3` named `aegis-pwn` (MAC omitted from public build notes).
+- `systemctl status bluetooth` returned Bluetooth service enabled and active, daemon BlueZ 5.82, management interface initialized, SDP server started.
+- `rfkill list`: `hci0` Bluetooth soft/hard blocks both `no`; `phy0` WLAN soft/hard blocks both `no`.
+- Service log timestamps start 2026-08-18, reflecting previously corrected system clock; configuration directory mode warning did not stop daemon startup.
+- Bluetooth readiness **passed**, but pairing, Bluetooth PAN/network configuration, and phone-side management not yet tested. Next read-only `bluetoothctl show`; ask user for Android vs iPhone to select correct networking approach. Preserve USB SSH recovery.
