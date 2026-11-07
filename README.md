@@ -23,7 +23,7 @@ Research, design, build, test, and document cybersecurity technologies and exper
 |---|---|---|---|
 | AEG-001 | **Project NEXUS** | Home lab infrastructure | [Existing repository](https://github.com/k41ju0x/Project-NEXUS) |
 | AEG-002 | **Meshtastic** | LoRa mesh communications | [Planning notes](projects/meshtastic/README.md) |
-| AEG-003 | **Pwnagotchi** | Wireless security | [Planning notes](projects/pwnagotchi/README.md) |
+| AEG-003 | **Pwnagotchi** (Testing) | Wireless security | [Build overview](projects/pwnagotchi/README.md) · [Build journal](projects/pwnagotchi/docs/build-journal.md) · [Tests](projects/pwnagotchi/docs/test-matrix.md) |
 | AEG-004 | **Remote Access Device** | Authorized remote administration hardware | [Planning notes](projects/remote-access-device/README.md) |
 | AEG-005 | **Portable LattePanda Platform** | Headless Kali / portable security assessment device (parked concept) | [Project registry](PROJECTS.md) |
 | AEG-006 | **Tactical Control Terminal** | Raspberry Pi 5 + Touch Display 2 / Meshtastic base station (in progress) | [v0.6 project overview](projects/tactical-control-terminal/README.md) · [Build journal](projects/tactical-control-terminal/docs/build-journal.md) |
