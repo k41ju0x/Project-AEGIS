@@ -47,4 +47,4 @@ See the [build journal](build-journal.md) for my exact executed commands, observ
 
 | T28 | e-Paper live rendering after manual shutdown/restart | Pass | I captured two photos showing `aegis-pwn`, two different facial expressions, and changed screen messages after restarting; private PAN address is excluded from public docs; the on-screen uptime counter was 00:00:00 in both photographs |
 
-| T29 | Live USB-to-PiSugar battery transition | Pass (immediate transition) | I unplugged USB, retained Termius SSH, observed Linux uptime 16 minutes, `throttled=0x0`, `NRestarts=1` unchanged and Pwnagotchi active; extended battery-only stability remains pending |
+| T29 | Live USB-to-PiSugar battery transition and short stability | Pass (transition; 7+ minutes observed) | I unplugged USB at approximately 09:19, retained Termius SSH and confirmed at 09:26:36: 23-minute OS uptime, `throttled=0x0`, unchanged `NRestarts=1`, Pwnagotchi active; 10-minute and extended battery runtime still pending |
