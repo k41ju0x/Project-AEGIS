@@ -111,3 +111,8 @@ timedatectl status
 - `journalctl -u pwnagotchi --since "5 minutes ago" --no-pager -n 40` returned `-- No entries --` (not independently evidence of a fault).
 - Application log last modified at `2026-11-06 21:31:46.979999313 -0600`, approximately 9.5 minutes before observation. Its final entry was `[ERROR] ... read error[Errno 5] Input/output error`, following initial PiSugar3 connected/ready messages.
 - Diagnosis remains open: systemd active, but unknown whether Pwnagotchi and PiSugar telemetry are continuing normally, whether application logging is simply quiet, or whether battery polling stalled. Next check process/thread state, available logs, and currently displayed BAT percentage before altering services.
+
+## Session 13 — process-level validation (2026-11-06)
+- User reports `ps` showing Bettercap PID 607, PwnGrid PID 850, Pwnagotchi launcher PID 9765, Python PID 9768 (`/opt/.pwn/bin/pwnagotchi --manual`), all running.
+- `systemctl status pwnagotchi` confirms `Active: active (running)` since 21:26:01 CST, 18 tasks, Python process present. This establishes process/service liveness, not PiSugar sensor thread health.
+- Battery telemetry remains unverified after last recorded plugin `read error[Errno 5]`. Next: inspect newest log timestamp, filtered PiSugar errors, Python thread count, and current WAVESHARE `BAT` percentage without changing service or USB network.
