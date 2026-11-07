@@ -559,3 +559,10 @@ The project remains in **Testing**. I will return to these specific acceptance i
 - I reviewed `sudo journalctl -b -p err --no-pager -n 20`. Entries included ALSA udev missing-GOTO-label warnings, VCHI/MMAL multimedia initialization failures (`-22`), Broadcom `brcmfmac` monitor-interface creation messages for `wlan0mon`, and `dhcpcd is not running`.
 - I confirmed the core services start and Bluetooth SSH management works despite these messages. I did not disable drivers, alter audio/multimedia modules, or replace NetworkManager. The log alone does not establish any operational impact from the multimedia or dhcpcd entries.
 - Acceptance outcome: **startup/service availability passed**. Extended-duration reliability remains distinct and untested in this checkpoint.
+
+## Final acceptance — capture file inventory (2026-11-07)
+- After reboot I ran `sudo ls -lh /etc/pwnagotchi/handshakes/` and confirmed **nine nonempty `.pcapng` captures**, with displayed sizes ranging from 128 bytes to approximately 83 KiB. A `cache/` subdirectory was also present.
+- I also ran `sudo find /etc/pwnagotchi/handshakes/ -maxdepth 1 -type f -name '*.pcap' -printf '%f — %s bytes\n'`; it printed no results because the stored files use the `.pcapng` extension rather than `.pcap`.
+- Several file timestamps still reflect the historical pre-clock-correction date of 2026-08-18; I do not treat these as reliable evidence of actual capture time.
+- **PASS:** stored capture files persist after startup. **PENDING:** validate file structure and packet/handshake content. I omit real capture filenames, SSIDs, and MAC-like identifiers from this public document.
+- Next commands: `sudo find /etc/pwnagotchi/handshakes/ -maxdepth 1 -type f -name '*.pcapng' -printf '%s bytes\n' | sort -n`, `sudo file /etc/pwnagotchi/handshakes/*.pcapng` (output requires sanitization if publishing), and `command -v tshark || echo 'tshark not installed'`.
