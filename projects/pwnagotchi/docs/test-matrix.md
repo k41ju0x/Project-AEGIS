@@ -38,3 +38,7 @@ Owner selected display/personality customization, authenticated USB-only web UI,
 
 | T19 | Custom AEGIS faces and personality | Partial | TOML validated, service active after restart, two facial expressions observed; complete set not individually verified |
 | T20 | AEGIS web UI theme | Pass | Custom `#9FE870` RGB accent applied; user confirmed theme and dashboard accessibility; existing authentication previously verified |
+
+| T21 | iPhone Bluetooth pairing and trusted device | Pass | `bluetoothctl info` showed Paired: yes, Trusted: yes |
+| T22 | iPhone Bluetooth PAN activation | Pass | `nmcli connection up` activated existing iPhone Network profile; user reports interface/route checks good; phone-originated SSH still untested |
+| T23 | SSH and dashboard from iPhone | Pending | Verify reachability to actual `bnep0` IP and tunnel to authenticated localhost-only web dashboard |
