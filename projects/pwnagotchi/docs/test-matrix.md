@@ -46,3 +46,5 @@ See the [build journal](build-journal.md) for my exact executed commands, observ
 | T27 | Manual safe shutdown and return to service | Pass | I ran `sudo shutdown -h now`, restarted the Pi, reconnected through Termius, confirmed `pwnagotchi` active and approximately one-minute uptime; PiSugar automatic low-battery cutoff remains untested |
 
 | T28 | e-Paper live rendering after manual shutdown/restart | Pass | I captured two photos showing `aegis-pwn`, two different facial expressions, and changed screen messages after restarting; private PAN address is excluded from public docs; the on-screen uptime counter was 00:00:00 in both photographs |
+
+| T29 | Live USB-to-PiSugar battery transition | Pass (immediate transition) | I unplugged USB, retained Termius SSH, observed Linux uptime 16 minutes, `throttled=0x0`, `NRestarts=1` unchanged and Pwnagotchi active; extended battery-only stability remains pending |
