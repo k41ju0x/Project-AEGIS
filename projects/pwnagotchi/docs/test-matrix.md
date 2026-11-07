@@ -35,3 +35,6 @@ Stable repeatable boot, display updates, safe standalone power and shutdown, cor
 
 ## Next phase scope — 2026-11-06
 Owner selected display/personality customization, authenticated USB-only web UI, optional phone Bluetooth tether, PiSugar battery optimization and safe shutdown, and Wi-Fi research analysis. Implement sequentially: validate current web UI binding and authentication without opening public ports; back up and carefully change custom configuration; pair phone only after platform-specific tether documentation is checked; validate battery plugin's existing shutdown settings before any charge/discharge test. Preserve existing working USB address assignment. Firmware v2.9.5.8 defaults include `[ui.web]` enabled/port 8080/auth false and `[main.plugins.pisugarx]` lowpower_shutdown_level=10, but deployed effective settings need verification before asserting behavior.
+
+| T19 | Custom AEGIS faces and personality | Partial | TOML validated, service active after restart, two facial expressions observed; complete set not individually verified |
+| T20 | AEGIS web UI theme | Not started | Configure RGB accent after backup; retain localhost-only auth and SSH tunnel |
