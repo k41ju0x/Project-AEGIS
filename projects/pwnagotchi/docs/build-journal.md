@@ -1,6 +1,6 @@
 # AEG-003 — Pwnagotchi Build Journal
 
-**Project phase:** Testing (user moved board item on 2026-11-06)  
+**Project phase:** Testing (I moved the board item on 2026-11-06)  
 **Hardware:** Raspberry Pi Zero 2 W (soldered 40-pin GPIO), Waveshare 2.13-inch e-Paper HAT V4, PiSugar 3 1200mAh, SanDisk 32GB microSD  
 **Host:** Windows 11  
 **Scope:** Owned or explicitly authorized wireless networks only. Raw captures, client MACs, SSIDs, credentials and private infrastructure details are excluded from the public repository.
@@ -23,7 +23,7 @@
 2. Initial searches of `/home/pi/handshakes` and `/root/handshakes` showed that those paths did not exist.
 3. `systemctl status pwnagotchi --no-pager -l` showed **active (running)** after one earlier failed start and systemd restart. Running process used `/opt/.pwn/bin/python3 /opt/.pwn/bin/pwnagotchi`.
 4. Configuration `/etc/pwnagotchi/default.toml` identifies `/etc/pwnagotchi/handshakes` as the actual capture location. Application log at `/etc/pwnagotchi/log/pwnagotchi.log` confirms capture initialization and events with `handshakes=1`.
-5. User subsequently confirmed a **.pcap file exists** at the configured capture location. Packet contents and handshake completeness have **not** yet been analyzed or validated.
+5. I subsequently confirmed a **.pcap file exists** at the configured capture location. Packet contents and handshake completeness have **not** yet been analyzed or validated.
 6. Wireshark installed on Windows for offline analysis; successful import, EAPOL packet inspection, and any transfer of the file are **not yet confirmed**.
 7. Device timestamps show **2026-08-18**, inconsistent with the actual build session date **2026-11-06**. Clock and timezone synchronization require verification before timeline or capture timestamps are relied upon.
 
@@ -46,31 +46,31 @@ timedatectl status
 ## Session 4 — 2026-11-06: clock correction and next-stage selection
 - Before intervention, `date -Is` reported `2026-08-18T19:12:03+01:00`; timezone `Europe/London`; NTP active but clock not synchronized.
 - Applied `sudo timedatectl set-timezone America/Chicago`, and manually set UTC using the Windows 11 host over established USB SSH. Subsequent `date -Is`: **`2026-11-06T21:02:06-06:00`**, Central Standard Time. `timedatectl status`: timezone America/Chicago, **System clock synchronized: no**, NTP service active, no RTC. Thus date/time corrected manually, **automatic time sync remains unverified**. No service restart or reboot validation yet.
-- Owner selected next feature work: customized display and personality, secure web dashboard, optional Bluetooth phone management, PiSugar low battery shut down and runtime, wireless telemetry/session statistics, plugin and log review. Priority is secure web dashboard inspection followed by controlled configuration updates and battery safeguards. Do not assume changing the software clock retroactively corrects prior PCAP timestamps.
+- I selected next feature work: customized display and personality, secure web dashboard, optional Bluetooth phone management, PiSugar low battery shut down and runtime, wireless telemetry/session statistics, plugin and log review. Priority is secure web dashboard inspection followed by controlled configuration updates and battery safeguards. Do not assume changing the software clock retroactively corrects prior PCAP timestamps.
 
 ## Session 5 — 2026-11-06: web dashboard verified
 - `sudo ss -ltnp | grep ':8080'` showed Pwnagotchi listening on `*:8080` (PID 931 at observation).
-- From Windows, user successfully opened an SSH tunnel using `ssh -L 8080:127.0.0.1:8080 pi@<private-USB-Pi-IP>` and browsed `http://127.0.0.1:8080`.
-- User confirmed **dashboard appears**. Browser access is verified, but authentication is not yet verified. Listening on wildcard address means potential exposure through any reachable Pi interface; inspect effective web configuration and restrict access/authenticate as appropriate.
+- From Windows, I successfully opened an SSH tunnel using `ssh -L 8080:127.0.0.1:8080 pi@<private-USB-Pi-IP>` and browsed `http://127.0.0.1:8080`.
+- I confirmed **dashboard appears**. Browser access is verified, but authentication is not yet verified. Listening on wildcard address means potential exposure through any reachable Pi interface; inspect effective web configuration and restrict access/authenticate as appropriate.
 - Next: inspect the `[ui.web]` settings in `/etc/pwnagotchi/config.toml` without publishing any password; verify auth and binding before making a backup and controlled change.
 
 ## Session 6 — 2026-11-06: authenticated dashboard validation
-- Added `[ui.web]` override to `/etc/pwnagotchi/config.toml` with `enabled = true`, `address = "127.0.0.1"`, `port = 8080`, `auth = true`, and user-selected private credentials (never committed). Backup taken prior to edit; syntax validation returned `TOML syntax valid`.
+- Added `[ui.web]` override to `/etc/pwnagotchi/config.toml` with `enabled = true`, `address = "127.0.0.1"`, `port = 8080`, `auth = true`, and my selected private credentials (never committed). Backup taken prior to edit; syntax validation returned `TOML syntax valid`.
 - After `sudo systemctl restart pwnagotchi`, `systemctl status pwnagotchi --no-pager -l` showed `active (running)`, launched at 21:12:54 CST.
 - `sudo ss -ltnp | grep ':8080'` confirmed listener `127.0.0.1:8080`, not a wildcard address.
-- User verified dashboard demanded login and accepted configured credentials through the existing Windows SSH tunnel. **Web dashboard security test passed.**
+- I verified dashboard demanded login and accepted configured credentials through the existing Windows SSH tunnel. **Web dashboard security test passed.**
 - Process appeared with `--manual`; operational mode should be confirmed rather than assuming active wireless operation.
 - Next: back up before display/personality customization; test changes incrementally, preserving accessible recovery via SSH.
 
 ## Session 7 — AEGIS face customization validation
-- User added custom `[ui.faces]` configuration and verified it parses with `sudo python3`/`tomllib`. Reported **22 facial-state/configuration entries**; this includes possible non-expression keys and should not be interpreted as 22 unique visible expressions.
+- I added custom `[ui.faces]` configuration and verified it parses with `sudo python3`/`tomllib`. Reported **22 facial-state/configuration entries**; this includes possible non-expression keys and should not be interpreted as 22 unique visible expressions.
 - `sudo systemctl restart pwnagotchi` completed and `systemctl is-active pwnagotchi` returned **active**.
-- User observed **two facial expressions** so far; display-state rendering works but all custom expressions are not individually validated. Face selection is state-driven; no intrusive wireless activity should be induced merely for appearance tests.
+- I observed **two facial expressions** so far; display-state rendering works but all custom expressions are not individually validated. Face selection is state-driven; no intrusive wireless activity should be induced merely for appearance tests.
 - Next: inspect effective web theme configuration, back up, apply reversible AEGIS green accent theme, check secured localhost-only dashboard remains authenticated.
 
 ## Session 8 — AEGIS green dashboard theme verified
 - Backed up config and added `[ui.web.theme]` RGB accent `159, 232, 112` (`#9FE870`).
-- User confirmed the custom theme works and the authenticated dashboard remains accessible after applying changes.
+- I confirmed the custom theme works and the authenticated dashboard remains accessible after applying changes.
 - Existing binding to `127.0.0.1:8080` had previously been verified; no report of a new listener check during this milestone.
 - Next priority: inspect PiSugar 3 low-battery shutdown configuration before making changes; then validate battery endurance and optional Bluetooth tethering.
 
@@ -81,7 +81,7 @@ timedatectl status
 
 ## Session 9 — PiSugar 3 detection warning (2026-11-06)
 - PiSugar plugin confirmed enabled in custom configuration; firmware default low-power shutdown threshold 10% and shutdown delay 45 seconds identified.
-- User log excerpt from 21:27–21:29 CST repeatedly reports `No PiSugar device was found. Please check if the PiSugar device is powered on.` and `[PiSugarX] PiSugar is not ready`.
+- My log excerpt from 21:27–21:29 CST repeatedly reports `No PiSugar device was found. Please check if the PiSugar device is powered on.` and `[PiSugarX] PiSugar is not ready`.
 - Important correction: earlier battery-powered startup and the displayed 52% battery reading establish prior battery use/reporting, **not reliable current I²C communication or a functioning low-battery safety cutoff**.
 - PiSugar official documentation warns that USB-connected Pi may illuminate PiSugar LEDs even if battery controller is not turned on. Other possible cause is intermittent pogo contact on underside GPIO solder pads.
 - Next read-only tests: `ls -l /dev/i2c*` and `sudo i2cdetect -y 1`. PiSugar 3 expected I²C addresses `0x57` and `0x68`; do not adjust hardware under power. If not available, check PiSugar power-on sequence (short then long press) and contact only after safe shutdown.
@@ -107,102 +107,102 @@ timedatectl status
 - Next: review subsequent logs for reconnection errors and observe current battery percentage. Do not deep-discharge merely to test low-voltage cutoff.
 
 ## Session 12 — quiet application log after I²C read error (2026-11-06)
-- User verified `date` at `2026-11-06 21:41:16 CST`; `systemctl is-active pwnagotchi` returned `active`.
+- I verified `date` at `2026-11-06 21:41:16 CST`; `systemctl is-active pwnagotchi` returned `active`.
 - `journalctl -u pwnagotchi --since "5 minutes ago" --no-pager -n 40` returned `-- No entries --` (not independently evidence of a fault).
 - Application log last modified at `2026-11-06 21:31:46.979999313 -0600`, approximately 9.5 minutes before observation. Its final entry was `[ERROR] ... read error[Errno 5] Input/output error`, following initial PiSugar3 connected/ready messages.
 - Diagnosis remains open: systemd active, but unknown whether Pwnagotchi and PiSugar telemetry are continuing normally, whether application logging is simply quiet, or whether battery polling stalled. Next check process/thread state, available logs, and currently displayed BAT percentage before altering services.
 
 ## Session 13 — process-level validation (2026-11-06)
-- User reports `ps` showing Bettercap PID 607, PwnGrid PID 850, Pwnagotchi launcher PID 9765, Python PID 9768 (`/opt/.pwn/bin/pwnagotchi --manual`), all running.
+- I reported `ps` showing Bettercap PID 607, PwnGrid PID 850, Pwnagotchi launcher PID 9765, Python PID 9768 (`/opt/.pwn/bin/pwnagotchi --manual`), all running.
 - `systemctl status pwnagotchi` confirms `Active: active (running)` since 21:26:01 CST, 18 tasks, Python process present. This establishes process/service liveness, not PiSugar sensor thread health.
 - Battery telemetry remains unverified after last recorded plugin `read error[Errno 5]`. Next: inspect newest log timestamp, filtered PiSugar errors, Python thread count, and current WAVESHARE `BAT` percentage without changing service or USB network.
 
 ## Session 14 — Live PiSugarX telemetry visible (2026-11-06)
-- Although application log remained at a one-off `[Errno 5] Input/output error` after `PiSugar3 is ready`, the user opened the PiSugarX dashboard over the existing SSH tunnel and reported **all fields display data**.
+- Although application log remained at a one-off `[Errno 5] Input/output error` after `PiSugar3 is ready`, I opened the PiSugarX dashboard over the existing SSH tunnel and reported **all fields display data**.
 - This supplies direct evidence that the plugin can retrieve and present battery-controller telemetry. I²C battery address 0x57 and RTC address 0x68 previously responded.
 - Current status: PiSugarX telemetry **Pass (visible)**; long-term polling stability, charging behavior, safe shutdown at the inherited 10% threshold, and 45-second cutoff remain **unverified**. No forced deep-discharge test performed.
 - Next: preserve working settings; proceed to Bluetooth tethering after confirming phone OS, since pairing/network configuration differs for Android and iOS.
 
 ## Alfa AWUS036ACM firmware prerequisite check — 2026-11-06
-- User confirmed firmware searches found `/lib/firmware/mt7662_rom_patch.bin`, `/lib/firmware/mediatek/mt7662_rom_patch.bin`, `/lib/firmware/mt7662.bin`, and `/lib/firmware/mediatek/mt7662.bin`.
+- I confirmed firmware searches found `/lib/firmware/mt7662_rom_patch.bin`, `/lib/firmware/mediatek/mt7662_rom_patch.bin`, `/lib/firmware/mt7662.bin`, and `/lib/firmware/mediatek/mt7662.bin`.
 - Together with `modinfo mt76x2u` on kernel `6.18.39+rpt-rpi-v8`, this verifies the planned Alfa AWUS036ACM / MT7612U software driver and required firmware are present.
 - **This is a prerequisite check, not hardware/monitor-mode acceptance.** Adapter not yet acquired/connected; device detection, actual monitor mode, Bettercap handoff, USB-OTG connection, PiSugar power capacity and remote management via onboard Wi-Fi still pending.
 - Preferred design: USB Alfa for authorized monitoring, onboard Pi Wi-Fi for home LAN SSH/dashboard, preserve USB-gadget recovery until migration passes.
 
 ## Next milestone — Bluetooth remote management (2026-11-06)
-- User intends to order Alfa AWUS036ACM for future dedicated monitor-mode use; **order not yet confirmed placed**. Firmware and driver prerequisites previously verified.
+- I intends to order Alfa AWUS036ACM for future dedicated monitor-mode use; **order not yet confirmed placed**. Firmware and driver prerequisites previously verified.
 - Work continues on AEG-003 without waiting for adapter. Next goal: Bluetooth phone management as an alternate transport, preserving proven USB SSH recovery and existing Pwnagotchi settings.
 - Initial non-destructive checks requested: `bluetoothctl list`, `sudo systemctl status bluetooth --no-pager -l`, `sudo rfkill list`. Phone OS not yet determined; pairing/PAN setup to be tailored after basic service inspection.
 
 ## Bluetooth controller readiness — 2026-11-06
-- `bluetoothctl list` found controller `88:A2:9E:D0:2E:F3` named `aegis-pwn` (MAC omitted from public build notes).
+- `bluetoothctl list` found controller `<PWNAGOTCHI_BLUETOOTH_MAC>` named `aegis-pwn` (MAC omitted from public build notes).
 - `systemctl status bluetooth` returned Bluetooth service enabled and active, daemon BlueZ 5.82, management interface initialized, SDP server started.
 - `rfkill list`: `hci0` Bluetooth soft/hard blocks both `no`; `phy0` WLAN soft/hard blocks both `no`.
 - Service log timestamps start 2026-08-18, reflecting previously corrected system clock; configuration directory mode warning did not stop daemon startup.
-- Bluetooth readiness **passed**, but pairing, Bluetooth PAN/network configuration, and phone-side management not yet tested. Next read-only `bluetoothctl show`; ask user for Android vs iPhone to select correct networking approach. Preserve USB SSH recovery.
+- Bluetooth readiness **passed**, but pairing, Bluetooth PAN/network configuration, and phone-side management not yet tested. Next read-only `bluetoothctl show`; identify the phone OS to select correct networking approach. Preserve USB SSH recovery.
 
 ## Bluetooth pairing readiness — 2026-11-06
 - `bluetoothctl show`: controller alias/name `aegis-pwn`, `Powered: yes`, `PowerState: on`, `Discoverable: no`, `Pairable: no`, `Discovering: no`, supports central and peripheral roles.
 - Hardware and BlueZ operational; device intentionally not currently pairing or advertising. Bluetooth pairing and PAN/SSH transport **not yet configured or tested**. Temporary pairable/discoverable mode should be enabled only during actual pairing, and disabled afterwards.
-- USB management SSH remains recovery path. Await user phone OS (Android/iPhone) to decide Bluetooth networking and verify PAN/tethering support before changes.
+- USB management SSH remains recovery path. At that point I had not yet selected the phone OS (Android/iPhone) to decide Bluetooth networking and verify PAN/tethering support before changes.
 
 ## iPhone Bluetooth pairing completed — 2026-11-06
-- User reports `bluetoothctl` showing **Paired: yes** and **Trusted: yes** for their iPhone. Do not publish device Bluetooth address in the public repo.
+- I reported `bluetoothctl` showing **Paired: yes** and **Trusted: yes** for their iPhone. Do not publish device Bluetooth address in the public repo.
 - Controller powered, service healthy, no rfkill blocks previously confirmed. Pairing milestone passed; Bluetooth PAN, IP, and SSH from the phone remain untested.
 - Recommended temporary discoverability/pairability OFF after pairing; preserve USB-gadget SSH for recovery.
 - Next diagnostic: inspect shape/enablement of firmware's `[main.plugins.bt-tether]` in default and custom TOML without printing secrets; list NetworkManager connections and `bnep0` if present. Configure only after identifying installed schema and avoid weakening `127.0.0.1:8080` authenticated dashboard binding.
 
 ## iPhone Bluetooth PAN profile discovered — 2026-11-06
 - `bt-tether` settings inspected using Python TOML parser: plugin enabled in custom config and disabled in defaults, default/custom key sets include `auto_reconnect`, `fast_dhcp`, reconnect intervals/status display options. `devices` subtable absent in both; do not assume per-device TOML profile necessary.
-- `nmcli -f NAME,TYPE,DEVICE connection show` showed `USB Gadget (shared)` active on `usb0`, loopback, inactive Bluetooth profile for paired iPhone (`Chris’s iPhone Network`), and inactive `USB Gadget (client)`.
+- `nmcli -f NAME,TYPE,DEVICE connection show` showed `USB Gadget (shared)` active on `usb0`, loopback, inactive Bluetooth profile for paired iPhone (`<IPHONE_BLUETOOTH_PROFILE>`), and inactive `USB Gadget (client)`.
 - `ip -br addr show bnep0`: interface does not exist, confirming PAN not presently active.
 - Relevant upstream issue jayofelony/pwnagotchi #387 notes paired iPhones may not activate PAN automatically and suggests `sudo nmcli connection up "<iPhone Network>"` over existing USB recovery, followed by `ip -br addr show bnep0`, active NetworkManager profile and route check.
-- Next: user to manually activate their existing Bluetooth profile while iPhone Personal Hotspot enabled; inspect result before enabling autoconnect or changing routes. No new connection or credential modifications yet.
+- Next: I will manually activate their existing Bluetooth profile while iPhone Personal Hotspot enabled; inspect result before enabling autoconnect or changing routes. No new connection or credential modifications yet.
 
 ## iPhone Bluetooth PAN activated successfully — 2026-11-06
-- On paired/trusted iPhone with Personal Hotspot available, user ran `sudo nmcli connection up "Chris’s iPhone Network"` and NetworkManager responded: `Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/3)`.
-- User reports follow-up IP/active-connection/routing checks all showed good outputs, but exact `bnep0` IP not supplied. Avoid inventing an address or asserting iPhone-initiated reachability.
+- On paired/trusted iPhone with Personal Hotspot available, user ran `sudo nmcli connection up "<IPHONE_BLUETOOTH_PROFILE>"` and NetworkManager responded: `Connection successfully activated (D-Bus active path: /org/freedesktop/NetworkManager/ActiveConnection/3)`.
+- I reported follow-up IP/active-connection/routing checks all showed good outputs, but exact `bnep0` IP not supplied. Avoid inventing an address or asserting iPhone-initiated reachability.
 - Status: **Bluetooth PAN activation passed**; direct SSH from iPhone, SSH-tunneled authenticated web dashboard, reconnection after reboot, and coexistence with USB recovery still need testing.
 - Next: read `ip -4 -br addr show bnep0`; attempt SSH from iPhone with actual Bluetooth IP and existing credentials, preserving localhost-only dashboard binding and USB recovery.
 
 ## Bluetooth IPv4 address assigned — 2026-11-06
-- User verified `ip -4 -br addr show bnep0` returned `bnep0 UNKNOWN [private Bluetooth PAN IPv4]/28` after activating existing paired iPhone PAN profile.
+- I verified `ip -4 -br addr show bnep0` returned `bnep0 UNKNOWN [private Bluetooth PAN IPv4]/28` after activating existing paired iPhone PAN profile.
 - IP assignment **passed**; interface UNKNOWN does not independently signify failure for Bluetooth PAN interfaces. iPhone-initiated SSH to port 22 at Bluetooth PAN IPv4 and dashboard SSH port-forward are **not yet tested**.
 - Next: with iPhone Bluetooth and Personal Hotspot enabled and USB SSH preserved, connect with iOS SSH client using existing account; verify hostname `aegis-pwn`. Afterwards test authenticated dashboard via SSH localhost forward, keeping existing `127.0.0.1:8080` bind.
-- Bluetooth-subnet address is documented here in local/private working notes only if repository visibility permits; avoid publishing device IDs or passwords.
+- I keep the actual Bluetooth-subnet address in private notes, not the public repository.
 
 ## iPhone direct SSH over Bluetooth — 2026-11-06
-- User successfully connected from iPhone Termius to `aegis-pwn` via the established Bluetooth PAN and reports interactive control of Pwnagotchi.
+- I successfully connected from iPhone Termius to `aegis-pwn` via the established Bluetooth PAN and reports interactive control of Pwnagotchi.
 - **Direct iPhone Bluetooth SSH acceptance: PASSED.** This establishes management access without relying on the Windows USB connection for the client session.
 - USB gadget SSH remains the recovery path; authenticated dashboard remains bound to Pi localhost `127.0.0.1:8080` and has not yet been tested from iPhone through a tunnel.
 - Next: test whether iOS Termius supports local port forwarding to the authenticated local dashboard; do not rebind web UI to 0.0.0.0. Later test reconnect behavior after phone leaves range and returns.
 
 ## iPhone authenticated dashboard via Bluetooth SSH tunnel — 2026-11-06
-- User confirmed Termius on iPhone successfully establishes SSH port forwarding over existing Bluetooth PAN, and the Pwnagotchi authenticated dashboard opens in Safari via local forwarded `127.0.0.1:8080`.
+- I confirmed Termius on iPhone successfully establishes SSH port forwarding over existing Bluetooth PAN, and the Pwnagotchi authenticated dashboard opens in Safari via local forwarded `127.0.0.1:8080`.
 - **PASS:** direct iPhone SSH, Bluetooth networking, SSH local forwarding, and web dashboard access. The dashboard remains bound to Pwnagotchi localhost; user did not need to expose the HTTP listener to external interfaces.
 - Outstanding reliability acceptance: reconnect after iPhone leaves Bluetooth range, reconnect after Pi reboot, and confirm SSH tunnel availability after iOS background suspension; PiSugar automatic low-battery shutdown remains separately untested.
 
 ## iPhone Bluetooth reconnection failure — 2026-11-06
-- User interrupted iPhone Bluetooth after verifying Termius SSH + SSH-tunneled Safari dashboard and reports **Bluetooth PAN does not automatically reconnect**.
+- I interrupted iPhone Bluetooth after verifying Termius SSH + SSH-tunneled Safari dashboard and reports **Bluetooth PAN does not automatically reconnect**.
 - Previous direct SSH/dashboard success remains passed. **Reconnection reliability test failed**; not the same as initial pairing/activation.
-- Firmware `bt-tether` enabled; existing NetworkManager Bluetooth profile `Chris’s iPhone Network` previously activated using `nmcli connection up`.
-- Next safe checks with USB SSH retained: re-enable iPhone Bluetooth + Personal Hotspot, manually reactivate existing profile, inspect `nmcli -g connection.autoconnect connection show "Chris’s iPhone Network"` and set `connection.autoconnect yes` if false, inspect effective `[main.plugins.bt-tether]` `auto_reconnect`, retry with phone ready. Do not remove pairings, reset USB gadget, or change Pwnagotchi monitor interface. Note iPhone tether availability/backoff and potential reconnect delay.
+- Firmware `bt-tether` enabled; existing NetworkManager Bluetooth profile `<IPHONE_BLUETOOTH_PROFILE>` previously activated using `nmcli connection up`.
+- Next safe checks with USB SSH retained: re-enable iPhone Bluetooth + Personal Hotspot, manually reactivate existing profile, inspect `nmcli -g connection.autoconnect connection show "<IPHONE_BLUETOOTH_PROFILE>"` and set `connection.autoconnect yes` if false, inspect effective `[main.plugins.bt-tether]` `auto_reconnect`, retry with phone ready. Do not remove pairings, reset USB gadget, or change Pwnagotchi monitor interface. Note iPhone tether availability/backoff and potential reconnect delay.
 - Reference: jayofelony/pwnagotchi issue #387 documents NetworkManager `connection.autoconnect yes` workaround.
 
 ## iPhone PAN autoconnect configuration fixed — 2026-11-06
-- User manually reactivated iPhone Bluetooth profile successfully via `sudo nmcli connection up "Chris’s iPhone Network"`.
-- Diagnosed NetworkManager profile `connection.autoconnect=no`; user changed to `yes` via `sudo nmcli connection modify "Chris’s iPhone Network" connection.autoconnect yes` and verified `yes`.
+- I manually reactivated iPhone Bluetooth profile successfully via `sudo nmcli connection up "<IPHONE_BLUETOOTH_PROFILE>"`.
+- Diagnosed NetworkManager profile `connection.autoconnect=no`; user changed to `yes` via `sudo nmcli connection modify "<IPHONE_BLUETOOTH_PROFILE>" connection.autoconnect yes` and verified `yes`.
 - Firmware's `bt-tether` config is enabled (`config.toml enabled=True`); auto_reconnect=True in default and custom files; reconnect_interval=60 s, reconnect_failure_cooldown=300 s.
 - Likely mismatch resolved at configuration level; **automatic reconnection has not yet been retested or passed**. Next test: disable/re-enable iPhone Bluetooth with hotspot active, watch `nmcli connection show --active` and `ip -4 -br addr show bnep0` without manual `nmcli connection up`; confirm Termius SSH and forwarded dashboard after restoration.
 
 ## Bluetooth PAN autoconnect retest failed despite both settings — 2026-11-06
-- User reports iPhone Bluetooth connection still **did not return automatically** after toggling Bluetooth off/on; manual `sudo nmcli connection up "Chris’s iPhone Network"` was again required via USB SSH.
+- I reported iPhone Bluetooth connection still **did not return automatically** after toggling Bluetooth off/on; manual `sudo nmcli connection up "<IPHONE_BLUETOOTH_PROFILE>"` was again required via USB SSH.
 - NetworkManager profile `connection.autoconnect=yes` and Pwnagotchi bt-tether `auto_reconnect=true` (60-s interval, 300-s cooldown) had already been confirmed. Therefore configuration switches alone did not resolve issue.
 - Upstream jayofelony/pwnagotchi issue #387 documents PAN activation failures and issue #604 (Aug 2026) documents some iOS Bluetooth reconnection failures; not proof of same root cause.
 - Next diagnostic while PAN disconnected and before another manual activation: inspect recent `bt-tether`/Bluetooth/reconnect logs from `/etc/pwnagotchi/log/pwnagotchi.log` and `journalctl -u NetworkManager --since "10 minutes ago"` to determine which layer is failing. Preserve working USB-gadget SSH and paired iPhone. If no automatic connection attempts, consider scoped periodic reconnection helper with bounded retries, only for inactive PAN and no changes to monitor-mode Wi-Fi.
 
 ## Bluetooth PAN log root-cause investigation — 2026-11-06 late session
-- User supplied bt-tether and NetworkManager log excerpts (user-provided diagnostic paste; do not publish Bluetooth MAC or private network IP).
+- I captured bt-tether and NetworkManager log excerpts (my diagnostic paste; do not publish Bluetooth MAC or private network IP).
 - `bt-tether` at 23:01:40 detected drop, 23:01:47 NAP ready; 23:01:48 reports DBus NAP connection successful, PAN interface bnep0 active, and Bluetooth link reconnected.
 - Simultaneously NetworkManager at 23:01:39–23:01:43 repeatedly attempted iPhone profile activation, failed `org.bluez.Error.Failed: Input/output error` / `bluetooth-failed`.
 - Manual `nmcli connection up` at 23:06:03 succeeded; by 23:06:05 DHCPv4 lease, IPv4/IPv6 routes and DNS and NM active connection all established.
@@ -210,7 +210,7 @@ timedatectl status
 - Next test while disconnected from iPhone management but USB SSH preserved: inspect `nmcli -f DEVICE,TYPE,STATE,CONNECTION device status`, `nmcli -f NAME,TYPE,DEVICE connection show --active`, `ip -4 -br addr show bnep0` and `ip -4 route show dev bnep0`. Compare Bluetooth NAP plugin state against network layer. Additional observation: plugin upgrade entries around 23:07 are noted but no conclusions drawn.
 
 ## Bluetooth PAN reconnection state — post-interruption inspection (2026-11-06)
-- Following unattended Bluetooth reconnection attempt, user observed `nmcli device status`: USB gadget `usb0` connected, loopback connected, `wlan0` unavailable (Pwnagotchi monitor configuration), no Bluetooth interface.
+- Following unattended Bluetooth reconnection attempt, I observed `nmcli device status`: USB gadget `usb0` connected, loopback connected, `wlan0` unavailable (Pwnagotchi monitor configuration), no Bluetooth interface.
 - `nmcli connection show --active`: only USB gadget and loopback. `ip -4 -br addr show bnep0`: device does not exist; `ip -4 route show dev bnep0`: cannot find device.
 - This proves **PAN network interface absent at inspection time**, not merely DHCP without an address. Previous logs demonstrated bt-tether NAP connection on a prior attempt and NetworkManager auto-activation I/O errors; current Bluetooth link connection state has not yet been inspected.
 - Next safe read-only check: `bluetoothctl devices Connected` / selected iPhone `bluetoothctl info` for Connected/Paired/Trusted and `journalctl -u bluetooth -u NetworkManager --since '5 minutes ago'` for BlueZ/NM failure. Keep USB recovery and avoid changing networking or forcing duplicate reconnect mechanisms until link state known.
@@ -228,23 +228,323 @@ timedatectl status
 - Next non-destructive diagnostics requested: `sudo dmesg -T | grep -iE 'bluetooth|hci0|brcm|firmware|uart|timeout' | tail -n 50`, `sudo journalctl -u bluetooth --no-pager -n 40`, `systemctl is-active bluetooth`, `systemctl is-active hciuart`. Do not re-pair, change Wi-Fi/USB configuration, or create persistent restart services until logs evaluated. Maintain USB SSH recovery.
 
 ## Bluetooth HCI controller reset timeouts — 2026-11-06
-- User's `dmesg` after iPhone PAN reconnection failure shows Broadcom BCM43430B0 driver/firmware initializing at boot on UART `serial0-0`, then `Bluetooth: hci0: hardware error 0x00` at 23:09:08 and repeated `Opcode 0x0c03 failed: -110` (HCI reset timeouts) at 23:09:10, 23:09:12, and 23:19:36.
-- bluetoothd service active; its journal records bnep0 disconnect 23:09 and later `Failed to set mode: Authentication Failed (0x05)` at 23:19. User says `systemctl is-active hciuart` returns inactive. Because kernel `hci_uart_bcm serial0-0` already detected controller, inactive hciuart alone does not establish a misconfiguration; do not enable legacy hciuart or change UART overlays without further evidence.
+- my `dmesg` after iPhone PAN reconnection failure shows Broadcom BCM43430B0 driver/firmware initializing at boot on UART `serial0-0`, then `Bluetooth: hci0: hardware error 0x00` at 23:09:08 and repeated `Opcode 0x0c03 failed: -110` (HCI reset timeouts) at 23:09:10, 23:09:12, and 23:19:36.
+- bluetoothd service active; its journal records bnep0 disconnect 23:09 and later `Failed to set mode: Authentication Failed (0x05)` at 23:19. I observed `systemctl is-active hciuart` returns inactive. Because kernel `hci_uart_bcm serial0-0` already detected controller, inactive hciuart alone does not establish a misconfiguration; do not enable legacy hciuart or change UART overlays without further evidence.
 - BlueZ controller earlier `Powered: no` despite no rfkill blocks; `sudo bluetoothctl power on` returned `org.bluez.Error.Failed`.
 - Diagnosis: kernel/controller HCI reset timeout, not just PAN DHCP. Proposed one clean `sudo reboot` while USB recovery and adequate power are maintained, then verify `bluetoothctl show`, fresh kernel HCI errors, and whether iPhone PAN auto-reconnects without manual `nmcli connection up`. Actual outcome **pending**. No hardware resets, pairing deletion or boot firmware changes performed.
 
 ## Bluetooth connection recovered after controlled reboot — 2026-11-06
-- Following Broadcom HCI reset timeouts and failed BlueZ controller power-on, user reports **iPhone connected after reboot**.
+- Following Broadcom HCI reset timeouts and failed BlueZ controller power-on, I reported **iPhone connected after reboot**.
 - This suggests reboot recovered controller/link connectivity. However, user has not yet provided post-reboot controller power status, `bnep0` IP, NetworkManager active profile, or confirmed direct Termius SSH/Safari tunnel after reboot. Mark full PAN auto-reconnection and management tests **pending verification**, not passed.
 - Next checks: `bluetoothctl show | grep 'Powered:'`, `nmcli -f NAME,TYPE,DEVICE connection show --active`, `ip -4 -br addr show bnep0`; verify Termius and Safari dashboard without manually activating NM.
 
 ## Bluetooth post-reboot recovery verified — 2026-11-06
-- After controlled reboot following Broadcom Bluetooth HCI reset timeouts, user confirmed **iPhone connectivity and remote access work again** following requested verification of controller, NetworkManager PAN interface, Termius SSH and web dashboard.
+- After controlled reboot following Broadcom Bluetooth HCI reset timeouts, I confirmed **iPhone connectivity and remote access work again** following requested verification of controller, NetworkManager PAN interface, Termius SSH and web dashboard.
 - Acceptance: recovery after reboot **Passed**. Earlier failure to reconnect unattended after temporarily turning iPhone Bluetooth off/on remains a separate **open reliability issue**. A single post-reboot success does not establish reliable reconnection after transient losses or explain the controller hardware timeouts.
 - Preserve existing paired/trusted phone, `connection.autoconnect=yes`, `bt-tether.auto_reconnect=true`, USB SSH recovery, and localhost-only authenticated web UI.
 
 ## Test scope decision — 2026-11-06
-- User considers existing standalone PiSugar 3 battery-powered operation sufficient for current AEG-003 build stage and elects to **defer** another controlled battery endurance test.
-- User also elects to **defer repeat Bluetooth interruption/reconnection tests** following successful post-reboot recovery of iPhone Termius SSH and SSH-tunneled dashboard.
+- I consider existing standalone PiSugar 3 battery-powered operation sufficient for current AEG-003 build stage and elects to **defer** another controlled battery endurance test.
+- I also elected to **defer repeat Bluetooth interruption/reconnection tests** following successful post-reboot recovery of iPhone Termius SSH and SSH-tunneled dashboard.
 - Evidence distinction preserved: battery can power device and live PiSugarX telemetry was displayed, but 10% automatic low-battery shutdown/cutoff and sustained runtime are not behaviorally verified; iPhone Bluetooth post-reboot recovery passed, but automatic recovery after ordinary out-of-range/toggle interruption had previously failed and is not claimed fixed.
 - Current build/testing session can proceed without additional stress testing; retain noted limitations for future field checks if symptoms recur. Await Alfa AWUS036ACM hardware for dual-radio integration, with no assumption order completed.
+
+---
+
+## Command record — executed checks and configuration (sanitized)
+
+This appendix consolidates commands from my November 6 build and troubleshooting session. I preserved shell syntax where recorded and replaced **real addresses, device names, SSIDs and credentials** with placeholders. Where my session notes describe an action without its exact shell line (for example flashing the SD card through a GUI), I document that action as a procedure instead of inventing a command. Some commands initially failed; I retain the failures and their outcomes for reproducibility.
+
+### 1. Image preparation, configuration and initial management
+
+- Used Raspberry Pi Imager on Windows 11 to write `pwnagotchi-64bit-2.9.5.8.img.xz` to a 32 GB SanDisk microSD (GUI workflow; no shell flash command).
+- Created `bootfs/config.toml` for the `aegis-pwn` identity, Waveshare display, PiSugar plugin and authorized-lab allowlist; real wireless identifiers omitted.
+- Verified the boot configuration from Windows PowerShell:
+
+```powershell
+Get-Content <BOOTFS_DRIVE>:\config.toml
+ssh pi@<PRIVATE_USB_IPV4>
+```
+
+- The Windows USB device appeared as Raspberry Pi USB RNDIS under Ethernet 5. I kept the working USB addresses in private notes rather than copying assumed community defaults into the system.
+
+### 2. Core service, capture and system clock
+
+```bash
+systemctl status pwnagotchi --no-pager -l
+sudo ls -lah /etc/pwnagotchi/handshakes/
+sudo grep -n 'handshakes' /etc/pwnagotchi/default.toml
+sudo tail -n 50 /etc/pwnagotchi/log/pwnagotchi.log
+date -Is
+timedatectl status
+sudo timedatectl set-timezone America/Chicago
+```
+
+I manually corrected the date/time using the Windows host as my time source. The exact manual UTC-setting command was not retained in the session record; I won't invent it. **NTP remained active but unsynchronized** when checked. I confirmed only that a PCAP exists, not its handshake validity.
+
+### 3. Secure web dashboard
+
+```bash
+sudo ss -ltnp | grep ':8080'
+ssh -L 8080:127.0.0.1:8080 pi@<PRIVATE_USB_IPV4>   # On Windows
+sudo cp /etc/pwnagotchi/config.toml /etc/pwnagotchi/config.toml.bak
+sudo nano /etc/pwnagotchi/config.toml
+sudo chown root:root /etc/pwnagotchi/config.toml
+sudo chmod 600 /etc/pwnagotchi/config.toml
+sudo systemctl restart pwnagotchi
+systemctl status pwnagotchi --no-pager -l
+sudo ss -ltnp | grep ':8080'
+```
+
+My effective configuration restricted the interface to loopback and required authentication. I used a unique password but **did not record the username or password in GitHub**.
+
+```toml
+[ui.web]
+enabled = true
+address = "127.0.0.1"
+port = 8080
+auth = true
+# Username and password are intentionally omitted from this public example.
+```
+
+I checked TOML syntax using Python's `tomllib` under `sudo`, since the config was root-readable only:
+
+```bash
+sudo python3 - <<'PY'
+import tomllib
+with open('/etc/pwnagotchi/config.toml', 'rb') as f:
+    config = tomllib.load(f)
+print("TOML syntax valid")
+PY
+```
+
+I confirmed the dashboard demanded credentials via the SSH tunnel and that `ss` showed `127.0.0.1:8080`, not a wildcard listener.
+
+### 4. Display faces and AEGIS theme
+
+```bash
+sudo grep -A 45 '^\[ui.faces\]' /etc/pwnagotchi/default.toml
+sudo cp /etc/pwnagotchi/config.toml /etc/pwnagotchi/config.toml.pre-aegis-faces.bak
+sudo nano /etc/pwnagotchi/config.toml
+```
+
+I added a custom `[ui.faces]` section. The following check initially failed without `sudo` because I protected `config.toml` with root-only read permissions; rerunning it as root succeeded and reported 22 configuration entries.
+
+```bash
+sudo python3 - <<'PY'
+import tomllib
+with open('/etc/pwnagotchi/config.toml', 'rb') as f:
+    config = tomllib.load(f)
+faces = config.get('ui', {}).get('faces', {})
+print("TOML syntax valid")
+print(f"Configured facial states: {len(faces)}")
+PY
+sudo systemctl restart pwnagotchi
+systemctl is-active pwnagotchi
+```
+
+I observed two expressions on the e-Paper screen. Then I backed up the configuration again and applied the web accent:
+
+```bash
+sudo cp /etc/pwnagotchi/config.toml /etc/pwnagotchi/config.toml.pre-web-theme.bak
+sudo nano /etc/pwnagotchi/config.toml
+```
+
+```toml
+[ui.web.theme]
+accent_r = 159
+accent_g = 232
+accent_b = 112
+```
+
+```bash
+sudo python3 - <<'PY'
+import tomllib
+with open('/etc/pwnagotchi/config.toml', 'rb') as f:
+    config = tomllib.load(f)
+print("TOML valid")
+print("Web theme:", config.get("ui", {}).get("web", {}).get("theme"))
+PY
+sudo systemctl restart pwnagotchi
+systemctl is-active pwnagotchi
+```
+
+The authenticated dashboard displayed the AEGIS green theme successfully.
+
+### 5. PiSugar 3 battery troubleshooting
+
+```bash
+sudo grep -A 8 '^\[main.plugins.pisugarx\]' /etc/pwnagotchi/default.toml
+sudo python3 - <<'PY'
+import tomllib
+with open('/etc/pwnagotchi/config.toml', 'rb') as f:
+    config = tomllib.load(f)
+plugin = config.get("main", {}).get("plugins", {}).get("pisugarx", {})
+for key in ("enabled", "lowpower_shutdown", "lowpower_shutdown_level",
+            "shutdown_delay", "max_charge_voltage_protection"):
+    print(f"{key}: {plugin.get(key, 'inherited from defaults')}")
+PY
+sudo grep -iE 'pisugar|lowpower|battery|shutdown' /etc/pwnagotchi/log/pwnagotchi.log | tail -n 30
+ls -l /dev/i2c*
+sudo i2cdetect -y 1             # Failed: i2cdetect not installed
+sudo apt update                 # Failed: no repository DNS via USB gadget
+sudo apt install -y i2c-tools   # Failed: unable to download dependencies
+```
+
+Both `smbus2` and `smbus` were already installed in the Pwnagotchi Python environment, allowing an offline targeted probe:
+
+```bash
+sudo /opt/.pwn/bin/python3 - <<'PY'
+import importlib.util
+for module in ("smbus2", "smbus"):
+    print(f"{module}: {'available' if importlib.util.find_spec(module) else 'not installed'}")
+PY
+
+sudo /opt/.pwn/bin/python3 - <<'PY'
+from smbus2 import SMBus
+devices = {0x57: "PiSugar battery controller", 0x68: "PiSugar RTC"}
+with SMBus(1) as bus:
+    for address, name in devices.items():
+        try:
+            bus.read_byte(address)
+            print(f"[DETECTED] 0x{address:02X} - {name}")
+        except OSError as error:
+            print(f"[NOT RESPONDING] 0x{address:02X} - {name}: {error}")
+PY
+```
+
+Both I²C addresses responded. The plugin initially reported "No PiSugar device was found", then "PiSugar3 is connected" and "PiSugar3 is ready", followed by one `read error[Errno 5]`. I inspected the service and log state:
+
+```bash
+sudo grep -iE 'pisugar|battery' /etc/pwnagotchi/log/pwnagotchi.log | tail -n 15
+sudo grep -iE 'PiSugar3 is ready|PiSugar3 is connected|PiSugar is not ready|No PiSugar device' /etc/pwnagotchi/log/pwnagotchi.log | tail -n 12
+sudo tail -n 40 /etc/pwnagotchi/log/pwnagotchi.log
+date '+%Y-%m-%d %H:%M:%S %Z'
+systemctl is-active pwnagotchi
+sudo journalctl -u pwnagotchi --since "5 minutes ago" --no-pager -n 40
+sudo stat -c 'Last log update: %y' /etc/pwnagotchi/log/pwnagotchi.log
+ps -eo pid,ppid,stat,etime,cmd | grep -E '[p]wnagotchi|[p]isugar'
+sudo systemctl status pwnagotchi --no-pager -l
+ps -p <PWNAGOTCHI_PYTHON_PID> -o pid,stat,nlwp,etime,%cpu,%mem,cmd
+systemctl list-units --all --type=service | grep -i pisugar
+```
+
+I then opened the PiSugarX dashboard through the authenticated local SSH tunnel and saw live battery data. The inherited defaults specify shutdown at 10% and a 45-second delay, but **I did not execute a real low-battery shutdown test**.
+
+### 6. Alfa AWUS036ACM software prerequisites
+
+```bash
+uname -r
+modinfo mt76x2u | head -n 12
+for file in mt7662_rom_patch.bin mt7662.bin; do
+    echo "Checking: $file"
+    find /lib/firmware -name "$file" -print
+done
+```
+
+Kernel `6.18.39+rpt-rpi-v8` contains the `mt76x2u` module, and I found both firmware files. I also mistakenly attempted to execute the compressed `.ko.xz` driver file and received `Permission denied`; this is a kernel module, not a shell program. I have not yet attached an Alfa adapter.
+
+### 7. Bluetooth controller, iPhone pairing and PAN networking
+
+```bash
+bluetoothctl list
+sudo systemctl status bluetooth --no-pager -l
+sudo rfkill list
+bluetoothctl show
+sudo bluetoothctl
+```
+
+During interactive pairing I used the applicable `bluetoothctl` commands:
+
+```text
+power on
+agent on
+default-agent
+pairable on
+discoverable on
+scan on
+devices
+pair <IPHONE_BLUETOOTH_MAC>
+trust <IPHONE_BLUETOOTH_MAC>
+info <IPHONE_BLUETOOTH_MAC>
+scan off
+discoverable off
+pairable off
+quit
+```
+
+I verified `Paired: yes`, `Trusted: yes`, and later `Bonded: yes`. I do not publish the phone's Bluetooth MAC or personal device name. An attempt to run `scan off` returned an error once; I continued by checking the actual controller state.
+
+I inspected plugin settings without printing credentials or phone identifiers:
+
+```bash
+sudo python3 - <<'PY'
+import tomllib
+for path in ("/etc/pwnagotchi/default.toml", "/etc/pwnagotchi/config.toml"):
+    with open(path, "rb") as f:
+        config = tomllib.load(f)
+    bt = config.get("main", {}).get("plugins", {}).get("bt-tether", {})
+    print(path, "keys:", sorted(bt.keys()))
+    print("enabled:", bt.get("enabled", "inherited"))
+    print("device profiles:", sorted(bt.get("devices", {}).keys()))
+PY
+nmcli -f NAME,TYPE,DEVICE connection show
+ip -br addr show bnep0
+sudo nmcli connection up "<IPHONE_BLUETOOTH_PROFILE>"
+ip -4 -br addr show bnep0
+nmcli -f NAME,TYPE,DEVICE connection show --active
+ip route
+```
+
+Manual profile activation succeeded and assigned a private Bluetooth PAN address. From the iPhone, I connected with Termius over SSH, then used a Termius local port forward to open `http://127.0.0.1:8080` in Safari.
+
+### 8. Bluetooth reconnection troubleshooting
+
+When automatic reconnection failed after I turned iPhone Bluetooth off and back on, I inspected and updated NetworkManager's profile:
+
+```bash
+nmcli -g connection.autoconnect connection show "<IPHONE_BLUETOOTH_PROFILE>"
+sudo nmcli connection modify "<IPHONE_BLUETOOTH_PROFILE>" connection.autoconnect yes
+nmcli -g connection.autoconnect connection show "<IPHONE_BLUETOOTH_PROFILE>"
+```
+
+I also verified that the Pwnagotchi `bt-tether` plugin was enabled with `auto_reconnect=true`, a 60-second retry interval and a 300-second failure cooldown. The next interruption test still failed without manual activation.
+
+```bash
+sudo grep -iE 'bt-tether|bluetooth|reconnect|PAN|NAP' /etc/pwnagotchi/log/pwnagotchi.log | tail -n 35
+sudo journalctl -u NetworkManager --since "10 minutes ago" --no-pager -n 60
+nmcli -f DEVICE,TYPE,STATE,CONNECTION device status
+nmcli -f NAME,TYPE,DEVICE connection show --active
+ip -4 -br addr show bnep0
+ip -4 route show dev bnep0
+bluetoothctl devices Connected
+bluetoothctl devices Paired
+bluetoothctl info <IPHONE_BLUETOOTH_MAC>
+sudo journalctl -u bluetooth -u NetworkManager --since "5 minutes ago" --no-pager -n 50
+sudo grep -iE 'bt-tether|NAP|reconnect|bluetooth' /etc/pwnagotchi/log/pwnagotchi.log | tail -n 25
+bluetoothctl show | grep -E 'Powered:|PowerState:|Discoverable:|Pairable:'
+sudo rfkill list bluetooth
+sudo bluetoothctl power on        # Failed: org.bluez.Error.Failed
+sudo dmesg -T | grep -iE 'bluetooth|hci0|brcm|firmware|uart|timeout' | tail -n 50
+sudo journalctl -u bluetooth --no-pager -n 40
+systemctl is-active bluetooth
+systemctl is-active hciuart
+```
+
+The logs showed NetworkManager BlueZ NAP I/O errors, `bt-tether` reporting a temporary NAP success without sustained connectivity, then `org.bluez.Error.NotReady: br-connection-adapter-not-powered`. The controller reported `Powered: no` without an `rfkill` block. Kernel `hci0` reported Broadcom hardware errors and HCI Reset opcode `0x0c03` timeouts (`-110`). A controlled reboot restored Bluetooth operation:
+
+```bash
+sudo reboot
+# Reconnected through my established USB SSH recovery path
+bluetoothctl show | grep 'Powered:'
+nmcli -f NAME,TYPE,DEVICE connection show --active
+ip -4 -br addr show bnep0
+```
+
+I verified iPhone management was working again. **I did not repeat the Bluetooth toggle/reconnection test afterward**, and I have not claimed this intermittent failure is permanently fixed.
+
+### 9. Closeout and outstanding work
+
+I elected to defer a further standalone battery endurance test and repeat Bluetooth-interruption test for this session. These decisions do **not** replace evidence for an automatic low-power shutdown, stable reconnection after an interrupted link, validated capture completeness, or a physical Alfa monitor-mode test.
+
+The project remains in **Testing**. I will return to these specific acceptance items when needed; I will preserve the USB recovery path and keep secret values out of the public repository.
