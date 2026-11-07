@@ -1,66 +1,48 @@
 # AEG-003 — Pwnagotchi
 
-**Status:** Testing (user-confirmed GitHub Project board status, 2026-11-06); functional prototype, outstanding validation
+**Phase:** Testing — working prototype; final acceptance items tracked below.  
+**Build date:** November 6, 2026 (America/Chicago)  
+**Purpose:** My portable, battery-powered wireless-security research platform for networks I own or am authorized to assess.
 
-## Purpose
-Document an authorized wireless security research hardware project.
+## My build
 
-## Next action
-Validate clock synchronization, existing capture integrity in Wireshark, service stability, battery safety/endurance, and secure management. See [build journal](docs/build-journal.md) and [test matrix](docs/test-matrix.md).
+| Item | Specification |
+|---|---|
+| Computer | Raspberry Pi Zero 2 W with soldered GPIO header |
+| Display | Waveshare 2.13-inch e-Paper HAT V4 |
+| Battery | PiSugar 3, 1200 mAh |
+| Storage | SanDisk 32 GB microSD |
+| Firmware | jayofelony Pwnagotchi 64-bit v2.9.5.8 |
+| Host machine | Windows 11 |
+| Hostname / on-screen identity | `aegis-pwn` |
 
-## Hardware and procurement — 2026-11-01
-- Ordered: dedicated Raspberry Pi Zero 2 W with pre-soldered GPIO header; PiSugar 3 1200mAh battery.
-- Already owned: Waveshare 2.13-inch e-Paper HAT V4.
-- Enclosure: custom 3D print after bench assembly and measurements; no enclosure ordered.
-- Confirm separate microSD card and compatible charging/data cable at inventory.
-- Intended use: authorized Wi-Fi research in owned/approved test environments.
+I flashed the community firmware with Raspberry Pi Imager, assembled the e-Paper display and PiSugar battery, and confirmed the face and device status render correctly. PiSugar powered the Pi without USB and initially displayed **BAT 52%**. I also confirmed that a packet capture exists in the configured handshake directory; its completeness has **not** been assessed.
 
-## Original arrival and bench-test plan (historical)
-1. Inventory and photograph components; verify revisions and GPIO/battery mechanical fit.
-2. Prepare supported community Pwnagotchi OS image on microSD; enable secure management access.
-3. Test e-paper display and battery monitoring before enclosure design.
-4. Measure stacked assembly for 3D-printed case; document build and results.
+## What I built and verified
 
-## Delivery log — 2026-11-06
-User reports arrival of the second Raspberry Pi Zero 2 W and second PiSugar battery. Existing Waveshare 2.13-inch e-Paper HAT V4 is in inventory. Label and store parts; no assembly, flashing, or development until explicitly resumed. Verify exact battery model during inventory.
+- **USB recovery:** Windows recognizes the Raspberry Pi USB RNDIS device, and I can manage the Pi over SSH. My private USB subnet is deliberately not published.
+- **Secure dashboard:** I configured Pwnagotchi's web interface to bind only to loopback (`127.0.0.1:8080`) with authentication. I access it through an SSH local port forward.
+- **AEGIS personality:** I configured custom facial expressions (two visibly observed) and the AEGIS green web-theme accent (`#9FE870`).
+- **Battery instrumentation:** I enabled PiSugarX, verified that the battery-controller and RTC I²C addresses respond, and viewed live telemetry in the plugin dashboard.
+- **iPhone management:** I paired/trusted my iPhone, activated a Bluetooth PAN profile, connected with Termius SSH, and opened the authenticated dashboard from Safari over a Termius SSH forward.
+- **Bluetooth recovery:** I diagnosed BlueZ/HCI controller errors during interrupted tethering. A controlled reboot restored iPhone connectivity and management.
+- **Future dual-radio design:** I selected the **Alfa AWUS036ACM** as a candidate dedicated monitor-mode adapter, with onboard Wi-Fi reserved for LAN management. The installed `mt76x2u` driver and both requisite firmware files are present; no physical Alfa integration has been tested.
 
-## Build session 1 — 2026-11-06 (initial preparation notes; completed results below)
-- User confirmed two PiSugar 3 1200mAh batteries received; one allocated to AEG-003.
-- Priority changed: Pwnagotchi active; Sentinel deferred.
-- Hardware: Pi Zero 2 W with soldered header, Waveshare 2.13-inch V4, PiSugar 3.
-- Software selection: jayofelony Pwnagotchi 64-bit Raspberry Pi Zero 2 W image; source https://github.com/jayofelony/pwnagotchi/releases. PiSugar reference https://docs.pisugar.com/docs/product-wiki/pwnagotchi/intro.
-- Next: verify microSD and host OS; download and flash verified image; no boot or hardware testing completed yet.
+## What remains open
 
-## Build session 1 — firmware selection (historical)
-- Firmware asset validated: `pwnagotchi-64bit-2.9.5.8.img.xz` from jayofelony release `v2.9.5.8` (published 2026-08-18).
-- Download: https://github.com/jayofelony/pwnagotchi/releases/download/v2.9.5.8/pwnagotchi-64bit-2.9.5.8.img.xz
-- Host: Windows 11; Raspberry Pi Imager installed.
-- Next: flash 32GB SanDisk microSD with custom image and verify write; flashing not yet reported complete.
+- I **deferred** an additional battery endurance test and a repeat Bluetooth interruption test.
+- Automatic shutdown at the inherited PiSugar 10% threshold and 45-second cutoff has **not** been behaviorally verified.
+- Bluetooth tethering after a transient radio interruption previously failed to reconnect automatically; it later worked after a reboot. I have not claimed the intermittent failure is resolved.
+- Timezone and clock were corrected manually to Central Time, but automatic time synchronization remains unverified.
+- Capture parsing/handshake completeness, long-term reliability, and enclosure design remain future acceptance items.
 
-## First successful display boot — 2026-11-06
-- Photo evidence supplied by user: Raspberry Pi Zero 2 W powered via USB, Waveshare 2.13-inch V4 showing Pwnagotchi face and `aegis-pwn` identity.
-- On-screen readings: `CH 00`, `APS 0 (00)`, `BAT 0%`, `UP 00:00:00`, `AUTO`; initial startup readings, not yet independently validated.
-- Verified: image boots sufficiently to render display and custom identity. USB Ethernet management and Wi-Fi behavior not verified.
-- PiSugar 3 not installed yet; battery telemetry not tested. Before wireless operation, verify passive settings and authorized-lab scope. Next milestone: USB management access and PiSugar hardware fit/telemetry.
+I will not mark the project fully complete until I explicitly close or accept these remaining items. See my [chronological build journal and command record](docs/build-journal.md) and [test matrix](docs/test-matrix.md).
 
-## Battery power and telemetry verified — 2026-11-06
-- Hardware stack: Raspberry Pi Zero 2 W, Waveshare 2.13-inch V4 e-paper HAT, PiSugar 3 1200mAh UPS.
-- PiSugar 3 boot procedure: short press then long press; the Pi booted without USB attached.
-- Pwnagotchi displayed battery state of charge **52%**; confirms initial software battery telemetry and battery-powered boot.
-- Previously validated: functional Pwnagotchi display, updating uptime and application status, USB RNDIS network and SSH (working interface addresses verified; site-specific addresses intentionally omitted from public documentation).
-- Remaining: measure endurance, verify graceful shutdown/low-battery behavior, inspect enclosure dimensions and design 3D-printable case.
+## Data-handling and reproducibility policy
 
-## Network documentation policy
-USB RNDIS management uses two compatible static IPv4 addresses on a dedicated point-to-point subnet. The exact addressing is environment-specific and should be kept in private operational notes. Example only: Windows `10.0.0.1/24`, Pi `10.0.0.2/24` (not the addresses validated in this build). Do not publish Wi-Fi credentials, SSH private keys, or sensitive capture files.
+I document actual command syntax with generic placeholders where necessary. **I do not publish** private USB/Bluetooth IP addresses, Bluetooth MAC addresses, personal device names, actual Wi-Fi SSIDs, passwords, SSH keys, or raw capture files. Loopback `127.0.0.1` and standard I²C addresses are included because they are non-sensitive technical constants.
 
-## Testing milestone — 2026-11-06
-The project owner moved AEG-003 to **Testing** on the GitHub Project board. Firmware v2.9.5.8, Waveshare V4, PiSugar 3 standalone startup with a 52% displayed charge, USB RNDIS/SSH access, and existence of one saved .pcap are verified. Wireshark is installed on the Windows host; capture interpretation, safe shutdown, battery endurance, and time synchronization remain pending. The device's log timestamps were inconsistent with the build date. See the detailed [build journal](docs/build-journal.md) and [test/acceptance matrix](docs/test-matrix.md). Captures, real SSIDs, network identifiers, and host-specific addresses are intentionally not published.
+### References
 
-## Clock correction and next features — 2026-11-06
-System clock initially reported August 18 in Europe/London and unsynchronized. Corrected manually via the Windows SSH host to **2026-11-06 21:02 CST**, timezone `America/Chicago`. NTP shows active but `System clock synchronized: no`; automatic sync, reboot persistence and upstream time-source access remain to test. Next planned features: secure local USB web UI, optional Bluetooth phone tethering, custom AEGIS personality/display, battery safety/runtime testing, and optional session analytics. [Journal](docs/build-journal.md) · [Test matrix](docs/test-matrix.md).
-
-## Secured web dashboard — 2026-11-06
-Pwnagotchi service remained active following restart. Web interface now listens on `127.0.0.1:8080` with authentication enabled; user verified successful credentials over SSH tunnel from Windows. No password or private interface address committed. Test T15 is **Passed**. Next: AEGIS personality and face customization with reversible configuration changes.
-
-## AEGIS theme milestone — 2026-11-06
-Custom `[ui.web.theme]` accent set to RGB `159, 232, 112` (`#9FE870`). User confirmed web theme working and dashboard accessible. See [build journal](docs/build-journal.md) and [test matrix](docs/test-matrix.md). Battery safety and Bluetooth management remain pending.
+- [jayofelony Pwnagotchi v2.9.5.8](https://github.com/jayofelony/pwnagotchi/releases/tag/v2.9.5.8)
+- [PiSugar Pwnagotchi documentation](https://docs.pisugar.com/docs/product-wiki/pwnagotchi/intro)
