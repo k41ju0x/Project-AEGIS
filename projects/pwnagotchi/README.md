@@ -1,6 +1,6 @@
 # AEG-003 — Pwnagotchi
 
-**Phase:** Testing — working prototype; final acceptance items tracked below.  
+**Phase:** Operational build with outstanding acceptance limitations documented below.  
 **Build date:** November 6, 2026 (America/Chicago)  
 **Purpose:** My portable, battery-powered wireless-security research platform for networks I own or am authorized to assess.
 
@@ -16,7 +16,7 @@
 | Host machine | Windows 11 |
 | Hostname / on-screen identity | `aegis-pwn` |
 
-I flashed the community firmware with Raspberry Pi Imager, assembled the e-Paper display and PiSugar battery, and confirmed the face and device status render correctly. PiSugar powered the Pi without USB and initially displayed **BAT 52%**. I also confirmed that a packet capture exists in the configured handshake directory; its completeness has **not** been assessed.
+I flashed the community firmware with Raspberry Pi Imager, assembled the e-Paper display and PiSugar battery, and confirmed the face and device status render correctly. PiSugar powered the Pi without USB and initially displayed **BAT 52%**. I verified nine stored PCAPNG files and structurally parsed all nine; seven contained 439 packet-bearing blocks in total. WPA handshake completeness has **not** been established.
 
 ## What I built and verified
 
@@ -26,17 +26,17 @@ I flashed the community firmware with Raspberry Pi Imager, assembled the e-Paper
 - **Battery instrumentation:** I enabled PiSugarX, verified that the battery-controller and RTC I²C addresses respond, and viewed live telemetry in the plugin dashboard.
 - **iPhone management:** I paired/trusted my iPhone, activated a Bluetooth PAN profile, connected with Termius SSH, and opened the authenticated dashboard from Safari over a Termius SSH forward.
 - **Bluetooth recovery:** I diagnosed BlueZ/HCI controller errors during interrupted tethering. A controlled reboot restored iPhone connectivity and management.
-- **Future dual-radio design:** I selected the **Alfa AWUS036ACM** as a candidate dedicated monitor-mode adapter, with onboard Wi-Fi reserved for LAN management. The installed `mt76x2u` driver and both requisite firmware files are present; no physical Alfa integration has been tested.
+- **Dual-radio expansion:** I considered the Alfa AWUS036ACM and verified software prerequisites, but subsequently decided it is **not required** for this build because Bluetooth provides management connectivity. No Alfa hardware was integrated.
 
 ## What remains open
 
-- I **deferred** an additional battery endurance test and a repeat Bluetooth interruption test.
+- I completed a 12+ minute PiSugar battery-only stability check with no observed new restarts or undervoltage flags. Longer endurance and an additional Bluetooth interruption test remain deferred.
 - Automatic shutdown at the inherited PiSugar 10% threshold and 45-second cutoff has **not** been behaviorally verified.
 - Bluetooth tethering after a transient radio interruption previously failed to reconnect automatically; it later worked after a reboot. I have not claimed the intermittent failure is resolved.
 - Timezone and clock were corrected manually to Central Time, but automatic time synchronization remains unverified.
-- Capture parsing/handshake completeness, long-term reliability, and enclosure design remain future acceptance items.
+- PCAPNG basic structural parsing passed; WPA handshake completeness, extended reliability, and enclosure design remain future acceptance items.
 
-I will not mark the project fully complete until I explicitly close or accept these remaining items. See my [chronological build journal and command record](docs/build-journal.md) and [test matrix](docs/test-matrix.md).
+I consider the operational build complete; unresolved formal acceptance tests remain documented until I explicitly close or accept them. See my [chronological build journal and command record](docs/build-journal.md) and [test matrix](docs/test-matrix.md).
 
 ## Data-handling and reproducibility policy
 
