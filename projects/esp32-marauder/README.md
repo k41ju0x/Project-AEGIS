@@ -14,4 +14,4 @@ I plan to evaluate an ESP32-based wireless security research platform in owned o
 - Record setup steps, commands, firmware versions, observations, test results and mitigations.
 - Evaluate power, portability, UI options and relevant physical enclosure considerations.
 
-**Current decision:** This is **AEG-005**, a separate ESP32 project from **AEG-004 Portable LattePanda Remote Access Device**. This ID replaces the former AEG-005 LattePanda label, which was merged into AEG-004. No hardware acquisition or active planning is approved.
+**Current decision:** This is **AEG-005**, a separate ESP32 project from **AEG-004 Portable LattePanda Remote Access Device**. This project is independent of **AEG-004 Portable LattePanda Remote Access Device**. No hardware acquisition or active planning is approved.
