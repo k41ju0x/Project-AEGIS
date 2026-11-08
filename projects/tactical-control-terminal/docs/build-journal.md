@@ -100,7 +100,7 @@ sudo reboot                 # Reboot after applying updates when appropriate
 **Starting condition:** Kali could connect over SSH using an authorized key. Password-based login from Termius failed. Connection-specific OpenSSH configuration was checked on the Pi:
 
 ```bash
-sudo sshd -T -C user=aegis,host=<TCT_HOSTNAME>,addr=127.0.0.1 \
+sudo sshd -T -C 'user=aegis,host=<TCT_HOSTNAME>,addr=127.0.0.1' \
   | grep -E '^(passwordauthentication|pubkeyauthentication|kbdinteractiveauthentication) '
 ```
 
