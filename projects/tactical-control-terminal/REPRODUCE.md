@@ -29,12 +29,12 @@ On the Pi, in the `aegis` account:
 ```bash
 cd ~
 git clone https://github.com/k41ju0x/Project-AEGIS.git aegis-portfolio
-mkdir -p ~/aegis-tct
-cp -a ~/aegis-portfolio/projects/tactical-control-terminal/src ~/aegis-tct/
-cp ~/aegis-portfolio/projects/tactical-control-terminal/requirements.txt ~/aegis-tct/
-python3 -m venv ~/aegis-tct/.venv
-~/aegis-tct/.venv/bin/python -m pip install -r ~/aegis-tct/requirements.txt
-~/aegis-tct/.venv/bin/python -m pip show Flask meshtastic
+mkdir -p ~/tct-app
+cp -a ~/aegis-portfolio/projects/tactical-control-terminal/src ~/tct-app/
+cp ~/aegis-portfolio/projects/tactical-control-terminal/requirements.txt ~/tct-app/
+python3 -m venv ~/tct-app/.venv
+~/tct-app/.venv/bin/python -m pip install -r ~/tct-app/requirements.txt
+~/tct-app/.venv/bin/python -m pip show Flask meshtastic
 ```
 
 If `python3 -m venv` fails, install the version-appropriate `python3-venv` package on the supported OS. The exact pinned dependencies are in the repository `requirements.txt`. Installation requires package network access.
@@ -44,8 +44,8 @@ If `python3 -m venv` fails, install the version-appropriate `python3-venv` packa
 The published `src/app.py` starts Flask on **127.0.0.1:5000**, initializes the bounded in-memory synthetic packet store and labels events as test data.
 
 ```bash
-cd ~/aegis-tct/src
-~/aegis-tct/.venv/bin/python app.py
+cd ~/tct-app/src
+~/tct-app/.venv/bin/python app.py
 ```
 
 From a **second SSH session to the Pi**:
@@ -71,8 +71,8 @@ After=network.target
 [Service]
 Type=simple
 User=aegis
-WorkingDirectory=/home/aegis/aegis-tct/src
-ExecStart=/home/aegis/aegis-tct/.venv/bin/python /home/aegis/aegis-tct/src/app.py
+WorkingDirectory=/home/aegis/tct-app/src
+ExecStart=/home/aegis/tct-app/.venv/bin/python /home/aegis/tct-app/src/app.py
 Restart=on-failure
 RestartSec=5
 
