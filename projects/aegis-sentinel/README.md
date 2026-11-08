@@ -1,6 +1,6 @@
 # AEG-016 — AEGIS Sentinel
 
-**Status:** Hardware received (2026-11-06); build deferred by user while AEG-003 Pwnagotchi is active
+**Status:** Hardware received (2026-11-06); I deferred the build to focus on other AEGIS priorities
 **Battery decision (confirmed 2026-11-01):** Desktop UPS + portable operation required. Select PiSugar 3 1200mAh as preferred battery, pending shared-I2C and Whisplay electrical/mechanical bench validation. Desktop external charging via PiSugar; software battery telemetry and safe shutdown. Do not assume uninterrupted upstream desktop AI/network access during outages. Estimated runtime to be measured with LCD/audio/Wi-Fi workloads. PiSugar 3 battery ordered 2026-11-01.
 **Controller decision (confirmed 2026-11-01):** Raspberry Pi Zero 2 W, with pre-soldered 40-pin GPIO header. Remote AI inference on existing Windows desktop; no dedicated Pi 5 purchase for Sentinel.
 **Track:** AI, Embedded Systems, Home Automation, Cybersecurity Research
@@ -28,7 +28,7 @@ A compact desktop AI companion with a hybrid personality: warm, expressive, and 
 - Phase A: Whisplay HAT, dedicated Pi Zero 2 W **with 40-pin header**, PiSugar 3 1200mAh UPS, microSD and power supply if not already owned. Confirm actual stock, shipping, board/header compatibility, and codec revision.
 - Phase B: verify LCD, dual mic capture, speaker, LED and button on current Raspberry Pi OS and PiSugar driver; then implement local animated face and push-to-talk.
 - Phase C: measure board assembly, select 3D-print material and enclosure, add secure service integrations.
-- No purchases have been placed by this GitHub registration.
+- The planned Pi Zero 2 W, Whisplay HAT, and PiSugar battery have been received; any additional hardware purchase requires a new decision.
 
 ## Acceptance criteria
 - Boots headless and auto-starts UI.
@@ -51,4 +51,4 @@ M0 concept and scope; M1 hardware procurement and inventory; M2 Whisplay driver 
 Ordered: Raspberry Pi Zero 2 W with soldered GPIO header, PiSugar 3 1200mAh, PiSugar Whisplay HAT. Existing microSD and charger available. Delivery date not yet confirmed. Defer 3D-printed enclosure until hardware assembly and physical measurements.
 
 ## Delivery log — 2026-11-06
-User reports arrival of two Raspberry Pi Zero 2 W boards, one PiSugar Whisplay HAT, and two PiSugar batteries (shared shipment with AEG-003). Allocate one Pi, one battery, and the Whisplay HAT to Sentinel. Verify battery model, board markings, header, accessories, and condition before assembly; no bench tests performed yet.
+I received two Raspberry Pi Zero 2 W boards, a PiSugar Whisplay HAT, and two PiSugar batteries (shared shipment with AEG-003). I reserved one Pi, one battery, and the Whisplay HAT for Sentinel. Verify battery model, board markings, header, accessories, and condition before assembly; no bench tests performed yet.
