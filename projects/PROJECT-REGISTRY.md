@@ -6,7 +6,7 @@
 
 ## Reconciled ID decisions
 
-- **AEG-004** — Portable LattePanda Remote Access Device: merges earlier AEG-004 remote access, former AEG-005 LattePanda, and former AEG-010 Raspberry Pi drop box/node, using **LattePanda** as the planned platform.
+- **AEG-004** — Portable LattePanda Remote Access Device, using LattePanda as the planned platform.
 - **AEG-005** — ESP32 Marauder Lab; **AEG-010** — ESP32 GPS Wardriver. Former remote-access uses of those numbers are consolidated under AEG-004 and noted only as history.
 - **AEG-002 Meshtastic, AEG-006 Tactical Control Terminal, AEG-016 Sentinel**, and the other established distinct concepts retain their previous IDs.
 - **AEG-018–AEG-020** — Dedicated Wireless Analysis Station, Standalone Network Diagnostics Console, and AEGIS Project Telemetry Integrations; all parked.
