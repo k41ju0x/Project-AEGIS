@@ -15,7 +15,7 @@
 |---|---|---|---|
 | AEG-001 | Project NEXUS | Existing / separate | Home-lab repository; review tracked in [issue #1](https://github.com/k41ju0x/Project-AEGIS/issues/1) |
 | AEG-002 | Meshtastic — RAK4631 | Hardware ordered | Planning [#2](https://github.com/k41ju0x/Project-AEGIS/issues/2), build [#5](https://github.com/k41ju0x/Project-AEGIS/issues/5) |
-| AEG-003 | Pwnagotchi | Operational build; acceptance follow-ups documented | [Issue #3](https://github.com/k41ju0x/Project-AEGIS/issues/3) · [Build journal](projects/pwnagotchi/docs/build-journal.md) |
+| AEG-003 | Pwnagotchi | **Completed November 7, 2026**; optional follow-ups documented | [Issue #3](https://github.com/k41ju0x/Project-AEGIS/issues/3) · [Build journal](projects/pwnagotchi/docs/build-journal.md) |
 | AEG-004 | Portable LattePanda Remote Access Device | Parked | Portable headless\/GUI remote administration and assessment device; [issue #4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
 | AEG-005 | ESP32 Marauder Lab | Parked | [Scope](projects/esp32-marauder/README.md) |
 | AEG-006 | Tactical Control Terminal | Built; live Meshtastic integration pending | [Issue #6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
@@ -51,7 +51,7 @@ I am not planning a second remote-access platform. The newly assigned AEG-005 ES
 
 ## Current execution focus
 
-- **AEG-003:** Working Pwnagotchi build; capture, power and wireless-management acceptance findings are documented, including deferred items.
+- **AEG-003:** Completed November 7, 2026; capture, power and wireless-management evidence and deferred follow-ups are documented.
 - **AEG-002 + AEG-006:** Resume RAK4631 inventory, firmware validation and Tactical Control Terminal live integration when the ordered kit arrives.
 - **AEG-016:** Hardware received; companion build deferred.
 - **AEG-004, AEG-005, AEG-007–AEG-015 and AEG-017–AEG-020:** Parked, without new procurement or GitHub Project board items.
