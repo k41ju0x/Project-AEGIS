@@ -1,19 +1,19 @@
-# AEG-005 — Portable Wireless Assessment Platform
+# AEG-004 — Portable LattePanda Remote Access Device | Detailed Design Charter
 
-**Status:** Concept / architecture selection
-**Build strategy:** Entirely new hardware build (greenfield); do not assume reuse of old LattePanda or peripherals.
+**Status:** Parked concept / design research only — not a separate project from AEG-004
+**Build strategy:** Greenfield LattePanda device; design only, with no purchase or implementation approval. This charter supplements [AEG-004](../remote-access-device/README.md).
 **Selected architecture:** Headless LattePanda x86 computer, remotely administered from a laptop/phone. Exact model pending selection.
 **Design priority:** Maximum sustained compute performance over portability, battery runtime, weight, and cost.
-**Enclosure direction:** Rugged Pelican-style protective case; user accepts active fans and larger form factor. Exact model and ingress-protection strategy TBD.
+**Enclosure direction:** Rugged Pelican-style protective case; I accept active fans and larger form factor. Exact model and ingress-protection strategy TBD.
 **Power requirement:** Both wall-powered and standalone battery-powered operation. Full sustained performance on AC; target full performance on battery subject to measured load and safe battery design.
-**OS deployment decision:** Native Kali Linux installed directly on the LattePanda internal NVMe SSD, booting via UEFI, with headless SSH/Tailscale management. No planned Windows dual boot or Ubuntu host. Ubuntu 24.04 with a Kali VM is a contingency only if selected Sigma hardware fails compatibility validation. User previously installed and booted Kali directly on a LattePanda 3 Delta; this is precedent, not Sigma 2 certification.
+**OS deployment decision:** Native Kali Linux installed directly on the LattePanda internal NVMe SSD, booting via UEFI, with headless SSH/Tailscale management. No planned Windows dual boot or Ubuntu host. Ubuntu 24.04 with a Kali VM is a contingency only if selected Sigma hardware fails compatibility validation. I previously installed and booted Kali directly on a LattePanda 3 Delta; this is precedent, not Sigma 2 certification.
 **Battery endurance target:** 8 hours at a documented active assessment workload; support an externally attachable backup battery/power bank for additional runtime, subject to verified voltage, current, continuous wattage and power-path compatibility.
 
 ## Mission
 Design and validate a modular, portable Kali Linux wireless security assessment workstation for authorized wireless discovery, GPS-correlated surveys, controlled WPA2/WPA3 lab security evaluation, and secure remote management.
 
 ## Historical reference
-Owner's four-page *Remote Access Device Build* PDF documents an older LattePanda Delta V3, Alfa AC1900, GlobalSat BU-353S4, cellular connectivity, Kali Linux, Tailscale, GPSD and Kismet system. Use as inspiration, not as a current hardware BOM or validated installation guide.
+My four-page *Remote Access Device Build* PDF documents an older LattePanda Delta V3, Alfa AC1900, GlobalSat BU-353S4, cellular connectivity, Kali Linux, Tailscale, GPSD and Kismet system. Use as inspiration, not as a current hardware BOM or validated installation guide.
 
 ## Candidate subsystems (not yet selected or purchased)
 - **LattePanda x86 SBC (selected platform family)**; evaluate current models for performance, Kali compatibility, power draw, cooling and expansion
