@@ -1,6 +1,6 @@
 # AEG-006 Engineering Build Journal
 
-This journal records the Raspberry Pi 5 / 10-inch touchscreen Tactical Control Terminal. It is reconstructed from verified sessions; it is not a verbatim terminal transcript. Photos mentioned below are pending upload and are not represented as committed artifacts.
+This journal records the Raspberry Pi 5 / 10-inch touchscreen Tactical Control Terminal. I reconstructed this journal from verified sessions; it is not a verbatim terminal transcript. Photos mentioned below are pending upload and are not represented as committed artifacts.
 
 ## Phase 0 — Install the correct Raspberry Pi OS image (before assembly and SSH recovery)
 
@@ -23,7 +23,7 @@ getconf LONG_BIT             # Confirm 64-bit userspace (expected: 64)
 command -v chromium          # Check browser presence (actual path may vary)
 ```
 
-**Evidence and accuracy:** Debian 13 Trixie, working graphical desktop, and Chromium kiosk were verified during the build. This is a reproducible installation checklist; the exact Raspberry Pi Imager selections from the original imaging session.
+**Evidence and accuracy:** Debian 13 Trixie, working graphical desktop, and Chromium kiosk were verified during the build. This is a reproducible installation checklist; the exact Raspberry Pi Imager selections from the original imaging session were not fully captured.
 
 <img width="680" height="482" alt="Pi 5 OS Selection" src="https://github.com/user-attachments/assets/47c84773-65bc-4ee4-a0aa-4dcf1d51d4b1" />
 
@@ -213,3 +213,9 @@ Await starter kit. Inventory, configure Meshtastic US915, bench test via phone, 
 Record goal, actual commands, reason for each command, full redacted output, what the output means, error and resolution, test pass/fail, source commit and embedded original photo. Never fabricate output or imply photos are present before they are committed.
 
 Tracking: https://github.com/k41ju0x/Project-AEGIS/issues/6
+
+## Reproduction status and source cross-reference (2026-11-08)
+
+I audited the original v0.6 project source and identified that the initial journal did not preserve every shell command used to configure its virtual environment, systemd unit, and Chromium kiosk. Rather than presenting guessed commands as my actual past terminal history, I wrote a separate [source-grounded reproduction guide](../REPRODUCE.md) with setup, `pip` dependency installation, local API checks, an **example** systemd unit, an **example** labwc kiosk autostart, expected outputs and explicit gaps requiring fresh-install validation.
+
+The original build results above remain the historical record; the separate guide is a **procedure to repeat**, not a declaration that its reconstructed lines were executed verbatim during the original build. Its accuracy should be confirmed on a clean microSD/second Pi before describing it as end-to-end reproducible.
