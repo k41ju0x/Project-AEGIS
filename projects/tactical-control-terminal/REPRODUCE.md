@@ -86,7 +86,7 @@ sudo journalctl -u aegis-mesh.service --no-pager -n 30
 curl -fsS http://127.0.0.1:5000/api/status
 ```
 
-If the user/home path differs, **edit the unit first**. Do not make the Flask development server publicly reachable. The packaged source is a prototype; production exposure requires a hardened deployment and authentication.
+If the account name or home directory differs, **edit the unit first**. Do not make the Flask development server publicly reachable. The packaged source is a prototype; production exposure requires a hardened deployment and authentication.
 
 ## 5. Local touchscreen kiosk (example to reproduce the original approach)
 
