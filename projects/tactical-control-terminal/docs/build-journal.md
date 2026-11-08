@@ -1,5 +1,7 @@
 # AEG-006 Engineering Build Journal
 
+
+> **Sanitization note (2026-11-08):** I replaced the actual host identifier with `<TCT_HOSTNAME>` and normalized hostname-derived local application paths to the illustrative directory `~/tct-app`. Paths shown in historical examples may differ from the folder originally used on the device. For a new installation, follow the consistent paths in the [reproduction guide](../REPRODUCE.md); this edit does not claim that my original commands used the normalized folder.
 This journal records the Raspberry Pi 5 / 10-inch touchscreen Tactical Control Terminal. I reconstructed this journal from verified sessions; it is not a verbatim terminal transcript. Photos mentioned below are pending upload and are not represented as committed artifacts.
 
 ## Phase 0 — Install the correct Raspberry Pi OS image (before assembly and SSH recovery)
