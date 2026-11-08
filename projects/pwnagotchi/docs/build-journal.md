@@ -1,6 +1,6 @@
 # AEG-003 — Pwnagotchi Build Journal
 
-**Project phase:** Testing (I moved the board item on 2026-11-06)  
+**Project phase:** Complete
 **Hardware:** Raspberry Pi Zero 2 W (soldered 40-pin GPIO), Waveshare 2.13-inch e-Paper HAT V4, PiSugar 3 1200mAh, SanDisk 32GB microSD  
 **Host:** Windows 11  
 **Scope:** Owned or explicitly authorized wireless networks only. Raw captures, client MACs, SSIDs, credentials and private infrastructure details are excluded from the public repository.
