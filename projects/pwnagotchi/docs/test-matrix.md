@@ -8,7 +8,7 @@ I mark **Pass** only when I observed the behavior; **Partial** when a prerequisi
 |---|---|---|---|
 | T01 | Pwnagotchi firmware boot | Pass | I booted jayofelony 64-bit v2.9.5.8 on Pi Zero 2 W |
 | T02 | Waveshare V4 display | Pass | I observed faces, uptime, and status updating |
-| T03 | Identity | Pass | The screen showed `aegis-pwn` |
+| T03 | Identity | Pass | The screen showed `<PWNAGOTCHI_HOSTNAME>` |
 | T04 | USB RNDIS | Pass | Windows detected the USB network device |
 | T05 | USB SSH | Pass | I connected to the Pi using my established private USB link |
 | T06 | PiSugar standalone power | Pass | I booted on PiSugar without USB after its short/long button sequence |
@@ -45,6 +45,6 @@ See the [build journal](build-journal.md) for my exact executed commands, observ
 
 | T27 | Manual safe shutdown and return to service | Pass | I ran `sudo shutdown -h now`, restarted the Pi, reconnected through Termius, confirmed `pwnagotchi` active and approximately one-minute uptime; PiSugar automatic low-battery cutoff remains untested |
 
-| T28 | e-Paper live rendering after manual shutdown/restart | Pass | I captured two photos showing `aegis-pwn`, two different facial expressions, and changed screen messages after restarting; private PAN address is excluded from public docs; the on-screen uptime counter was 00:00:00 in both photographs |
+| T28 | e-Paper live rendering after manual shutdown/restart | Pass | I captured two photos showing `<PWNAGOTCHI_HOSTNAME>`, two different facial expressions, and changed screen messages after restarting; private PAN address is excluded from public docs; the on-screen uptime counter was 00:00:00 in both photographs |
 
 | T29 | Live USB-to-PiSugar transition and 10-minute battery stability | Pass | I unplugged USB around 09:19 and remained battery-powered through 09:31:43 (12+ minutes); OS uptime 28 minutes, `throttled=0x0`, Pwnagotchi active, `NRestarts=1` unchanged; no observed reboot |
