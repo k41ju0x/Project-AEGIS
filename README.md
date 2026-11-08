@@ -17,7 +17,7 @@
 ## Mission
 Research, design, build, test, and document cybersecurity technologies and experimental systems through repeatable hands-on engineering. Project Aegis is the **portfolio hub**, not a monolithic code repository.
 
-## Project Index
+## Project Index — First 10 Registered Projects
 
 | ID | Initiative | Focus | Link |
 |---|---|---|---|
@@ -27,8 +27,12 @@ Research, design, build, test, and document cybersecurity technologies and exper
 | AEG-004 | **Portable LattePanda Remote Access Device** (Sigma 32GB ordered) | Consolidated authorized headless/GUI remote management | [Unified project scope](projects/remote-access-device/README.md) |
 | AEG-005 | **ESP32 Marauder Lab** (parked) | ESP32 wireless research | [Project scope](projects/esp32-marauder/README.md) |
 | AEG-006 | **Tactical Control Terminal** | Raspberry Pi 5 + Touch Display 2 / Meshtastic base station (in progress) | [v0.6 project overview](projects/tactical-control-terminal/README.md) · [Build journal](projects/tactical-control-terminal/docs/build-journal.md) |
+| AEG-007 | **RFID/NFC Security Lab** (parked) | RFID/NFC technology and authorized security research | [Project notes](projects/rfid-nfc/README.md) |
+| AEG-008 | **OpenWrt Rogue AP / DIY Wi-Fi Pineapple Lab** (parked) | Controlled Wi-Fi access point and wireless defense testing | [Project notes](projects/openwrt-rogue-ap/README.md) |
+| AEG-009 | **Custom Reconnaissance Toolkit** (parked) | Modular, reproducible authorized reconnaissance tooling | [Project notes](projects/custom-recon-toolkit/README.md) |
+| AEG-010 | **ESP32 GPS Wardriver** (parked) | GPS-assisted Wi-Fi observation and diagnostics | [Project scope](projects/esp32-gps-wardriver/README.md) |
 
-See **[PROJECTS.md](PROJECTS.md)** for the single canonical registry (AEG-001–AEG-020) and **[FUTURE-IDEAS.md](FUTURE-IDEAS.md)** for numbered parked ideas. **AEG-005 = ESP32 Marauder, AEG-010 = ESP32 GPS Wardriver, and AEG-021 is the next new ID.** Numbering a parked idea does not create a board card or approve a purchase.
+See **[PROJECTS.md](PROJECTS.md)** for the single canonical registry (AEG-001–AEG-020) and **[FUTURE-IDEAS.md](FUTURE-IDEAS.md)** for numbered parked ideas. These are the **first ten IDs, not an execution ranking**. AEG-002 and AEG-006 remain the immediate mesh-integration priorities; AEG-004 hardware is ordered but development is deferred. **AEG-005 = ESP32 Marauder, AEG-010 = ESP32 GPS Wardriver, and AEG-021 is the next new ID.** Listing a parked idea does not add a project-board card or represent build approval or a parts purchase.
 
 ## Documentation Framework
 
