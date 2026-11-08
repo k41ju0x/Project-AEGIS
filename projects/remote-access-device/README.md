@@ -12,7 +12,7 @@ I plan to design a portable, high-performance, authorized remote administration 
 - Former AEG-005 Portable LattePanda Platform
 - Former AEG-010 Raspberry Pi Remote Access Node / drop box
 
-**AEG-005 and AEG-010 are retired aliases. I will not build a separate Raspberry Pi drop box.**
+**These former project names have been merged into AEG-004, but the IDs AEG-005 and AEG-010 are now reassigned to ESP32 Marauder and ESP32 GPS Wardriver. I will not build a separate Raspberry Pi drop box.**
 
 ## Preliminary concept (subject to research)
 
@@ -38,4 +38,4 @@ Use only devices, infrastructure and networks I own or have explicit permission 
 
 ## Current decision
 
-**This project remains parked.** I am prioritizing existing AEGIS projects and am not buying anything for AEG-004 now. All previous AEG-005 and AEG-010 references should point here.
+**This project remains parked.** I am prioritizing existing AEGIS projects and am not buying anything for AEG-004 now. Historical references to the old LattePanda/drop-box concepts should point here; current AEG-005 and AEG-010 refer to their ESP32 projects.
