@@ -1,7 +1,7 @@
 # AEG-003 — Test and Acceptance Matrix
 
-**Last documented session:** 2026-11-06 (Central Time)  
-**Project phase:** Testing  
+**Last documented session:** 2026-11-07 (Central Time)  
+**Project phase:** Operational build; formal acceptance limitations remain open  
 I mark **Pass** only when I observed the behavior; **Partial** when a prerequisite passed but final acceptance remains open; **Deferred** when I chose not to repeat a test this session. An intermittent failure remains documented even if a later reboot restored service.
 
 | Test | Check | Status | My evidence / follow-up |
@@ -13,13 +13,13 @@ I mark **Pass** only when I observed the behavior; **Partial** when a prerequisi
 | T05 | USB SSH | Pass | I connected to the Pi using my established private USB link |
 | T06 | PiSugar standalone power | Pass | I booted on PiSugar without USB after its short/long button sequence |
 | T07 | PiSugar battery telemetry | Pass (live display) | I observed initial BAT 52% and subsequently saw data in the PiSugarX dashboard; an earlier I/O error was recorded |
-| T08 | Saved capture exists | Pass (existence only) | I found a .pcap in `/etc/pwnagotchi/handshakes/` |
+| T08 | Saved capture exists | Pass (existence only) | I found nine `.pcapng` files in `/etc/pwnagotchi/handshakes/` |
 | T09 | PCAPNG structural and packet record validation | Pass (structural only) | I checked all nine PCAPNG block structures: 9/9 pass, 439 packet-bearing blocks in seven files, two files have zero packets; frame-level Wireshark dissection remains pending |
 | T10 | Handshake completeness | Pending | `PWND 1` does not prove a complete four-way handshake |
 | T11 | Clock and timezone | Partial | I manually corrected to America/Chicago; automatic NTP sync unverified |
-| T12 | Service stability and reboot recovery | Partial — 10+ minute USB-powered check passed | I observed 14-minute OS uptime, active Pwnagotchi, and unchanged NRestarts=1 since 09:03:52; extended runtime and battery-only stability not established |
+| T12 | Service stability and reboot recovery | Partial — 10+ minute USB-powered check passed | I observed 14-minute OS uptime, active Pwnagotchi, and unchanged NRestarts=1 since 09:03:52; 10+ minute battery-only stability later passed (T29); extended runtime remains unverified |
 | T13 | PiSugar automatic low-battery shutdown/cutoff | Deferred | Firmware defaults specify 10% / 45 seconds; I have not tested real cutoff behavior |
-| T14 | Battery endurance | Deferred | I chose not to repeat a timed standalone runtime test |
+| T14 | Battery endurance | Deferred | I completed the 12+ minute short stability test (T29); I deferred full endurance measurement |
 | T15 | Authenticated localhost-only dashboard | Pass | I confirmed auth and listener `127.0.0.1:8080` with an SSH tunnel |
 | T16 | Bluetooth phone management | Pass | I used iPhone Termius SSH over Bluetooth PAN |
 | T17 | Enclosure fit / clearance | Pending | Final dimensions and custom printed case are not validated |
@@ -31,7 +31,7 @@ I mark **Pass** only when I observed the behavior; **Partial** when a prerequisi
 | T23 | iPhone SSH and browser tunnel | Pass | I used Termius SSH and opened my secure dashboard in Safari |
 | T24 | Auto-reconnect after Bluetooth interruption | Deferred — known failure | Auto-reconnect failed in tests even after enabling NetworkManager autoconnect; I did not repeat the test after the recovery reboot |
 | T25 | Controller/PAN recovery after reboot | Pass | After BlueZ hardware/HCI reset errors, I rebooted and remote management worked again |
-| T26 | Alfa AWUS036ACM pre-purchase compatibility | Partial | I verified `mt76x2u` and required firmware on current kernel; hardware, OTG power and monitor mode not yet tested |
+| T26 | Optional Alfa AWUS036ACM compatibility research | Not required / optional | I verified `mt76x2u` and firmware support, then decided Bluetooth management meets my current needs; no Alfa purchase or integration required for this build |
 
 ## Completion criteria
 
