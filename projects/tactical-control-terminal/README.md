@@ -22,7 +22,7 @@ Local-only Flask dashboard at `http://127.0.0.1:5000` displaying live CPU temper
 
 ## Engineering build journal
 
-**[Step-by-step build journal](docs/build-journal.md)** — chronological hardware, commands, purpose, test evidence, troubleshooting and photo register. Reconstructed from verified sessions; original photos and unrecorded terminal output still need to be added.
+**[Step-by-step build journal](docs/build-journal.md)** — chronological hardware, recorded commands, purpose, results, troubleshooting and photo register. **[Reproduction guide](REPRODUCE.md)** — separate, source-grounded fresh-install procedure, explicitly distinguishing reconstructed commands from original execution. Original photos and unrecorded terminal output still need to be added.
 
 ## Repository source files
 
