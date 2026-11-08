@@ -14,7 +14,7 @@
 | Storage | SanDisk 32 GB microSD |
 | Firmware | jayofelony Pwnagotchi 64-bit v2.9.5.8 |
 | Host machine | Windows 11 |
-| Hostname / on-screen identity | `aegis-pwn` |
+| Hostname / on-screen identity | `<PWNAGOTCHI_HOSTNAME>` |
 
 I flashed the community firmware with Raspberry Pi Imager, assembled the e-Paper display and PiSugar battery, and confirmed the face and device status render correctly. PiSugar powered the Pi without USB and initially displayed **BAT 52%**. I verified nine stored PCAPNG files and structurally parsed all nine; seven contained 439 packet-bearing blocks in total. WPA handshake completeness has **not** been established.
 
