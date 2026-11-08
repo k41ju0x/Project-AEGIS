@@ -162,7 +162,7 @@ ls /sys/class/hwmon/
 ```
 
 ## Phase 3 — Python/Flask and kiosk
-Python 3.13.5, Meshtastic Python client 2.7.11, Flask 3.1.3. Virtual environment under ~/aegis-tct/.venv. Flask binds 127.0.0.1:5000. systemd unit aegis-mesh.service enabled. Chromium kiosk starts via labwc autostart.
+Python 3.13.5, Meshtastic Python client 2.7.11, Flask 3.1.3. Virtual environment under ~/tct-app/.venv. Flask binds 127.0.0.1:5000. systemd unit aegis-mesh.service enabled. Chromium kiosk starts via labwc autostart.
 ```bash
 systemctl is-enabled aegis-mesh.service
 systemctl is-active aegis-mesh.service
@@ -187,7 +187,7 @@ In-memory packet store bounded at 200 events. Three explicitly synthetic samples
 ```bash
 curl -i --max-time 5 http://127.0.0.1:5000/api/packets
 sudo journalctl -u aegis-mesh.service -n 30 --no-pager
-grep -n 'def packet_events' ~/aegis-tct/src/app.py
+grep -n 'def packet_events' ~/tct-app/src/app.py
 grep -n 'def packet_events' ~/aegis-portfolio/projects/tactical-control-terminal/src/app.py
 ```
 Why: investigate HTTP 404. Root cause: live backend lacked the endpoint even though GitHub copy contained it. Corrected file synchronized, compiled, restarted, and three synthetic records verified.
