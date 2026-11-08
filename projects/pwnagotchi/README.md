@@ -1,6 +1,6 @@
 # AEG-003 — Pwnagotchi
 
-**Phase:** Operational build with outstanding acceptance limitations documented below.  
+**Phase:** Complete — November 7, 2026; optional/unverified follow-up checks documented below.  
 **Build date:** November 6, 2026 (America/Chicago)  
 **Purpose:** My portable, battery-powered wireless-security research platform for networks I own or am authorized to assess.
 
@@ -36,7 +36,7 @@ I flashed the community firmware with Raspberry Pi Imager, assembled the e-Paper
 - Timezone and clock were corrected manually to Central Time, but automatic time synchronization remains unverified.
 - PCAPNG basic structural parsing passed; WPA handshake completeness, extended reliability, and enclosure design remain future acceptance items.
 
-I consider the operational build complete; unresolved formal acceptance tests remain documented until I explicitly close or accept them. See my [chronological build journal and command record](docs/build-journal.md) and [test matrix](docs/test-matrix.md).
+I completed the operational build on November 7, 2026. Deferred and unverified follow-up tests remain documented transparently; they do not reverse the completion decision. See my [chronological build journal and command record](docs/build-journal.md) and [test matrix](docs/test-matrix.md).
 
 ## Data-handling and reproducibility policy
 
