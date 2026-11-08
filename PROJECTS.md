@@ -8,7 +8,7 @@
 |---|---|---|---|
 | AEG-001 | Project NEXUS | Existing home lab, separate | [Project NEXUS](https://github.com/k41ju0x/Project-NEXUS) · [#1](https://github.com/k41ju0x/Project-AEGIS/issues/1) |
 | AEG-002 | Meshtastic — RAK4631 | Awaiting kit/integration | [Planning #2](https://github.com/k41ju0x/Project-AEGIS/issues/2) · [Build #5](https://github.com/k41ju0x/Project-AEGIS/issues/5) |
-| AEG-003 | Pwnagotchi | **Build operational; remaining acceptance limitations documented** | [Overview](projects/pwnagotchi/README.md) · [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3) |
+| AEG-003 | Pwnagotchi | **Completed (November 7, 2026); deferred follow-ups documented** | [Overview](projects/pwnagotchi/README.md) · [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3) |
 | **AEG-004** | **Portable LattePanda Remote Access Device** | Parked; consolidated project | [Scope](projects/remote-access-device/README.md) · [#4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
 | AEG-005 | ESP32 Marauder Lab | Parked | [Scope](projects/esp32-marauder/README.md) |
 | AEG-006 | Tactical Control Terminal | Hardware/dashboard built; radio integration pending | [Overview](projects/tactical-control-terminal/README.md) · [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
@@ -36,7 +36,7 @@
 
 ## Current focus
 
-I have built and validated the core **AEG-003 Pwnagotchi** hardware and software, with documented deferred battery-cutoff, Bluetooth-interruption and handshake-completeness checks. I will next focus on the ordered **AEG-002 RAK4631** kit and its live integration with **AEG-006** when hardware arrives. **AEG-016** remains deferred. I am not approving additional purchases or backlog builds by numbering these ideas.
+I completed **AEG-003 Pwnagotchi** on November 7, 2026, with documented deferred battery-cutoff, Bluetooth-interruption and handshake-completeness checks. I will next focus on the ordered **AEG-002 RAK4631** kit and its live integration with **AEG-006** when hardware arrives. **AEG-016** remains deferred. I am not approving additional purchases or backlog builds by numbering these ideas.
 
 ## Documentation
 
