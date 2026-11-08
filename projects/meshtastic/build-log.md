@@ -19,7 +19,7 @@ Requirements captured: rugged, GPS, screen, 48h preferred, open-ended $250+ budg
 ## 2026-10-26 — Planning baseline
 Established initial charter, risks, research shortlist and tests.
 
-## 2026-10-29 — RAK4631 starter kit order (reported)
-One WisBlock RAK4631/RAK19007 starter kit ordered with US915 hardware selection, OLED, RAK12501 GNSS and RAK1904 sensor configuration. Recorded checkout price: $56.30 before import fees and 14–20-day shipping estimate. Physical receipt, actual included parts and functional test **not yet verified**. Previous 'no hardware procured' statements above describe the earlier October 26 planning state only.
+## 2026-10-29 — RAK4631 starter kit ordered
+I ordered one WisBlock RAK4631/RAK19007 starter kit with US915 hardware selection, OLED, RAK12501 GNSS and RAK1904 sensor configuration. Recorded checkout price: $56.30 before import fees and 14–20-day shipping estimate. Physical receipt, actual included parts and functional test **not yet verified**. Previous 'no hardware procured' statements above describe the earlier October 26 planning state only.
 
 **Next:** Inventory on arrival; photograph actual parts; confirm correct antenna, region and safe connection before powering or flashing.
