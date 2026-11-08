@@ -30,12 +30,9 @@
 ## Rules that prevent collisions
 
 1. Every distinct concept gets **one permanent ID** on registration, even while parked.
-2. **AEG-004** is the single Portable LattePanda Remote Access Device; **AEG-005** is ESP32 Marauder and **AEG-010** is ESP32 GPS Wardriver. They are three distinct project concepts.
-3. Preserve existing distinct assignments: AEG-002 = Meshtastic, AEG-006 = Tactical Control Terminal, AEG-016 = Sentinel; AEG-007–AEG-017 remain the same aside from the newly assigned AEG-010.
-4. **Next new project: AEG-021**. IDs AEG-001 through AEG-020 are now continuously assigned. Keep historical project names as annotations rather than as competing ID records.
-5. GitHub issue numbers and project numbers are different namespaces. For example, **issue #5 is an AEG-002 task**, not Project AEG-005.
-6. Numbered and *Parked* does **not** mean approved, funded or placed on the [Project AEGIS board](https://github.com/users/k41ju0x/projects/3/views/1).
-7. Project NEXUS and APEX remain separate platforms and repositories/efforts; APEX has no new AEG ID assigned by this reconciliation.
+2. GitHub issue numbers and project numbers are different namespaces. For example, **issue #5 is an AEG-002 task**, not Project AEG-005.
+3. Numbered and *Parked* does **not** mean approved, funded or placed on the [Project AEGIS board](https://github.com/users/k41ju0x/projects/3/views/1).
+4. Project NEXUS and APEX remain separate platforms and repositories/efforts; APEX has no new AEG ID assigned by this reconciliation.
 
 ## Current focus
 
