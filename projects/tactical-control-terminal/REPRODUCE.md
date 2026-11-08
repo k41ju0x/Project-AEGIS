@@ -1,5 +1,7 @@
 # AEG-006 — Reproduction Guide (Repository Source)
 
+
+> **Privacy and paths:** `<TCT_HOSTNAME>` is a placeholder; choose your own name when imaging the Pi. `~/tct-app` and `/home/aegis/tct-app` are example deployment paths selected for this sanitized walkthrough, not verified original device paths. Use the same actual account and application directory consistently throughout the service configuration.
 **Last reviewed:** 2026-11-08  
 **Build:** Raspberry Pi 5 (8GB), Raspberry Pi Touch Display 2, Active Cooler, Raspberry Pi OS 64-bit with Desktop (Debian Trixie), `<TCT_HOSTNAME>` hostname.
 
