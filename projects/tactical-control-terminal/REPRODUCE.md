@@ -1,13 +1,13 @@
 # AEG-006 — Reproduction Guide (Repository Source)
 
 **Last reviewed:** 2026-11-08  
-**Build:** Raspberry Pi 5 (8GB), Raspberry Pi Touch Display 2, Active Cooler, Raspberry Pi OS 64-bit with Desktop (Debian Trixie), `aegis-tct` hostname.
+**Build:** Raspberry Pi 5 (8GB), Raspberry Pi Touch Display 2, Active Cooler, Raspberry Pi OS 64-bit with Desktop (Debian Trixie), `<TCT_HOSTNAME>` hostname.
 
 > This guide is a **repeatable deployment procedure reconstructed from the published source and verified architecture**, not a verbatim record of every original terminal command. For commands that were observed in the build and their results, read the [engineering build journal](docs/build-journal.md). I have not re-executed this exact clean-install procedure end to end on a fresh Pi. Use owned/authorized equipment and review commands before execution.
 
 ## 1. Prepare and verify Raspberry Pi OS
 
-Use Raspberry Pi Imager to write **Raspberry Pi OS (64-bit) with Desktop** to microSD. In Imager OS customization, create the `aegis` login, set hostname `aegis-tct`, select the local timezone, configure networking and enable SSH. Connect official display DSI, power and fan wiring while unpowered; use the official Pi 5 power supply. After boot, connect from a trusted administrator machine:
+Use Raspberry Pi Imager to write **Raspberry Pi OS (64-bit) with Desktop** to microSD. In Imager OS customization, create the `aegis` login, set your own hostname (`<TCT_HOSTNAME>`), select the local timezone, configure networking and enable SSH. Connect official display DSI, power and fan wiring while unpowered; use the official Pi 5 power supply. After boot, connect from a trusted administrator machine:
 
 ```bash
 ssh aegis@<PI_LAN_IP>
