@@ -15,4 +15,4 @@ I plan to explore GPS-tagged wireless survey collection and mapping with an ESP3
 - Document sensor accuracy, sampling, file formats, export handling and secure data retention.
 - Build a reproducible, sanitized step-by-step technical journal if this concept is approved.
 
-**Current decision:** This is **AEG-010**. The former Raspberry Pi drop-box concept once labeled AEG-010 was consolidated under **AEG-004 Portable LattePanda Remote Access Device**. No equipment purchase, execution or GitHub board work is authorized yet.
+**Current decision:** This is **AEG-010**. This project is independent of **AEG-004 Portable LattePanda Remote Access Device**. No equipment purchase, execution or GitHub board work is authorized yet.
