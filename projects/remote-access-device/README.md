@@ -1,18 +1,12 @@
 # AEG-004 — Portable LattePanda Remote Access Device
 
 **Status:** Parked idea / not approved for purchase or build  
-**Platform decision:** LattePanda (not a separate Raspberry Pi drop box)  
+**Platform decision:** LattePanda  
 **Tracking:** [AEG-004 issue #4](https://github.com/k41ju0x/Project-AEGIS/issues/4) · [Canonical registry](../../PROJECTS.md)
 
 ## Purpose
 
-I plan to design a portable, high-performance, authorized remote administration and security-assessment device based on a **LattePanda** single-board computer. This is **one unified project** incorporating concepts previously split across:
-
-- AEG-004 Remote Access Device / headless assessment drop box
-- Former AEG-005 Portable LattePanda Platform
-- Former AEG-010 Raspberry Pi Remote Access Node / drop box
-
-**These former project names have been merged into AEG-004, but the IDs AEG-005 and AEG-010 are now reassigned to ESP32 Marauder and ESP32 GPS Wardriver. I will not build a separate Raspberry Pi drop box.**
+I plan to design a portable, high-performance, authorized remote administration and security-assessment device based on a **LattePanda** single-board computer. This project combines secure remote management, headless security assessment, and optional local GUI capabilities into one hardware build.
 
 ## Preliminary concept (subject to research)
 
@@ -38,4 +32,4 @@ Use only devices, infrastructure and networks I own or have explicit permission 
 
 ## Current decision
 
-**This project remains parked.** I am prioritizing existing AEGIS projects and am not buying anything for AEG-004 now. Historical references to the old LattePanda/drop-box concepts should point here; current AEG-005 and AEG-010 refer to their ESP32 projects.
+**This project remains parked.** I am prioritizing existing AEGIS projects and am not buying anything for AEG-004 now. The project is uniquely identified as AEG-004; AEG-005 and AEG-010 are separate ESP32 projects.
