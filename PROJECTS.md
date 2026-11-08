@@ -30,7 +30,7 @@
 ## Rules that prevent collisions
 
 1. Every distinct concept gets **one permanent ID** on registration, even while parked.
-2. **AEG-004** is the single consolidated LattePanda remote access project. Historical references to the earlier LattePanda idea (formerly called AEG-005) and Raspberry Pi drop-box concept (formerly called AEG-010) belong to AEG-004; **AEG-005 and AEG-010 now denote ESP32 Marauder and ESP32 GPS Wardriver**, respectively.
+2. **AEG-004** is the single Portable LattePanda Remote Access Device; **AEG-005** is ESP32 Marauder and **AEG-010** is ESP32 GPS Wardriver. They are three distinct project concepts.
 3. Preserve existing distinct assignments: AEG-002 = Meshtastic, AEG-006 = Tactical Control Terminal, AEG-016 = Sentinel; AEG-007–AEG-017 remain the same aside from the newly assigned AEG-010.
 4. **Next new project: AEG-021**. IDs AEG-001 through AEG-020 are now continuously assigned. Keep historical project names as annotations rather than as competing ID records.
 5. GitHub issue numbers and project numbers are different namespaces. For example, **issue #5 is an AEG-002 task**, not Project AEG-005.
