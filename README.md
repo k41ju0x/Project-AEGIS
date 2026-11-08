@@ -25,9 +25,10 @@ Research, design, build, test, and document cybersecurity technologies and exper
 | AEG-002 | **Meshtastic** | LoRa mesh communications | [Planning notes](projects/meshtastic/README.md) |
 | AEG-003 | **Pwnagotchi** (operational build) | Wireless security research | [Build overview](projects/pwnagotchi/README.md) · [Journal](projects/pwnagotchi/docs/build-journal.md) · [Tests](projects/pwnagotchi/docs/test-matrix.md) |
 | AEG-004 | **Portable LattePanda Remote Access Device** (parked) | Consolidated authorized headless/GUI remote management | [Unified project scope](projects/remote-access-device/README.md) |
+| AEG-005 | **ESP32 Marauder Lab** (parked) | ESP32 wireless research | [Project scope](projects/esp32-marauder/README.md) |
 | AEG-006 | **Tactical Control Terminal** | Raspberry Pi 5 + Touch Display 2 / Meshtastic base station (in progress) | [v0.6 project overview](projects/tactical-control-terminal/README.md) · [Build journal](projects/tactical-control-terminal/docs/build-journal.md) |
 
-See **[PROJECTS.md](PROJECTS.md)** for the single canonical registry (AEG-001–AEG-022) and **[FUTURE-IDEAS.md](FUTURE-IDEAS.md)** for numbered parked ideas. **AEG-005 and AEG-010 are retired aliases of AEG-004; AEG-023 is the next new ID.** Numbering a parked idea does not create a board card or approve a purchase.
+See **[PROJECTS.md](PROJECTS.md)** for the single canonical registry (AEG-001–AEG-020) and **[FUTURE-IDEAS.md](FUTURE-IDEAS.md)** for numbered parked ideas. **AEG-005 = ESP32 Marauder, AEG-010 = ESP32 GPS Wardriver, and AEG-021 is the next new ID.** Numbering a parked idea does not create a board card or approve a purchase.
 
 ## Documentation Framework
 
