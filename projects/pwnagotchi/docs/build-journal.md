@@ -10,8 +10,8 @@
 1. Installed Raspberry Pi Imager on Windows 11.
 2. Selected jayofelony community image `pwnagotchi-64bit-2.9.5.8.img.xz`: https://github.com/jayofelony/pwnagotchi/releases/tag/v2.9.5.8
 3. Flashed the 32GB microSD via Imager using **Use custom**. Windows ejected the device; reinserting exposed the FAT `bootfs` partition. Do not format Linux partitions when Windows prompts.
-4. Created `bootfs/config.toml` and verified its contents via PowerShell `Get-Content`. Configuration included `main.name = "aegis-pwn"`, `ui.display.type = "waveshare_4"`, `main.plugins.pisugarx.enabled = true`, and a lab whitelist. **Do not commit real SSIDs or credentials.**
-5. Mounted e-Paper HAT onto 40-pin header with power disconnected; checked GPIO alignment visually. First boot rendered `aegis-pwn` and animated face; uptime and on-screen status advanced, confirming display refresh and application operation.
+4. Created `bootfs/config.toml` and verified its contents via PowerShell `Get-Content`. Configuration included `main.name = "<PWNAGOTCHI_HOSTNAME>"`, `ui.display.type = "waveshare_4"`, `main.plugins.pisugarx.enabled = true`, and a lab whitelist. **Do not commit real SSIDs or credentials.**
+5. Mounted e-Paper HAT onto 40-pin header with power disconnected; checked GPIO alignment visually. First boot rendered `<PWNAGOTCHI_HOSTNAME>` and animated face; uptime and on-screen status advanced, confirming display refresh and application operation.
 
 ## Session 2 — 2026-11-06: USB access and battery
 1. Windows initially enumerated Pi gadget as serial COM3; later recognized it as **Raspberry Pi USB Remote NDIS Network Device** under **Ethernet 5**.
@@ -136,14 +136,14 @@ timedatectl status
 - Initial non-destructive checks requested: `bluetoothctl list`, `sudo systemctl status bluetooth --no-pager -l`, `sudo rfkill list`. Phone OS not yet determined; pairing/PAN setup to be tailored after basic service inspection.
 
 ## Bluetooth controller readiness — 2026-11-06
-- `bluetoothctl list` found controller `<PWNAGOTCHI_BLUETOOTH_MAC>` named `aegis-pwn` (MAC omitted from public build notes).
+- `bluetoothctl list` found controller `<PWNAGOTCHI_BLUETOOTH_MAC>` named `<PWNAGOTCHI_HOSTNAME>` (MAC omitted from public build notes).
 - `systemctl status bluetooth` returned Bluetooth service enabled and active, daemon BlueZ 5.82, management interface initialized, SDP server started.
 - `rfkill list`: `hci0` Bluetooth soft/hard blocks both `no`; `phy0` WLAN soft/hard blocks both `no`.
 - Service log timestamps start 2026-08-18, reflecting previously corrected system clock; configuration directory mode warning did not stop daemon startup.
 - Bluetooth readiness **passed**, but pairing, Bluetooth PAN/network configuration, and phone-side management not yet tested. Next read-only `bluetoothctl show`; identify the phone OS to select correct networking approach. Preserve USB SSH recovery.
 
 ## Bluetooth pairing readiness — 2026-11-06
-- `bluetoothctl show`: controller alias/name `aegis-pwn`, `Powered: yes`, `PowerState: on`, `Discoverable: no`, `Pairable: no`, `Discovering: no`, supports central and peripheral roles.
+- `bluetoothctl show`: controller alias/name `<PWNAGOTCHI_HOSTNAME>`, `Powered: yes`, `PowerState: on`, `Discoverable: no`, `Pairable: no`, `Discovering: no`, supports central and peripheral roles.
 - Hardware and BlueZ operational; device intentionally not currently pairing or advertising. Bluetooth pairing and PAN/SSH transport **not yet configured or tested**. Temporary pairable/discoverable mode should be enabled only during actual pairing, and disabled afterwards.
 - USB management SSH remains recovery path. At that point I had not yet selected the phone OS (Android/iPhone) to decide Bluetooth networking and verify PAN/tethering support before changes.
 
@@ -169,11 +169,11 @@ timedatectl status
 ## Bluetooth IPv4 address assigned — 2026-11-06
 - I verified `ip -4 -br addr show bnep0` returned `bnep0 UNKNOWN [private Bluetooth PAN IPv4]/28` after activating existing paired iPhone PAN profile.
 - IP assignment **passed**; interface UNKNOWN does not independently signify failure for Bluetooth PAN interfaces. iPhone-initiated SSH to port 22 at Bluetooth PAN IPv4 and dashboard SSH port-forward are **not yet tested**.
-- Next: with iPhone Bluetooth and Personal Hotspot enabled and USB SSH preserved, connect with iOS SSH client using existing account; verify hostname `aegis-pwn`. Afterwards test authenticated dashboard via SSH localhost forward, keeping existing `127.0.0.1:8080` bind.
+- Next: with iPhone Bluetooth and Personal Hotspot enabled and USB SSH preserved, connect with iOS SSH client using existing account; verify hostname `<PWNAGOTCHI_HOSTNAME>`. Afterwards test authenticated dashboard via SSH localhost forward, keeping existing `127.0.0.1:8080` bind.
 - I keep the actual Bluetooth-subnet address in private notes, not the public repository.
 
 ## iPhone direct SSH over Bluetooth — 2026-11-06
-- I successfully connected from iPhone Termius to `aegis-pwn` via the established Bluetooth PAN and reports interactive control of Pwnagotchi.
+- I successfully connected from iPhone Termius to `<PWNAGOTCHI_HOSTNAME>` via the established Bluetooth PAN and reports interactive control of Pwnagotchi.
 - **Direct iPhone Bluetooth SSH acceptance: PASSED.** This establishes management access without relying on the Windows USB connection for the client session.
 - I preserved USB SSH as my recovery path. At this stage, the localhost-only authenticated dashboard had not yet been tested through an iPhone tunnel; I later verified that access.
 - Next: test whether iOS Termius supports local port forwarding to the authenticated local dashboard; do not rebind web UI to 0.0.0.0. Later test reconnect behavior after phone leaves range and returns.
@@ -259,7 +259,7 @@ This appendix consolidates commands from my November 6 build and troubleshooting
 ### 1. Image preparation, configuration and initial management
 
 - Used Raspberry Pi Imager on Windows 11 to write `pwnagotchi-64bit-2.9.5.8.img.xz` to a 32 GB SanDisk microSD (GUI workflow; no shell flash command).
-- Created `bootfs/config.toml` for the `aegis-pwn` identity, Waveshare display, PiSugar plugin and authorized-lab allowlist; real wireless identifiers omitted.
+- Created `bootfs/config.toml` for the `<PWNAGOTCHI_HOSTNAME>` identity, Waveshare display, PiSugar plugin and authorized-lab allowlist; real wireless identifiers omitted.
 - Verified the boot configuration from Windows PowerShell:
 
 ```powershell
@@ -589,7 +589,7 @@ At the time of this test session, the project was in **Testing**. I subsequently
 
 ## Final acceptance — e-Paper restart and live display evidence (2026-11-07)
 - After I performed a controlled Linux shutdown, restarted from PiSugar power and confirmed Termius SSH and the Pwnagotchi service were working, I photographed the Waveshare 2.13-inch V4 display twice.
-- The two photos show my `aegis-pwn` identity, two distinct custom facial expressions and changing screen messages (from a session-log reading state to the normal personality greeting), establishing that the e-Paper interface was operating and updating after restart.
+- The two photos show my `<PWNAGOTCHI_HOSTNAME>` identity, two distinct custom facial expressions and changing screen messages (from a session-log reading state to the normal personality greeting), establishing that the e-Paper interface was operating and updating after restart.
 - Battery percentages visible in the photos are approximately 46% and 51%, demonstrating the percentage is displayed but **not establishing accurate state-of-charge measurement or charging behavior**. Both pictures show on-screen `UP 00:00:00`; I did not separately verify that this UI counter advances. Linux `uptime` had already reported one minute after restart.
 - The display also showed a private Bluetooth PAN address. I **did not include that address** in this public journal or commit the photographs. Before publishing any images I will redact/crop private device/network identifiers, SSIDs and capture information.
 - **PASS:** e-Paper renders and changes faces/messages after controlled shutdown and restart, while SSH and the Pwnagotchi service are functional. **OPEN:** PiSugar automatic low-battery cutoff and on-screen uptime counter observation.
