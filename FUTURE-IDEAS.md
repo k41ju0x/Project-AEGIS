@@ -29,7 +29,7 @@
 | AEG-011 | Ethernet Assessment Appliance | Parked | LAN Turtle / Shark Jack-inspired authorized research; [notes](projects/ethernet-assessment-appliance/README.md) |
 | AEG-012 | Evil Twin Defense Lab | Parked | [Notes](projects/evil-twin-defense/README.md) |
 | AEG-013 | Web Application Security Lab | Parked | [Notes](projects/web-app-security/README.md) |
-| AEG-014 | IoT Security Research Platform | Parked | [Notes](projects/iot-security/README.md) |
+| AEG-014 | IoT Security Research Platform | Parked | [Notes](projects/iot-security-research/README.md) |
 | AEG-015 | Flipper Zero Development Lab | Parked | [Notes](projects/flipper-development/README.md) |
 | AEG-016 | AEGIS Sentinel — Desktop AI Companion | Deferred; hardware received | [Notes](projects/aegis-sentinel/README.md) |
 | AEG-017 | Pico Ducky / HID Research | Parked | [Notes](projects/pico-ducky/README.md) |
