@@ -1,39 +1,20 @@
-# Project AEGIS — New Research Project Registry
+# Project AEGIS — Registry Compatibility Pointer
 
-Registered: 2026-10-27
+**Updated November 8, 2026.** This file formerly maintained an independent set of project assignments and development phases. That duplication created conflicting information.
 
-These are proposed research projects, not purchase commitments. Existing AEG-002 Meshtastic and AEG-005 LattePanda projects remain separate and unchanged.
+**Use [PROJECTS.md](../PROJECTS.md) as the sole authoritative registry for all AEG identifiers, names and statuses.** For descriptions of numbered but parked projects, see [FUTURE-IDEAS.md](../FUTURE-IDEAS.md).
 
-| ID | Project | Track | Phase | Status | Folder |
-|---|---|---|---|---|
-| AEG-003 | Pwnagotchi | Wireless Security Research | Testing | Functional Prototype / Validation Pending | [pwnagotchi](pwnagotchi/README.md) |
-| AEG-006 | Tactical Control Terminal | Raspberry Pi / Meshtastic | Active | Built / integration ongoing | Existing project documentation |
-| AEG-007 | RFID/NFC Security Lab | Hardware & Embedded | 2 | Backlog | [rfid-nfc](rfid-nfc/README.md) |
-| AEG-008 | OpenWrt Rogue AP Lab | Wireless & Network | 2 | Backlog | [openwrt-rogue-ap](openwrt-rogue-ap/README.md) |
-| AEG-009 | Custom Recon Toolkit | Software Development | 1 | Backlog | [custom-recon-toolkit](custom-recon-toolkit/README.md) |
-| AEG-010 | Raspberry Pi Remote Access Node | Remote Operations | 3 | Backlog | [pi-remote-access-node](pi-remote-access-node/README.md) |
-| AEG-011 | Ethernet Assessment Appliance | Wireless & Network | 3 | Backlog | [ethernet-assessment-appliance](ethernet-assessment-appliance/README.md) |
-| AEG-012 | Evil Twin Defense Lab | Wireless & Network | 3 | Backlog | [evil-twin-defense](evil-twin-defense/README.md) |
-| AEG-013 | Web Application Security Lab | Software Development | 1 | Backlog | [web-app-security](web-app-security/README.md) |
-| AEG-014 | IoT Security Research Platform | Hardware & Embedded | 3 | Backlog | [iot-security-research](iot-security-research/README.md) |
-| AEG-015 | Flipper Zero Development Lab | Hardware & Embedded | 2 | Backlog | [flipper-development](flipper-development/README.md) |
-| AEG-016 | AEGIS Sentinel — Desktop AI Companion | AI & Embedded Systems | Deferred | Hardware Received / Build Paused | [aegis-sentinel](aegis-sentinel/README.md) |
-| AEG-017 | Pico Ducky / HID Research | Hardware & Embedded | 1 | Backlog | [pico-ducky](pico-ducky/README.md) |
+## Reconciled ID decisions
 
-## Operating principle
-Pair every authorized offensive security experiment with corresponding detection, mitigation, or defensive validation. Use isolated lab environments and sanitized evidence. Each project follows M0 scope, M1 design, M2 prototype, M3 test, M4 defensive validation and publication, M5 retrospective.
+- **AEG-004** — Portable LattePanda Remote Access Device: merges earlier AEG-004 remote access, former AEG-005 LattePanda, and former AEG-010 Raspberry Pi drop box/node, using **LattePanda** as the planned platform.
+- **AEG-005 and AEG-010** — retired historical aliases of AEG-004; never recycle these IDs.
+- **AEG-002 Meshtastic, AEG-006 Tactical Control Terminal, AEG-016 Sentinel**, and the existing names behind **AEG-007–AEG-017** retain their previous IDs (except for retired AEG-010).
+- **AEG-018–AEG-022** — newly registered previously unnumbered future ideas; all parked.
+- **AEG-023** — next available number, if an entirely distinct concept is registered.
+- GitHub issue number is unrelated to AEG project ID; issue #5 is a hardware task belonging to AEG-002.
 
-## Sequencing
-Phase 1: AEG-009, AEG-017, AEG-013. Phase 2: AEG-007, AEG-008, AEG-015. Phase 3: AEG-010, AEG-011, AEG-012, AEG-014. These are suggested sequencing groups, not committed dates.
+## Execution policy
 
-## ID reconciliation (2026-11-01)
-AEG-006 remains the existing Tactical Control Terminal. Pico Ducky has been reassigned to AEG-017; AEG-016 remains Sentinel. No other existing project IDs were renumbered.
+Numbering ideas does not approve hardware purchases or add work to the GitHub Project board. Work on AEG-002/AEG-006 hardware integration is the next priority; AEG-003 has a functional build; AEG-016 remains paused. All other numbered ideas remain parked.
 
-## Execution focus — 2026-11-01
-Pause new project ideas, discretionary procurement, and backlog expansion. Active priorities: AEG-002 Meshtastic RAK4631 arrival, bring-up and integration with AEG-006 Tactical Control Terminal; AEG-016 Sentinel hardware arrival, build and initial companion software. AEG-003 Pwnagotchi hardware is ordered but **build deferred**: inventory/store on arrival only, no assembly or software work until explicitly resumed. Other backlog projects remain paused.
-
-## Priority change — 2026-11-06
-I resumed AEG-003 Pwnagotchi as my immediate build. AEG-016 Sentinel is deferred with hardware received; no assembly yet. AEG-002 Meshtastic and AEG-006 TCT remain the planned integration focus upon RAK4631 delivery. I kept other new-project purchases paused; the AWUS036ACM is a planned AEG-003 upgrade, not an unrelated new project.
-
-## Testing update — 2026-11-06
-I moved AEG-003 Pwnagotchi to **Testing**. I confirmed a functional prototype, initial saved capture, secure local web dashboard, PiSugar telemetry, and iPhone Bluetooth SSH/dashboard access. I deferred endurance and repeat Bluetooth-toggle testing; automatic low-power cutoff, complete handshake validation and enclosure fitting remain open. See [build journal](pwnagotchi/docs/build-journal.md) and [test matrix](pwnagotchi/docs/test-matrix.md). AEG-016 Sentinel remains deferred; AEG-002 Meshtastic/AEG-006 TCT remain pending hardware integration.
+The detailed historical version of this file remains recoverable through Git history, but no second live numbering registry is maintained here.
