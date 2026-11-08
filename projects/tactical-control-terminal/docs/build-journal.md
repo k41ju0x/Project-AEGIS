@@ -10,7 +10,7 @@ This journal records the Raspberry Pi 5 / 10-inch touchscreen Tactical Control T
 1. Install and open Raspberry Pi Imager; choose **Raspberry Pi 5** as the device.
 2. Under **Operating System**, choose **Raspberry Pi OS (64-bit)** — the **desktop** image, not the Lite variant. Check the image description in Imager because menu labels can change.
 3. Under **Storage**, select the intended microSD card. Writing the image **erases the selected drive**; double-check the target.
-4. Before writing, use the OS customization options to set the device hostname (here `aegis-tct`), create the `aegis` account with a strong password, configure Wi-Fi and its regulatory country if Wi-Fi is used, select time zone `America/Chicago`, and **enable SSH**. Select either password authentication for initial setup or provision a public SSH key already generated on the management computer.
+4. Before writing, use the OS customization options to set the device hostname (here `<TCT_HOSTNAME>`), create the `aegis` account with a strong password, configure Wi-Fi and its regulatory country if Wi-Fi is used, select time zone `America/Chicago`, and **enable SSH**. Select either password authentication for initial setup or provision a public SSH key already generated on the management computer.
 5. Write and verify the image, safely eject the card, insert it into the Pi, attach the DSI touchscreen and cooler according to their hardware instructions, and apply the official Pi 5 power supply.
 6. If the display is blank, **do not assume the OS failed to install**. Check whether the Pi joined the network and continue with the following headless SSH recovery phase.
 
@@ -51,12 +51,12 @@ sudo rpi-eeprom-update   # Inspect bootloader
 
 ### Step A — Locate the Pi from the management computer
 
-The hostname was `aegis-tct`. Name resolution using `aegis-tct.local` was attempted but did not reliably resolve, so the Pi's LAN-assigned IP address was found through the router's connected-device list.
+The hostname was `<TCT_HOSTNAME>`. Name resolution using `<TCT_HOSTNAME>.local` was attempted but did not reliably resolve, so the Pi's LAN-assigned IP address was found through the router's connected-device list.
 
 Example commands on the **Kali management machine**, not on the Pi touchscreen:
 
 ```bash
-ping -c 2 aegis-tct.local        # Optional discovery check; mDNS may fail
+ping -c 2 "<TCT_HOSTNAME>.local"        # Optional discovery check; mDNS may fail
 ssh aegis@<PI_LAN_IP>           # Connect using the IP discovered from router
 ```
 
@@ -67,7 +67,7 @@ Replace `<PI_LAN_IP>` with the actual private LAN address; do not publish real n
 If choosing SSH keys, create the key on the **Kali management machine** and provision its public half on the Pi via Raspberry Pi Imager before boot, or after an initial password-authenticated login:
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_aegis -C "aegis-tct"
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_aegis -C "TCT-SSH-KEY"
 # If password authentication already works and the Pi allows it:
 ssh-copy-id -i ~/.ssh/id_ed25519_aegis.pub aegis@<PI_LAN_IP>
 ssh -i ~/.ssh/id_ed25519_aegis aegis@<PI_LAN_IP>
@@ -100,7 +100,7 @@ sudo reboot                 # Reboot after applying updates when appropriate
 **Starting condition:** Kali could connect over SSH using an authorized key. Password-based login from Termius failed. Connection-specific OpenSSH configuration was checked on the Pi:
 
 ```bash
-sudo sshd -T -C user=aegis,host=aegis-tct,addr=127.0.0.1 \
+sudo sshd -T -C user=aegis,host=<TCT_HOSTNAME>,addr=127.0.0.1 \
   | grep -E '^(passwordauthentication|pubkeyauthentication|kbdinteractiveauthentication) '
 ```
 
@@ -150,7 +150,7 @@ hostname
 systemctl is-active aegis-mesh.service
 ```
 
-Expected: `aegis`, `aegis-tct`, and `active` if the dashboard service is running.
+Expected: `aegis`, `<TCT_HOSTNAME>`, and `active` if the dashboard service is running.
 
 **Security note:** Do not add private-key files, real `authorized_keys` contents, account passwords, host fingerprints tied to private infrastructure, or LAN addresses to the public repository. Store recovery copies securely outside the Git repository. Keep a known-working SSH session open until each new authentication method has been tested.
 
