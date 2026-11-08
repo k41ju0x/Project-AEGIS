@@ -42,6 +42,7 @@ See **[PROJECTS.md](PROJECTS.md)** for the single canonical registry (AEG-001–
 | [Reusable Templates](templates/PROJECT-TEMPLATE.md) | Charters, requirements, research, ADRs, BOM, build logs, tests, lessons and handoff |
 | [Project Intake Form](.github/ISSUE_TEMPLATE/project-intake.yml) | Register a new project as a GitHub issue |
 | [Engineering Task Form](.github/ISSUE_TEMPLATE/task.yml) | Track specific implementation or investigation work |
+| [November 2026 Repository Audit](docs/REPOSITORY-AUDIT-2026-11-08.md) | Verified project numbering, document voice, relative links, command reproduction gaps and follow-ups |
 
 **When returning to a project:** read its README, latest build log, and session handoff; update the next action after each work session.
 
