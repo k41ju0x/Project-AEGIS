@@ -3,8 +3,8 @@
 **Purpose:** Establish a repeatable, lightweight engineering record for any research, software, RF, hardware, home lab, or cybersecurity project.
 
 ## Start here
-1. Capture an idea as a GitHub issue on [Project Aegis](https://github.com/k41ju0x/Project-AEGIS/issues), then add it to the [R&D tracking board](https://github.com/users/k41ju0x/projects/3/views/1).
-2. Assign a stable ID (AEG-005, AEG-006, etc.; never recycle IDs). Add it to [PROJECTS.md](../PROJECTS.md).
+1. Register the idea with the **next unused stable ID** in [PROJECTS.md](../PROJECTS.md) (currently AEG-021). Numbering alone doesn't authorize building or purchasing hardware.
+2. Keep parked concepts in [FUTURE-IDEAS.md](../FUTURE-IDEAS.md). Create a GitHub issue or add a card to the [R&D tracking board](https://github.com/users/k41ju0x/projects/3/views/1) **only when planning or execution is approved**.
 3. Create `projects/<slug>/README.md` from [PROJECT-TEMPLATE.md](../templates/PROJECT-TEMPLATE.md) when ready to research.
 4. Copy relevant templates into the project folder as the work progresses. **Do not fill every template on day one.**
 5. Every working session: update [BUILD-LOG-TEMPLATE.md](../templates/BUILD-LOG-TEMPLATE.md) and the project's **Next action**.
@@ -41,9 +41,21 @@ Statuses describe work state; **Completed** does not mean permanently maintained
 - Project IDs: `AEG-NNN` sequential, unique, retained forever.
 - Paths: lowercase kebab-case.
 - Dates: `YYYY-MM-DD`; timestamps include timezone if time matters.
-- Tests: `TST-001` per project; decisions: `ADR-0001` per project.
+- Tests: use a stable project-specific test identifier (`T01`, `TST-001`, etc.) consistently; decisions: `ADR-0001` per project.
 - Reference GitHub issue URLs, repository commits, firmware/software versions and measurement conditions.
 - Write **observed** versus **expected** results explicitly; don't invent performance numbers.
 - Keep all links relative inside the repository when possible.
 
 See [WORKFLOW.md](WORKFLOW.md), [BOARD-CONFIGURATION.md](BOARD-CONFIGURATION.md), and [VISIBILITY-POLICY.md](VISIBILITY-POLICY.md).
+
+## Documentation voice and reproducibility standards
+
+I write build journals **in first person**, accurately recording what I physically installed, configured, tested, observed, and decided. I avoid narration such as “the user confirmed” or “the user ran.” Generic project templates may use instructional language, but actual build sessions must read as my engineering record.
+
+Each dated build entry should capture **the actual command/action and execution context** (Windows, Kali, Raspberry Pi, phone), why it was chosen, expected versus observed output, errors and recovery, exact package/firmware versions, proof of tests, and what remains open. GUI operations need ordered instructions as well. **Do not fabricate terminal commands or source files** that were never recorded. When reconstructing a reproducible setup procedure from committed source, label it “reconstruction” and keep it separate from verified execution history.
+
+- Use placeholders such as `<PI_LAN_IP>` and `<DEVICE_MAC>` for real addresses/identifiers, without publishing the originals.
+- Do not publish plaintext credentials, private keys, wireless network names tied to real people, geolocation/capture filenames, secrets, or unauthorized packet captures.
+- Only link photographs that are already committed or accessible, after cropping/redaction of sensitive details.
+- Before calling a build *Completed*, distinguish the operational build from deferred acceptance tests and track any remaining risks.
+- Audit project IDs and relative links whenever moving or renaming a project. Keep [PROJECTS.md](../PROJECTS.md) the sole canonical registry.
