@@ -10,12 +10,12 @@
 | AEG-002 | Meshtastic — RAK4631 | Awaiting kit/integration | [Planning #2](https://github.com/k41ju0x/Project-AEGIS/issues/2) · [Build #5](https://github.com/k41ju0x/Project-AEGIS/issues/5) |
 | AEG-003 | Pwnagotchi | **Build operational; remaining acceptance limitations documented** | [Overview](projects/pwnagotchi/README.md) · [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3) |
 | **AEG-004** | **Portable LattePanda Remote Access Device** | Parked; consolidated project | [Scope](projects/remote-access-device/README.md) · [#4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
-| AEG-005 | *Retired: duplicate merged into AEG-004* | Reserved / do not reuse | [AEG-004](projects/remote-access-device/README.md) |
+| AEG-005 | ESP32 Marauder Lab | Parked | [Scope](projects/esp32-marauder/README.md) |
 | AEG-006 | Tactical Control Terminal | Hardware/dashboard built; radio integration pending | [Overview](projects/tactical-control-terminal/README.md) · [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
 | AEG-007 | RFID/NFC Security Lab | Parked | [Notes](projects/rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP / DIY Wi-Fi Pineapple Lab | Parked | [Notes](projects/openwrt-rogue-ap/README.md) |
 | AEG-009 | Custom Reconnaissance Toolkit | Parked | [Notes](projects/custom-recon-toolkit/README.md) |
-| AEG-010 | *Retired: Pi drop box merged into AEG-004* | Reserved / do not reuse | [Redirect](projects/pi-remote-access-node/README.md) |
+| AEG-010 | ESP32 GPS Wardriver | Parked | [Scope](projects/esp32-gps-wardriver/README.md) |
 | AEG-011 | Ethernet Assessment Appliance | Parked | [Notes](projects/ethernet-assessment-appliance/README.md) |
 | AEG-012 | Evil Twin Defense Lab | Parked | [Notes](projects/evil-twin-defense/README.md) |
 | AEG-013 | Web Application Security Lab | Parked | [Notes](projects/web-app-security/README.md) |
@@ -23,18 +23,16 @@
 | AEG-015 | Flipper Zero Development Lab | Parked | [Notes](projects/flipper-development/README.md) |
 | AEG-016 | AEGIS Sentinel — Desktop AI Companion | Deferred; hardware received | [Notes](projects/aegis-sentinel/README.md) |
 | AEG-017 | Pico Ducky / HID Research | Parked | [Notes](projects/pico-ducky/README.md) |
-| AEG-018 | ESP32 Marauder Lab | Parked | [Future ideas](FUTURE-IDEAS.md) |
-| AEG-019 | ESP32 GPS Wardriver | Parked | [Future ideas](FUTURE-IDEAS.md) |
-| AEG-020 | Dedicated Wireless Analysis Station | Parked | [Future ideas](FUTURE-IDEAS.md) |
-| AEG-021 | Standalone Network Diagnostics Console | Parked | [Future ideas](FUTURE-IDEAS.md) |
-| AEG-022 | AEGIS Project Telemetry Integrations | Parked | [Future ideas](FUTURE-IDEAS.md) |
+| AEG-018 | Dedicated Wireless Analysis Station | Parked | [Future ideas](FUTURE-IDEAS.md) |
+| AEG-019 | Standalone Network Diagnostics Console | Parked | [Future ideas](FUTURE-IDEAS.md) |
+| AEG-020 | AEGIS Project Telemetry Integrations | Parked | [Future ideas](FUTURE-IDEAS.md) |
 
 ## Rules that prevent collisions
 
 1. Every distinct concept gets **one permanent ID** on registration, even while parked.
-2. **AEG-005** (Portable LattePanda) and **AEG-010** (Raspberry Pi drop box/node) are **retired aliases of AEG-004**, not available numbers. The one current target hardware platform is **LattePanda**.
-3. Preserve prior assignments: AEG-002 = Meshtastic, AEG-006 = Tactical Control Terminal, AEG-016 = Sentinel; AEG-007–AEG-017 remain as previously assigned except the merged 010.
-4. **Next new project: AEG-023**. Never reuse a retired ID.
+2. **AEG-004** is the single consolidated LattePanda remote access project. Historical references to the earlier LattePanda idea (formerly called AEG-005) and Raspberry Pi drop-box concept (formerly called AEG-010) belong to AEG-004; **AEG-005 and AEG-010 now denote ESP32 Marauder and ESP32 GPS Wardriver**, respectively.
+3. Preserve existing distinct assignments: AEG-002 = Meshtastic, AEG-006 = Tactical Control Terminal, AEG-016 = Sentinel; AEG-007–AEG-017 remain the same aside from the newly assigned AEG-010.
+4. **Next new project: AEG-021**. IDs AEG-001 through AEG-020 are now continuously assigned. Keep historical project names as annotations rather than as competing ID records.
 5. GitHub issue numbers and project numbers are different namespaces. For example, **issue #5 is an AEG-002 task**, not Project AEG-005.
 6. Numbered and *Parked* does **not** mean approved, funded or placed on the [Project AEGIS board](https://github.com/users/k41ju0x/projects/3/views/1).
 7. Project NEXUS and APEX remain separate platforms and repositories/efforts; APEX has no new AEG ID assigned by this reconciliation.
