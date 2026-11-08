@@ -21,4 +21,4 @@
 - [ ] Confirm battery connector polarity before connecting any third-party Li-ion pack
 - [ ] Confirm enclosure dimensions and antenna bulkhead fit before drilling
 
-**Scope:** Order reported by project owner; no purchase was placed by the assistant.
+**Scope:** I placed the original order. This is my procurement and delivery record; no further purchasing is authorized by the documentation.
