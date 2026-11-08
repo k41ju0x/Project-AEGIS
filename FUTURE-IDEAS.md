@@ -6,8 +6,8 @@
 ## Numbering policy
 
 - **One canonical AEG ID per distinct project.** An ID is permanent once assigned; renaming a project does not create a new ID.
-- **AEG-004** consolidates the earlier remote-access concepts: Remote Access Device (AEG-004), Portable LattePanda Platform (former AEG-005) and Raspberry Pi drop box / remote-access node (former AEG-010). The chosen platform is **LattePanda**. A Raspberry Pi drop box is **not** a separate planned build.
-- **AEG-005 is ESP32 Marauder; AEG-010 is ESP32 GPS Wardriver.** The old LattePanda and Raspberry Pi drop-box meanings were merged into AEG-004. Historic references to those old names remain only as explanatory notes.
+- **AEG-004** is the single Portable LattePanda Remote Access Device. Its hardware platform is **LattePanda**.
+- **AEG-005** is the ESP32 Marauder Lab and **AEG-010** is the ESP32 GPS Wardriver. These are independent parked projects.
 - **AEG-001 through AEG-020 are now assigned continuously.** Distinct existing projects retain their identities, especially AEG-002 Meshtastic, AEG-006 Tactical Control Terminal, and AEG-016 Sentinel.
 - The three remaining ideas occupy **AEG-018–AEG-020**. The authoritative source for IDs and status is [PROJECTS.md](PROJECTS.md). GitHub **issue numbers** are not project IDs: for example, issue #5 belongs to **AEG-002**.
 - Project NEXUS and APEX stay architecturally separate; APEX is not assigned a new AEG number here.
@@ -19,13 +19,13 @@
 | AEG-001 | Project NEXUS | Existing / separate | Home-lab repository; review tracked in [issue #1](https://github.com/k41ju0x/Project-AEGIS/issues/1) |
 | AEG-002 | Meshtastic — RAK4631 | Hardware ordered | Planning [#2](https://github.com/k41ju0x/Project-AEGIS/issues/2), build [#5](https://github.com/k41ju0x/Project-AEGIS/issues/5) |
 | AEG-003 | Pwnagotchi | Operational build; acceptance follow-ups documented | [Issue #3](https://github.com/k41ju0x/Project-AEGIS/issues/3) · [Build journal](projects/pwnagotchi/docs/build-journal.md) |
-| **AEG-004** | **Portable LattePanda Remote Access Device** | **Parked** | Combines the formerly separate remote access, LattePanda, and Raspberry Pi drop-box concepts; [issue #4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
+| **AEG-004** | **Portable LattePanda Remote Access Device** | **Parked** | Portable headless\/GUI remote administration and assessment device; [issue #4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
 | **AEG-005** | **ESP32 Marauder Lab** | Parked | [Scope](projects/esp32-marauder/README.md) |
 | AEG-006 | Tactical Control Terminal | Built; live Meshtastic integration pending | [Issue #6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
 | AEG-007 | RFID/NFC Security Lab | Parked | [Notes](projects/rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP / DIY Wi-Fi Pineapple Lab | Parked | GL.iNet/OpenWrt controlled assessment and defenses; [notes](projects/openwrt-rogue-ap/README.md) |
 | AEG-009 | Custom Reconnaissance Toolkit | Parked | [Notes](projects/custom-recon-toolkit/README.md) |
-| **AEG-010** | **ESP32 GPS Wardriver** | Parked | [Scope](projects/esp32-gps-wardriver/README.md); older Raspberry Pi drop-box documentation redirects to AEG-004 |
+| **AEG-010** | **ESP32 GPS Wardriver** | Parked | [Scope](projects/esp32-gps-wardriver/README.md) |
 | AEG-011 | Ethernet Assessment Appliance | Parked | LAN Turtle / Shark Jack-inspired authorized research; [notes](projects/ethernet-assessment-appliance/README.md) |
 | AEG-012 | Evil Twin Defense Lab | Parked | [Notes](projects/evil-twin-defense/README.md) |
 | AEG-013 | Web Application Security Lab | Parked | [Notes](projects/web-app-security/README.md) |
@@ -39,9 +39,9 @@
 
 ## Consolidated remote access scope — AEG-004
 
-My **AEG-004 Portable LattePanda Remote Access Device** will be a portable, primarily headless authorized assessment/administration device, with a GUI available when needed. It inherits the earlier *remote access device*, *portable LattePanda*, and *drop box* concepts. Potential future design research includes Kali on local storage, WireGuard or authenticated reverse-SSH, reliable recovery, logging, defensive detection testing, cooling and an external battery option. The previous eight-hour battery target is a **design goal, not a validated specification**.
+My **AEG-004 Portable LattePanda Remote Access Device** will be a portable, primarily headless authorized assessment/administration device, with a GUI available when needed. It is the single planned LattePanda remote-access device. Potential future design research includes Kali on local storage, WireGuard or authenticated reverse-SSH, reliable recovery, logging, defensive detection testing, cooling and an external battery option. The previous eight-hour battery target is a **design goal, not a validated specification**.
 
-I am **not** planning a separate Raspberry Pi drop box or a second LattePanda platform. The newly assigned AEG-005 ESP32 Marauder and AEG-010 ESP32 GPS Wardriver are separate parked concepts. I will not buy additional hardware until this parked project's scope and budget are explicitly approved.
+I am not planning a second remote-access platform. The newly assigned AEG-005 ESP32 Marauder and AEG-010 ESP32 GPS Wardriver are separate parked concepts. I will not buy additional hardware until this parked project's scope and budget are explicitly approved.
 
 ## Backlog management rules
 
