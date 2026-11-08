@@ -8,7 +8,7 @@ Local-only Flask dashboard at `http://127.0.0.1:5000` displaying live CPU temper
 
 **Verified milestones:**
 - Raspberry Pi OS installed; touch display, cooling, SSH and networking operational.
-- Meshtastic Python package and CLI v2.7.11 in `/home/aegis/aegis-tct/.venv` (Python 3.13.5).
+- Meshtastic Python package and CLI v2.7.11 in `/home/aegis/tct-app/.venv` (Python 3.13.5).
 - Flask v3.1.3 running locally via `aegis-mesh.service`; starts on reboot.
 - Chromium fullscreen kiosk via `labwc` graphical autostart, without keyring prompt after using a dedicated basic password-store kiosk configuration.
 - v0.2 API verifies CPU temperature, memory, storage, uptime, and fan RPM.
