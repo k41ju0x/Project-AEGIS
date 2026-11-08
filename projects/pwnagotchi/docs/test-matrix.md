@@ -1,7 +1,7 @@
 # AEG-003 — Test and Acceptance Matrix
 
 **Last documented session:** 2026-11-07 (Central Time)  
-**Project phase:** Operational build; formal acceptance limitations remain open  
+**Project phase:** Complete — November 7, 2026; deferred follow-up tests remain documented  
 I mark **Pass** only when I observed the behavior; **Partial** when a prerequisite passed but final acceptance remains open; **Deferred** when I chose not to repeat a test this session. An intermittent failure remains documented even if a later reboot restored service.
 
 | Test | Check | Status | My evidence / follow-up |
@@ -35,7 +35,7 @@ I mark **Pass** only when I observed the behavior; **Partial** when a prerequisi
 
 ## Completion criteria
 
-To call this project **Completed**, I will document repeatable boot/display behavior, a safe and tested shutdown path or explicitly accepted risk, accurate timestamps, authenticated management, authorized capture handling, and enclosure/power constraints. Password recovery or intrusive wireless activity is not a completion criterion.
+**Completion decision (November 7, 2026):** I accepted the operational Pwnagotchi build as complete following boot/display, authenticated management, capture file structure, controlled shutdown/restart and 12+ minutes of battery-only stability checks. Longer endurance, automatic PiSugar low-battery cutoff, interrupted Bluetooth reconnection, timestamp synchronization and WPA handshake completeness remain explicitly deferred or unverified. This is an operational build completion, not a claim that every optional follow-up was tested.
 
 ## Notes on deferred checks
 
