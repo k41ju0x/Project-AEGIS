@@ -248,7 +248,7 @@ timedatectl status
 - I consider existing standalone PiSugar 3 battery-powered operation sufficient for current AEG-003 build stage and elects to **defer** another controlled battery endurance test.
 - I also elected to **defer repeat Bluetooth interruption/reconnection tests** following successful post-reboot recovery of iPhone Termius SSH and SSH-tunneled dashboard.
 - Evidence distinction preserved: battery can power device and live PiSugarX telemetry was displayed, but 10% automatic low-battery shutdown/cutoff and sustained runtime are not behaviorally verified; iPhone Bluetooth post-reboot recovery passed, but automatic recovery after ordinary out-of-range/toggle interruption had previously failed and is not claimed fixed.
-- Current build/testing session can proceed without additional stress testing; retain noted limitations for future field checks if symptoms recur. Await Alfa AWUS036ACM hardware for dual-radio integration, with no assumption order completed.
+- Current build/testing session can proceed without additional stress testing; retain noted limitations for future field checks if symptoms recur. Alfa AWUS036ACM was evaluated as an optional expansion but ultimately was not required for this completed build.
 
 ---
 
@@ -548,7 +548,7 @@ I verified iPhone management was working again. **I did not repeat the Bluetooth
 
 I elected to defer a further standalone battery endurance test and repeat Bluetooth-interruption test for this session. These decisions do **not** replace evidence for an automatic low-power shutdown, stable reconnection after an interrupted link, validated capture completeness, or a physical Alfa monitor-mode test.
 
-The project remains in **Testing**. I will return to these specific acceptance items when needed; I will preserve the USB recovery path and keep secret values out of the public repository.
+At the time of this test session, the project was in **Testing**. I subsequently marked the operational build **Complete** on November 7, 2026. I will return to these optional acceptance items when needed; I will preserve the USB recovery path and keep secret values out of the public repository.
 
 ## Final acceptance — post-startup management and clock check (2026-11-07)
 - I booted AEG-003 and successfully connected using Termius over the existing iPhone management setup.
@@ -638,3 +638,8 @@ The project remains in **Testing**. I will return to these specific acceptance i
 - Results: `up 28 min`, `throttled=0x0`, `NRestarts=1` (unchanged), and `ActiveState=active`. The Termius SSH session remained available.
 - **PASS:** controlled live USB-to-battery transition and over 12 minutes of observed battery-only operation with no new OS restart, Pwnagotchi service restart, or reported undervoltage flag. This completes my chosen **10-minute short battery stability acceptance test**.
 - Separate acceptance limitations remain: I have not measured long-duration battery endurance or behaviorally verified the inherited PiSugar automatic low-power shutdown/cutoff; the earlier startup failure's root cause and intermittent Bluetooth recovery after deliberately interrupting the connection remain unconfirmed.
+
+## Project closeout — 2026-11-07
+- I declared **AEG-003 Pwnagotchi Complete** after verifying the operational Raspberry Pi Zero 2 W, Waveshare e-Paper, PiSugar 3, secure Bluetooth/USB SSH management, captured PCAPNG block integrity, orderly shutdown/restart and a 12+ minute battery-only stability test.
+- The completed build uses the Pi Zero 2 W, e-Paper HAT, PiSugar 3 and microSD; no ESP32 or external Alfa adapter is required. I retained the known intermittent Bluetooth interruption issue and unverified automatic low-battery cutoff, long endurance, timestamp sync and complete WPA handshake status as documented follow-up observations rather than silently marking them passed.
+- **Project phase:** Complete. No additional build work or spending required for the approved baseline.
