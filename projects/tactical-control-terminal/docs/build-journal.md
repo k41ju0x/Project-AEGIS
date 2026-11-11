@@ -600,3 +600,19 @@ After the verified v0.7 source snapshot was published, the Raspberry Pi's **loca
 A guarded local source patch extended `radio_manager.py` to expose a privacy-reduced `local_node` object from the existing `SerialInterface` node database (display long name, short name and hardware label). The Mesh Nodes HTML now uses that object for its heading instead of a hardcoded node name. The user confirmed **the dynamic identity worked** on the physical dashboard; exact output values were not pasted. Both manager and template were backed up before the change. No second serial session was opened.
 
 **Next checkpoint:** use the interface's read-only `metadata.firmware_version` field (when populated) for firmware UI; validate live value and fallback. Subsequent recovery testing should not assume that USB re-enumeration always retains the same `/dev/ttyACM0` path. Local dynamic-identity changes are not yet claimed to be published to GitHub.
+
+## November 11, 2026 — v0.8 local node firmware + identity API verified
+
+The user ran a production `/api/status` query against the active systemd Flask service on the Raspberry Pi. Actual observed radio snapshot:
+
+```text
+Connected: True
+Firmware: 2.7.15.567b8ea
+Local node: {'hardware': 'RAK4631', 'long_name': 'AEGIS-MESH-01', 'short_name': 'AE01'}
+```
+
+Firmware is obtained from the existing Meshtastic `SerialInterface.metadata.firmware_version` and node display information from the local node table; no second serial interface was opened. The v0.8 frontend now has a firmware field in the Mesh Nodes diagnostics pane, though its visual update has not been independently reported in this turn. This verifies the **backend values** and connected state, not yet USB failure/recovery behavior.
+
+**State distinction:** The current v0.8 radio-manager and HTML changes have been applied on the Pi. They still need to be copied, reviewed and published as a verified v0.8 checkpoint; do not claim GitHub source contains these changes until verified. Preserve the working radio's attached LoRa antenna during USB replug tests; do not flash firmware or alter radio settings. The current manager watches `/dev/ttyACM0`; renumbering on reconnection is a known limitation to test. Do not open an independent Meshtastic CLI session during this test.
+
+**Next:** create the local source checkpoint and sync GitHub, then test USB unplug/replug while monitoring the Flask radio state and systemd journal, checking any error state and automatically recovered connection.
