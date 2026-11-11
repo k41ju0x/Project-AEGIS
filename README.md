@@ -22,11 +22,11 @@ Research, design, build, test, and document cybersecurity technologies and exper
 | ID | Initiative | Focus | Link |
 |---|---|---|---|
 | AEG-001 | **Project NEXUS** | Home lab infrastructure | [Existing repository](https://github.com/k41ju0x/Project-NEXUS) |
-| AEG-002 | **Meshtastic** | LoRa mesh communications | [Planning notes](projects/meshtastic/README.md) |
+| AEG-002 | **Meshtastic** (kit received; radio tested) | RAK4631 USB connection, US region, live local telemetry verified | [Project overview](projects/meshtastic/README.md) · [Build log](projects/meshtastic/build-log.md) |
 | AEG-003 | **Pwnagotchi** (Completed — November 7, 2026) | Wireless security research | [Build overview](projects/pwnagotchi/README.md) · [Journal](projects/pwnagotchi/docs/build-journal.md) · [Tests](projects/pwnagotchi/docs/test-matrix.md) |
 | AEG-004 | **Portable LattePanda Remote Access Device** (Sigma 32GB ordered) | Consolidated authorized headless/GUI remote management | [Unified project scope](projects/remote-access-device/README.md) |
 | AEG-005 | **ESP32 Marauder Lab** (parked) | ESP32 wireless research | [Project scope](projects/esp32-marauder/README.md) |
-| AEG-006 | **Tactical Control Terminal** | Raspberry Pi 5 + Touch Display 2 / Meshtastic base station (in progress) | [v0.6 project overview](projects/tactical-control-terminal/README.md) · [Build journal](projects/tactical-control-terminal/docs/build-journal.md) |
+| AEG-006 | **Tactical Control Terminal** (in progress) | v0.6 kiosk deployed; standalone v0.7 Meshtastic connection/telemetry verified, Flask integration pending | [Project overview](projects/tactical-control-terminal/README.md) · [Build journal](projects/tactical-control-terminal/docs/build-journal.md) |
 | AEG-007 | **RFID/NFC Security Lab** (parked) | RFID/NFC technology and authorized security research | [Project notes](projects/rfid-nfc/README.md) |
 | AEG-008 | **OpenWrt Rogue AP / DIY Wi-Fi Pineapple Lab** (parked) | Controlled Wi-Fi access point and wireless defense testing | [Project notes](projects/openwrt-rogue-ap/README.md) |
 | AEG-009 | **Custom Reconnaissance Toolkit** (parked) | Modular, reproducible authorized reconnaissance tooling | [Project notes](projects/custom-recon-toolkit/README.md) |
