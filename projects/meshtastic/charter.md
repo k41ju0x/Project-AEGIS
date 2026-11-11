@@ -1,6 +1,6 @@
 # AEG-002 — Meshtastic Project Charter
 **Initiated:** 2026-10-26  
-**Phase:** Planning / requirements baseline  
+**Phase (2026-11-11):** Bench prototype underway; firmware and USB telemetry verified; requirements for enclosure/battery, BLE/OLED and two-node traffic pending  
 **Tracking:** https://github.com/k41ju0x/Project-Aegis/issues/2  
 **Visibility:** Public sanitized planning; sensitive operational configurations private.
 
@@ -35,4 +35,4 @@ REQ-001 through REQ-006 evaluated with documented acceptance evidence; unresolve
 RF compliance/local rules, antenna damage from transmitting unloaded, incorrect battery polarity/charging, nonrepresentative range claims, exposed location/channel secrets. See [risk register](risk-register.md).
 
 ## Next action
-Confirm intended form factor, budget, and mandatory features; compare supported hardware; select core platform in an ADR before purchasing.
+Continue from delivered RAK4631/RAK19007 and live local telemetry. Follow [build log](build-log.md) and [resume checklist](resume-here.md); verify outstanding GNSS/OLED, peer communication and power requirements. No additional parts required for current USB/Flask phase.
