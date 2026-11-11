@@ -649,3 +649,16 @@ The Pi-local v0.9 changes to `radio_manager.py` added a monotonic `connection_up
 **Important verification boundary:** A repeat controlled USB disconnect/reconnect test has not yet been reported for the new v0.9 counters. Therefore `reconnect_count` incrementing to one, the updated timestamps, and connection uptime reset still need to be tested. The Pi-local v0.9 source modifications have not yet been independently verified in the published GitHub source and must be copied/reviewed before claiming a release checkpoint.
 
 **Next acceptance:** capture `/api/status.radio` before removal, during the cable-out period, and after reconnect; verify uptime transitions `number → null → low number`, successful connections `1 → 2`, reconnect count `0 → 1`, and nonempty connection/disconnection timestamps. Do not restart Flask during the cable test.
+
+## November 11, 2026 — v0.9 recovery instrumentation acceptance: PASS
+
+A controlled USB cable disconnect/reconnect test was run against the current local Pi v0.9 `aegis-mesh.service` while polling `GET /api/status` every roughly three seconds. The user supplied this exact observed progression:
+
+- Baseline connected and healthy: `Connected=True`, uptime increments from **381** to **402** seconds, `successful_connections=1`, `reconnect_count=0`, `error=None`.
+- Cable-out transition: `Connected=False`, `connection_uptime_seconds=None`, `successful_connections=1`, `reconnect_count=0`, initially `ConnectionError`, then `Serial device unavailable`.
+- Automatic recovery: `Connected=True`, uptime **1** second, `successful_connections=2`, `reconnect_count=1`, `error=None`.
+- Follow-up observations: connected uptime increased through **4, 7, 11 and 14 seconds**; counters remained 2 successful connections and 1 recovery; no error.
+
+**Accepted:** fault detection, disconnect-state handling, successful reconnection, monotonic uptime reset, correct connection/recovery counter increments, and cleared error state. **Not yet independently checked in this run:** values of `last_connected_at` and `last_disconnected_at`, continued new live telemetry after this particular second test, or USB-port renumbering/reboot recovery. The previous v0.8 test verified resumed live telemetry after reconnection.
+
+**Release gate:** Pi-local v0.9 source updates to `radio_manager.py` and `src/templates/index.html` should be copied to the GitHub checkout, inspected and committed; this journal update alone does not publish the tested code.
