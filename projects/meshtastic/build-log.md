@@ -121,3 +121,9 @@ The user queried `http://127.0.0.1:5000/api/packets/live`, filtering locally for
 **Acceptance boundaries:** OLED power/display and a six-satellite indication are verified by user's direct observation. The exact OLED module SKU and WisBlock slot were not reported; keep those inventory details pending. A valid/fresh GNSS 2D/3D fix, source of position, accuracy, and usable coordinates have not yet been verified. Do not publish location coordinates, node IDs, or other sensitive telemetry. No second node has been observed.
 
 **Next:** ask for OLED's explicit GPS fix/lock indicator if available; verify position source and freshness using privacy-safe booleans/ages from the existing single serial-owning application. Avoid opening Meshtastic CLI concurrently with the live Flask manager.
+
+## 2026-11-11 — Privacy-safe internal GNSS position event captured
+
+During the ten-cycle, 30-second status-polling test, the user observed at check 5 (local 11:28:59) a new `POSITION_APP` event at `2026-11-11T17:28:45+00:00`. The `/api/status.radio.gnss` object reported `satellites=15`, `location_source=LOC_INTERNAL`, `has_coordinates=true`, `fix_type=null`, `fix_quality=null`, and `observed_at=2026-11-11T17:28:45+00:00`. At check 6 (11:29:29 local), the radio remained connected and a later `TELEMETRY_APP` event arrived; the GNSS object retained its preceding position status. User did not disclose coordinates.
+
+**Interpretation:** internal-GNSS-sourced position report and coordinate-field presence are **verified**, with 15 reported satellites; this substantially advances GNSS acquisition acceptance. A formally determined fix dimension, fix accuracy, or verified physical coordinate correctness cannot be inferred because `fix_type` and `fix_quality` were absent. No second RF peer was involved. GNSS monitor may be stopped after sufficient observations; no repeated serial session or configuration change needed.
