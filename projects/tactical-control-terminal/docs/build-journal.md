@@ -641,3 +641,11 @@ Following the observed USB cable disconnect/reconnect recovery, the user ran bot
 **Acceptance chain now verified:** operational USB serial connection → cable removed → supervisor detected connection loss → `/dev/ttyACM0` became unavailable → cable reconnected → supervisor re-established the session without restarting Flask → subsequent real telemetry reached Flask's live APIs.
 
 **Open work:** publish the exact latest v0.8 Pi `radio_manager.py` and `templates/index.html` sources after staged diff and privacy review; add recovery/connection counters and last state-change timestamps; optionally test USB path renumbering and boot recovery. Do not present these as already tested. RF peer reception remains untested with only one node available.
+
+## November 11, 2026 — v0.9 connection diagnostics initial validation PASSED
+
+The Pi-local v0.9 changes to `radio_manager.py` added a monotonic `connection_uptime_seconds` metric, in-process `successful_connections` and `reconnect_count`, and UTC `last_connected_at` / `last_disconnected_at` fields. The Mesh Nodes view now presents these values alongside existing firmware, event and error diagnostics. The user reports the **Step 5 API check and touchscreen validation passed**. Individual numerical results were not provided, so none are asserted here.
+
+**Important verification boundary:** A repeat controlled USB disconnect/reconnect test has not yet been reported for the new v0.9 counters. Therefore `reconnect_count` incrementing to one, the updated timestamps, and connection uptime reset still need to be tested. The Pi-local v0.9 source modifications have not yet been independently verified in the published GitHub source and must be copied/reviewed before claiming a release checkpoint.
+
+**Next acceptance:** capture `/api/status.radio` before removal, during the cable-out period, and after reconnect; verify uptime transitions `number → null → low number`, successful connections `1 → 2`, reconnect count `0 → 1`, and nonempty connection/disconnection timestamps. Do not restart Flask during the cable test.
