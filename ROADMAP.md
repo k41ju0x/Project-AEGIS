@@ -17,11 +17,11 @@
 ## Phase 3 — Engineering
 - [ ] Populate architecture, bill of materials and test plan for active projects
 - [ ] Create separate engineering repositories as needed
-- [ ] Complete end-to-end documentation lifecycle for first build (AEG-006 v0.6 validated; original photos, full build evidence and radio integration pending)
+- [ ] Complete full documentation/photo evidence lifecycle for AEG-006 (v1.0 single-node functionality accepted; original photo register and additional evidence remain open)
 
 [Engineering handbook](docs/README.md) · [Tracking board](https://github.com/users/k41ju0x/projects/3/views/1)
 
 ## Current engineering checkpoint — November 11, 2026
-- **AEG-006:** Raspberry Pi 5 and 10-inch touchscreen functional; AEGIS Mesh Control **v0.6 UI remains deployed** and touchscreen-tested with explicit synthetic packet data. A **partial v0.7 Flask backend integration is now running under systemd** and returned real radio `connected` state and telemetry on port 5000. Kiosk visual status and live packet view are still pending; local tested app/manager code is not yet published in GitHub. [Project README](projects/tactical-control-terminal/README.md) · [Build journal](projects/tactical-control-terminal/docs/build-journal.md) · [Issue #6](https://github.com/k41ju0x/Project-AEGIS/issues/6).
-- **AEG-002:** Kit **received November 10**; LoRa/BLE/GNSS antenna setup inspected, USB `/dev/ttyACM0` detected, RAK4631 firmware 2.7.15 identified, US region / LONG_FAST and node names configured, live local telemetry/position events and Python connection manager verified. OLED, BLE pairing, GNSS fix, enclosure/battery tests and two-node messaging remain pending. [Project README](projects/meshtastic/README.md) · [Execution issue #5](https://github.com/k41ju0x/Project-AEGIS/issues/5).
-- **Documentation:** Detailed November 10–11 integration and error/recovery journals published. Some original build photographs are already embedded; new RAK4631 photos still require uploading. Do not claim multi-node over-the-air reception, Flask v0.7 deployment or wideband RF spectrum measurements.
+- **AEG-006:** AEGIS Mesh Control **v1.0 single-node baseline accepted**. Physical Pi reboot test passed 5/5: boot and SSH reconnect, automatic Flask startup, RAK4631 USB reconnect, fresh live telemetry, and touchscreen kiosk restoration. v0.9 recovery counters and uptime reset previously verified under unplug/replug. [Project README](projects/tactical-control-terminal/README.md) · [Build journal](projects/tactical-control-terminal/docs/build-journal.md) · [Issue #6](https://github.com/k41ju0x/Project-AEGIS/issues/6).
+- **AEG-002:** RAK4631 local radio integrated with AEG-006: firmware 2.7.15.567b8ea, US/LONG_FAST, AEGIS-MESH-01/AE01 and telemetry verified. Two-node peer LoRa messaging, valid GNSS fix, OLED, battery/endurance and enclosure remain separate unverified follow-ups.
+- **Scope:** v1.0 is the stable **single-node** monitor, not a finished mesh network, validated peer RF RSSI/SNR receiver, or spectrum analyzer. Photos, long-duration reliability and USB port-renumbering remain to be addressed separately.
