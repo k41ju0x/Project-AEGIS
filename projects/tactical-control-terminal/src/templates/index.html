@@ -203,6 +203,22 @@ th { color: #a8f46c; }
   <div class="card">
     <h2>Connection Diagnostics</h2>
     <p>Firmware: <strong id="node-firmware">--</strong></p>
+    <p>Connection uptime:
+      <strong id="node-connection-uptime">--</strong>
+    </p>
+    <p>Successful connections:
+      <strong id="node-connections">--</strong>
+    </p>
+    <p>Automatic recoveries:
+      <strong id="node-reconnects">--</strong>
+    </p>
+    <p>Last connected:
+      <strong id="node-connected-at">--</strong>
+    </p>
+    <p>Last disconnected:
+      <strong id="node-disconnected-at">--</strong>
+    </p>
+    <small>Connection counters reset when Flask restarts.</small>
     <p>Events observed: <strong id="node-events">--</strong></p>
     <p>Last event: <strong id="node-last">--</strong></p>
     <p>Connection error: <strong id="node-error">--</strong></p>
@@ -518,6 +534,46 @@ async function refreshStatus() {
       radioConnected
         ? (nodeRadio.firmware_version || "N/A")
         : "Unavailable";
+
+    const uptimeSeconds =
+      nodeRadio.connection_uptime_seconds;
+
+    document.getElementById(
+      "node-connection-uptime"
+    ).textContent =
+      typeof uptimeSeconds === "number"
+        ? Math.floor(uptimeSeconds / 3600) + "h " +
+          Math.floor((uptimeSeconds % 3600) / 60) + "m " +
+          (uptimeSeconds % 60) + "s"
+        : "Disconnected";
+
+    document.getElementById(
+      "node-connections"
+    ).textContent =
+      String(nodeRadio.successful_connections ?? 0);
+
+    document.getElementById(
+      "node-reconnects"
+    ).textContent =
+      String(nodeRadio.reconnect_count ?? 0);
+
+    document.getElementById(
+      "node-connected-at"
+    ).textContent =
+      nodeRadio.last_connected_at
+        ? new Date(
+            nodeRadio.last_connected_at
+          ).toLocaleString()
+        : "Not recorded";
+
+    document.getElementById(
+      "node-disconnected-at"
+    ).textContent =
+      nodeRadio.last_disconnected_at
+        ? new Date(
+            nodeRadio.last_disconnected_at
+          ).toLocaleString()
+        : "Not recorded";
 
     document.getElementById("node-events").textContent =
       String(nodeRadio.packets_observed ?? 0);

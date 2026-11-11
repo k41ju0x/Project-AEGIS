@@ -2,6 +2,7 @@
 
 import logging
 import threading
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -19,6 +20,7 @@ class RadioManager:
         self.lost_event = threading.Event()
         self.thread = None
         self.interface = None
+        self._connected_since_monotonic = None
 
         self.state = {
             "connected": False,
@@ -31,6 +33,10 @@ class RadioManager:
             "last_event": None,
             "device_metrics": {},
             "error": None,
+            "successful_connections": 0,
+            "reconnect_count": 0,
+            "last_connected_at": None,
+            "last_disconnected_at": None,
         }
 
     def snapshot(self):
@@ -39,10 +45,49 @@ class RadioManager:
             result["device_metrics"] = dict(
                 self.state["device_metrics"]
             )
+
+            if (
+                self.state["connected"]
+                and self._connected_since_monotonic is not None
+            ):
+                result["connection_uptime_seconds"] = max(
+                    0, int(
+                        time.monotonic()
+                        - self._connected_since_monotonic
+                    )
+                )
+            else:
+                result["connection_uptime_seconds"] = None
+
             return result
 
     def _update(self, **changes):
         with self.lock:
+            previous = self.state["connected"]
+            current = changes.get("connected", previous)
+
+            if current and not previous:
+                now = datetime.now(
+                    timezone.utc
+                ).isoformat(timespec="seconds")
+
+                if self.state["successful_connections"] > 0:
+                    self.state["reconnect_count"] += 1
+
+                self.state["successful_connections"] += 1
+                self.state["last_connected_at"] = now
+                self._connected_since_monotonic = (
+                    time.monotonic()
+                )
+
+            elif previous and not current:
+                self.state["last_disconnected_at"] = (
+                    datetime.now(
+                        timezone.utc
+                    ).isoformat(timespec="seconds")
+                )
+                self._connected_since_monotonic = None
+
             self.state.update(changes)
 
     def _local_node_identity(self, iface):
