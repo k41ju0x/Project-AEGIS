@@ -616,3 +616,20 @@ Firmware is obtained from the existing Meshtastic `SerialInterface.metadata.firm
 **State distinction:** The current v0.8 radio-manager and HTML changes have been applied on the Pi. They still need to be copied, reviewed and published as a verified v0.8 checkpoint; do not claim GitHub source contains these changes until verified. Preserve the working radio's attached LoRa antenna during USB replug tests; do not flash firmware or alter radio settings. The current manager watches `/dev/ttyACM0`; renumbering on reconnection is a known limitation to test. Do not open an independent Meshtastic CLI session during this test.
 
 **Next:** create the local source checkpoint and sync GitHub, then test USB unplug/replug while monitoring the Flask radio state and systemd journal, checking any error state and automatically recovered connection.
+
+## November 11, 2026 — v0.8 USB cable disconnect/reconnect test PASSED
+
+**Test setup:** The RAK4631 was attached to the Raspberry Pi 5 over USB serial at `/dev/ttyACM0`, with the `aegis-mesh.service` Flask process polling its own persistent `radio_manager.snapshot()` through `/api/status`. The user unplugged the radio USB cable and subsequently replugged it; terminal poll interval was approximately three seconds.
+
+**Observed terminal transitions (local clock):**
+
+- `02:49:31` through `02:49:49`: `Connected: True | Port: /dev/ttyACM0 | Error: None`.
+- `02:49:52`: `Connected: False | Port: /dev/ttyACM0 | Error: ConnectionError`.
+- `02:49:58`: `Connected: False | Port: /dev/ttyACM0 | Error: Serial device unavailable` (same error persisted through `02:50:25`).
+- `02:50:28`: `Connected: True | Port: /dev/ttyACM0 | Error: None`; remained connected through the final observed sample `02:50:44`.
+
+The disconnected window observed in the polled samples was **36 seconds** (first observed offline at 02:49:52 to first observed restored at 02:50:28); exact cable reconnect time and recovery latency were not directly measured. Crucially, the radio manager recovered automatically without a manual application/service restart, and the serial path remained `/dev/ttyACM0`.
+
+**Acceptance:** USB disconnect detection **PASS**; unavailable-device error reporting **PASS**; automatic reconnect on the same serial path **PASS**; cleared error state after reconnect **PASS**. Still unverified: serial-device renumbering, successive flapping, app reboot recovery, live packet subscription after reconnect, touchscreen recovery timing, and long-duration stability. Do not claim these as tested.
+
+**Next:** verify post-reconnect telemetry arrives through the existing live API and dashboard; if confirmed, publish exact current v0.8 Pi files. Consider exposing reconnect counters and timestamps in the single-node diagnostics screen without adding a second radio session.
