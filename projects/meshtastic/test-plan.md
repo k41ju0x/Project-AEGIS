@@ -54,3 +54,7 @@ AEG-006 v1.0 release acceptance does **not** imply AEG-002 field-ready acceptanc
 ## Bluetooth acceptance — November 11, 2026
 
 **PASS (BLE pairing and connection):** User reports Meshtastic app on iPhone successfully paired to the RAK4631, and connection was good. Specific mobile-side configuration readbacks and reconnect persistence are not independently documented. Normal AEG-006 USB monitoring restoration after BLE handoff remains to be confirmed.
+
+## Bluetooth-to-USB handoff acceptance — November 11, 2026
+
+**PASS — BLE-to-USB handoff:** User confirmed that after the successful iPhone BLE pairing test and restoration of the Pi's monitor, the application reported `Connected: True` and `Error: None`. This verifies the connection-status portion of the handoff; a separate post-handoff telemetry sample was not provided. Keep multi-node RF, portable battery/endurance, enclosure and exact accessory-module identification as separate follow-ups.
