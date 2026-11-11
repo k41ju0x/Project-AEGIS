@@ -7,6 +7,10 @@ import socket
 import shutil
 
 from packet_store import get_events, load_synthetic_events
+from radio_manager import radio_manager
+from live_packet_store import record_packet, get_live_events
+from pubsub import pub
+import os
 
 app = Flask(__name__)
 
@@ -82,6 +86,7 @@ def index():
 
 @app.get("/api/status")
 def status():
+    radio = radio_manager.snapshot()
     return jsonify({
         "hostname": socket.gethostname(),
         "timestamp": datetime.now(
@@ -93,18 +98,20 @@ def status():
         "storage": storage_usage(),
         "uptime_seconds": system_uptime(),
         "fan_rpm": fan_speed(),
-        "radio_status": "not_connected",
+        "radio_status": "connected" if radio["connected"] else "not_connected",
+        "radio": radio,
         "serial_candidates": serial_candidates(),
         "nodes": [],
-        "node_data_status": "awaiting_radio"
+        "node_data_status": "radio_connected" if radio["connected"] else "awaiting_radio"
     })
 
 
 @app.get("/api/rf")
 def rf_status():
+    radio = radio_manager.snapshot()
     return jsonify({
-        "radio_connected": False,
-        "connection_type": None,
+        "radio_connected": radio["connected"],
+        "connection_type": radio["connection_type"] if radio["connected"] else None,
         "radio_region": None,
         "modem_preset": None,
         "center_frequency_mhz": None,
@@ -114,7 +121,10 @@ def rf_status():
         "packets": [],
         "capture_active": False,
         "spectrum_available": False,
-        "data_source": "no_radio_connected"
+        "data_source": "local_meshtastic_events" if radio["connected"] else "no_radio_connected",
+        "events_observed": radio["packets_observed"],
+        "last_event": radio["last_event"],
+        "device_metrics": radio["device_metrics"]
     })
 
 
@@ -131,10 +141,31 @@ def packet_events():
     })
 
 
+
+@app.get("/api/packets/live")
+def live_packet_events():
+    events = get_live_events()
+    radio = radio_manager.snapshot()
+    return jsonify({
+        "mode": "live_local_events",
+        "synthetic": False,
+        "radio_connected": radio["connected"],
+        "count": len(events),
+        "packets": events,
+        "notice": (
+            "LIVE MESHTASTIC EVENTS - "
+            "LOCAL NODE AND UNVERIFIED ORIGINS"
+        ),
+    })
+
+
 if __name__ == "__main__":
     load_synthetic_events()
+    pub.subscribe(record_packet, "meshtastic.receive")
+    radio_manager.start()
     app.run(
         host="127.0.0.1",
-        port=5000,
-        debug=False
+        port=int(os.environ.get("AEGIS_HTTP_PORT", "5000")),
+        debug=False,
+        use_reloader=False
     )

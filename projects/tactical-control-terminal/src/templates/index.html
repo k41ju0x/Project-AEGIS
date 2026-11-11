@@ -119,7 +119,7 @@ th { color: #a8f46c; }
     <div class="card">
       <small>MESHTASTIC RADIO</small>
       <div class="value warn" id="radio">NOT CONNECTED</div>
-      <small>Awaiting AEG-002 USB integration</small>
+      <small id="radio-detail">Checking radio connection...</small>
     </div>
   </div>
   <div class="card">
@@ -211,6 +211,12 @@ th { color: #a8f46c; }
     <p class="warn" id="packet-mode">
       SYNTHETIC TEST DATA — NOT LIVE RF TRAFFIC
     </p>
+
+    <label for="packet-data-mode">Data source</label>
+    <select id="packet-data-mode">
+      <option value="live" selected>Live Radio</option>
+      <option value="synthetic">Simulation</option>
+    </select>
 
     <label for="packet-filter">Packet type</label>
     <select id="packet-filter">
@@ -384,11 +390,27 @@ async function refreshStatus() {
     document.getElementById("updated").textContent =
       data.timestamp;
 
-    document.getElementById("radio").textContent =
-      "NOT CONNECTED";
+    const radioConnected = data.radio_status === "connected";
+    const radioElement = document.getElementById("radio");
+
+    radioElement.textContent =
+      radioConnected ? "CONNECTED" : "NOT CONNECTED";
+
+    radioElement.className =
+      radioConnected ? "value ok" : "value warn";
+
+    document.getElementById("radio-detail").textContent =
+      radioConnected
+        ? "AEG-002 USB serial connection established"
+        : "Awaiting AEG-002 USB connection";
+
+    const nodeCount = data.radio?.node_count ?? 0;
 
     document.getElementById("node-message").textContent =
-      "No live radio session. 0 verified nodes.";
+      radioConnected
+        ? `Radio connected. ${nodeCount} known node(s). ` +
+          "Detailed node listing is pending."
+        : "No live radio session established.";
 
     document.getElementById("diagnostic-output").textContent =
       JSON.stringify(data, null, 2);
@@ -564,11 +586,20 @@ function updateHistoryState() {
 
   state.textContent = packetPaused
     ? "PAUSED — packet display frozen"
-    : "AUTO-REFRESH — synthetic test records";
+    : document.getElementById("packet-data-mode").value === "live"
+      ? "AUTO-REFRESH — live Meshtastic events"
+      : "AUTO-REFRESH — synthetic test records";
 
   document.getElementById("pause-packets").textContent =
     packetPaused ? "Resume" : "Pause";
 }
+
+document.getElementById("packet-data-mode")
+  .addEventListener("change", () => {
+    hiddenPacketIds.clear();
+    packetPaused = false;
+    refreshPackets();
+  });
 
 document.getElementById("source-filter")
   .addEventListener("change", drawPackets);
@@ -620,8 +651,8 @@ function drawPackets() {
       new Date(packet.timestamp).toLocaleTimeString(),
       packet.source,
       packet.packet_type,
-      packet.rssi_dbm + " dBm",
-      packet.snr_db + " dB"
+      Number.isFinite(packet.rssi_dbm) ? packet.rssi_dbm + " dBm" : "N/A",
+      Number.isFinite(packet.snr_db) ? packet.snr_db + " dB" : "N/A"
     ];
 
     values.forEach(value => {
@@ -636,7 +667,15 @@ function drawPackets() {
 async function refreshPackets() {
   if (packetPaused) return;
   try {
-    const response = await fetch("/api/packets", {
+    const mode = document.getElementById(
+      "packet-data-mode"
+    ).value;
+
+    const endpoint = mode === "live"
+      ? "/api/packets/live"
+      : "/api/packets";
+
+    const response = await fetch(endpoint, {
       cache: "no-store"
     });
     if (!response.ok) throw new Error("Packet API unavailable");
