@@ -44,3 +44,9 @@ Do not publish exact private coordinates. Record obstacles, mounting elevation, 
 5. **Deferred:** two-node message delivery / peer RSSI-SNR, protected pack polarity and battery endurance, rugged enclosure/antenna feedthrough and ingress tests.
 
 AEG-006 v1.0 release acceptance does **not** imply AEG-002 field-ready acceptance. [AEG-006 release](../tactical-control-terminal/README.md).
+
+## GNSS follow-up result — November 11, 2026
+
+**PASS (internal GNSS position report):** An actual local `POSITION_APP` callback was observed at `2026-11-11T17:28:45+00:00`; privacy-safe monitoring reported 15 satellites, `location_source=LOC_INTERNAL`, and presence of coordinate fields. The user observed the event after initially receiving `gnss=None` while waiting for a position update. The OLED previously reported 6 satellites and was visually confirmed operating.
+
+**Qualification:** `fix_type` and `fix_quality` were absent, so exact fix quality, 2D/3D classification, reported accuracy and real-world coordinate correctness have not been measured. Do not expose coordinate values in public logs. GNSS hardware/event integration is verified; precise location accuracy testing remains optional future validation.
