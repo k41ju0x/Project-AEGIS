@@ -452,3 +452,69 @@ Tracking: https://github.com/k41ju0x/Project-AEGIS/issues/6
 I audited the original v0.6 project source and identified that the initial journal did not preserve every shell command used to configure its virtual environment, systemd unit, and Chromium kiosk. Rather than presenting guessed commands as my actual past terminal history, I wrote a separate [source-grounded reproduction guide](../REPRODUCE.md) with setup, `pip` dependency installation, local API checks, an **example** systemd unit, an **example** labwc kiosk autostart, expected outputs and explicit gaps requiring fresh-install validation.
 
 The original build results above remain the historical record; the separate guide is a **procedure to repeat**, not a declaration that its reconstructed lines were executed verbatim during the original build. Its accuracy should be confirmed on a clean microSD/second Pi before describing it as end-to-end reproducible.
+
+
+## November 11, 2026 — Cross-project repository/source audit and resume checkpoint
+
+This checkpoint reconciles **AEG-002** and **AEG-006** against photographed hardware, command outputs and actual GitHub source. It does not imply that the live Pi filesystem or deployed Flask service was remotely modified during the documentation audit.
+
+| Area | Verified at checkpoint | Remaining gap |
+|---|---|---|
+| AEG-002 physical inventory | Kit received, base/core/GNSS visually inventoried, antenna leads attached | Exact OLED/optional sensor SKU and connector seating verification; OLED still uninstalled |
+| Firmware and LoRa | RAK4631 firmware 2.7.15.567b8ea, US region, LONG_FAST and node names read back | Firmware recovery/flash and cold-boot tests |
+| CLI | Meshtastic 2.7.11 connects over /dev/ttyACM0 | Concurrency policy once live Flask manager is enabled |
+| Telemetry | Actual TELEMETRY_APP/POSITION_APP events, parsed device metrics | Fresh GNSS fix, remote RF peer, sustained reception |
+| Python manager | Locally tested radio_manager.py passes compilation and 30-sec session; debug incident resolved | Exact source file must be copied from Pi, reviewed and committed; unplug/replug testing |
+| v0.6 Flask backend | GitHub src/app.py inspected; /api/status and /api/rf have hardcoded offline status; /api/packets is synthetic | Implement and acceptance-test v0.7 integration |
+| Packet store | GitHub src/packet_store.py inspected; 200-event bounded deque, 3 demo records | Separate real and synthetic queues, annotate local-vs-over-air events |
+| systemd | Service active; user aegis and venv running; restart on failure | Verify full ExecStart and production behavior with live serial owner |
+| Physical evidence | Older journal contains original uploaded photos; new kit and terminal screenshots seen during testing | Add and embed original RAK4631 photos, with privacy/location metadata stripped |
+| Security | No private keys, channel credentials, exact GPS coordinates or private LAN IPs copied into journal | Review any subsequently committed logs/screenshot EXIF |
+
+### Exact code provenance / known gap
+
+The tested `/home/aegis/aegis-tct/src/radio_manager.py` was created and repaired **on the Raspberry Pi**, not through the GitHub connector. GitHub currently retains the verified v0.6 `src/app.py` and `src/packet_store.py`. The functional manager source has **not** been independently fetched from the device, so do not call any reconstructed version of it the exact tested file.
+
+The complete **original proposed manager creation command** was supplied in the engineering session. The applied correction replaced the initial unconditional assignment of an empty metric dict with:
+
+```python
+            new_metrics = {
+                key: metrics[key]
+                for key in allowed
+                if key in metrics
+            }
+
+            if new_metrics:
+                changes["device_metrics"] = new_metrics
+```
+
+To publish the **actual** tested file, use this sequence on the Pi when resuming:
+
+```bash
+cd ~/aegis-tct
+source .venv/bin/activate
+python -m py_compile src/radio_manager.py
+sha256sum src/radio_manager.py
+cd ~/aegis-portfolio
+git pull --ff-only origin main
+cp ~/aegis-tct/src/radio_manager.py projects/tactical-control-terminal/src/radio_manager.py
+git diff -- projects/tactical-control-terminal/src/radio_manager.py
+git add projects/tactical-control-terminal/src/radio_manager.py
+git commit -m "feat(AEG-006): add verified standalone Meshtastic radio manager"
+git push origin main
+```
+
+**Why:** `git pull --ff-only` syncs the new GitHub documentation before local commit; `cp` preserves the actual successfully tested Python file; review/commit/push gives traceable source provenance. These are **next-session instructions, not commands claimed executed**. Inspect the file for secrets and environment paths before staging. Avoid committing `.venv`, backups, logs or credentials.
+
+### Immediate next development step
+
+The last completed development operation was the 30-second `radio_manager.py` test concluding with `Radio test finished.` The running kiosk is still v0.6. Resume by inspecting exact endpoint definitions and implementation context **without editing anything**:
+
+```bash
+cd ~/aegis-tct
+grep -nE '^(@app.route|@app.get|def |if __name__)' src/app.py
+sed -n '45,115p' src/app.py
+```
+
+Follow with a backup, syntax validation, controlled manual API test and rollback plan before restarting the systemd service. Implement one persistent serial owner, distinguish local node callbacks from actual external mesh reception, and retain demonstration events in a separate clearly labeled store. Keep the server loopback-bound until remote access is separately designed.
+
