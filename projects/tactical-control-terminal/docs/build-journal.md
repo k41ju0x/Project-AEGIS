@@ -586,3 +586,11 @@ The HTML/JavaScript was patched locally to provide **Live Radio** and **Simulati
 2. Confirm the GitHub source matches the tested Pi files; do **not** overwrite the live installation from the older repository copy.
 3. Build v0.8 single-node intelligence (identity/health, firmware when available, local vs remote event counters, USB fault state), maintaining separate demo/live histories.
 4. Validate power-cycle, unplug/replug and delayed reconnect behavior with safe antenna attachment; postpone two-node RF messaging until a compatible peer is available.
+
+## November 11, 2026 — v0.8 single-node health cards: visual acceptance
+
+After the verified v0.7 source snapshot was published, the Raspberry Pi's **local** `src/templates/index.html` was updated with the initial v0.8 Mesh Nodes health view. Its fields read the existing `/api/status.radio` snapshot: connection state, USB serial port, known node count, voltage, last reported device uptime, channel utilization, TX airtime utilization, event counter, most recent event type and reported connection error. A backup of the v0.7 template was preserved locally as `src/templates/index.html.v0.7.backup`.
+
+**Observed:** The physical Touch Display 2 **shows the new Mesh Nodes cards**. The user verified the visual rendering. The individual metric values, dynamic node identity, connection-loss behavior and firmware extraction have **not** yet been independently validated. The v0.8 HTML modifications are **local Pi working changes**, not yet claimed as a published tested source commit.
+
+**Next:** Retrieve identity from the radio's existing serial connection with safe fallback for unavailable fields; validate API/UI results and capture exact tested source. Do not open a competing Meshtastic CLI session while systemd owns the port. After that, test safe USB unplug/replug and recovery.
