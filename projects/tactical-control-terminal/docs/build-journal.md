@@ -558,3 +558,31 @@ curl -sS http://127.0.0.1:5000/api/status | python3 -m json.tool
 **Not yet verified:** whether the existing 10-inch kiosk frontend visually changes to *Connected*, reconnect behavior across USB removal/restart, live node enumeration (`nodes` is still an empty array), and real packet history. The event counter includes local device events; do not equate it with peer-to-peer RF reception. Do not describe v0.7 as a complete finished release.
 
 **Next actions:** (1) visually inspect Overview tab on the touchscreen; (2) publish the *exact tested local* `src/app.py` and `src/radio_manager.py` after synchronizing the checkout and reviewing secrets; (3) keep synthetic and live packet histories separate, implement node listing and validate frontend; (4) test reconnect and reboot. Do not start a second Meshtastic serial process while the systemd service owns `/dev/ttyACM0`.
+
+## November 11, 2026 — Touchscreen live-radio UI and packet-history acceptance
+
+The previously deployed Flask backend exposed live connection status, but the v0.6 Overview JavaScript still set `#radio` to `NOT CONNECTED` unconditionally. A focused local template edit made Overview read `/api/status.radio_status` and display **CONNECTED**, which was visibly verified on the physical Raspberry Pi Touch Display 2.
+
+The RF Monitor continued to show the three demonstration sources TEST-NODE-A/B/C because its packet-history fetch targeted the synthetic `/api/packets` endpoint. The locally developed `live_packet_store.py` added a separate 200-event, process-memory buffer subscribed to `meshtastic.receive`. Initially, `/api/packets/live` returned HTTP **404**: inspection of `src/app.py` showed only `radio_manager.start()`, proving that the endpoint patch had not been applied. The missing Flask route, import and subscription were subsequently added and the service restarted.
+
+**Recorded production endpoint acceptance:**
+
+```bash
+curl -i --max-time 5 http://127.0.0.1:5000/api/packets/live
+# HTTP/1.1 200 OK
+```
+
+The API returned a real **local** event: `mode=live_local_events`, `synthetic=false`, `radio_connected=true`, `count=1`, `source=AEGIS-MESH-01`, `origin=local_node`, `packet_type=TELEMETRY`, `id=LIVE-00000001`, timestamp `2026-11-11T07:57:14+00:00`, with `rssi_dbm=null` and `snr_db=null`. This is serial-visible local-node telemetry, **not proof of peer-to-peer LoRa reception**.
+
+The HTML/JavaScript was patched locally to provide **Live Radio** and **Simulation** selectors, routing to `/api/packets/live` and `/api/packets` respectively and showing unavailable signal values as N/A. The physical touchscreen was subsequently confirmed to show **Live Radio** and **AEGIS-MESH-01** in its live source list. The synthetic A/B/C sample records remain a distinct simulation path.
+
+**Version/state precision:** The working device now contains the live v0.7 backend **and** live-history UI, verified for local events only. The exact tested Pi files `src/app.py`, `src/radio_manager.py`, `src/live_packet_store.py`, and `src/templates/index.html` have **not yet been committed** into the GitHub project source as of this checkpoint. The published repository source still reflects v0.6. Source capture is the immediate hold point before v0.8 development.
+
+**Known limitations:** One owned node only; external received LoRa packets and true peer RSSI/SNR not yet tested. Node listing `nodes=[]` and full device intelligence are incomplete; reconnection under unplug/replug and system reboot untested. No need to purchase a second radio to continue single-node monitoring. Keep channel keys, messages and precise coordinates out of public logs and commits.
+
+### Next actions — source publication followed by v0.8
+
+1. In the existing Pi repo checkout, pull current GitHub documentation, copy the four **actual working** local source files, review staged diff for privacy and unrelated changes, compile, then commit and push the precise v0.7 snapshot.
+2. Confirm the GitHub source matches the tested Pi files; do **not** overwrite the live installation from the older repository copy.
+3. Build v0.8 single-node intelligence (identity/health, firmware when available, local vs remote event counters, USB fault state), maintaining separate demo/live histories.
+4. Validate power-cycle, unplug/replug and delayed reconnect behavior with safe antenna attachment; postpone two-node RF messaging until a compatible peer is available.
