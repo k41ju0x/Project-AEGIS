@@ -19,3 +19,7 @@
 With AEG-006 v1.0 accepted, **validate a fresh GNSS satellite fix** using the existing RAK12501 antenna outdoors, without publicly logging coordinates. Then verify the actual OLED module SKU and compatible slot before installation, and perform a controlled Bluetooth pairing test with the mobile app. Verify the sensor-module SKU from its markings. Two-node messaging, battery/endurance and the rugged enclosure remain later phases; **no additional hardware purchase is required for the immediate checks**. Keep CLIENT role and the US/LONG_FAST configuration unless a specific test requires a deliberate, documented change. The previously planned Flask integration, event-history UI, USB fault recovery and automatic boot are now complete for the single-node baseline. See [AEG-006 v1.0 release evidence](../tactical-control-terminal/README.md) and [the Meshtastic test plan](test-plan.md).
 
 [Tracking issue](https://github.com/k41ju0x/Project-AEGIS/issues/2)
+
+## November 11, 2026 — qualification progress
+
+**Verified:** Meshtastic iPhone app pairs to the RAK4631 via BLE and establishes a working connection (user confirmation). OLED shows active node information and satellite reception; a fresh local `POSITION_APP` event reported 15 satellites, `LOC_INTERNAL` and presence of coordinates (exact location withheld). GNSS precision/fix quality was not explicitly reported. Return the Pi from the controlled BLE pairing test to USB-owned Flask monitoring before leaving it unattended. [Observed evidence](build-log.md).
