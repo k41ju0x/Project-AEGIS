@@ -633,3 +633,11 @@ The disconnected window observed in the polled samples was **36 seconds** (first
 **Acceptance:** USB disconnect detection **PASS**; unavailable-device error reporting **PASS**; automatic reconnect on the same serial path **PASS**; cleared error state after reconnect **PASS**. Still unverified: serial-device renumbering, successive flapping, app reboot recovery, live packet subscription after reconnect, touchscreen recovery timing, and long-duration stability. Do not claim these as tested.
 
 **Next:** verify post-reconnect telemetry arrives through the existing live API and dashboard; if confirmed, publish exact current v0.8 Pi files. Consider exposing reconnect counters and timestamps in the single-node diagnostics screen without adding a second radio session.
+
+## November 11, 2026 — post-reconnect telemetry path confirmed
+
+Following the observed USB cable disconnect/reconnect recovery, the user ran both acceptance checks: `GET /api/status` to inspect connection state, firmware, node metadata, event counter, last event and device metrics, and `GET /api/packets/live` to inspect current live events. The user reported **both checks passed** and therefore confirmed that live event reception resumed after the radio automatically reconnected. Exact post-reconnect response bodies/counters were not pasted; no numerical values are asserted beyond the previous captured recovery trace.
+
+**Acceptance chain now verified:** operational USB serial connection → cable removed → supervisor detected connection loss → `/dev/ttyACM0` became unavailable → cable reconnected → supervisor re-established the session without restarting Flask → subsequent real telemetry reached Flask's live APIs.
+
+**Open work:** publish the exact latest v0.8 Pi `radio_manager.py` and `templates/index.html` sources after staged diff and privacy review; add recovery/connection counters and last state-change timestamps; optionally test USB path renumbering and boot recovery. Do not present these as already tested. RF peer reception remains untested with only one node available.
