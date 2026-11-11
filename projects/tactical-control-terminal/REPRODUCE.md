@@ -2,7 +2,7 @@
 
 
 > **Privacy and paths:** `<TCT_HOSTNAME>` is a placeholder; choose your own name when imaging the Pi. `~/tct-app` and `/home/aegis/tct-app` are example deployment paths selected for this sanitized walkthrough, not verified original device paths. Use the same actual account and application directory consistently throughout the service configuration.
-**Last reviewed:** 2026-11-08  
+**Last reviewed:** 2026-11-11  
 **Build:** Raspberry Pi 5 (8GB), Raspberry Pi Touch Display 2, Active Cooler, Raspberry Pi OS 64-bit with Desktop (Debian Trixie), `<TCT_HOSTNAME>` hostname.
 
 > This guide is a **repeatable deployment procedure reconstructed from the published source and verified architecture**, not a verbatim record of every original terminal command. For commands that were observed in the build and their results, read the [engineering build journal](docs/build-journal.md). I have not re-executed this exact clean-install procedure end to end on a fresh Pi. Use owned/authorized equipment and review commands before execution.
@@ -114,7 +114,7 @@ ls -l /sys/class/hwmon/
 cat /sys/class/thermal/thermal_zone0/temp
 ```
 
-The v0.6 UI uses synthetic sample nodes; the actual RAK4631 radio integration, physical RF spectrum collection, greater-than-10-record history testing and original photo evidence are not complete.
+**As of November 11:** The RAK4631 is physically connected and verified via the standalone Meshtastic CLI and a locally tested Python radio manager. The **published v0.6 Flask application is still deliberately offline/synthetic**, and the local `radio_manager.py` is not yet integrated or committed. Reproducing the exact USB test requires a compatible radio, appropriate antenna, Meshtastic firmware, permission to use the serial port, and a single serial owner. The v0.6 UI uses synthetic sample nodes; the actual RAK4631 radio integration, physical RF spectrum collection, greater-than-10-record history testing and original photo evidence are not complete.
 
 ## 7. Recovery and privacy
 
