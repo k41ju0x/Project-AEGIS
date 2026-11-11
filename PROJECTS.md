@@ -11,7 +11,7 @@
 | AEG-003 | Pwnagotchi | **Completed (November 7, 2026); deferred follow-ups documented** | [Overview](projects/pwnagotchi/README.md) · [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3) |
 | **AEG-004** | **Portable LattePanda Remote Access Device** | Original Sigma 32GB SSD + Wi-Fi bundle ordered; awaiting shipment | [Scope](projects/remote-access-device/README.md) · [#4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
 | AEG-005 | ESP32 Marauder Lab | Parked | [Scope](projects/esp32-marauder/README.md) |
-| AEG-006 | Tactical Control Terminal | v0.6 kiosk UI running; partial v0.7 live Flask API deployed and verified; node/history UI and source push pending | [Overview](projects/tactical-control-terminal/README.md) · [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
+| AEG-006 | Tactical Control Terminal | v1.0 single-node monitor accepted: live telemetry, touchscreen, reboot recovery and v0.9 USB reliability verified | [Overview](projects/tactical-control-terminal/README.md) · [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
 | AEG-007 | RFID/NFC Security Lab | Parked | [Notes](projects/rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP / DIY Wi-Fi Pineapple Lab | Parked | [Notes](projects/openwrt-rogue-ap/README.md) |
 | AEG-009 | Custom Reconnaissance Toolkit | Parked | [Notes](projects/custom-recon-toolkit/README.md) |
@@ -36,12 +36,12 @@
 
 ## Current focus
 
-I completed **AEG-003 Pwnagotchi** on November 7, 2026, with documented deferred battery-cutoff, Bluetooth-interruption and handshake-completeness checks. Current engineering work is on the **received AEG-002 RAK4631** kit and **AEG-006**. Live USB telemetry now reaches the systemd-managed Flask API; live node and packet-history UI, recovery testing, and exact source publication remain open. **AEG-016** remains deferred. AEG-004 Sigma hardware was ordered November 8, 2026; assembly and testing are pending shipment. This does not authorize other backlog purchases.
+I completed **AEG-003 Pwnagotchi** on November 7, 2026, with documented deferred battery-cutoff, Bluetooth-interruption and handshake-completeness checks. Current engineering work is on the **received AEG-002 RAK4631** kit and **AEG-006**. AEG-006 v1.0 single-node baseline has passed live node telemetry, UI, USB recovery and reboot acceptance; multi-node reception remains open as a separate future capability. **AEG-016** remains deferred. AEG-004 Sigma hardware was ordered November 8, 2026; assembly and testing are pending shipment. This does not authorize other backlog purchases.
 
 ## Documentation
 
 - [AEG-002 hardware receipt, configuration and telemetry build log](projects/meshtastic/build-log.md) · [test status](projects/meshtastic/test-plan.md)
-- [AEG-006 radio integration and v0.7 prototype journal](projects/tactical-control-terminal/docs/build-journal.md)
+- [AEG-006 v1.0 single-node engineering journal](projects/tactical-control-terminal/docs/build-journal.md)
 
 - [AEG-003 build journal](projects/pwnagotchi/docs/build-journal.md) · [test matrix](projects/pwnagotchi/docs/test-matrix.md)
 - [Future Ideas Backlog](FUTURE-IDEAS.md)
