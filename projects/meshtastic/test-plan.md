@@ -1,5 +1,5 @@
 # AEG-002 — Verification Plan and Initial Bench Evidence
-**Status (November 11, 2026):** Partial USB and telemetry acceptance executed. No firmware flashing, battery endurance, OLED, BLE pairing, enclosure, fresh GNSS-fix or peer-to-peer RF acceptance has been demonstrated.
+**Status (November 11, 2026):** Standalone RAK4631 USB, identity, telemetry, recovery and AEG-006 v1.0 integration accepted. AEG-002 remains open for fresh GNSS fix, OLED, Bluetooth pairing, battery endurance, enclosure and peer RF testing. No firmware flashing has been performed or required.
 
 | Test ID | Requirement | Planned procedure | Evidence / criteria |
 |---|---|---|---|
@@ -23,12 +23,24 @@
 | Node naming | **PASS** | `AEGIS-MESH-01`, `AE01` read back |
 | Receive subscription | **PASS (single-node)** | `TELEMETRY_APP` and `POSITION_APP` callbacks; not proof of peer messages or fresh GNSS lock |
 | Device metrics parsing | **PASS** | 60-second test produced two `deviceMetrics` samples; final manager run parsed voltage 4.25 V and uptime 1872 s |
-| Radio manager standalone runtime | **PASS (30 s)** | Connected, 1 node, 2 events, error null; reconnection under real USB unplug still untested |
-| Flask v0.7 live integration | **NOT STARTED** | v0.6 API still reports `not_connected` despite serial candidate |
-| Two-node messaging, OLED, battery, enclosure | **NOT TESTED** | Still open under relevant requirements |
+| Radio manager standalone runtime | **PASS (30 s)** | Connected, 1 node, 2 events, error null |
+| Flask live integration and touchscreen | **PASS (AEG-006 v1.0)** | Live local telemetry and separate simulation, node identity, firmware and recovery counters verified in production Flask and physical kiosk |
+| USB recovery and Pi reboot | **PASS** | Disconnection detected, supervisor reconnected, live telemetry resumed; full five-of-five reboot/kiosk acceptance reported for AEG-006 v1.0 |
+| Fresh GNSS fix / OLED / BLE pairing | **NOT TESTED** | Next bench qualification tasks (no new hardware required) |
+| Two-node messaging, battery, enclosure | **NOT TESTED** | Still open under relevant requirements |
 
 **Interpretation of original TST-001:** Firmware identity and normal USB boot verified, but the original test specifically requires *flashing and two cold boots*, so **TST-001 remains incomplete**; do not silently convert installation detection into flashing acceptance.
 
 [Detailed dated observed commands and outputs](build-log.md) · [AEG-006 integration journal](../tactical-control-terminal/docs/build-journal.md)
 
 Do not publish exact private coordinates. Record obstacles, mounting elevation, antenna, settings, weather, and firmware when comparing RF tests.
+
+## AEG-002 follow-up qualification order — after AEG-006 v1.0
+
+1. **Fresh GNSS fix:** test outdoors with antenna attached, document acquisition success, satellites/fix quality when available, and no public coordinates. Keep the existing serial owner exclusive during any CLI inspection.
+2. **OLED module:** verify actual SKU/slot/pinout before installing with all power disconnected; inspect for boot/screen operation.
+3. **Bluetooth:** validate phone pairing, read-only node information and controlled handoff, avoiding simultaneous configuration writes with the Pi session.
+4. **Sensor:** read module markings and confirm required telemetry support; do not assume an accelerometer reading from deviceMetrics.
+5. **Deferred:** two-node message delivery / peer RSSI-SNR, protected pack polarity and battery endurance, rugged enclosure/antenna feedthrough and ingress tests.
+
+AEG-006 v1.0 release acceptance does **not** imply AEG-002 field-ready acceptance. [AEG-006 release](../tactical-control-terminal/README.md).
