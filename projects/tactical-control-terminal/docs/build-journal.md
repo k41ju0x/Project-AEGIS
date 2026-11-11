@@ -662,3 +662,21 @@ A controlled USB cable disconnect/reconnect test was run against the current loc
 **Accepted:** fault detection, disconnect-state handling, successful reconnection, monotonic uptime reset, correct connection/recovery counter increments, and cleared error state. **Not yet independently checked in this run:** values of `last_connected_at` and `last_disconnected_at`, continued new live telemetry after this particular second test, or USB-port renumbering/reboot recovery. The previous v0.8 test verified resumed live telemetry after reconnection.
 
 **Release gate:** Pi-local v0.9 source updates to `radio_manager.py` and `src/templates/index.html` should be copied to the GitHub checkout, inspected and committed; this journal update alone does not publish the tested code.
+
+## November 11, 2026 — AEGIS Mesh Control v1.0 single-node reboot acceptance: 5/5 PASS
+
+The user completed the **full Raspberry Pi reboot** acceptance check after v0.9 source publication (commit `b1d0407`, `feat(AEG-006): add v0.9 connection reliability diagnostics`). All five checklist entries were independently reported **PASSED**:
+
+1. Raspberry Pi restarted successfully and Termius/SSH access returned.
+2. `aegis-mesh.service` / Flask started automatically without manual intervention.
+3. The USB-attached RAK4631 automatically re-established its serial connection.
+4. Fresh device telemetry appeared after reboot through the live monitoring path.
+5. Chromium touchscreen kiosk restored and displayed the dashboard.
+
+**Release decision:** **ACCEPT AEG-006 AEGIS Mesh Control v1.0 single-node baseline**. This is a functional readiness designation supported by the user's boot and telemetry validation, not a claim of multiple independent field runs, extended soak testing, or peer-to-peer RF reception. The exact post-boot HTTP response, systemd journal and timestamped screenshots were not supplied in this acceptance turn.
+
+**Prior measured evidence:** v0.8 same-path USB recovery and post-reconnect telemetry passed. v0.9 disconnect/reconnect produced `Connected=False` with `ConnectionError` / `Serial device unavailable`, then `Connected=True`, `successful_connections 1→2`, `reconnect_count 0→1`, and uptime reset to 1 s before increasing. The source `radio_manager.py` and `templates/index.html` containing v0.9 fields were confirmed available on GitHub.
+
+**Known limitations / deferred gates:** only one RAK4631, so no inter-node LoRa reception, peer RSSI/SNR or two-node messaging verified; no measured RF spectrum waterfall; GNSS fix, battery endurance, USB renumbering, multicycle soak testing and published photos remain open as relevant future work. Counters and recent live history reset after Flask process restart. Application is loopback-only by design.
+
+**Publication work:** update AEG-006 project README, ROADMAP.md, PROJECTS.md and issue #6 to reflect the accepted v1.0 baseline; preserve these exact functional limits. Do not conflate this baseline acceptance with acceptance of all AEG-006 future enhancements or of AEG-002 as a whole.
