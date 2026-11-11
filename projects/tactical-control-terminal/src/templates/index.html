@@ -155,13 +155,60 @@ th { color: #a8f46c; }
 
 <section id="nodes" hidden style="margin-top:22px">
   <div class="card">
-    <h2>Mesh Node Monitor</h2>
-    <p id="node-message">
-      No live radio connection established.
+    <h2 id="local-node-name">Local Meshtastic Radio</h2>
+    <p class="muted" id="local-node-details">
+      Awaiting node identity
     </p>
+    <p id="node-message">Checking radio connection...</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <small>CONNECTION STATUS</small>
+      <div class="value" id="node-link">--</div>
+      <small id="node-port">USB serial</small>
+    </div>
+
+    <div class="card">
+      <small>KNOWN NODES</small>
+      <div class="value" id="node-count">--</div>
+      <small>Includes the local radio</small>
+    </div>
+
+    <div class="card">
+      <small>DEVICE VOLTAGE</small>
+      <div class="value" id="node-voltage">--</div>
+      <small>Latest reported device telemetry</small>
+    </div>
+
+    <div class="card">
+      <small>RADIO UPTIME</small>
+      <div class="value" id="node-uptime">--</div>
+      <small>From the last telemetry report</small>
+    </div>
+
+    <div class="card">
+      <small>CHANNEL UTILIZATION</small>
+      <div class="value" id="node-channel">--</div>
+      <small>Reported LoRa channel utilization</small>
+    </div>
+
+    <div class="card">
+      <small>TX AIRTIME UTILIZATION</small>
+      <div class="value" id="node-airtime">--</div>
+      <small>Reported transmit airtime utilization</small>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Connection Diagnostics</h2>
+    <p>Firmware: <strong id="node-firmware">--</strong></p>
+    <p>Events observed: <strong id="node-events">--</strong></p>
+    <p>Last event: <strong id="node-last">--</strong></p>
+    <p>Connection error: <strong id="node-error">--</strong></p>
     <p class="muted">
-      Node information will appear after the
-      RAK4631 is connected and verified.
+      Local USB events are not proof of reception from
+      another over-the-air Meshtastic node.
     </p>
   </div>
 </section>
@@ -411,6 +458,75 @@ async function refreshStatus() {
         ? `Radio connected. ${nodeCount} known node(s). ` +
           "Detailed node listing is pending."
         : "No live radio session established.";
+
+    const nodeRadio = data.radio || {};
+    const localNode = nodeRadio.local_node || {};
+
+    document.getElementById("local-node-name").textContent =
+      localNode.long_name || "Local Meshtastic Radio";
+
+    const nodeDetails = [
+      localNode.short_name,
+      localNode.hardware,
+      "Local USB radio"
+    ].filter(Boolean).join(" · ");
+
+    document.getElementById("local-node-details").textContent =
+      nodeDetails;
+    const metrics = nodeRadio.device_metrics || {};
+
+    const numberOrNA = (value, digits, suffix) =>
+      typeof value === "number" && Number.isFinite(value)
+        ? value.toFixed(digits) + suffix
+        : "N/A";
+
+    const uptimeValue = metrics.uptimeSeconds;
+
+    const radioUptime =
+      typeof uptimeValue === "number"
+        ? Math.floor(uptimeValue / 3600) + "h " +
+          Math.floor((uptimeValue % 3600) / 60) + "m"
+        : "N/A";
+
+    document.getElementById("node-link").textContent =
+      radioConnected ? "CONNECTED" : "OFFLINE";
+
+    document.getElementById("node-link").className =
+      radioConnected ? "value ok" : "value warn";
+
+    document.getElementById("node-port").textContent =
+      radioConnected
+        ? "USB serial: " + (nodeRadio.port || "Unknown")
+        : "USB radio disconnected";
+
+    document.getElementById("node-count").textContent =
+      radioConnected ? String(nodeRadio.node_count ?? 0) : "N/A";
+
+    document.getElementById("node-voltage").textContent =
+      numberOrNA(metrics.voltage, 3, " V");
+
+    document.getElementById("node-uptime").textContent =
+      radioUptime;
+
+    document.getElementById("node-channel").textContent =
+      numberOrNA(metrics.channelUtilization, 2, "%");
+
+    document.getElementById("node-airtime").textContent =
+      numberOrNA(metrics.airUtilTx, 3, "%");
+
+    document.getElementById("node-firmware").textContent =
+      radioConnected
+        ? (nodeRadio.firmware_version || "N/A")
+        : "Unavailable";
+
+    document.getElementById("node-events").textContent =
+      String(nodeRadio.packets_observed ?? 0);
+
+    document.getElementById("node-last").textContent =
+      nodeRadio.last_event?.type || "No event recorded";
+
+    document.getElementById("node-error").textContent =
+      nodeRadio.error || "None reported";
 
     document.getElementById("diagnostic-output").textContent =
       JSON.stringify(data, null, 2);

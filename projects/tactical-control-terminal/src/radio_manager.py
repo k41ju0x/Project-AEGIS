@@ -25,6 +25,8 @@ class RadioManager:
             "connection_type": "usb_serial",
             "port": port,
             "node_count": 0,
+            "local_node": None,
+            "firmware_version": None,
             "packets_observed": 0,
             "last_event": None,
             "device_metrics": {},
@@ -42,6 +44,46 @@ class RadioManager:
     def _update(self, **changes):
         with self.lock:
             self.state.update(changes)
+
+    def _local_node_identity(self, iface):
+        """Read the local node's public display names."""
+        try:
+            my_info = getattr(iface, "myInfo", None)
+            my_number = getattr(
+                my_info, "my_node_num", None
+            )
+
+            nodes_by_num = getattr(
+                iface, "nodesByNum", {}
+            ) or {}
+
+            node = nodes_by_num.get(my_number)
+
+            if not isinstance(node, dict):
+                nodes = getattr(iface, "nodes", {}) or {}
+                for candidate in nodes.values():
+                    if not isinstance(candidate, dict):
+                        continue
+                    if candidate.get("num") == my_number:
+                        node = candidate
+                        break
+
+            if not isinstance(node, dict):
+                return None
+
+            user = node.get("user") or {}
+
+            if not isinstance(user, dict):
+                return None
+
+            return {
+                "long_name": user.get("longName"),
+                "short_name": user.get("shortName"),
+                "hardware": user.get("hwModel"),
+            }
+
+        except (AttributeError, TypeError, ValueError):
+            return None
 
     def _on_receive(self, packet, interface):
         decoded = packet.get("decoded") or {}
@@ -125,6 +167,17 @@ class RadioManager:
                     self._update(
                         connected=True,
                         node_count=len(iface.nodes),
+                        local_node=self._local_node_identity(iface),
+                        firmware_version=(
+                            str(iface.metadata.firmware_version)
+                            if (
+                                getattr(iface, "metadata", None) is not None
+                                and getattr(
+                                    iface.metadata, "firmware_version", ""
+                                )
+                            )
+                            else None
+                        ),
                         error=None,
                     )
 
