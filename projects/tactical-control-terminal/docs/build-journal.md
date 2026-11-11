@@ -594,3 +594,9 @@ After the verified v0.7 source snapshot was published, the Raspberry Pi's **loca
 **Observed:** The physical Touch Display 2 **shows the new Mesh Nodes cards**. The user verified the visual rendering. The individual metric values, dynamic node identity, connection-loss behavior and firmware extraction have **not** yet been independently validated. The v0.8 HTML modifications are **local Pi working changes**, not yet claimed as a published tested source commit.
 
 **Next:** Retrieve identity from the radio's existing serial connection with safe fallback for unavailable fields; validate API/UI results and capture exact tested source. Do not open a competing Meshtastic CLI session while systemd owns the port. After that, test safe USB unplug/replug and recovery.
+
+## November 11, 2026 — v0.8 dynamic local identity accepted
+
+A guarded local source patch extended `radio_manager.py` to expose a privacy-reduced `local_node` object from the existing `SerialInterface` node database (display long name, short name and hardware label). The Mesh Nodes HTML now uses that object for its heading instead of a hardcoded node name. The user confirmed **the dynamic identity worked** on the physical dashboard; exact output values were not pasted. Both manager and template were backed up before the change. No second serial session was opened.
+
+**Next checkpoint:** use the interface's read-only `metadata.firmware_version` field (when populated) for firmware UI; validate live value and fallback. Subsequent recovery testing should not assume that USB re-enumeration always retains the same `/dev/ttyACM0` path. Local dynamic-identity changes are not yet claimed to be published to GitHub.
