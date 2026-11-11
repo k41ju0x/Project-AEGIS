@@ -1,8 +1,8 @@
 # AEG-006 Engineering Build Journal
 
 
-> **Sanitization note (2026-11-08):** I replaced the actual host identifier with `<TCT_HOSTNAME>` and normalized hostname-derived local application paths to the illustrative directory `~/tct-app`. Paths shown in historical examples may differ from the folder originally used on the device. For a new installation, follow the consistent paths in the [reproduction guide](../REPRODUCE.md); this edit does not claim that my original commands used the normalized folder.
-This journal records the Raspberry Pi 5 / 10-inch touchscreen Tactical Control Terminal. I reconstructed this journal from verified sessions; it is not a verbatim terminal transcript. Photos mentioned below are pending upload and are not represented as committed artifacts.
+> **Sanitization note (2026-11-08):** Earlier documentation replaced the actual host identifier with `<TCT_HOSTNAME>` and normalized hostname-derived local application paths to the illustrative directory `~/tct-app`. Paths shown in historical examples may differ from the folder originally used on the device. For a new installation, follow the consistent paths in the [reproduction guide](../REPRODUCE.md); this edit does not claim that my original commands used the normalized folder.
+This journal records the Raspberry Pi 5 / 10-inch touchscreen Tactical Control Terminal. This journal was reconstructed from verified sessions; it is not a verbatim terminal transcript. Photos mentioned below are pending upload and are not represented as committed artifacts.
 
 ## Phase 0 — Install the correct Raspberry Pi OS image (before assembly and SSH recovery)
 
@@ -164,7 +164,7 @@ ls /sys/class/hwmon/
 ```
 
 ## Phase 3 — Python/Flask and kiosk
-Python 3.13.5, Meshtastic Python client 2.7.11, Flask 3.1.3. Virtual environment under ~/tct-app/.venv. Flask binds 127.0.0.1:5000. systemd unit aegis-mesh.service enabled. Chromium kiosk starts via labwc autostart.
+Python 3.13.5, Meshtastic Python client 2.7.11, Flask 3.1.3. **Actual tested runtime virtual environment:** `/home/aegis/aegis-tct/.venv` (earlier sanitized instructions used illustrative `~/tct-app/.venv`). Flask binds 127.0.0.1:5000. systemd unit aegis-mesh.service enabled. Chromium kiosk starts via labwc autostart.
 ```bash
 systemctl is-enabled aegis-mesh.service
 systemctl is-active aegis-mesh.service
