@@ -1,17 +1,17 @@
 # Project AEGIS — Canonical Project Registry
 
-**Updated November 8, 2026.** This is the **single authoritative project-number registry**. [Future Ideas](FUTURE-IDEAS.md) is the detailed archive; the [main README](README.md) is a short index. The GitHub Project board is for active/approved work only, not every numbered idea.
+**Updated November 11, 2026.** This is the **single authoritative project-number registry**. [Future Ideas](FUTURE-IDEAS.md) is the detailed archive; the [main README](README.md) is a short index. The GitHub Project board is for active/approved work only, not every numbered idea.
 
 ## Canonical IDs
 
 | ID | Initiative | Status | Reference |
 |---|---|---|---|
 | AEG-001 | Project NEXUS | Existing home lab, separate | [Project NEXUS](https://github.com/k41ju0x/Project-NEXUS) · [#1](https://github.com/k41ju0x/Project-AEGIS/issues/1) |
-| AEG-002 | Meshtastic — RAK4631 | Awaiting kit/integration | [Planning #2](https://github.com/k41ju0x/Project-AEGIS/issues/2) · [Build #5](https://github.com/k41ju0x/Project-AEGIS/issues/5) |
+| AEG-002 | Meshtastic — RAK4631 | Kit received; USB, firmware, US/LONG_FAST, live local telemetry verified; peer testing pending | [Planning #2](https://github.com/k41ju0x/Project-AEGIS/issues/2) · [Build #5](https://github.com/k41ju0x/Project-AEGIS/issues/5) |
 | AEG-003 | Pwnagotchi | **Completed (November 7, 2026); deferred follow-ups documented** | [Overview](projects/pwnagotchi/README.md) · [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3) |
 | **AEG-004** | **Portable LattePanda Remote Access Device** | Original Sigma 32GB SSD + Wi-Fi bundle ordered; awaiting shipment | [Scope](projects/remote-access-device/README.md) · [#4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
 | AEG-005 | ESP32 Marauder Lab | Parked | [Scope](projects/esp32-marauder/README.md) |
-| AEG-006 | Tactical Control Terminal | Hardware/dashboard built; radio integration pending | [Overview](projects/tactical-control-terminal/README.md) · [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
+| AEG-006 | Tactical Control Terminal | v0.6 dashboard running; local v0.7 radio manager tested; Flask integration pending | [Overview](projects/tactical-control-terminal/README.md) · [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
 | AEG-007 | RFID/NFC Security Lab | Parked | [Notes](projects/rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP / DIY Wi-Fi Pineapple Lab | Parked | [Notes](projects/openwrt-rogue-ap/README.md) |
 | AEG-009 | Custom Reconnaissance Toolkit | Parked | [Notes](projects/custom-recon-toolkit/README.md) |
@@ -36,9 +36,12 @@
 
 ## Current focus
 
-I completed **AEG-003 Pwnagotchi** on November 7, 2026, with documented deferred battery-cutoff, Bluetooth-interruption and handshake-completeness checks. I will next focus on the ordered **AEG-002 RAK4631** kit and its live integration with **AEG-006** when hardware arrives. **AEG-016** remains deferred. AEG-004 Sigma hardware was ordered November 8, 2026; assembly and testing are pending shipment. This does not authorize other backlog purchases.
+I completed **AEG-003 Pwnagotchi** on November 7, 2026, with documented deferred battery-cutoff, Bluetooth-interruption and handshake-completeness checks. Current engineering work is on the **received AEG-002 RAK4631** kit and live serial integration into **AEG-006**. **AEG-016** remains deferred. AEG-004 Sigma hardware was ordered November 8, 2026; assembly and testing are pending shipment. This does not authorize other backlog purchases.
 
 ## Documentation
+
+- [AEG-002 hardware receipt, configuration and telemetry build log](projects/meshtastic/build-log.md) · [test status](projects/meshtastic/test-plan.md)
+- [AEG-006 radio integration and v0.7 prototype journal](projects/tactical-control-terminal/docs/build-journal.md)
 
 - [AEG-003 build journal](projects/pwnagotchi/docs/build-journal.md) · [test matrix](projects/pwnagotchi/docs/test-matrix.md)
 - [Future Ideas Backlog](FUTURE-IDEAS.md)
