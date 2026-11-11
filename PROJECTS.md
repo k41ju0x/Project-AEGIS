@@ -11,7 +11,7 @@
 | AEG-003 | Pwnagotchi | **Completed (November 7, 2026); deferred follow-ups documented** | [Overview](projects/pwnagotchi/README.md) · [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3) |
 | **AEG-004** | **Portable LattePanda Remote Access Device** | Original Sigma 32GB SSD + Wi-Fi bundle ordered; awaiting shipment | [Scope](projects/remote-access-device/README.md) · [#4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
 | AEG-005 | ESP32 Marauder Lab | Parked | [Scope](projects/esp32-marauder/README.md) |
-| AEG-006 | Tactical Control Terminal | v0.6 dashboard running; local v0.7 radio manager tested; Flask integration pending | [Overview](projects/tactical-control-terminal/README.md) · [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
+| AEG-006 | Tactical Control Terminal | v0.6 kiosk UI running; partial v0.7 live Flask API deployed and verified; node/history UI and source push pending | [Overview](projects/tactical-control-terminal/README.md) · [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
 | AEG-007 | RFID/NFC Security Lab | Parked | [Notes](projects/rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP / DIY Wi-Fi Pineapple Lab | Parked | [Notes](projects/openwrt-rogue-ap/README.md) |
 | AEG-009 | Custom Reconnaissance Toolkit | Parked | [Notes](projects/custom-recon-toolkit/README.md) |
@@ -36,7 +36,7 @@
 
 ## Current focus
 
-I completed **AEG-003 Pwnagotchi** on November 7, 2026, with documented deferred battery-cutoff, Bluetooth-interruption and handshake-completeness checks. Current engineering work is on the **received AEG-002 RAK4631** kit and live serial integration into **AEG-006**. **AEG-016** remains deferred. AEG-004 Sigma hardware was ordered November 8, 2026; assembly and testing are pending shipment. This does not authorize other backlog purchases.
+I completed **AEG-003 Pwnagotchi** on November 7, 2026, with documented deferred battery-cutoff, Bluetooth-interruption and handshake-completeness checks. Current engineering work is on the **received AEG-002 RAK4631** kit and **AEG-006**. Live USB telemetry now reaches the systemd-managed Flask API; live node and packet-history UI, recovery testing, and exact source publication remain open. **AEG-016** remains deferred. AEG-004 Sigma hardware was ordered November 8, 2026; assembly and testing are pending shipment. This does not authorize other backlog purchases.
 
 ## Documentation
 
