@@ -105,3 +105,11 @@ Radio test finished.
 The in-memory telemetry and event counter are **live standalone API-derived measurements**, not yet integrated with the production Flask kiosk. The dashboard continues running **v0.6** with simulated events and an intentionally hardcoded `radio_status: not_connected`. The single actual radio does not establish two-node messaging, battery endurance, BLE, OLED function or enclosure durability. The detailed debugging procedure and service inspection are in the [AEG-006 engineering journal](../tactical-control-terminal/docs/build-journal.md).
 
 **Next:** inspect `app.py` routes; connect a single serial-owning radio manager to Flask; segregate synthetic/live histories; test disconnect/reconnect, reboot and kiosk display; copy exact tested local `radio_manager.py` into the repo; independently validate two-node communication when a second authorized node is available.
+
+## 2026-11-11 — AEG-006 v1.0 integration and AEG-002 next steps
+
+The RAK4631 is now the **tested local radio** in the AEG-006 AEGIS Mesh Control **v1.0 single-node baseline**, which passed physical Pi reboot acceptance 5/5: SSH recovery, automatic Flask startup, serial radio reconnection, new local telemetry, kiosk restoration. Live local event source `AEGIS-MESH-01` appears on the touchscreen. Node hardware/identity/firmware (`RAK4631`, `AEGIS-MESH-01`, `AE01`, `2.7.15.567b8ea`) were verified through production Flask. USB removal triggered connection-loss and unavailable-device errors; auto-reconnect and live telemetry recovery passed. v0.9 diagnostics verified successful-connection count 1→2, recovery count 0→1, uptime reset to 1s, and cleared error. The source snapshot is in GitHub tag `aeg-006-v1.0`.
+
+**AEG-002 remaining qualification:** get a **fresh satellite/GNSS fix** (previous `POSITION_APP` alone is not proof), verify and install OLED module safely, test BLE phone pairing, confirm optional sensor SKU. Peer LoRa messages and real peer RSSI/SNR are untested because only one node is owned. Protected battery pack, capacity/endurance and enclosure remain unpurchased proposals. Keep the already working CLIENT/US/LONG_FAST configuration and avoid competing serial sessions with `aegis-mesh.service`.
+
+[Full v1.0 AEG-006 acceptance](../tactical-control-terminal/docs/build-journal.md).
