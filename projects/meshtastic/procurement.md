@@ -1,5 +1,5 @@
 # AEG-002 — Procurement Plan v2
-**Status (November 1, 2026):** One RAK4631/R​AK19007 Meshtastic kit has been ordered, reported checkout $56.30 before import fees, with US915 selection and OLED/GNSS/sensor configuration. Kit delivery and component inventory are pending. Battery, enclosure and accessories in this document remain *unbought proposals*.
+**Status (November 11, 2026):** The ordered RAK4631/RAK19007 Meshtastic kit **arrived November 10** and was visually inventoried. Antennas were attached and USB/Meshtastic communication passed. Reported original checkout: $56.30 before import fees (final landed amount not recorded). The OLED is still separate/uninstalled; optional sensor SKU remains to be confirmed. Battery, enclosure and accessories in this document remain *unbought proposals*. Battery, enclosure and accessories in this document remain *unbought proposals*.
 
 ## Preferred battery and housing
 - **Battery:** [Adafruit #353 3.7V protected 6600mAh Li-ion pack](https://www.adafruit.com/product/353): **$24.50** listed; 69 × 54 × 18mm; JST-PH-2; rated charge current up to 1.65A by pack maker, **but RAK19007 charges far slower**.
@@ -31,7 +31,8 @@ Does not include a second owned Meshtastic node or specialist test instruments. 
 7. Modified enclosure's published IP68 rating is **not a certified finished-device rating**. Test assembled enclosure for realistic splashes/rain before use; no intentional submersion claim.
 
 ## Before purchasing additional enclosure/power parts
-- [ ] Verify exact variant cart and delivered module assembly/pinout
+- [x] Receive RAK4631 starter kit; inspect radio/base, GNSS and antennas (November 10–11)
+- [ ] Reconfirm exact OLED and sensor SKUs and module pinout; verify final landed cost
 - [ ] Download/check Hammond interior dimensions and mounting drawing
 - [ ] Confirm battery-to-base polarity without relying on matching connector
 - [ ] Confirm SMA/pigtail/feedthrough mating interfaces and mechanical layout
