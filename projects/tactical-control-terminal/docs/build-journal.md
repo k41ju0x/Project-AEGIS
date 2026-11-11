@@ -518,3 +518,43 @@ sed -n '45,115p' src/app.py
 
 Follow with a backup, syntax validation, controlled manual API test and rollback plan before restarting the systemd service. Implement one persistent serial owner, distinguish local node callbacks from actual external mesh reception, and retain demonstration events in a separate clearly labeled store. Keep the server loopback-bound until remote access is separately designed.
 
+
+## 2026-11-11 — v0.7 live Flask backend promoted to systemd (verified)
+
+**Purpose:** Replace the v0.6 hardcoded offline status with data from the already-tested local `src/radio_manager.py`, while preserving the existing synthetic packet demo. This was an incremental backend integration, **not** a complete v0.7 UI/packet-history release.
+
+**Troubleshooting:** An initial automated Flask patch never applied: a guard expected exactly one `"radio_connected": False` occurrence, but it existed in both the RF and synthetic packet endpoints. Checks of both source (`grep`) and the port-5000 API confirmed no `radio_manager` import and still-hardcoded `radio_status: not_connected`. A corrected route-specific patch was then applied and compiled. The working v0.6 application was backed up locally as `src/app.py.v0.6.safe` (backups not committed).
+
+**Implementation observed through API:** Flask now imports/starts the background radio manager, reads `snapshot()` in `/api/status` and `/api/rf`, and supports an optional `AEGIS_HTTP_PORT` override for independent loopback testing. The UI and synthetic packet store were not edited. The exact modified `app.py` and locally tested `radio_manager.py` have **not yet been published** to GitHub as source files; the GitHub `src/app.py` is still v0.6.
+
+### Isolated Flask acceptance on localhost port 5001
+
+```bash
+cd ~/aegis-tct
+source .venv/bin/activate
+AEGIS_HTTP_PORT=5001 python -u src/app.py
+# Separate terminal:
+curl -sS http://127.0.0.1:5001/api/status | python3 -m json.tool
+curl -sS http://127.0.0.1:5001/api/rf | python3 -m json.tool
+curl -sS http://127.0.0.1:5001/api/packets | python3 -m json.tool
+```
+
+**Observed:** `/api/status` returned `radio_status: connected`, `node_data_status: radio_connected`, `radio.connected: true`, `node_count: 1`, `packets_observed: 5`, device voltage 4.254 V, uptime 4363 s, and error null. `/api/rf` later returned `radio_connected: true`, `events_observed: 6`, last `TELEMETRY_APP` event, and 4.24 V. The `packets_received: 0`, empty packets array, `capture_active: false`, null RF region/preset and `spectrum_available: false` fields remained unchanged because no external-packet collector or SDR exists. `/api/packets` returned **three** explicitly labeled synthetic records (`mode: synthetic_test`, `synthetic: true`, `count: 3`), still with legacy hardcoded `radio_connected: false` on that demo endpoint. No mixing of synthetic and observed events.
+
+After stopping the port-5001 process, `ss -ltnp | grep ':5001 '` found no listener.
+
+### Systemd production promotion and verification
+
+```bash
+cd ~/aegis-tct
+sudo systemctl restart aegis-mesh.service
+systemctl is-active aegis-mesh.service
+# Observed: active
+curl -sS http://127.0.0.1:5000/api/status | python3 -m json.tool
+```
+
+**Observed production API response at 2026-11-11T01:41:38-06:00:** `app_status: online`, `radio_status: connected`, `node_data_status: radio_connected`, `radio.connected: true`, `connection_type: usb_serial`, port `/dev/ttyACM0`, one known node, one event since restart (`TELEMETRY_APP`), and `error: null`. Device metrics: `batteryLevel: 101` (USB/external power sentinel), voltage **4.237 V**, radio uptime **4623 seconds**, channel utilization **0.0**, TX airtime utilization **0.122611105**. Host CPU temperature 46.3 C, 943/8062 MB used, Active Cooler 0 RPM, and service `active`. The production Flask connection and API validation **PASSED**.
+
+**Not yet verified:** whether the existing 10-inch kiosk frontend visually changes to *Connected*, reconnect behavior across USB removal/restart, live node enumeration (`nodes` is still an empty array), and real packet history. The event counter includes local device events; do not equate it with peer-to-peer RF reception. Do not describe v0.7 as a complete finished release.
+
+**Next actions:** (1) visually inspect Overview tab on the touchscreen; (2) publish the *exact tested local* `src/app.py` and `src/radio_manager.py` after synchronizing the checkout and reviewing secrets; (3) keep synthetic and live packet histories separate, implement node listing and validate frontend; (4) test reconnect and reboot. Do not start a second Meshtastic serial process while the systemd service owns `/dev/ttyACM0`.
