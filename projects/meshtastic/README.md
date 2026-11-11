@@ -1,6 +1,6 @@
 # AEG-002 — Meshtastic Rugged Field Node
-**Phase:** Kit ordered; awaiting delivery, inventory and bench testing (as of November 1, 2026)  
-**Core:** RAK4631 / RAK19007 US915 Client-Tracker with RAK12501 GNSS, RAK19221 OLED and RAK1904 sensor (ordered kit configuration; delivered contents not yet checked)  
+**Phase (November 11, 2026):** Kit received November 10; antennas installed; RAK4631 USB/Meshtastic firmware, US region, LONG_FAST, node identity and standalone Python telemetry/event callbacks verified. Peer messaging and full field validation pending.  
+**Core:** RAK4631 / RAK19007 US915 Client-Tracker with RAK12501 GNSS, RAK1921-series OLED (exact label to reconfirm) and RAK1904 sensor (inventory photographed; GNSS/core inspected; OLED still uninstalled and sensor SKU unverified)  
 **Runtime requirement:** 48h preferred; **24h verified fallback acceptable**  
 **Visibility:** Public sanitized build notes; keep private coordinates and keys confidential.
 
@@ -16,6 +16,6 @@
 [Charter](charter.md) · [Requirements](requirements.md) · [Architecture](architecture.md) · [Hardware decision](decisions/ADR-0001-rak4631.md) · [BOM](bom.csv) · [Procurement](procurement.md) · [Power budget](power-budget.md) · [Risk register](risk-register.md) · [Test plan](test-plan.md) · [Build log](build-log.md) · [Resume](resume-here.md)
 
 ## Next action
-Inventory the ordered single-node RAK4631 / RAK19007 US915 kit on arrival, verify modules/antenna, then begin bench testing. Battery, Hammond enclosure and sealed RF feedthrough remain proposed, not purchased; check JST polarity and mechanical fit before any separate purchases. No measured runtime or assembled-device ingress rating yet.
+Continue from **verified USB-connected node**: integrate local `radio_manager.py` into AEG-006 Flask API after reviewing routes, then test live telemetry, safe packet history and connection recovery. Copy exact locally tested source to GitHub before claiming v0.7 release. OLED, BLE pairing, fresh GNSS fix, second-node communications, battery and enclosure remain unverified. See [build log](build-log.md). Battery, Hammond enclosure and sealed RF feedthrough remain proposed, not purchased; check JST polarity and mechanical fit before any separate purchases. No measured runtime or assembled-device ingress rating yet.
 
 [Tracking issue](https://github.com/k41ju0x/Project-AEGIS/issues/2)
