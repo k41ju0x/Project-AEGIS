@@ -113,3 +113,11 @@ The RAK4631 is now the **tested local radio** in the AEG-006 AEGIS Mesh Control 
 **AEG-002 remaining qualification:** get a **fresh satellite/GNSS fix** (previous `POSITION_APP` alone is not proof), verify and install OLED module safely, test BLE phone pairing, confirm optional sensor SKU. Peer LoRa messages and real peer RSSI/SNR are untested because only one node is owned. Protected battery pack, capacity/endurance and enclosure remain unpurchased proposals. Keep the already working CLIENT/US/LONG_FAST configuration and avoid competing serial sessions with `aegis-mesh.service`.
 
 [Full v1.0 AEG-006 acceptance](../tactical-control-terminal/docs/build-journal.md).
+
+## 2026-11-11 — Local POSITION event and OLED GNSS satellite count observed
+
+The user queried `http://127.0.0.1:5000/api/packets/live`, filtering locally for `packet_type == "POSITION"`. **Observed:** one `POSITION` event with `timestamp=2026-11-11T17:06:36+00:00` and `origin=local_node`. The user independently observed the attached, operating Meshtastic **OLED display** reporting **six satellites**.
+
+**Acceptance boundaries:** OLED power/display and a six-satellite indication are verified by user's direct observation. The exact OLED module SKU and WisBlock slot were not reported; keep those inventory details pending. A valid/fresh GNSS 2D/3D fix, source of position, accuracy, and usable coordinates have not yet been verified. Do not publish location coordinates, node IDs, or other sensitive telemetry. No second node has been observed.
+
+**Next:** ask for OLED's explicit GPS fix/lock indicator if available; verify position source and freshness using privacy-safe booleans/ages from the existing single serial-owning application. Avoid opening Meshtastic CLI concurrently with the live Flask manager.
