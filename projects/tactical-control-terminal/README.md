@@ -2,9 +2,9 @@
 
 **Status:** In Progress. **Platform:** Raspberry Pi 5 (8 GB), Raspberry Pi Touch Display 2 (10-inch), Raspberry Pi OS 64-bit (Debian Trixie).
 
-## AEGIS Mesh Control v0.6 — deployed; v0.7 live-radio manager under development
+## AEGIS Mesh Control v0.6 — deployed; v0.7 live-radio Flask backend running (partial integration)
 
-Local-only Flask dashboard at `http://127.0.0.1:5000` displaying live CPU temperature, memory, root filesystem storage, uptime, and Active Cooler RPM. The **v0.6 backend** still reports `not_connected`/`awaiting_radio` because the Flask application has **not yet integrated** the now-present RAK4631. This is a fixed software status, not a radio connectivity failure. Touch navigation and status polling have been verified on physical hardware.
+Local-only Flask dashboard at `http://127.0.0.1:5000` displaying live CPU temperature, memory, root filesystem storage, uptime, and Active Cooler RPM. The **As of November 11:** the Pi's **deployed Flask backend** now reports actual RAK4631 connection and device telemetry through a locally tested v0.7 radio manager. The kiosk UI and live packet-history display have not yet been verified/implemented, and GitHub's committed application source is still v0.6. Touch navigation and status polling have been verified on physical hardware.
 
 **Verified milestones:**
 - Raspberry Pi OS installed; touch display, cooling, SSH and networking operational.
@@ -17,9 +17,11 @@ Local-only Flask dashboard at `http://127.0.0.1:5000` displaying live CPU temper
 - v0.5 RSSI/SNR averages, source counts and illustrative signal bars, verified on touchscreen.
 - **v0.6** source and packet-type filters, 10/50/200 record display controls, Pause/Resume, Clear/Restore View; touchscreen controls verified. Only three synthetic records exist, so history-limit behavior above ten remains untested.
 
-**November 10–11 bench milestones:** RAK4631 kit received, LoRa/BLE/GNSS antennas attached, USB interface `/dev/ttyACM0` detected, CLI 2.7.11 connected to RAK4631 firmware 2.7.15.567b8ea; US region and LONG_FAST preset verified; identity `AEGIS-MESH-01`/`AE01` verified. Live `TELEMETRY_APP`/`POSITION_APP` events and device metrics received via a standalone Python listener. A separately developed `~/aegis-tct/src/radio_manager.py` prototype passed a 30-second connection/telemetry test after an indentation repair. **This file is not yet copied to GitHub, the Flask backend is still v0.6, and no dashboard live-radio integration is deployed.**
+**November 10–11 bench milestones:** RAK4631 kit received, LoRa/BLE/GNSS antennas attached, USB interface `/dev/ttyACM0` detected, CLI 2.7.11 connected to RAK4631 firmware 2.7.15.567b8ea; US region and LONG_FAST preset verified; identity `AEGIS-MESH-01`/`AE01` verified. Live `TELEMETRY_APP`/`POSITION_APP` events and device metrics received via a standalone Python listener. A separately developed `~/aegis-tct/src/radio_manager.py` prototype passed a 30-second connection/telemetry test after an indentation repair. **The radio-manager file and modified Flask app are not yet copied to GitHub. The production Flask API is now connected to the radio, but the frontend and live history are not yet updated.**
 
-**Pending:** Integrate a single persistent serial owner with Flask, segregate live and synthetic events, validate the kiosk and USB reconnect/reboot behavior, upload additional photo evidence, and publish the exact tested v0.7 source. One-node local telemetry does not demonstrate two-node mesh RF reception.
+**November 11 production API acceptance:** `sudo systemctl restart aegis-mesh.service` returned an active service and `http://127.0.0.1:5000/api/status` returned `radio_status: connected`, `radio.connected: true`, USB port `/dev/ttyACM0`, 1 node, real `TELEMETRY_APP` event, and 4.237 V device telemetry, error null. The isolated port-5001 `/api/rf` and `/api/packets` tests also passed, preserving three simulated records.
+
+**Pending:** Segregate live and synthetic event histories, validate kiosk visual rendering and USB reconnect/reboot behavior, upload additional photo evidence, and publish the exact tested v0.7 app and manager sources. One-node local telemetry does not demonstrate two-node mesh RF reception.
 
 
 ## Engineering build journal
