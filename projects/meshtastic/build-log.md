@@ -131,3 +131,9 @@ During the ten-cycle, 30-second status-polling test, the user observed at check 
 ## 2026-11-11 — iPhone Bluetooth pairing successful
 
 After the internal-GNSS test, the user installed/opened Meshtastic on iPhone and attempted BLE pairing with the RAK4631. The user explicitly confirmed **pairing succeeded** and **the Bluetooth connection was working**. This is the first observed successful BLE client pairing for AEG-002. No PIN value or other secrets were retained. The exact mobile app readback of firmware/configuration and persistence after reconnect were not supplied, so those finer checks remain optional. Before pairing, instructions called for stopping `aegis-mesh.service` to release USB ownership; the user's current service state and subsequent restoration have not yet been reported. Restore service, disconnect phone BLE session, and confirm Flask returns `radio.connected=true`, `error=null` and fresh telemetry without changing node configuration.
+
+## Bluetooth-to-USB handoff acceptance — November 11, 2026
+
+After successful iPhone-to-RAK4631 Meshtastic BLE pairing, the user followed the controlled return-to-Pi test. The production Flask radio status again reported **`Connected: True`** with **`Error: None`**, verifying that the existing USB monitoring session was restored following the Bluetooth test. The complete JSON and fresh post-handoff telemetry event were not included in this message, so those details are not asserted here.
+
+**Accepted:** BLE pairing/connection and return to working USB serial ownership. **Remaining:** confirm accessory module SKUs, optional longer-run testing, portable battery and enclosure work, and authorized peer-to-peer LoRa messaging when a second node is available. No additional purchase needed for inventory work.
