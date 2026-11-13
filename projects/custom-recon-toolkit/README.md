@@ -1,36 +1,33 @@
-# AEG-009 — Custom Recon Toolkit
+# AEG-009 — Custom Reconnaissance Toolkit
 
-**Status:** Proposed / Backlog (not started; no procurement authorized)
+**Status:** In Progress — requirements and lab preparation (November 13, 2026)
 **Track:** Software Development
-**Complexity:** Medium
-**Suggested phase:** Phase 1
+**Visibility:** Public planning and sanitized learning records; scan evidence stays local.
 
-## Charter and objective
-Create auditable Python network discovery utilities and compare their behavior to established tools.
+## Objective
+Build understandable Python discovery utilities, then add reproducible automation around established tools. Explain each command and result so the project can support teaching as well as practical lab work. APEX and Project NEXUS remain separate.
 
-## Preliminary hardware and software (not purchased)
-Development laptop or VM; Python; isolated test network; GitHub CI.
+## First milestone: v0.1 TCP connect scanner
+Use the existing Kali VM. No additional hardware or paid services are required. Start with one literal IPv4 address and explicitly selected TCP ports. The scanner will apply timeouts and rate limits, record outcomes, and export JSON and CSV plus a readable summary. Compare the result with Nmap against the same local test service.
 
-## Research and implementation scope
-TCP connect scanning; rate limits; timeouts; output formats; DNS/subdomain enumeration against owned zones; Nmap comparison.
+**Current evidence:** Planning documents published; scanner implementation and user-machine testing have not started. This is not a released v0.1.
 
-## Defensive validation
-Network monitoring; logging; asset inventory; alerting on scanning.
+## Documents
+- [Requirements and architecture](requirements.md)
+- [Kali lab setup and first checks](START-HERE.md)
+- [Acceptance test plan](test-plan.md)
+- [Build log and next session](build-log.md)
 
-## Showcase / acceptance criteria
-Unit tests and a reproducible lab comparison of correctness, runtime, and generated telemetry.
+## Development sequence
+1. Prepare the Kali working directory and record Python/Nmap versions.
+2. Create a separate implementation repository under the hub's graduation policy.
+3. Implement and test port parsing and explicit scope checks.
+4. Implement sequential TCP connection probes with rate limits and timeouts.
+5. Add output files and command/run metadata; test on localhost.
+6. Compare with Nmap and record actual differences.
+7. Later: owned-zone DNS enumeration and optional tool adapters.
 
-## Milestones
-1. M0 — Confirm authorization boundaries, test environment, and success metrics.
-2. M1 — Research architecture, compatibility, safety, and draft bill of materials.
-3. M2 — Build or configure a minimum viable lab prototype.
-4. M3 — Execute repeatable functional and security tests; record evidence.
-5. M4 — Validate defensive controls and publish a sanitized walkthrough.
-6. M5 — Retrospective, lessons learned, and backlog for v2.
+## Boundaries
+v0.1 does not perform exploitation, credential testing, stealth scans, UDP discovery, CIDR sweeps, or automatic follow-on scanning. Tests start on loopback; later targets must be explicitly authorized. Keep real target inventories, reports and packet captures out of the public hub.
 
-## Safety, privacy and scope
-Use only owned or explicitly authorized equipment, accounts, badges, applications and networks. Isolate experiments from production and third-party systems. Never collect or publish real credentials, private network location data, access tokens, or sensitive packet captures. Obtain authorization before any active wireless or network testing. Maintain logs and a documented teardown procedure.
-
-## Project state and next action
-**Current:** Idea registered; hardware, budget, schedule and detailed requirements are TBD.
-**Next:** Approve a project-specific requirements document and compatibility research before ordering parts.
+**Next action:** Complete START-HERE.md in the Kali VM and capture the version output. No procurement is needed.

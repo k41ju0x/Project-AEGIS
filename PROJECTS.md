@@ -14,7 +14,7 @@
 | AEG-006 | Tactical Control Terminal | v1.0 single-node monitor accepted: live telemetry, touchscreen, reboot recovery and v0.9 USB reliability verified | [Overview](projects/tactical-control-terminal/README.md) · [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
 | AEG-007 | RFID/NFC Security Lab | Parked | [Notes](projects/rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP / DIY Wi-Fi Pineapple Lab | Parked | [Notes](projects/openwrt-rogue-ap/README.md) |
-| AEG-009 | Custom Reconnaissance Toolkit | Parked | [Notes](projects/custom-recon-toolkit/README.md) |
+| AEG-009 | Custom Reconnaissance Toolkit | In Progress — v0.1 requirements and Kali lab preparation; implementation pending | [Notes](projects/custom-recon-toolkit/README.md) |
 | AEG-010 | ESP32 GPS Wardriver | Parked | [Scope](projects/esp32-gps-wardriver/README.md) |
 | AEG-011 | Ethernet Assessment Appliance | Parked | [Notes](projects/ethernet-assessment-appliance/README.md) |
 | AEG-012 | Evil Twin Defense Lab | Parked | [Notes](projects/evil-twin-defense/README.md) |
