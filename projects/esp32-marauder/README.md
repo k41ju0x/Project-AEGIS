@@ -1,17 +1,21 @@
 # AEG-005 — ESP32 Marauder Lab
 
-**Status:** Parked idea — no build or purchase authorized  
-**Registry:** [PROJECTS.md](../../PROJECTS.md) · [Future ideas](../../FUTURE-IDEAS.md)
+**Status:** Hardware Purchased — awaiting delivery (not yet In Progress)  
+**Hardware:** JustCallMeKoko ESP32 Marauder v8  
+**Purchase date:** November 15, 2026 (user-confirmed)  
+**Listed price at purchase:** $100 USD, excluding tax/shipping; final charged amount not verified  
+**Official product:** https://justcallmekokollc.com/products/marauder-v8  
+**Registry:** [PROJECTS.md](../../PROJECTS.md)
 
 ## Purpose
 
-I plan to evaluate an ESP32-based wireless security research platform in owned or expressly authorized lab environments, with a focus on understanding discovery, protocol behavior, controlled experiments, and appropriate defensive monitoring.
+Evaluate an ESP32-based wireless security research platform in owned or expressly authorized lab environments, focusing on wireless discovery, protocol behavior, controlled experiments and defensive monitoring.
 
-## Planned scope
+## Next milestones (after delivery)
 
-- Select compatible ESP32 hardware and supported firmware when this idea enters planning.
-- Define isolated, authorized Wi-Fi/BLE research scenarios and safety boundaries before testing.
-- Record setup steps, commands, firmware versions, observations, test results and mitigations.
-- Evaluate power, portability, UI options and relevant physical enclosure considerations.
+- Record receipt, hardware revision, included accessories and photographs.
+- Verify firmware version and document safe setup/configuration.
+- Define authorized Wi-Fi/BLE research scenarios and test boundaries.
+- Record repeatable setup steps, observations, results and mitigations.
 
-**Current decision:** This is **AEG-005**, a separate ESP32 project from **AEG-004 Portable LattePanda Remote Access Device**. This project is independent of **AEG-004 Portable LattePanda Remote Access Device**. No hardware acquisition or active planning is approved.
+**Project boundary:** AEG-005 is independent of AEG-010 C5 Wardriver and AEG-004 remote access device. No assembly or testing has begun.
