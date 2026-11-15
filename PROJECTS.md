@@ -1,6 +1,6 @@
 # Project AEGIS — Canonical Project Registry
 
-**Updated November 11, 2026.** This is the **single authoritative project-number registry**. [Future Ideas](FUTURE-IDEAS.md) is the detailed archive; the [main README](README.md) is a short index. The GitHub Project board is for active/approved work only, not every numbered idea.
+**Updated November 15, 2026.** This is the **single authoritative project-number registry**. [Future Ideas](FUTURE-IDEAS.md) is the detailed archive; the [main README](README.md) is a short index. The GitHub Project board is for active/approved work only, not every numbered idea.
 
 ## Canonical IDs
 
@@ -10,12 +10,12 @@
 | AEG-002 | Meshtastic — RAK4631 | Kit received; USB, firmware, US/LONG_FAST, live local telemetry verified; peer testing pending | [Planning #2](https://github.com/k41ju0x/Project-AEGIS/issues/2) · [Build #5](https://github.com/k41ju0x/Project-AEGIS/issues/5) |
 | AEG-003 | Pwnagotchi | **Completed (November 7, 2026); deferred follow-ups documented** | [Overview](projects/pwnagotchi/README.md) · [#3](https://github.com/k41ju0x/Project-AEGIS/issues/3) |
 | **AEG-004** | **Portable LattePanda Remote Access Device** | Original Sigma 32GB SSD + Wi-Fi bundle ordered; awaiting shipment | [Scope](projects/remote-access-device/README.md) · [#4](https://github.com/k41ju0x/Project-AEGIS/issues/4) |
-| AEG-005 | ESP32 Marauder Lab | Parked | [Scope](projects/esp32-marauder/README.md) |
+| AEG-005 | ESP32 Marauder Lab | **Hardware Purchased** — JustCallMeKoko ESP32 Marauder v8 ordered November 15, 2026; awaiting delivery | [Scope](projects/esp32-marauder/README.md) |
 | AEG-006 | Tactical Control Terminal | v1.0 single-node monitor accepted: live telemetry, touchscreen, reboot recovery and v0.9 USB reliability verified | [Overview](projects/tactical-control-terminal/README.md) · [#6](https://github.com/k41ju0x/Project-AEGIS/issues/6) |
 | AEG-007 | RFID/NFC Security Lab | Parked | [Notes](projects/rfid-nfc/README.md) |
 | AEG-008 | OpenWrt Rogue AP / DIY Wi-Fi Pineapple Lab | Parked | [Notes](projects/openwrt-rogue-ap/README.md) |
 | AEG-009 | Custom Reconnaissance Toolkit | In Progress — v0.1 requirements and Kali lab preparation; implementation pending | [Notes](projects/custom-recon-toolkit/README.md) |
-| AEG-010 | ESP32 GPS Wardriver | Parked | [Scope](projects/esp32-gps-wardriver/README.md) |
+| AEG-010 | ESP32 GPS Wardriver | **Hardware Purchased** — JustCallMeKoko C5 Wardriver v2 ordered November 15, 2026; awaiting delivery | [Scope](projects/esp32-gps-wardriver/README.md) |
 | AEG-011 | Ethernet Assessment Appliance | Parked | [Notes](projects/ethernet-assessment-appliance/README.md) |
 | AEG-012 | Evil Twin Defense Lab | Parked | [Notes](projects/evil-twin-defense/README.md) |
 | AEG-013 | Web Application Security Lab | Parked | [Notes](projects/web-app-security/README.md) |
@@ -36,7 +36,7 @@
 
 ## Current focus
 
-I completed **AEG-003 Pwnagotchi** on November 7, 2026, with documented deferred battery-cutoff, Bluetooth-interruption and handshake-completeness checks. Current engineering work is on the **received AEG-002 RAK4631** kit and **AEG-006**. AEG-006 v1.0 single-node baseline has passed live node telemetry, UI, USB recovery and reboot acceptance; multi-node reception remains open as a separate future capability. **AEG-016** remains deferred. AEG-004 Sigma hardware was ordered November 8, 2026; assembly and testing are pending shipment. This does not authorize other backlog purchases.
+I completed **AEG-003 Pwnagotchi** on November 7, 2026, with documented deferred battery-cutoff, Bluetooth-interruption and handshake-completeness checks. Current engineering work is on the **received AEG-002 RAK4631** kit and **AEG-006**. AEG-006 v1.0 single-node baseline has passed live node telemetry, UI, USB recovery and reboot acceptance; multi-node reception remains open as a separate future capability. **AEG-016** remains deferred. AEG-004 Sigma hardware was ordered November 8, 2026; assembly and testing are pending shipment. AEG-005 Marauder v8 and AEG-010 C5 Wardriver v2 were purchased November 15, 2026; both await delivery and remain separate builds. This does not authorize other backlog purchases.
 
 ## Documentation
 
