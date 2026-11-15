@@ -1,18 +1,22 @@
 # AEG-010 — ESP32 GPS Wardriver
 
-**Status:** Parked idea — no build or purchase authorized  
-**Registry:** [PROJECTS.md](../../PROJECTS.md) · [Future ideas](../../FUTURE-IDEAS.md)
+**Status:** Hardware Purchased — awaiting delivery (not yet In Progress)  
+**Hardware:** JustCallMeKoko C5 Wardriver v2  
+**Purchase date:** November 15, 2026 (user-confirmed)  
+**Listed price at purchase:** $75 USD, excluding tax/shipping; final charged amount not verified  
+**Official product:** https://justcallmekokollc.com/products/c5-wardriver-v2  
+**Registry:** [PROJECTS.md](../../PROJECTS.md)
 
 ## Purpose
 
-I plan to explore GPS-tagged wireless survey collection and mapping with an ESP32 and an appropriate GNSS module, **only in owned or explicitly authorized environments**.
+Explore GPS-tagged wireless survey collection and mapping in owned or explicitly authorized environments, with attention to privacy and secure handling of location data.
 
-## Planned scope
+## Next milestones (after delivery)
 
-- Research ESP32 platform and GPS/GNSS receiver options, antenna placement and battery budget.
-- Define data minimization, geolocation privacy and permission boundaries.
-- Test passive survey collection and location synchronization in an authorized lab.
-- Document sensor accuracy, sampling, file formats, export handling and secure data retention.
-- Build a reproducible, sanitized step-by-step technical journal if this concept is approved.
+- Record receipt, hardware revision, accessories and photographs.
+- Verify firmware and GNSS/GPS functionality and document setup.
+- Define data minimization, location privacy and permission boundaries.
+- Test passive survey collection and location synchronization in an authorized environment.
+- Document sensor accuracy, sampling, exports and secure retention.
 
-**Current decision:** This is **AEG-010**. This project is independent of **AEG-004 Portable LattePanda Remote Access Device**. No equipment purchase, execution or GitHub board work is authorized yet.
+**Project boundary:** AEG-010 is independent of AEG-005 Marauder and AEG-004 remote access device. No assembly or testing has begun.
